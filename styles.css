@@ -62,21 +62,22 @@ html, body {
 
 .signup-form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
   justify-content: center;
-  max-width: 280px;
+  max-width: 320px;
   margin: 0 auto;
 }
 
 .signup-form input[type="email"] {
   flex: 1;
-  min-width: 160px;
-  padding: 0.4rem 0;
-  border: none;
-  border-bottom: 1px solid #ff7300;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ff7300;
+  border-right: none;
   font-size: 0.95rem;
-  background: transparent;
+  background: #fff;
 }
 
 .signup-form input[type="email"]::placeholder {
@@ -85,20 +86,20 @@ html, body {
 
 .signup-form input[type="email"]:focus {
   outline: none;
-  border-bottom-color: #ff7300;
+  border-color: #ff7300;
 }
 
 .signup-form button {
-  padding: 0.4rem 0.6rem;
-  border: none;
-  background: transparent;
-  color: #ff7300;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ff7300;
+  background: #ff7300;
+  color: #fff;
   font-size: 0.95rem;
   cursor: pointer;
 }
 
 .signup-form button:hover {
-  text-decoration: underline;
+  background: #e66800;
 }
 
 .page-footer {
