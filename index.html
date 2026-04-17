@@ -13,18 +13,48 @@
       <div class="logo">
         <img src="assets/DJOOR1.gif" alt="DJ OOR" />
       </div>
-      <div class="signup">
-        <p class="signup-text">More to come. Check back soon.</p>
-        <!-- <form class="signup-form" action="https://app.convertkit.com/forms/9095422/subscriptions" method="post">
-          <input type="email" name="email_address" placeholder="Your email" required aria-label="Email address">
-          <button type="submit">Subscribe</button>
-        </form>
-        <script async data-uid="66176d0438" src="https://dj-oord.kit.com/66176d0438/index.js"></script> -->
-      </div>
+      <section class="blurb" aria-label="About DJ OOR">
+        <p>
+          The brainchild of local DJs GrizBeard and DizzyB, DJ OOR is opening up a transcendental portal 
+          dressed like a dance party. Bring your best boogie for an evening of non-euclidean beats, 
+          bizarre rituals, and an experience that will leave you bouncing and breathless.
+        </p>
+        <p>
+          The portal is opening May 2nd at the Plains Art Museum Spring Gala.
+        </p>
+      </section>
+      <audio id="opening-ritual-audio" loop autoplay preload="auto" hidden aria-hidden="true">
+        <source src="assets/opening-ritual.mp3" type="audio/mpeg">
+      </audio>
     </div>
     <footer class="page-footer">
       © 2026 <a href="https://oord.art">oord.art</a>
     </footer>
   </main>
+  <script>
+    (function () {
+      const audio = document.getElementById('opening-ritual-audio');
+      if (!audio) return;
+
+      const tryPlay = async () => {
+        try {
+          await audio.play();
+          return true;
+        } catch (_err) {
+          return false;
+        }
+      };
+
+      const unlockOnFirstInteraction = () => {
+        void tryPlay();
+        window.removeEventListener('pointerdown', unlockOnFirstInteraction);
+        window.removeEventListener('keydown', unlockOnFirstInteraction);
+      };
+
+      window.addEventListener('pointerdown', unlockOnFirstInteraction, { once: true });
+      window.addEventListener('keydown', unlockOnFirstInteraction, { once: true });
+      void tryPlay();
+    })();
+  </script>
 </body>
 </html>

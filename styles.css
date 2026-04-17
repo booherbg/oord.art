@@ -26,6 +26,7 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
 }
 
 .logo {
@@ -52,6 +53,25 @@ html, body {
 .signup {
   margin-top: 1.5rem;
   text-align: center;
+}
+
+.blurb {
+  margin-top: 1.25rem;
+  max-width: min(90vw, 700px);
+  padding: 1.1rem 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.blurb p {
+  margin: 0;
+  margin-bottom: 5px;
+  color: #202020;
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 .signup-text {
