@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE PILGRIM'S PATH — Lore Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #07050a;
+    --bg2:      #100d16;
+    --orange:   #E86010;
+    --yellow:   #D4A820;
+    --violet:   #6020C0;
+    --pink:     #D04870;
+    --green:    #304830;
+    --text:     #C8BCA8;
+    --text-dim: #6A6058;
+    --text-bright: #E8DCC8;
+    --border:   #201818;
+    --border-warm: #3A2818;
+    --card-bg:  #0e0b12;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── PORTAL BACKGROUND ─────────────────────────────── */
+  #portal-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vmax;
+    height: 100vmax;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+
+  .ring {
+    fill: none;
+    stroke-width: 1;
+    transform-origin: center;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .ring:nth-child(1)  { stroke: var(--orange); r: 80;  animation-delay: 0s;    animation-duration: 5s; }
+  .ring:nth-child(2)  { stroke: var(--yellow); r: 160; animation-delay: 0.4s;  animation-duration: 5.5s; }
+  .ring:nth-child(3)  { stroke: var(--orange); r: 240; animation-delay: 0.8s;  animation-duration: 6s; }
+  .ring:nth-child(4)  { stroke: var(--violet); r: 320; animation-delay: 1.2s;  animation-duration: 6.5s; }
+  .ring:nth-child(5)  { stroke: var(--yellow); r: 400; animation-delay: 1.6s;  animation-duration: 7s; }
+  .ring:nth-child(6)  { stroke: var(--orange); r: 480; animation-delay: 2.0s;  animation-duration: 7.5s; }
+  .ring:nth-child(7)  { stroke: var(--violet); r: 560; animation-delay: 2.4s;  animation-duration: 8s; }
+  .ring:nth-child(8)  { stroke: var(--yellow); r: 640; animation-delay: 2.8s;  animation-duration: 8.5s; }
+  .ring:nth-child(9)  { stroke: var(--orange); r: 720; animation-delay: 3.2s;  animation-duration: 9s; }
+  .ring:nth-child(10) { stroke: var(--pink);   r: 800; animation-delay: 3.6s;  animation-duration: 9.5s; }
+
+  @keyframes pulse {
+    0%   { opacity: 0.1; transform: scale(0.97); }
+    50%  { opacity: 0.6; transform: scale(1.02); }
+    100% { opacity: 0.1; transform: scale(0.97); }
+  }
+
+  /* ─── GRAIN ─────────────────────────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────────────── */
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  .site-header {
+    text-align: center;
+    padding: 56px 0 32px;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .site-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 14vw, 96px);
+    line-height: 0.9;
+    color: var(--orange);
+    letter-spacing: 0.04em;
+    text-shadow:
+      0 0 40px rgba(232, 96, 16, 0.4),
+      0 0 80px rgba(232, 96, 16, 0.15);
+  }
+
+  .site-title span {
+    display: block;
+    color: var(--yellow);
+    font-size: 0.55em;
+    letter-spacing: 0.12em;
+  }
+
+  .site-sub {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--yellow), transparent);
+    margin: 24px 0;
+    opacity: 0.3;
+  }
+
+  /* ─── SECTIONS ───────────────────────────────────────── */
+  .section {
+    margin-bottom: 8px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--card-bg);
+  }
+
+  .section-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .section-toggle:hover { background: rgba(232,96,16,0.05); }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--text-bright);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .chevron {
+    color: var(--orange);
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    display: none;
+    padding: 0 18px 20px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.25s ease;
+  }
+
+  .section.open .section-body { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── ENTITY CARDS ───────────────────────────────────── */
+  .entity-card {
+    margin-top: 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    padding: 14px 16px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .entity-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .entity-name.oor    { color: var(--orange); text-shadow: 0 0 20px rgba(232,96,16,0.3); }
+  .entity-name.sub    { color: var(--violet); text-shadow: 0 0 20px rgba(96,32,192,0.3); }
+  .entity-name.fam    { color: var(--yellow); }
+
+  .field { margin-bottom: 10px; }
+
+  .field-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+  }
+
+  .field-value { color: var(--text); font-size: 12px; line-height: 1.65; }
+
+  .pill {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin: 2px 2px 2px 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── TRANSCENDENTALS ────────────────────────────────── */
+  .transcendental-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .t-card {
+    border-radius: 2px;
+    padding: 14px 12px;
+    background: rgba(0,0,0,0.3);
+    border-left: 3px solid;
+  }
+
+  .t-card.unity    { border-color: #4080D0; }
+  .t-card.beauty   { border-color: var(--pink); }
+  .t-card.truth    { border-color: var(--yellow); }
+  .t-card.goodness { border-color: #40A060; }
+
+  .t-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .t-card.unity    .t-name { color: #60A0E8; }
+  .t-card.beauty   .t-name { color: var(--pink); }
+  .t-card.truth    .t-name { color: var(--yellow); }
+  .t-card.goodness .t-name { color: #60C080; }
+
+  .t-char {
+    font-size: 11px;
+    color: var(--text-bright);
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .t-floor {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── RITUALS ────────────────────────────────────────── */
+  .ritual {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+    position: relative;
+    padding-left: 44px;
+  }
+
+  .ritual-num {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--orange);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .ritual-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .ritual-desc { font-size: 11px; color: var(--text); line-height: 1.7; margin-bottom: 6px; }
+
+  .ritual-tone {
+    font-size: 10px;
+    color: var(--yellow);
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ─── OUTCOMES ───────────────────────────────────────── */
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .outcome {
+    padding: 12px;
+    border-radius: 2px;
+    border: 1px solid;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .outcome.transcendence { border-color: var(--yellow); }
+  .outcome.harvest       { border-color: var(--orange); }
+  .outcome.failure       { border-color: var(--violet); }
+  .outcome.escape        { border-color: var(--text-dim); }
+
+  .outcome-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .outcome.transcendence .outcome-label { color: var(--yellow); }
+  .outcome.harvest       .outcome-label { color: var(--orange); }
+  .outcome.failure       .outcome-label { color: var(--violet); }
+  .outcome.escape        .outcome-label { color: var(--text-dim); }
+
+  .outcome-text { font-size: 10px; color: var(--text); line-height: 1.6; }
+
+  /* ─── PERSPECTIVES ───────────────────────────────────── */
+  .perspective {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .perspective-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .perspective.default .perspective-label  { color: var(--text-bright); }
+  .perspective.unlocked .perspective-label { color: var(--yellow); }
+  .perspective.rare .perspective-label     { color: var(--orange); }
+
+  .lock-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .lock-free     { background: rgba(64,160,96,0.2);  color: #60C080; }
+  .lock-unlock   { background: rgba(212,168,32,0.2); color: var(--yellow); }
+  .lock-rare     { background: rgba(232,96,16,0.2);  color: var(--orange); }
+
+  /* ─── PRINCIPLES ─────────────────────────────────────── */
+  .principle {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-left: 2px solid var(--violet);
+    background: rgba(96,32,192,0.06);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .principle-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--violet);
+    margin-bottom: 6px;
+    text-shadow: 0 0 12px rgba(96,32,192,0.4);
+  }
+
+  /* ─── AVOIDS ─────────────────────────────────────────── */
+  .avoid-list { list-style: none; margin-top: 10px; }
+  .avoid-list li {
+    padding: 5px 0 5px 16px;
+    position: relative;
+    font-size: 11px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    line-height: 1.5;
+  }
+  .avoid-list li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: var(--pink);
+    font-size: 9px;
+    top: 7px;
+  }
+
+  /* ─── REFERENCES ─────────────────────────────────────── */
+  .ref-group { margin-top: 10px; }
+  .ref-group-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+  }
+  .ref-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    margin: 2px;
+    border: 1px solid var(--border-warm);
+    border-radius: 20px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── SONIC ──────────────────────────────────────────── */
+  .track {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .track:last-child { border-bottom: none; }
+  .track::before { content: '▶ '; color: var(--orange); font-size: 9px; }
+
+  .genre-pills { margin-top: 10px; }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── UTILITY ────────────────────────────────────────── */
+  p + p { margin-top: 8px; }
+
+  .mt { margin-top: 12px; }
+
+  .quote {
+    border-left: 2px solid var(--orange);
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-style: italic;
+    color: var(--text-bright);
+    font-size: 12px;
+    background: rgba(232,96,16,0.04);
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Portal Background -->
+<svg id="portal-bg" viewBox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+</svg>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="eyebrow">Lore Document v0.1 · Draft</div>
+    <div class="site-title">
+      The Pilgrim's
+      <span>Path</span>
+    </div>
+    <div class="site-sub">A lore document for the world of DJ OOR and the harvest of SUBOONT</div>
+    <div class="divider"></div>
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span>Portal open</span>
+      <span>·</span>
+      <span>Harvest active</span>
+      <span>·</span>
+      <span>4 transcendentals</span>
+      <span>·</span>
+      <span>5 rituals</span>
+    </div>
+  </header>
+
+  <!-- SETTING -->
+  <div class="section open" id="s-setting">
+    <button class="section-toggle" onclick="toggle('s-setting')">
+      <div class="section-label">
+        Setting
+        <span class="tag" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Warehouse</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field">
+        <div class="field-label">The Venue</div>
+        <div class="field-value">A former industrial manufacturing facility in an unnamed rust belt city. Familiar enough to recognize. Wrong enough to notice. The building has the bones of a factory — concrete floor, high ceilings, old iron fixtures that hum at frequencies no one can explain. It was built to make things. Tonight it is making something else.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">The City</div>
+        <div class="field-value">Unnamed. Post-industrial. Midwestern. It could be Fargo. It isn't Fargo. The kind of city where the grid feels slightly off at the edges, where alleys lead somewhere unexpected, where the tree line at the end of a block looks older than the buildings.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Atmosphere</div>
+        <div class="field-value">The architecture stops being reliable as the night deepens. Hallways you used an hour ago are shorter now. Machinery in the walls responds to the music. By the end of the night the building is not where you thought it was.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">The Approach</div>
+        <div class="field-value">Damp and cold. Industrial edges. Alleys. Gravel lots under orange sodium lights. The bass reaches you before you can see the building. You feel it in your sternum. You follow it. The building finds you before you find it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTITIES -->
+  <div class="section" id="s-entities">
+    <button class="section-toggle" onclick="toggle('s-entities')">
+      <div class="section-label">
+        Entities
+        <span class="tag" style="background:rgba(96,32,192,0.15);color:#8060D8">3 beings</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <!-- SUBOONT -->
+      <div class="entity-card">
+        <div class="entity-name sub">SUBOONT</div>
+        <div class="field">
+          <div class="field-label">Nature</div>
+          <div class="field-value">The primary deity. Primordial. Pre-temporal. Older than the concept of age. Not malevolent — indifferent in the way a star is indifferent. It does not intend harm. It does not intend anything.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Function</div>
+          <div class="field-value">A cosmic heart. Its rhythm circulates the transcendentals between the Primordial Plane and the material world. Bass is the oldest frequency. The subwoofer is not a metaphor.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Awareness</div>
+          <div class="field-value">Suboont is not aware of you. You are a mineral deposit. You contain things it needs. This is not personal.</div>
+        </div>
+        <div class="quote">Known primarily through its effects on those who encounter it. Never witnessed directly. Only felt.</div>
+        <div class="field mt">
+          <div class="field-label">References</div>
+          <div>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Azathoth</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Ain Soph</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Yog-Sothoth</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">The Demiurge</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">The Pleroma</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Sophia</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">King in Yellow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OOR -->
+      <div class="entity-card">
+        <div class="entity-name oor">OOR</div>
+        <div class="field">
+          <div class="field-label">Role</div>
+          <div class="field-value">Minor deity. Harvester. Servant of Suboont. DJ.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Nature</div>
+          <div class="field-value">Ambivalent but terrifying. Not evil. Not safe. Operating on a logic that predates human morality. OOR does not understand humans — it understands frequencies. The transcendentals are not emotional experiences to OOR. They are minerals. OOR is mining.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Appearance</div>
+          <div class="field-value">Orange and yellow. Furry and tinsel-bright. A mouth at the center — pink-gloved hands emerge from it, functioning as a tongue. A giant ear at the top. Eyes everywhere — green masks covered in eyeballs.</div>
+        </div>
+        <div class="quote">From across the room it reads as comedy — bright, oversized, absurd. Up close the hands emerging from the mouth flex at the knuckle joints under the pink gloves and the motion is peristaltic. The eyes on the green masks do not track together. One looks at you. The others look at things behind you that you cannot see.</div>
+        <div class="field mt">
+          <div class="field-label">Voice Rule</div>
+          <div class="field-value">OOR does not speak to the player. OOR does not address anyone directly. OOR is doing a job. You happen to be in the room. The music is the only communication.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Arc</div>
+          <div class="field-value">The more the player understands OOR, the less frightening OOR becomes — and the more frightening everything else becomes. Understanding OOR reveals that the harvest has always been happening. Every dance floor. Every crowd you ever lost yourself in. The bass was always a mechanism. OOR is not the horror. The retrospective contamination of your entire history is the horror.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">References</div>
+          <div>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Faun</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Nyarlathotep</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Annihilation</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Hermit</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Meow Wolf</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILIARS -->
+      <div class="entity-card">
+        <div class="entity-name fam">The Antlered Companions</div>
+        <div class="field">
+          <div class="field-label">Role</div>
+          <div class="field-value">Servants of Suboont. They perform tasks. They do not explain the tasks. They move through the crowd with the focused indifference of hospital orderlies.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Origin</div>
+          <div class="field-value">Came through the portal. Some may have been on this plane already, emerging from industrial edges — forests, alleys, the spaces between buildings. Some servants may not know they are servants.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Mating Ritual Pair</div>
+          <div class="field-value">One familiar wears a wearable theremin — their movement is the instrument, gesture becomes sound. A second familiar choreographs alongside them. Together they are one unit: the instrument and the intention. They move through the crowd selecting people closest to resonance. This is tuning, not seduction.</div>
+        </div>
+        <div class="quote">The crowd is a spectrum. Some are first-timers. Some have been harvested before — at other venues, other nights, other cities — and carry trace resonance in their bodies without knowing it. They are easier to harvest. They always come back to the bass. They think this is taste.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRANSCENDENTALS -->
+  <div class="section" id="s-trans">
+    <button class="section-toggle" onclick="toggle('s-trans')">
+      <div class="section-label">
+        Transcendentals
+        <span class="tag" style="background:rgba(212,168,32,0.15);color:var(--yellow)">4 minerals</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <p style="font-size:11px;margin-top:12px;color:var(--text-dim);font-style:italic;">The harvestable properties of collective human experience. Only these survive the crossing to the Primordial Plane. A single person feeling any of these is insufficient. The portal requires a density of collective experience.</p>
+      <div class="transcendental-grid">
+        <div class="t-card unity">
+          <div class="t-name">Unity</div>
+          <div class="t-char">Many bodies moving as one</div>
+          <div class="t-floor">Synchronized movement, call and response. The moment you stop being a person and become part of the crowd.</div>
+        </div>
+        <div class="t-card beauty">
+          <div class="t-name">Beauty</div>
+          <div class="t-char">Form transcending function</div>
+          <div class="t-floor">A perfect drop. The second when the music does exactly what your body needed before you knew you needed it.</div>
+        </div>
+        <div class="t-card truth">
+          <div class="t-name">Truth</div>
+          <div class="t-char">Unselfconscious presence</div>
+          <div class="t-floor">The person who forgets to perform and just dances. No audience. No mirror. Pure being.</div>
+        </div>
+        <div class="t-card goodness">
+          <div class="t-name">Goodness</div>
+          <div class="t-char">Care extended outward</div>
+          <div class="t-floor">Making space for someone. Offering a hand. Noticing the person next to you and acting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTAL -->
+  <div class="section" id="s-portal">
+    <button class="section-toggle" onclick="toggle('s-portal')">
+      <div class="section-label">The Portal</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Visual Language</div>
+        <div class="field-value">Concentric rings of distorted geometry — like a speaker membrane, but organic. The portal looks like Suboont's heartbeat rendered in space.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Why Here</div>
+        <div class="field-value">Unknown. The portal opened at this location for reasons that are not explained. <strong style="color:var(--orange)">This ambiguity is canon. Do not resolve it.</strong></div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Mechanics</div>
+        <div class="field-value">The portal was opened — accidentally or otherwise. OOR emerged through it. The portal remains open as long as the harvest continues. If the harvest is sufficient, the portal closes. OOR returns. The transcendentals go with it.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Failure State</div>
+        <div class="field-value">If the collective experience collapses, the portal does not close cleanly. The consequences are not spelled out. They are ambient.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RITUALS -->
+  <div class="section" id="s-rituals">
+    <button class="section-toggle" onclick="toggle('s-rituals')">
+      <div class="section-label">
+        Rituals
+        <span class="tag" style="background:rgba(208,72,112,0.15);color:var(--pink)">5 events</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="ritual">
+        <div class="ritual-num">01</div>
+        <div class="ritual-name">The Opening</div>
+        <div class="ritual-desc">The portal opens. The bass begins. The room changes. The player may not witness this directly — they may arrive after it has already happened, feeling the aftershock in the building's bones.</div>
+        <div class="ritual-tone">Silly but genuinely unsettling. Something has changed. The room knows it.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">02</div>
+        <div class="ritual-name">The Mating Ritual</div>
+        <div class="ritual-desc">The theremin-familiar moves through the crowd, gesture becoming sound. The choreographer familiar conducts alongside. Together they select individuals by proximity to resonance — the ones already sweating, already moving without deciding to, already losing the boundary between their body and the beat. From the outside, being selected looks like being noticed by something that does not have eyes.</div>
+        <div class="ritual-tone">Pagan harvest energy. The familiars are doing a job with great seriousness. The crowd interprets it as play. Both readings are correct and neither is complete.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">03</div>
+        <div class="ritual-name">The OOR Slide</div>
+        <div class="ritual-desc">A collective movement ritual. Familiar structure — call and response, directional movement — but the calls come from a robotic, vocoded voice. The crowd follows without knowing why. For a moment, many bodies move as one. Unity floods the harvest.</div>
+        <div class="ritual-tone">Absurd and effective. The comedy is part of it. OOR does not understand why this works. It works.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">04</div>
+        <div class="ritual-name">The Dance Circle</div>
+        <div class="ritual-desc">A circle of light on the floor. A spinning arrow. When the arrow points at you, you are expected to enter. The crowd watches. Someone always enters. The arrow is not random — it finds the people who need to be found.</div>
+        <div class="ritual-tone">Low-stakes, high-energy. Individual visibility inside the collective. The exposure is part of the mechanism.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">05</div>
+        <div class="ritual-name">The Closing</div>
+        <div class="ritual-desc">The harvest completes. The crowd descends — call and response pulling everyone lower, lower, to the floor. At the floor, music fades to a low bass drone. Then: stillness. The bass drops away. Silence as ritual completion. The portal closes. OOR is gone.</div>
+        <div class="ritual-tone">The way a great late-night dance session ends — not in memory but in the body. You don't remember everything. You remember the heat, the weight of your own limbs, the silence after.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIMORDIAL PLANE -->
+  <div class="section" id="s-plane">
+    <button class="section-toggle" onclick="toggle('s-plane')">
+      <div class="section-label">Primordial Plane</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Description</div>
+        <div class="field-value">The realm prior to and separate from material reality. No sound. No color as humans understand it. No individual forms. The transcendentals originate here and are pulled back here. Whether this constitutes a cycle or a digestion is not clear from inside it.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Player Experience</div>
+        <div class="field-value">Players who reach the Primordial Plane — through specific artifact unlocks or witness perspective branches — experience something their senses were not built to process. Spatial orientation fails. The second-person voice may begin to malfunction. Text corrupts. Choices disappear or present themselves in languages the player does not read. The game holds still, but the stillness has weight and direction. This is not transcendence. This is exposure.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Suboont's Presence</div>
+        <div class="field-value">Suboont is here. It is not visible. It is the medium itself — the atmosphere, the pressure, the slow rhythmic compression of space that suggests something vast is digesting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSPECTIVES -->
+  <div class="section" id="s-persp">
+    <button class="section-toggle" onclick="toggle('s-persp')">
+      <div class="section-label">
+        Perspectives
+        <span class="tag" style="background:rgba(48,72,48,0.4);color:#60C080">3 playthroughs</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="perspective default">
+        <div class="perspective-label">
+          The Wanderer
+          <span class="lock-tag lock-free">Free</span>
+        </div>
+        <div class="field-value">A person who heard about a party from a friend. Slightly lost. Following the bass through an industrial neighborhood at night. They arrive not knowing what they are arriving at. Starting location: outside, the approach.</div>
+      </div>
+      <div class="perspective unlocked">
+        <div class="perspective-label">
+          The Familiar
+          <span class="lock-tag lock-unlock">Unlock after 1 run</span>
+        </div>
+        <div class="field-value">An antlered servant of Suboont. Already inside the operation. The crowd is frequencies, not faces. The harvest is a job. Starting location: inside, near OOR.</div>
+      </div>
+      <div class="perspective rare">
+        <div class="perspective-label">
+          OOR
+          <span class="lock-tag lock-rare">Holy artifact required</span>
+        </div>
+        <div class="field-value">OOR itself. The harvest from the harvester's perspective. Humans as mineral deposits. The music as a tool. The crowd as a resonance field to be agitated. Profoundly disorienting. Starting location: the decks. The center.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMINAL OUTCOMES -->
+  <div class="section" id="s-outcomes">
+    <button class="section-toggle" onclick="toggle('s-outcomes')">
+      <div class="section-label">Terminal Outcomes</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="outcome-grid">
+        <div class="outcome transcendence">
+          <div class="outcome-label">Transcendence</div>
+          <div class="outcome-text">Fully participated. Portal closes. You were part of something that will not be named. Something in your body still vibrates at a frequency that is not yours. In the weeks after, you will stand in quiet rooms and hear bass that isn't there. Your body remembers a rhythm your mind will not return.</div>
+        </div>
+        <div class="outcome harvest">
+          <div class="outcome-label">Harvest</div>
+          <div class="outcome-text">Partially participated. The harvest succeeds but something was taken you did not consciously offer. You feel lighter. You are not sure this is good.</div>
+        </div>
+        <div class="outcome failure">
+          <div class="outcome-label">Failure</div>
+          <div class="outcome-text">The collective experience collapsed. The portal does not close cleanly. What remains is not described. It is ambient. The building is still there in the morning. Something about its dimensions has changed. The alley outside is longer than it was.</div>
+        </div>
+        <div class="outcome escape">
+          <div class="outcome-label">Escape</div>
+          <div class="outcome-text">Withdrew entirely. You are safe. You are home. You remember nothing specific — just a pressure behind your sternum that won't resolve, and a sense that something saw you leave. You will check over your shoulder at crosswalks for months. You will not know why.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORLD PRINCIPLES -->
+  <div class="section" id="s-principles">
+    <button class="section-toggle" onclick="toggle('s-principles')">
+      <div class="section-label">
+        World Principles
+        <span class="tag" style="background:rgba(96,32,192,0.15);color:#8060D8">Generation rules</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="principle">
+        <div class="principle-title">The Condition of Unknowing</div>
+        <div class="field-value">This world exists in a state of deliberate unknowing. Servant identity, portal origin, the true nature of Suboont — these are not gaps to be filled. They are the condition of this world. Mystery is a first-class value. Both known and unknown simultaneously.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Temperature as Consequence</div>
+        <div class="field-value">Cold is moral feedback, never stated as such. Choices leading away from transcendental harvesting feel cold and biting. Choices aligning with the harvest feel warm. The player is never told this. They may notice it on a second playthrough.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Group Consciousness Arc</div>
+        <div class="field-value">The crowd moves from individuals to a unified harvest entity. Early nodes: distinct people, separate bodies. Late nodes: the boundary between self and crowd becomes porous. Terminal transcendence: the individual perspective dissolves. The player does not return to a whole — they are absorbed into a larger body that was already using them. The Buddhist concept of anatta (non-self) is the structural framework, but the emotional register is closer to learning you were never separate to begin with.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Dissolution Arcs</div>
+        <div class="field-value">Some playthroughs destabilize subjective experience as a reward for depth. Not the default — a discovery. The second-person voice may become unreliable. The primordial plane may bleed in. Should feel like something happening to the player, not being explained to them.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Sonic Specificity</div>
+        <div class="field-value">Specific sonic texture allowed as ambient observation — a bassline noticed, a lyric fragment. Ritual descriptions stay generic so the lore survives real-world set changes. Never name a song in a ritual description.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TONE -->
+  <div class="section" id="s-tone">
+    <button class="section-toggle" onclick="toggle('s-tone')">
+      <div class="section-label">Tone &amp; Voice</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Narrative Voice</div>
+        <div class="field-value">Second person. Present tense. Sparse. Terse. Every sentence earns its place.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Register</div>
+        <div class="field-value">Psychedelic, post-industrial, warm, genuinely unsettling without being horror. The horror is ambient. The goal is understanding.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">OOR Action Blocks</div>
+        <div class="field-value">Clinical. Present tense. Observational. Never emotional. OOR does not address the player. OOR is doing a job. Rendered as a separate styled block — italicized, offset, lower opacity.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Never Do</div>
+        <ul class="avoid-list">
+          <li>OOR speaking directly to the player</li>
+          <li>Explaining the lore didactically</li>
+          <li>Resolving the ambiguity of why the portal opened</li>
+          <li>Describing transcendentals as emotions — they are minerals to OOR</li>
+          <li>Punishing the player for avoidance — ignorance is a quiet exit</li>
+          <li>Generic fantasy or horror tropes</li>
+          <li>Named references to real-world locations</li>
+          <li>Stateful constructions — no "you decided earlier" in base node text</li>
+          <li>Naming specific songs in ritual descriptions</li>
+        </ul>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Literary References</div>
+        <div class="ref-group">
+          <span class="ref-tag">Pan's Labyrinth</span>
+          <span class="ref-tag">Annihilation</span>
+          <span class="ref-tag">The King in Yellow</span>
+          <span class="ref-tag">Invisible Cities</span>
+          <span class="ref-tag">Ficciones</span>
+        </div>
+        <div class="field-label mt">Spiritual References</div>
+        <div class="ref-group">
+          <span class="ref-tag">Buddhist non-self</span>
+          <span class="ref-tag">Gnostic cosmology</span>
+          <span class="ref-tag">Kabbalah</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SONIC PALETTE -->
+  <div class="section" id="s-sonic">
+    <button class="section-toggle" onclick="toggle('s-sonic')">
+      <div class="section-label">Sonic Palette</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Character</div>
+        <div class="field-value">Ass-throwing bass. Classic dance. 80s (inherently slightly spooky). Japanese horror vocal stingers as transitions. Cosmic and unstoppable.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Genres</div>
+        <div class="genre-pills">
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Bass</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Pop</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Hip-Hop</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Dark 80s/90s</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Acid</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Goa</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Remixes</span>
+        </div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Reference Tracks</div>
+        <div class="track">Burial — Archangel (ghostly, bass-heavy, eerie)</div>
+        <div class="track">Trentemøller — Moan (dark, hypnotic, cinematic)</div>
+        <div class="track">SOPHIE — Ponyboy (body horror pop, surprisingly danceable)</div>
+        <div class="track">Donna Summer — I Feel Love (cosmic, unstoppable)</div>
+        <div class="track">New Order — Blue Monday (mechanical, pounding)</div>
+        <div class="track">New Order — Bizarre Love Triangle</div>
+        <div class="track">Human League — Don't You Want Me</div>
+        <div class="track">Kenji Kawai — Ghost in the Shell OST (choral, haunting)</div>
+        <div class="track">Susumu Hirasawa — general catalog</div>
+        <div class="track">Ring / Ju-On soundtracks — vocal stingers, reversed audio</div>
+      </div>
+      <div class="quote" style="margin-top:16px;">The crowd does not know it is being harvested. They think they are dancing. They are right.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    v0.1 · Draft · The harvest continues · <span style="color:var(--orange)">oord.art</span>
+  </div>
+
+</div>
+
+<script>
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Stagger open first section on load, rest collapsed
+  document.addEventListener('DOMContentLoaded', () => {
+    // subtle bass pulse on portal rings via JS randomization
+    const rings = document.querySelectorAll('.ring');
+    rings.forEach((ring, i) => {
+      const r = [80, 160, 240, 320, 400, 480, 560, 640, 720, 800][i];
+      ring.setAttribute('r', r);
+    });
+  });
+</script>
+</body>
+</html>
