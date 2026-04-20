@@ -1,0 +1,43 @@
+[
+  {
+    "id": "outcome_transcendence",
+    "text": "You are outside.\n\nYou don't remember leaving. The night is cold in the way nights are cold when you have been somewhere very warm for a very long time — not the cold itself but the contrast, your body recalibrating, the heat of the harvest bleeding off into the dark air.\n\nThe sodium lights are orange. The alley is the alley. The gravel lot is the gravel lot. The city that is not Fargo and never was.\n\nYou stand in it and understand, for the first time with full clarity, what happened tonight.\n\nSomething was very hungry. Something has been hungry for a long time — longer than this building, longer than this city, longer than the species that built both. It required specific nourishment. Not your body, not your memory, not anything you will notice missing on a list. What it required, what it harvested, what it pulled through the portal into whatever lies on the other side —\n\nWas the best of you.\n\nUnity, when you stopped being separate. Beauty, when the music did the thing your body needed before you could name the need. Truth, when you forgot to perform. Goodness, when you reached toward a stranger without deciding to.\n\nThose moments are gone. Not from memory — memory keeps the outline, the shape of the container. The moments themselves, the actual living substance of them, the mineral content of genuine human experience — taken. Processed. Delivered to something you will never see. Something that was hungry and is now, briefly, less hungry.\n\nAnd you fed it willingly. You danced. You went lower when the voice said lower. You held still in the radius of the rod. You put your hand on a stranger's shoulder in the dark.\n\nThe plant always wins. The plant was always going to win. You walked in knowing — at some level below language, in the body, in the frequency that pulled you down the alley — what this was. You came anyway.\n\nYou would come again.\n\nThis does not mean the moments were not real. They were real before they were taken. The taking does not retroactively empty them. The Dunwich thing, when it was banished, left the witnesses changed — not destroyed, changed. Knowing. Carrying the shape of what they had seen in a part of the mind that does not take notes.\n\nYou are that now.\n\nSomewhere above, in a location that is not a location, something vast and slow and indifferent is circulating what you gave it. It does not know your name. It does not know you. You are a mineral deposit that has been processed. The drain has been cleared. It will clog again. This is the nature of the circulation. This is why the portal exists. This is why the bass is the oldest frequency and the subwoofer is not a metaphor.\n\nYou are a person standing in a gravel lot before dawn. Your ears are ringing. Your legs are heavy with hours of dancing. Something behind your sternum is still vibrating at a frequency that is not yours and may never fully resolve.\n\nYou are not diminished. You are not more than you were. You are exactly what you were, with the knowledge you cannot un-have and a frequency you did not arrive with.\n\nThe bass will fade. By the time you reach your door it will be very quiet. By morning it will be something you almost remember.\n\nBut in quiet rooms — a library, a stairwell, the space just before sleep — it will return. Low and certain and sourceless. Your body will recognize it before your mind does.\n\nYour body will always recognize it.\n\nFeed me.\n\nFeed me.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The night is over. The harvest is complete. You are standing in the cold with the knowledge."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "transcendentals_complete": true },
+        "append": "All four. You gave all four. Full yield. In whatever calculus Sooboont runs, you were sufficient. More than sufficient. Exactly what was asked."
+      },
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "The frequency that pulled you from the alley: it knew. It found you specifically because of what you carried. You were selected before you arrived. The invitation was not random."
+      },
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "You were right to be wary. Wary did not protect you. Nothing would have. Wariness is not a shield — it is just a way of arriving with your eyes open. You arrived with your eyes open. You saw it clearly. You stayed."
+      }
+    ],
+    "oor_action": "Harvest yield: run-variant signature resolved at close. Total: sufficient. Portal: closed. Location: vacated. Next occurrence: scheduled. The drain does not stay clear forever.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "cold",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "You walk toward the street.",
+        "next": null,
+        "tag": null,
+        "requires": null
+      }
+    ],
+    "terminal": true,
+    "outcome": "transcendence"
+  }
+]

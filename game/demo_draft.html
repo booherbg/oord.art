@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE PILGRIM'S PATH — Draft Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #07050a;
+    --orange:      #E86010;
+    --yellow:      #D4A820;
+    --violet:      #6020C0;
+    --pink:        #D04870;
+    --text:        #C8BCA8;
+    --text-dim:    #6A6058;
+    --text-bright: #E8DCC8;
+    --border:      #201818;
+    --border-warm: #3A2818;
+    --unity:       #4080D0;
+    --beauty:      #D04870;
+    --truth:       #D4A820;
+    --goodness:    #40A060;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ─── TEMPERATURE ───────────────────────────────── */
+  .temp-cold .node-card { border-color: #1a2030; }
+  .temp-cool .node-card { border-color: #1e1e28; }
+  .temp-warm .node-card { border-color: var(--border-warm); }
+  .temp-hot  .node-card { border-color: #4a2010; }
+
+  .temp-cold .state-temp { color: #6090C0; }
+  .temp-cool .state-temp { color: #8090A0; }
+  .temp-warm .state-temp { color: var(--orange); }
+  .temp-hot  .state-temp { color: #E03010; }
+
+  /* ─── LAYOUT ────────────────────────────────────── */
+  .wrap {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 0 20px 140px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-header {
+    text-align: center;
+    padding: 48px 0 20px;
+  }
+
+  .site-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 10vw, 64px);
+    line-height: 0.9;
+    color: var(--orange);
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 40px rgba(232, 96, 16, 0.3);
+  }
+
+  .site-title span {
+    display: block;
+    color: var(--yellow);
+    font-size: 0.55em;
+    letter-spacing: 0.12em;
+  }
+
+  .site-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--yellow), transparent);
+    margin: 20px 0;
+    opacity: 0.25;
+  }
+
+  /* ─── NODE CARD ─────────────────────────────────── */
+  .node-card {
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    padding: 28px 24px;
+    margin-top: 24px;
+    background: rgba(14, 11, 18, 0.8);
+    animation: nodeIn 0.6s ease;
+  }
+
+  @keyframes nodeIn {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .node-id {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    opacity: 0.6;
+  }
+
+  /* ─── ARRIVAL ───────────────────────────────────── */
+  .arrival {
+    color: var(--yellow);
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(212, 168, 32, 0.1);
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.3s forwards;
+  }
+
+  /* ─── BODY TEXT ─────────────────────────────────── */
+  .node-text p {
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .node-text p:last-child { margin-bottom: 0; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(4px); }
+  }
+
+  /* ─── CONDITIONAL ───────────────────────────────── */
+  .conditional {
+    color: var(--text-bright);
+    font-size: 12px;
+    margin-top: 14px;
+    padding-left: 12px;
+    border-left: 2px solid var(--violet);
+    opacity: 0;
+    animation: fadeUp 0.4s ease 0.8s forwards;
+  }
+
+  /* ─── OOR ACTION ────────────────────────────────── */
+  .oor-action {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--orange);
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(232, 96, 16, 0.04);
+    border-left: 2px solid var(--orange);
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.6s forwards;
+  }
+
+  /* ─── TRANSCENDENTAL AWARD ──────────────────────── */
+  .award-flash {
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+  .award-flash.unity    { background: rgba(64,128,208,0.1);  color: #60A0E8; border-left: 2px solid #4080D0; }
+  .award-flash.beauty   { background: rgba(208,72,112,0.1);  color: var(--pink); border-left: 2px solid var(--pink); }
+  .award-flash.truth    { background: rgba(212,168,32,0.1);  color: var(--yellow); border-left: 2px solid var(--yellow); }
+  .award-flash.goodness { background: rgba(64,160,96,0.1);   color: #60C080; border-left: 2px solid #40A060; }
+
+  /* ─── CHOICES ───────────────────────────────────── */
+  .choices {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.4s ease 1s forwards;
+  }
+
+  .choice-btn {
+    background: none;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .choice-btn:hover {
+    background: rgba(232, 96, 16, 0.06);
+    border-color: var(--orange);
+    color: var(--text-bright);
+  }
+
+  .choice-btn.locked {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-style: dashed;
+  }
+
+  /* ─── STUB ──────────────────────────────────────── */
+  .stub-card {
+    border: 1px dashed #3a2030;
+    border-radius: 2px;
+    padding: 28px 24px;
+    margin-top: 24px;
+    background: rgba(96, 32, 64, 0.06);
+    animation: nodeIn 0.6s ease;
+  }
+
+  .stub-id {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .stub-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--violet);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    opacity: 0.6;
+  }
+
+  .stub-msg {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .stub-restart {
+    margin-top: 16px;
+    display: inline-block;
+    background: none;
+    border: 1px solid var(--violet);
+    color: var(--violet);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .stub-restart:hover { opacity: 1; }
+
+  /* ─── OUTCOME TERMINAL ──────────────────────────── */
+  .outcome-card {
+    border: 1px solid var(--yellow);
+    border-radius: 2px;
+    padding: 28px 24px;
+    margin-top: 24px;
+    background: rgba(212, 168, 32, 0.03);
+    animation: nodeIn 0.8s ease;
+  }
+
+  .outcome-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+    margin-bottom: 16px;
+    text-shadow: 0 0 20px rgba(212, 168, 32, 0.3);
+  }
+
+  /* ─── STATE BAR ─────────────────────────────────── */
+  .state-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(7, 5, 10, 0.96);
+    border-top: 1px solid var(--border);
+    padding: 10px 20px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+  }
+
+  .state-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .state-temp {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    min-width: 36px;
+  }
+
+  /* transcendental pips */
+  .trans-pips {
+    display: flex;
+    gap: 4px;
+  }
+
+  .t-pip {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    border: 1px solid;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.2;
+    transition: opacity 0.4s ease, background 0.4s ease;
+  }
+
+  .t-pip.earned { opacity: 1; }
+
+  .t-pip.unity    { border-color: var(--unity);    color: #60A0E8; }
+  .t-pip.beauty   { border-color: var(--beauty);   color: var(--pink); }
+  .t-pip.truth    { border-color: var(--truth);    color: var(--yellow); }
+  .t-pip.goodness { border-color: var(--goodness); color: #60C080; }
+
+  .t-pip.earned.unity    { background: rgba(64,128,208,0.15); }
+  .t-pip.earned.beauty   { background: rgba(208,72,112,0.15); }
+  .t-pip.earned.truth    { background: rgba(212,168,32,0.15); }
+  .t-pip.earned.goodness { background: rgba(64,160,96,0.15);  }
+
+  /* tags */
+  .state-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .state-tag {
+    padding: 2px 6px;
+    border-radius: 2px;
+    background: rgba(232, 96, 16, 0.1);
+    color: var(--orange);
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .restart-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .restart-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ─── LOAD ERROR ────────────────────────────────── */
+  .load-error {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+  }
+
+  .load-error code {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: rgba(232, 96, 16, 0.08);
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    color: var(--orange);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body class="temp-cold">
+
+<div class="wrap">
+  <header class="site-header">
+    <div class="site-title">The Pilgrim's<span>Path</span></div>
+    <div class="site-sub">Draft Demo</div>
+    <div class="divider"></div>
+  </header>
+  <div id="game"></div>
+</div>
+
+<div class="state-bar">
+  <div class="state-left">
+    <span class="state-temp" id="temp-display">cold</span>
+    <div class="trans-pips">
+      <span class="t-pip unity"    id="t-unity">Unity</span>
+      <span class="t-pip beauty"   id="t-beauty">Beauty</span>
+      <span class="t-pip truth"    id="t-truth">Truth</span>
+      <span class="t-pip goodness" id="t-goodness">Goodness</span>
+    </div>
+  </div>
+  <div class="state-tags" id="tag-display"></div>
+  <button class="restart-btn" onclick="restart()">Restart</button>
+</div>
+
+<script>
+// ─── CONFIG ────────────────────────────────────────
+const START_NODE = 'spine_001';
+
+const JSON_FILES = [
+  'spine_nodes.json',
+  'branch_unity.json',
+  'post_unity.json',
+  'branch_beauty.json',
+  'post_beauty.json',
+  'branch_truth.json',
+  'post_truth.json',
+  'branch_goodness.json',
+  'closing.json',
+  'outcome_transcendence.json',
+  'withdraw.json',
+  'outcome_escape.json'
+];
+
+const TRANSCENDENTAL_LABELS = {
+  unity:    'Unity yielded — many bodies, one motion',
+  beauty:   'Beauty yielded — form exceeding function',
+  truth:    'Truth yielded — presence without performance',
+  goodness: 'Goodness yielded — care without audience'
+};
+
+// ─── STATE ─────────────────────────────────────────
+const nodeMap = {};
+let _currentChoices = [];
+
+let state = {
+  node:            START_NODE,
+  tags:            [],
+  transcendentals: [],
+  artifacts:       [],
+  run_artifacts:   [],
+  pending_arrival: null
+};
+
+// ─── INIT ──────────────────────────────────────────
+async function init() {
+  const game = document.getElementById('game');
+  game.innerHTML = '<div style="padding:40px 0;color:var(--text-dim);font-size:11px;letter-spacing:0.1em;">Loading nodes...</div>';
+
+  try {
+    const arrays = await Promise.all(
+      JSON_FILES.map(f => fetch(f).then(r => {
+        if (!r.ok) throw new Error(`Failed to load ${f}: ${r.status}`);
+        return r.json();
+      }))
+    );
+    arrays.flat().forEach(n => { nodeMap[n.id] = n; });
+    render();
+  } catch (err) {
+    game.innerHTML = `
+      <div class="load-error">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--orange);margin-bottom:12px;">Load Error</div>
+        <div style="font-size:12px;margin-bottom:16px;">${err.message}</div>
+        <div style="font-size:11px;color:var(--text-dim);">This demo requires a local server due to browser CORS restrictions.<br>From the <code>game/</code> directory, run:</div>
+        <code>python3 -m http.server 8000</code>
+        <div style="margin-top:12px;font-size:10px;color:var(--text-dim);">Then open <code>http://localhost:8000/demo_draft.html</code></div>
+      </div>`;
+  }
+}
+
+// ─── ENGINE ────────────────────────────────────────
+function evaluate(condition, st) {
+  if (!condition) return true;
+  if (condition.has_artifact)            return st.artifacts.includes(condition.has_artifact);
+  if (condition.has_transcendental)      return st.transcendentals.includes(condition.has_transcendental);
+  if (condition.has_tag)                 return st.tags.includes(condition.has_tag);
+  if (condition.run_has_artifact)        return st.run_artifacts.includes(condition.run_has_artifact);
+  if (condition.transcendentals_complete) return st.transcendentals.length === 4;
+  return true;
+}
+
+function getArrival(node) {
+  if (!node.arrival_variants) return null;
+  for (const v of node.arrival_variants) {
+    if (v.default) continue;
+    if (evaluate(v.requires, state)) return v.text;
+  }
+  const def = node.arrival_variants.find(v => v.default);
+  return def ? def.text : null;
+}
+
+function getConditionals(node) {
+  if (!node.conditional_text) return [];
+  return node.conditional_text
+    .filter(c => evaluate(c.condition, state))
+    .map(c => c.append);
+}
+
+function getChoices(node) {
+  return node.choices ? node.choices.filter(c => evaluate(c.requires, state)) : [];
+}
+
+function applyAwards(node) {
+  if (node.awards_transcendental && !state.transcendentals.includes(node.awards_transcendental)) {
+    state.transcendentals.push(node.awards_transcendental);
+    return node.awards_transcendental;
+  }
+  if (node.awards_artifact && !state.artifacts.includes(node.awards_artifact)) {
+    state.artifacts.push(node.awards_artifact);
+  }
+  return null;
+}
+
+function formatDuration(seconds) {
+  const clamped = Math.max(1, Math.floor(seconds));
+  if (clamped < 60) return `${clamped} seconds`;
+  const mins = Math.floor(clamped / 60);
+  const secs = clamped % 60;
+  return `${mins} minutes ${String(secs).padStart(2, '0')} seconds`;
+}
+
+function getHarvestSignature() {
+  let unitySeconds = 11;
+  let beautyWithheldMins = 23;
+  let truthSeconds = 6 * 60 + 44;
+  const hasTag = t => state.tags.includes(t);
+
+  // Small deterministic path variance to make the harvest log feel earned.
+  if (hasTag('willing')) unitySeconds += 2;
+  if (hasTag('drawn')) unitySeconds += 1;
+
+  if (hasTag('accepts')) beautyWithheldMins -= 2;
+  if (hasTag('denies')) beautyWithheldMins += 3;
+  beautyWithheldMins = Math.max(14, beautyWithheldMins);
+
+  if (hasTag('holds')) truthSeconds -= 72;
+  if (hasTag('self_monitoring')) truthSeconds -= 28;
+  else truthSeconds += 22;
+  truthSeconds = Math.max(150, truthSeconds);
+
+  let goodnessDescriptor = 'unsolicited act of care, non-performative';
+  if (hasTag('wary')) goodnessDescriptor = 'unsolicited act of care under resistance load';
+  if (hasTag('accepts')) goodnessDescriptor = 'unsolicited act of care with low resistance';
+
+  return {
+    unityLabel: `${unitySeconds} seconds at full density`,
+    beautyLabel: `1 release event, ${beautyWithheldMins} minutes withheld`,
+    truthLabel: formatDuration(truthSeconds),
+    goodnessLabel: goodnessDescriptor
+  };
+}
+
+function getOorAction(node) {
+  if (!node.oor_action) return null;
+  if (node.id !== 'outcome_transcendence') return node.oor_action;
+
+  const sig = getHarvestSignature();
+  return `Harvest yield: Unity × ${sig.unityLabel}. Beauty × ${sig.beautyLabel}. Truth × ${sig.truthLabel} unselfconscious. Goodness × 1 ${sig.goodnessLabel}. Total: sufficient. Portal: closed. Location: vacated. Next occurrence: scheduled. The drain does not stay clear forever.`;
+}
+
+// ─── RENDER ────────────────────────────────────────
+function render() {
+  const node = nodeMap[state.node];
+
+  if (!node) {
+    renderStub(state.node);
+    return;
+  }
+
+  const newAward = applyAwards(node);
+  updateStateBar(node);
+
+  const pendingArrival = state.pending_arrival;
+  state.pending_arrival = null;
+
+  const container = document.getElementById('game');
+  let html = `<div class="node-card">`;
+  html += `<div class="node-id">${node.id}</div>`;
+
+  const arrival = pendingArrival || getArrival(node);
+  if (arrival) {
+    html += `<div class="arrival">${arrival}</div>`;
+  }
+
+  const paragraphs = node.text.split('\n\n');
+  html += `<div class="node-text">`;
+  paragraphs.forEach((p, i) => {
+    html += `<p style="animation-delay:${0.15 + i * 0.12}s">${p}</p>`;
+  });
+  html += `</div>`;
+
+  const conds = getConditionals(node);
+  conds.forEach(c => {
+    html += `<div class="conditional">${c}</div>`;
+  });
+
+  const oorAction = getOorAction(node);
+  if (oorAction) {
+    html += `<div class="oor-action">${oorAction}</div>`;
+  }
+
+  if (newAward) {
+    const label = TRANSCENDENTAL_LABELS[newAward] || newAward;
+    html += `<div class="award-flash ${newAward}">&#x25c6; ${label}</div>`;
+  }
+
+  const choices = getChoices(node);
+  _currentChoices = choices;
+
+  html += `<div class="choices">`;
+  choices.forEach((c, i) => {
+    const isStub = c.next && !nodeMap[c.next];
+    const lockedClass = isStub ? ' locked' : '';
+    const lockedTitle = isStub ? ` title="Branch not yet written: ${c.next}"` : '';
+    const stubLabel = isStub ? ` <span style="opacity:0.4;font-size:10px;">[ stub ]</span>` : '';
+    html += `<button class="choice-btn${lockedClass}"${lockedTitle} data-idx="${i}" onclick="handleChoice(this.dataset.idx)">${c.text}${stubLabel}</button>`;
+  });
+  html += `</div>`;
+
+  html += `</div>`;
+  container.innerHTML = html;
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function renderStub(id) {
+  updateStateBarRaw('cold');
+  const container = document.getElementById('game');
+  container.innerHTML += `
+    <div class="stub-card">
+      <div class="stub-id">${id}</div>
+      <div class="stub-label">Branch Not Written</div>
+      <div class="stub-msg">This path hasn't been built yet. Tags accumulated so far: ${state.tags.join(', ') || 'none'}.<br>Transcendentals: ${state.transcendentals.join(', ') || 'none'}.</div>
+      <button class="stub-restart" onclick="restart()">Restart from beginning</button>
+    </div>`;
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+// ─── STATE BAR ─────────────────────────────────────
+function updateStateBar(node) {
+  updateStateBarRaw(node.temperature || 'cold');
+}
+
+function updateStateBarRaw(temp) {
+  document.body.className = 'temp-' + temp;
+  document.getElementById('temp-display').textContent = temp;
+
+  ['unity', 'beauty', 'truth', 'goodness'].forEach(t => {
+    document.getElementById('t-' + t).classList.toggle('earned', state.transcendentals.includes(t));
+  });
+
+  document.getElementById('tag-display').innerHTML =
+    state.tags.map(t => `<span class="state-tag">${t}</span>`).join('');
+}
+
+// ─── NAVIGATION ────────────────────────────────────
+function handleChoice(idx) {
+  const c = _currentChoices[Number(idx)];
+  if (!c.next) {
+    if (c.tag) state.tags.push(c.tag);
+    const container = document.getElementById('game');
+    container.innerHTML += `
+      <div class="choices" style="opacity:1;margin-top:20px;padding:0 0 20px;">
+        <button class="choice-btn" onclick="restart()">Begin again.</button>
+      </div>`;
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    return;
+  }
+  choose(c.next, c.tag || null, c.arrival || null);
+}
+
+function choose(nextId, tag, arrival) {
+  if (tag) state.tags.push(tag);
+  if (arrival) state.pending_arrival = arrival;
+  state.node = nextId;
+  render();
+}
+
+function restart() {
+  state = { node: START_NODE, tags: [], transcendentals: [], artifacts: [], run_artifacts: [], pending_arrival: null };
+  document.getElementById('game').innerHTML = '';
+  render();
+}
+
+// ─── START ─────────────────────────────────────────
+init();
+</script>
+</body>
+</html>

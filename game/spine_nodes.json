@@ -1,0 +1,194 @@
+[
+  {
+    "id": "spine_001",
+    "text": "The cold is specific tonight. Not seasonal — structural. It sits in the concrete under your feet and radiates upward through your soles, into the bones of your ankles.\n\nYou hear it before you understand what you are hearing. A pressure below the threshold of music. It has no melody. It has direction. You follow it the way water follows gravity — not because you decided to but because the gradient exists and you are on it.\n\nThe sodium lights turn the fog orange. The alley narrows. Gravel pops under your shoes like small bones.",
+    "arrival_variants": null,
+    "conditional_text": null,
+    "oor_action": null,
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "cold",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Follow the bass.",
+        "next": "spine_002",
+        "tag": "drawn",
+        "arrival": "You followed the sound here. You thought you were choosing. The building disagrees.",
+        "requires": null
+      },
+      {
+        "text": "You didn't choose this direction. You're just walking.",
+        "next": "spine_002",
+        "tag": "drifting",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "spine_002",
+    "text": "The building is there before you find it. You were walking toward it and it was already behind you — you passed it without registering it and now you are standing at its mouth, turned around, facing a doorway that is open the way a jaw is open when the tendons have given out.\n\nWarm air pushes through the gap. It smells like sweat and electricity and something underneath both that your lungs recognize before your brain does. The bass is not louder here. It is closer. The distinction matters and you do not yet understand why.\n\nYou step across the threshold. The cold peels off you like a wet shirt.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You arrived. You are not confident of the route you took."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": null,
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "cool",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "The warmth is immediate. Your body wants this.",
+        "next": "spine_003",
+        "tag": "willing",
+        "arrival": "The heat is thick and close. Your skin adjusts before your eyes do.",
+        "requires": null
+      },
+      {
+        "text": "Something is wrong with this building. You go in anyway.",
+        "next": "spine_003",
+        "tag": "wary",
+        "arrival": "The warmth does not reassure you. It is too deliberate. It is not the crowd's heat — it has a source.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "spine_003",
+    "text": "The room is larger than the building should allow. The ceiling disappears into dark. Two hundred bodies occupy the floor and the boundary between them is softening — you can see it from the edge, the way individual movement bleeds into coordination, shoulders synchronizing without signal.\n\nAt the center, behind a pair of decks, something is wrong.\n\nIt is bright — orange and yellow, furred or fibrous, larger than a person. A mouth gapes at its center and tongue-limbs emerge from inside it, moving across the mixer with mechanical precision. Above, a single massive ear tilts toward the crowd. Eyes stud the surface — misaligned, tracking different things. One of them has already found you.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "Inside. The sound has architecture now."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": "OOR adjusts a low-pass filter. The air pressure in the room shifts. Three people near the front stop talking mid-sentence and begin to move.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "warm",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Move closer.",
+        "next": "spine_004",
+        "tag": null,
+        "arrival": "You are close enough now to see the tongue-limbs flex at the knuckle joints. The motion is peristaltic.",
+        "requires": null
+      },
+      {
+        "text": "Watch from the edge.",
+        "next": "spine_004",
+        "tag": null,
+        "arrival": "From the edge you can see more than you want to. The patterns in the crowd are too regular. The synchronization is not voluntary.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "spine_004",
+    "text": "The longer you watch, the less it looks like a performance. The tongue-limbs are not mixing for the crowd. They are mixing the crowd. Each adjustment changes something in the room — a filter sweep and the dance floor contracts. A bass drop and six people gasp simultaneously, mouths the same shape, necks arched at the same angle.\n\nIt is not playing music. It is operating equipment. The crowd is raw material. The music is a tool — a drill bit, a solvent, something that loosens what it touches so the valuable thing inside can be extracted.\n\nThe floor vibrates from underneath. Not from the subwoofers. From below the concrete. The bass originates in a direction your inner ear was not built to name, and DJ OOR is tuning the room to match it.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are watching something you were not meant to see the mechanics of."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "Your instinct was right. You knew it at the door. The wrongness was not the building. It was the purpose the building is being put to."
+      }
+    ],
+    "oor_action": "OOR's ear rotates twelve degrees toward the south wall. Something there has reached a useful density. It makes a correction on the low end. The group near the south wall moves harder. They do not know they were corrected.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "warm",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "This is what it is.",
+        "next": "spine_005",
+        "tag": "accepts",
+        "arrival": "You accepted what you saw. Acceptance does not make it easier. It makes it real.",
+        "requires": null
+      },
+      {
+        "text": "This can't be what it looks like.",
+        "next": "spine_005",
+        "tag": "denies",
+        "arrival": "You told yourself it couldn't be what it looked like. Your body disagrees. Your body has been listening to the bass since the alley.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "spine_005",
+    "text": "The room is asking you a question. Not in language. In temperature, in pressure, in the way the bass enters your body through your feet and leaves through the crown of your skull.\n\nYou can feel the crowd behind you — not as individuals but as a field. A warmth that has weight and direction. It wants you the way a current wants a river stone: not personally, not urgently, but with the slow inevitability of gradient.\n\nThe door is still behind you. The cold is still outside. You can feel it along the back of your neck — offering the alley, the sodium lights, the walk home. A life in which tonight was just a night.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "Something is about to happen. You feel it the way you feel weather changing — in the pressure, in the joints."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "The thing that pulled you here is still pulling. It has not stopped. It will not stop until you give it what it brought you here to give."
+      },
+      {
+        "condition": { "has_tag": "drifting" },
+        "append": "You have been drifting since the alley. The current is stronger here. It is harder to pretend you are not in it."
+      }
+    ],
+    "oor_action": "OOR does not look at you. OOR has never looked at you. The eye that tracked you was not looking — it was measuring.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "warm",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Step into the crowd. Let the bass take you.",
+        "next": "engage_001",
+        "tag": null,
+        "requires": null
+      },
+      {
+        "text": "The door. The cold. The walk home.",
+        "next": "withdraw_001",
+        "tag": null,
+        "requires": null
+      },
+      {
+        "text": "The antler is warm against your hip. It pulls toward OOR.",
+        "next": "called_001",
+        "tag": null,
+        "requires": { "has_artifact": "pale_antler" }
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "truth_001",
+    "text": "Somewhere in the last few minutes, you stopped watching yourself.\n\nYou don't know when. That is the point. There is no threshold to name, no crossing to point at. The internal voice that narrates your movement, estimates your appearance from the outside, monitors your expression against an imagined observer: quiet. Not silenced. No longer running.\n\nYou are moving. That is all. Not moving-while-being-watched. Not moving-for-the-room. Moving.\n\nThe crowd is here. The music is here. You are here. The difference is that here no longer requires maintenance.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You arrived here without trying to. That is the only way to arrive here."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "You have been watching yourself move since the first song. This is the first moment you haven't. It has taken the whole night to get here."
+      }
+    ],
+    "oor_action": "OOR has identified a deposit in the center-west section — unselfconscious presence, six minutes and counting. Truth deposits of this duration are fragile. A single dissonant frequency can collapse them. OOR has isolated the monitors nearest this position and is managing their frequency range independently. It will not intervene further. Intervention would end it.",
+    "transcendental": "truth",
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Stay exactly where you are.",
+        "next": "truth_002",
+        "tag": null,
+        "arrival": "You stayed. The state came to you because you stopped going anywhere.",
+        "requires": null
+      },
+      {
+        "text": "Move toward where the music is loudest.",
+        "next": "truth_002",
+        "tag": null,
+        "arrival": "You moved toward the music without thinking about the moving. That was already it.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "truth_002",
+    "text": "The song changes.\n\nYou don't note the change. You receive it — the new frequency arriving in your body the way temperature arrives, the way dark arrives when a light goes out. Not information. Just the next thing.\n\nFor a duration you cannot measure, there is no distance between you and the room. Not the way the floor felt earlier — that was edges dissolving, many becoming one. This is different. You are exactly yourself. Precisely located. But the membrane that usually surrounds your presence — the one that monitors, compares, performs — is gone. You are not demonstrating being here. You simply are.\n\nOOR notes this before you do.\n\nThen a thought arrives — the thought of the thought — and the state closes. Gently, the way a room cools when a window opens briefly and shuts. Not a loss. A completion.\n\nYou were unselfconscious for long enough that it mattered.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "It arrived because you were not waiting for it."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice is back. It is quieter than it was at the start of the night. You don't think it will return to its original volume."
+      },
+      {
+        "condition": { "has_tag": "holds" },
+        "append": "You held on through Unity. You could not hold on here. Truth does not negotiate with holding."
+      }
+    ],
+    "oor_action": "The Truth deposit resolved at six minutes and forty-four seconds. OOR restores the monitor feed to the main mix. The yield was sufficient — duration exceeded projection by forty-four seconds. OOR notes the conditions that produced this duration and files them. It will attempt to replicate them.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": "truth",
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "The room looks different from inside this.",
+        "next": "post_truth_001",
+        "tag": null,
+        "arrival": "You said the room looked different. This is what different looks like from the inside.",
+        "requires": null
+      },
+      {
+        "text": "You came back to yourself slowly. Like surfacing.",
+        "next": "post_truth_001",
+        "tag": null,
+        "arrival": "You surfaced slowly. What you surfaced into is not the room you left.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

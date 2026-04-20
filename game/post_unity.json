@@ -1,0 +1,53 @@
+[
+  {
+    "id": "post_unity_001",
+    "text": "The beat returns and you are in it. The crowd is still moving. You are moving with it. This is not remarkable.\n\nExcept the room has changed quality. The people around you are not strangers in the way they were before. You know nothing about them. But you were, briefly, the same object, and that changes what not-knowing means.\n\nYou look toward the decks. DJ OOR is there — orange and bright, tongue-limbs moving across the mixer with the same mechanical precision. You understand it slightly better than before. The understanding does not make you safer. It makes the room larger.\n\nSomething else: a memory, or almost one. Another room. Another night. Bass entering through your feet the same way. A crowd closing around you. Different city. Different year. The same frequency underneath it.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You returned to yourself. The self you returned to has been somewhere."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice you use to watch yourself is still quieter than it was. The room is louder in its absence."
+      },
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "The wrongness you felt at the door has not resolved. It has clarified. The wrongness was never the building."
+      }
+    ],
+    "oor_action": "OOR checks something above the center of the floor — not the decks, not the crowd. A fixed point near the ceiling that has no visible feature. The check takes less than a second. OOR returns its attention to the mixer. The portal is at 67% capacity. This is ahead of schedule.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "The music has changed. Something in you is already answering it.",
+        "next": "beauty_001",
+        "tag": null,
+        "arrival": "You said something in you was already answering. This is what it was answering.",
+        "requires": null
+      },
+      {
+        "text": "Someone near you has stopped moving. They look lost.",
+        "next": "goodness_001",
+        "tag": null,
+        "arrival": "You noticed them before you chose to notice. The self-monitoring is quiet enough now that noticing is just what you do.",
+        "requires": null
+      },
+      {
+        "text": "You want to see DJ OOR from closer than you have.",
+        "next": "oor_approach_001",
+        "tag": null,
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

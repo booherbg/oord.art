@@ -1,0 +1,55 @@
+[
+  {
+    "id": "withdraw_001",
+    "text": "The door is where you left it.\n\nYou push through and the cold arrives immediately — not gradually, all at once, the full weight of the night outside against your face and hands. The bass drops away the moment you cross the threshold. Not fades — drops. Like a signal cut.\n\nBehind you the building hums. In front of you: the alley, the sodium lights, the gravel lot, the city that is not Fargo and never was. Everything exactly as you left it. Everything exactly right.\n\nYou chose this. You are choosing it now, each step away from the door, the building getting smaller in whatever peripheral sense you are using to track it without turning around.\n\nYou don't turn around.\n\nThe bass is gone. The warmth is gone. You are intact. You are outside and moving and the cold is just cold and the city is just a city and you are just a person who went to a thing and left.\n\nThis is what you told yourself you wanted.\n\nSomething behind your sternum has not gotten the message yet.",
+    "arrival_variants": [
+      {
+        "requires": { "has_tag": "wary" },
+        "text": "You were right to be wary. You are outside. You are safe. These facts are both true and do not explain the feeling."
+      },
+      {
+        "requires": { "has_tag": "denies" },
+        "text": "You told yourself it couldn't be what it looked like. You left before finding out. You will always have left before finding out."
+      },
+      {
+        "default": true,
+        "text": "The door is behind you. You are not going back through it."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "Whatever pulled you here has not stopped. It is still running. You have just moved outside its radius. For now."
+      },
+      {
+        "condition": { "has_tag": "accepts" },
+        "append": "You accepted what you saw. You accepted it and left anyway. That combination will take a long time to resolve."
+      }
+    ],
+    "oor_action": "One participant has exited the radius. OOR notes the departure without adjustment. The harvest does not require this one specifically. The yield distribution is sufficient from remaining participants. The unrealized potential of this deposit is logged. The log will not be reviewed.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "cold",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Keep walking. Don't look back.",
+        "next": "outcome_escape",
+        "tag": "refused",
+        "arrival": "You didn't stop. You kept walking. The refusal was clean and it will cost you that cleanness for a long time.",
+        "requires": null
+      },
+      {
+        "text": "You stop. The bass is gone but something isn't.",
+        "next": "outcome_escape",
+        "tag": null,
+        "arrival": "You stopped outside and felt it — the bass still faintly present, the door still there. You stood in that for a moment. Then you kept walking. The almost is the part that stays.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

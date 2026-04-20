@@ -1,0 +1,85 @@
+[
+  {
+    "id": "goodness_001",
+    "text": "The person is standing still inside the moving crowd. Not frozen — still. Present but at a remove, as if listening to something the room is not playing. The crowd moves around them the way water moves around a stone.\n\nYou stop moving.\n\nYou do not decide to stop. The music is still happening. The crowd is still happening. You are standing in the middle of both and something in you has oriented toward this person the way a compass orients: prior to thought, prior to choice.\n\nYou move toward them.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are here because something pulled your attention outward. You followed it."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "You are not watching yourself do this. That is new."
+      },
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "The wrongness you have been carrying since the door has not disappeared. It has become something else. Something that moves toward rather than away."
+      }
+    ],
+    "oor_action": "OOR identifies an emerging Goodness condition in the center-west section. One stationary participant, one approaching. The approaching participant carries three transcendental deposits — Unity, Beauty, Truth. At this stage of the harvest the boundary between individuals becomes porous enough that care can extend as reflex rather than choice. OOR makes no adjustment to the mix. Intervention would collapse the condition.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "You put your hand on their shoulder.",
+        "next": "goodness_002",
+        "tag": null,
+        "arrival": "Their shoulder was warm. That was real. You were there for it.",
+        "requires": null
+      },
+      {
+        "text": "You stand beside them. You don't say anything. You just stay.",
+        "next": "goodness_002",
+        "tag": null,
+        "arrival": "You stayed. Not as performance of staying. Just staying.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "goodness_002",
+    "text": "They look at you. You look at them.\n\nThere is nothing to say and you don't say it.\n\nFor a moment — no longer than that, exactly as long as that — you are two separate people who are not alone. That is all. That is the whole thing.\n\nSomething passes from this into the room. You don't feel it go. You feel the quality of having done something without watching yourself do it, the absence of the performed version of the act, the thing itself with nothing around it.\n\nThe bass shifts. Not in pitch — in weight. Something in the room has completed.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The act was small. The smallness was the point."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice that watches you is very quiet now. Quieter than it has been all night. You think it may not return to its previous volume. You are not sure this is a loss."
+      },
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "Whatever pulled you here tonight pulled you here for this too. The frequency it detected included this. It knew before you did."
+      }
+    ],
+    "oor_action": "Goodness yield confirmed. Care extended without audience, without architecture. The fourth transcendental crosses the portal threshold. Harvest complete. OOR engages the closing sequence. The crowd does not know this yet. They will feel it in the bass before they understand it.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": "goodness",
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "The bass has changed. The room knows something you don't yet.",
+        "next": "closing_001",
+        "tag": null,
+        "arrival": "You carried all four of them to this floor. Unity, Beauty, Truth, Goodness — yielded, completed, taken. What remains in you is what was not harvested. You don't know yet what that is.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

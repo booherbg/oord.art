@@ -1,0 +1,96 @@
+[
+  {
+    "id": "closing_001",
+    "text": "The voice comes from everywhere at once.\n\nNot from the speakers — from somewhere behind the speakers, behind the walls, from a direction that should not exist inside a building. The crowd knows what it is asking before the words resolve into language.\n\nGo lower.\n\nNot a command. Something prior to a command. The body was already implementing it before the ears confirmed. The crowd is going down. You are going down. The floor is rising to meet you and you are meeting it and this feels — not like surrender, more like the final term of an equation that has been assembling since the alley, since the sodium lights, since the bass first entered through the soles of your feet in the dark.\n\nYour knees find the floor. The bass is different here. Thicker. Directional. It is not coming from the speakers above you. It is coming from below the concrete, from whatever is underneath this building, from a source that the subwoofers are resonating with rather than producing. You can feel it in your palms.\n\nAround you: two hundred people going down in stages. No one resisting. No one watching. The crowd has become something else over the course of the night — not individuals, not yet dissolved, something in between, a single organism completing a motion it began hours ago without knowing it had begun.\n\nAbove you, very far above you, the air changes.\n\nThe portal is fully open. You cannot see it. You feel it the way you feel a door open in a dark room — a pressure differential, a sense of adjacent space that is not the space you are in. The ceiling is very far away. The ceiling may not be the ceiling anymore.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are down. The room is down. Something above is open."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "The pull that brought you here from the alley has not stopped. It has changed direction. It was pulling you toward the building. Now it is pulling you toward the floor. You understand, finally, that it was always pulling you toward the floor."
+      },
+      {
+        "condition": { "has_tag": "denies" },
+        "append": "You told yourself it couldn't be what it looked like. You are on the floor now. You know what it looks like."
+      }
+    ],
+    "oor_action": "OOR executes the closing sequence. The crowd descends on call — 94% compliance on the first pass, 100% by the second. The portal aperture is fully open. The yield is crossing at a rate that exceeds projection. OOR begins reducing gain across all channels. The drone will be the last frequency. After the drone: silence. After silence: the portal closes. After the portal closes: OOR is no longer in this location.",
+    "transcendental": null,
+    "ritual": "the_closing",
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Press your palms flat and follow the bass into the concrete.",
+        "next": "closing_002",
+        "tag": null,
+        "arrival": "You felt it leave through the floor. Through your palms. The frequency going somewhere you cannot follow.",
+        "requires": null
+      },
+      {
+        "text": "Keep your eyes up and witness what opens above the crowd.",
+        "next": "closing_002",
+        "tag": null,
+        "arrival": "You were watching the ceiling when the portal closed. The ceiling came back. The room came back. You are still here.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "closing_002",
+    "text": "The music reduces.\n\nNot all at once. In stages, the way a tide goes out — the high frequencies first, then the mids, then everything until only the bass remains. The bass reduces to the drone. One frequency, pure, the one that has been underneath all of it since before you arrived, since before the building was a building, since before this city had a name. It hums through the floor into your palms. It hums in the bones of your hands. For a moment it is the only sound in the world and the world is a very small place.\n\nThen the drone stops.\n\nThe silence arrives like weather. Not empty — present. A pressure that moves through the room at a frequency below detection, the portal drawing closed, the adjacent space withdrawing, the geometry of the building reasserting itself around you. The ceiling is the ceiling again. The walls are the walls.\n\nYou are on the floor.\n\nThe decks are empty.\n\nYou don't know when DJ OOR left. There was no departure — no flash, no sound, no visible transition. DJ OOR was in this location and now is not. The absence is total and immediate and somehow the least surprising thing that has happened tonight. The harvest was a job. The job is done. The worker has gone where workers go when the work is finished.\n\nYou expected to feel something specific about the absence. What you feel is harder to name than that.\n\nAround you: two hundred people on the floor, returning to themselves in stages. Faces you will not remember. Bodies that moved with yours for hours. They are becoming strangers again. You were briefly the same object and now the object has disaggregated and you are all separate, all still here, all carrying something you did not arrive with.\n\nThe room is cooling. The orange and yellow are gone. The iron fixtures have stopped humming. The building is a building again — concrete and girders and industrial dark, built to make things, having made something tonight that will not be catalogued or named.\n\nYou were part of it. Whatever it was, you were part of it.\n\nYou will carry this in the body. Not as memory — memory will soften and lose detail, the way it does. You will carry it as calibration. The frequency is still in your palms, in the long bones of your legs, behind your sternum where the bass lived for hours. In quiet rooms, for weeks after, you will feel it arrive without a source. You will stand very still and not know whether it is real or residue.\n\nIt was both.\n\nIt has always been both.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The silence landed. You were in it."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "transcendentals_complete": true },
+        "append": "Unity, Beauty, Truth, Goodness — four crossings, four yields, four moments that were real and are now taken. What remains is the shape of what was taken. You will feel it as an absence that has weight."
+      },
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice that watches you did not come back at full volume. You have been in this room for hours and you have not been watched for most of them. You are not sure you want it back."
+      },
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "The pull is gone. Whatever frequency brought you here from the alley has completed its function and released you. You are free. You were always going to be free — after."
+      }
+    ],
+    "oor_action": "The portal closes. The yield is complete. OOR follows it through. From the material plane: no event, no sound, no visible transition. OOR was in this location. OOR is no longer in this location. The frequency that sustained this event remains in the walls, the floor, the bodies on the floor. It will attenuate. It will take longer than you would expect.",
+    "transcendental": null,
+    "ritual": "the_closing",
+    "temperature": "cold",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Something was taken. You are lighter.",
+        "next": "outcome_transcendence",
+        "tag": null,
+        "arrival": "You said you were lighter. You are. The weight you are missing had a name. Several names.",
+        "requires": null
+      },
+      {
+        "text": "Something happened. You are not sure yet what.",
+        "next": "outcome_transcendence",
+        "tag": null,
+        "arrival": "You said you weren't sure yet what happened. You are sure now. You were sure when you walked in.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

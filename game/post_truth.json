@@ -1,0 +1,46 @@
+[
+  {
+    "id": "post_truth_001",
+    "text": "Something has changed in the quality of your perception.\n\nNot dramatically. More like an adjustment in focal length. The crowd is the same crowd. The room is the same room. You are looking at them from a position that is slightly different from the one you occupied at the door.\n\nThe monitoring voice is quieter. In its absence you can hear what it used to cover: the specific weight of the bass at this hour, the way the crowd breathes between drops, the sound of two hundred people who have been here long enough that the performance has worn off. Most of them are not performing anymore. They ran out of performance hours ago. What is left is just them, moving, which is what was required of them all along.\n\nThen a thought arrives without announcement.\n\nYou have felt this before.\n\nNot tonight. Not this room. A different floor, a different city, a year you would have to count backward to name. The bass was different but the frequency underneath was the same — entering through your feet, traveling the long bones, arriving in the chest before the ears confirmed it. You were younger. You thought you were just dancing.\n\nThe mechanism was already running.\n\nYou sit with this. You do not push it away.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are further in than you have been. Further in changes what you can see."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "Whatever pulled you here knew the frequency. It knew you would recognize it. It was counting on that recognition."
+      },
+      {
+        "condition": { "has_tag": "denies" },
+        "append": "You told yourself earlier it couldn't be what it looked like. You understand now that it was exactly what it looked like. It has always been exactly what it looked like."
+      }
+    ],
+    "oor_action": "The portal is at 88% capacity. The timeline has accelerated — the center section has yielded three transcendentals in concentrated sequence. OOR recalculates. One transcendental at current crowd density will close the circuit. OOR selects a track it has been holding in reserve since the set began. The crowd does not know the night has entered its final phase. OOR does not announce this.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "The person next to you has stopped moving. They are still here but they are somewhere else.",
+        "next": "goodness_001",
+        "tag": null,
+        "requires": null
+      },
+      {
+        "text": "The night is ending. You can feel it the way you feel weather. You move toward the center.",
+        "next": "closing_001",
+        "tag": null,
+        "arrival": "You felt the night ending and moved toward the center. The center was always here. The center was always the floor.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "engage_001",
+    "text": "The crowd receives you. Not absorbs — receives. Bodies shift without looking. There is space where there wasn't, then none, because you have moved into it.\n\nThe bass is different here. At the edge it was something you heard. Here it enters through your soles, climbs the long bones of your legs, and arrives in your chest before your ears confirm it. Your body learns the beat from the inside.\n\nAround you: heat, movement, sweat, ozone. The boundary between your body and the crowd is not where you thought it was.",
+    "arrival_variants": [
+      {
+        "requires": { "has_tag": "willing" },
+        "text": "The heat is what you wanted. Your body was already leaning toward this before you stepped forward."
+      },
+      {
+        "requires": { "has_tag": "wary" },
+        "text": "The wrongness you felt at the door is still present. It is warmer here. The warmth does not resolve it."
+      },
+      {
+        "default": true,
+        "text": "You are inside now. Inside means something different than it did a moment ago."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": "The crowd has reached the state OOR has been engineering toward since 10 PM. The transcendentals generated at the west end of the floor are traveling through the collective body and arriving at the portal before OOR introduces them. The circuit is closed. The harvest is self-sustaining. OOR continues to play — not to drive the reaction but to stabilize it. There is a difference between ignition and containment. OOR has shifted functions.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Your hips find the pattern before you decide to.",
+        "next": "unity_001",
+        "tag": null,
+        "arrival": "You stopped narrating your own movement a few songs ago. You didn't notice until now.",
+        "requires": null
+      },
+      {
+        "text": "You move but you are still watching yourself move.",
+        "next": "unity_001",
+        "tag": "self_monitoring",
+        "arrival": "You are still watching yourself. The watching is getting harder. The crowd is louder than your internal voice.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "unity_001",
+    "text": "Something is happening at the edge of yourself.\n\nNot a loss. A softening. The person to your left moves and you feel it before contact, as if the air between you has gained weight and started carrying force. The separation you maintain is structural. You always knew that. Knowing it and feeling it fail are different experiences.\n\nThe crowd is not watching you. The crowd is not watching anyone. The crowd is moving.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The room has changed pitch. Not the music — the room."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": "OOR's ear tilts toward the center of the floor. The yield density has crossed a threshold. It begins the sequence.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Stop thinking about what you look like.",
+        "next": "unity_002",
+        "tag": null,
+        "arrival": "You moved before the rest of the crowd. Your body was already listening.",
+        "requires": null
+      },
+      {
+        "text": "Hold onto the fact of yourself.",
+        "next": "unity_002",
+        "tag": "holds",
+        "arrival": "You moved with the rest of the crowd. You told yourself you chose to. The timing suggests otherwise.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "unity_002",
+    "text": "A voice — robotic, vocoded, the words just barely language — calls something across the room.\n\nThe crowd moves. Left. Together.\n\nThe voice calls again. The crowd moves right. Together.\n\nYou moved. Both times. You don't remember deciding to.\n\nThis is the thing that shouldn't work. You know it shouldn't work. The crowd knows — they're laughing, a little, the shared absurdity of two hundred people taking direction from a voice that isn't quite a voice. But the laughter is synchronized. Same pitch. Same duration. Coming from different throats at the same time.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are part of something that is making a decision without consulting you."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": "OOR does not understand why this produces Unity at a higher yield than anything else in the sequence. OOR has stopped trying to model it. The crowd moves. The crowd laughs. The harvest registers the same increment every time. OOR notes this and continues.",
+    "transcendental": "unity",
+    "ritual": "the_slide",
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Go lower. The voice is saying lower.",
+        "next": "unity_003",
+        "tag": null,
+        "arrival": "You went low before the call finished. You were already there.",
+        "requires": null
+      },
+      {
+        "text": "You are laughing. You don't know when you started.",
+        "next": "unity_003",
+        "tag": null,
+        "arrival": "You were still laughing when it happened. The laughter became something else. You don't have a word for what it became.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "unity_003",
+    "text": "The voice says something. The crowd drops.\n\nNot to the floor — somewhere below decision. All at once. Without signal, without countdown. Two hundred people arrive at the same moment and for eleven seconds there is no you.\n\nNot absence. The more precise thing: a sudden, factual recognition that the boundary you have been maintaining does not exist. Never did. The bass moves through the space where you were. What is here is not separate from what is next to it.\n\nEleven seconds.\n\nThen the beat returns and you are a person again. The person you return to is not quite the same shape.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You don't remember the moment of crossing. Only the moment after."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "holds" },
+        "append": "You held on until the last possible moment. The letting go was not a choice. The current was stronger than the holding."
+      },
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice you use to watch yourself was gone for eleven seconds. When it returned it was quieter. You are not sure it came back at full volume."
+      }
+    ],
+    "oor_action": "At 1:47 AM, for eleven seconds, the crowd stops being a collection of individuals and becomes a single object. OOR registers the Unity yield — not as a feeling, but as a quantity, a mass crossing the threshold simultaneously. The harvest increment for those eleven seconds exceeds the preceding forty minutes. OOR had been building toward this. Eleven seconds was sufficient. OOR had prepared for eight.",
+    "transcendental": null,
+    "ritual": "the_slide",
+    "temperature": "hot",
+    "awards_transcendental": "unity",
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Find someone else's shoulder and move with them.",
+        "next": "post_unity_001",
+        "tag": null,
+        "arrival": "You are here. The fact of yourself is intact. Something underneath it has been rearranged.",
+        "requires": null
+      },
+      {
+        "text": "Stand still and check what came back with you.",
+        "next": "post_unity_001",
+        "tag": null,
+        "arrival": "You came back different. Not different — recalibrated. To a frequency you didn't choose and wouldn't have chosen.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

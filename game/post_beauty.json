@@ -1,0 +1,53 @@
+[
+  {
+    "id": "post_beauty_001",
+    "text": "She moves through the crowd with the seriousness of someone completing a task.\n\nThe rod she carries is not decorative. It is an instrument. You know this now in a way you wouldn't have known at the beginning of the night. As she moves, it speaks — a tone that rises and falls with proximity to each person, her path through the crowd a survey, methodical, unhurried. The second familiar moves alongside her, not mirroring — contextualizing. They are one function expressed across two forms.\n\nShe passes within two meters of you. The rod's tone sharpens.\n\nShe pauses. Not looking at you — she is looking at what you contain. What has not yet been taken. What is ripe. The pause lasts three seconds. Then she moves on, the tone already adjusting to the next person, the next reading.\n\nYou were not seen. You were measured. The distinction feels significant. You are not certain yet whether it is a relief.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The crowd has parted slightly, without deciding to, around the line she is walking."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "Your instinct at the door was right about the wrong thing. The wrongness was never the building, never OOR. It was this — being read accurately by something that does not need your permission."
+      },
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "Whatever pulled you here knew what you carried. The rod is confirming it."
+      }
+    ],
+    "oor_action": "The familiar completes her pass through the center section. OOR receives the yield distribution through a frequency the crowd cannot detect — the rod's survey compressed and transmitted in real time. Three high-density deposits confirmed in the center cluster. OOR updates the closing sequence accordingly.",
+    "transcendental": null,
+    "ritual": "mating_ritual",
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Hold still. Let her finish the circuit.",
+        "next": "truth_001",
+        "tag": null,
+        "arrival": "You held still for the familiar and did not perform the stillness. Something in that released.",
+        "requires": null
+      },
+      {
+        "text": "Follow her. Something in you wants to stay inside the radius of the rod.",
+        "next": "mating_ritual_001",
+        "tag": null,
+        "requires": null
+      },
+      {
+        "text": "Step back. Not out — just back. Out of the measurement.",
+        "next": "truth_001",
+        "tag": null,
+        "arrival": "You stepped out of the measurement without performing the stepping. That was already this.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

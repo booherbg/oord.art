@@ -1,0 +1,79 @@
+[
+  {
+    "id": "beauty_001",
+    "text": "The music is doing something.\n\nYou do not have the word yet. A high-register frequency: present, then not. Present, then not. Each time it disappears your body leans into the space it leaves. Not consciously. The lean is pre-cognitive, a hunger locating itself in the sternum before the mind can name what is missing.\n\nYou look at the nearest faces and see the same lean: bodies tipped slightly forward, pressing toward something that keeps almost arriving. Two hundred people reaching toward two hundred versions of the same absence.\n\nThe music holds you at the edge of a word you cannot say. The edge is not uncomfortable. The edge is everything.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "The room has shifted register. Something in the music is incomplete on purpose."
+      }
+    ],
+    "conditional_text": null,
+    "oor_action": "OOR has been withholding a harmonic since the third track. Not removing it — holding it just below the surface, present enough to be felt as absence, absent enough to accumulate pressure. The crowd cannot name what is missing. They only know that something is. OOR monitors the pressure. It has not yet reached the release threshold. OOR waits.",
+    "transcendental": "beauty",
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Stay inside it. Whatever is almost here — let it come.",
+        "next": "beauty_002",
+        "tag": null,
+        "arrival": "You were already open when it arrived. It had nothing to push through.",
+        "requires": null
+      },
+      {
+        "text": "You are trying to identify what's missing. You can almost name it.",
+        "next": "beauty_002",
+        "tag": null,
+        "arrival": "You found the name half a second before the drop. The name dissolved when the thing arrived. Names are not needed for this.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  },
+  {
+    "id": "beauty_002",
+    "text": "The harmonic arrives.\n\nNot loudly. Not even as a change — as a completion. Something partially present becoming fully present. A sentence seventeen minutes in the gathering, finally landing its last word.\n\nYour hands open. Not a choice.\n\nThe music has done exactly what your body needed before you knew you needed it, and the knowing and the receiving happen in the same instant — the gap between wanting and having collapsed to nothing. In that nothing, for a moment that is not quite a moment, form has exceeded function entirely. The music is not doing anything. It simply is.\n\nThis is different from what happened on the floor. That was the loss of edges. This is edges so precise they become unnecessary. Every frequency in its exact position. A rightness that feels older than music, older than the room, something that was waiting to be built and has now been built and will dissolve and will wait again.\n\nThen it passes. Completely, without remainder.\n\nYou are not diminished by the end of it. You carry the knowledge that the moment existed, which is different from carrying the moment.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "It arrived. You were there for it."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_transcendental": "unity" },
+        "append": "You have felt the edges dissolve and now you have felt the edges become perfect. These are not the same experience. They are the same harvest."
+      }
+    ],
+    "oor_action": "OOR releases the harmonic on a downbeat. The crowd receives it as Beauty: form completing function so precisely that function becomes irrelevant. The yield crosses into the portal. OOR begins withholding the next harmonic. It will take seventeen minutes.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "hot",
+    "awards_transcendental": "beauty",
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "Step toward the nearest body and ride the afterglow.",
+        "next": "post_beauty_001",
+        "tag": null,
+        "arrival": "You felt the moment being taken. Now something in the crowd has come to confirm what remains.",
+        "requires": null
+      },
+      {
+        "text": "Close your eyes and try to hold the exact shape of it.",
+        "next": "post_beauty_001",
+        "tag": null,
+        "arrival": "You were still inside the music when she appeared. The rod found you before you found her.",
+        "requires": null
+      }
+    ],
+    "terminal": false,
+    "outcome": null
+  }
+]

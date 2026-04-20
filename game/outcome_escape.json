@@ -1,0 +1,43 @@
+[
+  {
+    "id": "outcome_escape",
+    "text": "You are three blocks away before you realize you haven't looked back.\n\nThe cold is thorough. The city is the city — grid lines, sodium light, pavement that goes where pavement goes. Your breath is visible. Your legs work. You are intact in all the ways that can be verified.\n\nThe bass is gone. Not fading — gone. There is a space in your chest where it was that is shaped exactly like it. Not pain. Not grief. The specific contour of an absence. Something was almost given and wasn't, and now the almost-giving has a permanent address inside you.\n\nYou did the right thing. You don't know what you did the right thing about, but the logic holds: something wanted something from you, and you declined, and you are outside now, and that is correct.\n\nExcept.\n\nYou felt it. In the alley, in the soles of your feet, in the building before you understood it as a building. You felt the current and you stood in it long enough to know what it was. Long enough that your body took a reading it will not return.\n\nIn quiet rooms — a library, a parking garage, the moment before sleep — it will come back. Not the frequency. The shape of the frequency. Your body reaching toward something that was there once and isn't, that was offered once and refused, that will not be offered again in exactly this form.\n\nYou were not taken. You are not less than you were.\n\nYou are exactly what you were, carrying the permanent record of having stood at the edge of something enormous and stepped back. The stepping back is yours. The enormous thing is still there, in whatever direction enormous things exist, circulating without you.\n\nThis is what you chose.\n\nThe city continues. You continue. Somewhere behind you, at a frequency below detection, a drain has been cleared — or is being cleared — without your contribution. The harvest did not require you specifically. You were a deposit. Deposits can be left.\n\nYou walk toward your door.\n\nThe bass is gone. It will come back. Not tonight — in three weeks, in a stairwell, in the moment after a song ends and the room hasn't caught up yet. You will stand very still and wait for it to resolve.\n\nIt won't resolve.\n\nThat is what you chose.",
+    "arrival_variants": [
+      {
+        "default": true,
+        "text": "You are outside. This is what leaving looks like."
+      }
+    ],
+    "conditional_text": [
+      {
+        "condition": { "has_tag": "drawn" },
+        "append": "Whatever pulled you here hasn't stopped running. You are just outside its current radius. Currents don't stop because you walked away from them. They find other channels."
+      },
+      {
+        "condition": { "has_tag": "wary" },
+        "append": "You were right to be wary. Being right does not stop the frequency from living in your chest. Being right and carrying the shape of refusal are not in conflict. You will have both now."
+      },
+      {
+        "condition": { "has_tag": "self_monitoring" },
+        "append": "The voice that watches you is still running at full volume. You kept it. That was the trade. You are fully yourself, watching yourself walk away, and the watching is very loud in the quiet."
+      }
+    ],
+    "oor_action": "One deposit unrealized. Yield: zero. The harvest proceeds without adjustment — sufficient density achieved from remaining participants. The unrealized deposit will carry the resonance of near-contact indefinitely. This is not OOR's concern. OOR does not have a field for what happens to deposits that are not processed. The field does not exist. OOR continues.",
+    "transcendental": null,
+    "ritual": null,
+    "temperature": "cold",
+    "awards_transcendental": null,
+    "awards_artifact": null,
+    "perspective": "wanderer",
+    "choices": [
+      {
+        "text": "You walk toward your door.",
+        "next": null,
+        "tag": null,
+        "requires": null
+      }
+    ],
+    "terminal": true,
+    "outcome": "escape"
+  }
+]
