@@ -458,7 +458,7 @@ const JSON_FILES = [
   'branch_goodness.json',
   'closing.json',
   'outcome_transcendence.json',
-  'withdraw.json',
+  '../withdraw.json',
   'outcome_escape.json'
 ];
 
@@ -501,9 +501,9 @@ async function init() {
       <div class="load-error">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--orange);margin-bottom:12px;">Load Error</div>
         <div style="font-size:12px;margin-bottom:16px;">${err.message}</div>
-        <div style="font-size:11px;color:var(--text-dim);">This demo requires a local server due to browser CORS restrictions.<br>From the <code>game/</code> directory, run:</div>
+        <div style="font-size:11px;color:var(--text-dim);">This demo requires a local server due to browser CORS restrictions.<br>From the repo root, run:</div>
         <code>python3 -m http.server 8000</code>
-        <div style="margin-top:12px;font-size:10px;color:var(--text-dim);">Then open <code>http://localhost:8000/demo_draft.html</code></div>
+        <div style="margin-top:12px;font-size:10px;color:var(--text-dim);">Then open <code>http://localhost:8000/game/v1/demo_draft.html</code></div>
       </div>`;
   }
 }

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OOR Lore Lab</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0f1216; --panel:#171b21; --text:#e8edf3; --muted:#9aa8b6; --accent:#71b7ff; --border:#28313d; --ok:#6dd38f; --warn:#ffce6a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+    .panel { border-right: 1px solid var(--border); background: var(--panel); padding: 16px; }
+    .content { padding: 16px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; }
+    h1, h2, h3 { margin: 0 0 10px; } h1 { font-size: 18px; } h2 { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+    input, select, textarea, button { width: 100%; border: 1px solid var(--border); border-radius: 8px; background: #11161d; color: var(--text); padding: 8px 10px; font: inherit; }
+    textarea { min-height: 140px; resize: vertical; } button { cursor: pointer; background: #18212c; } button.primary { background: #1c3551; border-color: #2b4f75; } button:hover { border-color: var(--accent); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .status { color: var(--muted); font-size: 12px; margin-top: 8px; min-height: 18px; } .ok { color: var(--ok); } .warn { color: var(--warn); }
+    .card { border: 1px solid var(--border); border-radius: 10px; padding: 12px; background: #121820; }
+    .history { max-height: 220px; overflow: auto; border: 1px solid var(--border); border-radius: 8px; background: #0d1319; padding: 8px; }
+    .history-item { border-bottom: 1px solid #1c242f; padding: 8px 4px; white-space: pre-wrap; } .history-item:last-child { border-bottom: 0; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="panel">
+      <h1>OOR Lore Lab</h1>
+      <h2>LM Studio</h2>
+      <label for="baseUrl">Base URL</label><input id="baseUrl" value="http://127.0.0.1:1234" />
+      <label for="model">Model</label><input id="model" value="mistralai/ministral-3-3b" />
+      <label for="endpointStyle">Endpoint style</label>
+      <select id="endpointStyle">
+        <option value="auto">Auto detect</option>
+        <option value="legacy">LM Studio `/api/v1/chat`</option>
+        <option value="openai">OpenAI `/v1/chat/completions`</option>
+      </select>
+      <div class="row">
+        <div><label for="temperature">Temperature</label><input id="temperature" type="number" step="0.1" min="0" max="2" value="0.8" /></div>
+        <div><label for="maxTokens">Max tokens</label><input id="maxTokens" type="number" min="128" max="8192" value="900" /></div>
+      </div>
+      <label><input id="includeContext" type="checkbox" checked /> Include `story_design.md` context</label>
+      <h2>Session Files</h2>
+      <div class="row"><button id="saveSession">Save Session</button><button id="refreshSessions">Refresh List</button></div>
+      <label for="sessionSelect">Saved runs</label><select id="sessionSelect"></select>
+      <button id="loadSession">Load Selected Session</button>
+      <div id="leftStatus" class="status"></div>
+    </aside>
+    <main class="content">
+      <section class="card">
+        <h3>Draft Workspace</h3>
+        <label for="draftPath">Target draft file path (workspace-relative)</label><input id="draftPath" value="game/story_design.md" class="mono" />
+        <label for="draftText">Current draft text</label><textarea id="draftText" placeholder="Paste or load draft content here..."></textarea>
+      </section>
+      <section class="card">
+        <h3>Prompt + Actions</h3>
+        <label for="mode">Assist mode</label>
+        <select id="mode">
+          <option value="opener">Generate opener ideas</option><option value="prose">Update prose</option><option value="choices">Explore new choices</option>
+          <option value="tags">Refine tags + gates</option><option value="feedback">Give editorial feedback</option><option value="custom">Custom request</option>
+        </select>
+        <label for="goal">Goal / request</label><textarea id="goal" placeholder="Example: Generate 5 new openers for Resistant path with concise, high-tension voice."></textarea>
+        <div class="row3"><button id="presetOpeners">10m opener sprint</button><button id="presetChoices">choice remix</button><button id="presetFeedback">quick feedback</button></div>
+        <div class="row3"><button class="primary" id="generate">Generate</button><button id="appendOutput">Append output to draft</button><button id="writeDraft">Write draft file now</button></div>
+        <div class="row"><button id="saveAndGenerate">Save + Generate</button><button id="suggestImprovements">Suggest tool upgrades</button></div>
+        <div id="mainStatus" class="status"></div>
+      </section>
+      <section class="card"><h3>Model Output</h3><textarea id="outputText" placeholder="Model response will appear here..."></textarea></section>
+      <section class="card"><h3>Recent Turn Log</h3><div id="history" class="history"></div></section>
+    </main>
+  </div>
+  <script src="./lmstudio-lab.js"></script>
+</body>
+</html>

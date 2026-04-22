@@ -1,0 +1,469 @@
+{
+  "character": "builder",
+  "display_name": "The Builder",
+  "tagline": "The email arrived six weeks ago.",
+  "start_node": "b_001",
+  "unlock_requires": {
+    "completed_characters": ["wanderer", "familiar"]
+  },
+  "nodes": [
+    {
+      "id": "b_001",
+      "text": "The email arrived six weeks ago. No name. No company. Burner address, randomly generated handle. Subject line: SUBWOOFER SYSTEM — SPECIFICATIONS ENCLOSED.\n\nYou almost deleted it. But the attachment was a PDF — forty-seven pages, single-spaced, frequency response curves hand-drawn in a style that reminded you of technical illustrations from the 1800s. Copperplate engravings of sine waves. Whoever made this understood acoustics at a level either deeply professional or deeply unwell.\n\nThe specifications were, in order: impossible, fascinating, and extremely well-compensated.\n\nFive enclosures. Twenty twelve-inch subwoofers, four per enclosure, custom-coiled into a logarithmic spiral — a snail-shell configuration you've been iterating for a decade because the idea grabbed you by the brainstem and wouldn't let go. The modeling software said the phase alignment couldn't work at this scale. The PDF included solutions. They worked. You checked twice. The mathematics hadn't been published yet, or had been published once and forgotten.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "cold",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_002",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_002",
+      "text": "You call the system the Homewreckers, which is not a metaphor — you ran them once on open prairie outside of town, no neighbors for miles except one farm a mile and a half out, and the farmer drove over the next morning to ask what you'd been celebrating. The name stuck. The Homewreckers put the ass in bass, and you have spent ten years making sure they do it with the lowest distortion figures anyone has ever measured outside of an anechoic chamber.\n\nThe power spec called for ten residential circuits. Full draw. The kind of power budget that makes electricians leave the room. The trick is heat management. Custom-machined heat sinks bolted to the driver interface, pulling thermal energy out of the voice coils faster than the coils can generate it. You solved the thermal problem by machining aluminum into shapes that a metallurgist friend described as needlessly beautiful. You took this as a compliment.\n\nEach heat sink you've ever shipped carries a small chamfer on the mounting flange — forty-five degrees, hand-filed. It introduces a micro-resonance into the driver assembly, a frequency artifact so far down in the noise floor that no one would ever hear it. But it's there. It shows up in spectral analysis as a faint, clean line, consistent across every system you've built. Your signature. A luthier voices an instrument. You chamfer a flange. Same principle. The sound it makes is yours.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_003",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_003",
+      "text": "The PDF specified heat sinks. Not your design — similar, but different. Better in some ways. The geometry was organic, almost biological — branching structures that looked less like machined aluminum and more like bronchial trees, or river deltas, or the vascular system of something very large. You built them anyway. They worked better than yours. You did not enjoy admitting this. But you added the chamfer. You always add the chamfer.\n\nThe enclosure tops were load-bearing — dance-rated decks. People would stand on these. Bass through the skeleton via direct contact. This was already a Homewrecker principle. Someone else had arrived at the same conclusion through a very different process.\n\nThe payment arrived before you invoiced. Exact amount. You had not discussed price.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "The horns. You spent an evening rotating the STL files in your slicer, trying to understand the internal curves. Theoretical-limit distortion — figures from academic papers about systems that cannot be physically constructed. You printed them. They worked. Margins that implied variables you didn't know existed."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "You searched for the client. Burner address, dead-end domain, no trace. You built the system anyway.",
+          "next": "b_004",
+          "tag": "investigates",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "Some gigs are better left unquestioned. You built the system.",
+          "next": "b_004",
+          "tag": "accepts_gig",
+          "arrival": null,
+          "requires": null
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_004",
+      "text": "The venue is a warehouse on the industrial edge of town. High ceilings, concrete floor, ten twenty-amp circuits confirmed. You brought your own distro box because trusting venue power is how you blow drivers.\n\nYou back the van to the loading dock. Cold. Machine oil and old concrete. The floor is cracked — deep, structural, the kind that makes you think about what's underneath. You don't think about what's underneath. You think about cable runs.\n\nThe Homewreckers come out in pieces. Five enclosures, twenty drivers, heat sinks carrying the ancient designs from the PDF — because your pride can take a hit when the engineering is that good. But each one carries your chamfer. Your frequency hiding in theirs.\n\nYou build the stack. Ritual. Enclosures level, drivers seated, gaskets checked, heat sinks torqued to spec. The snail-shells click into place. Geometry right. Physics right. Sound right.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "investigates" }, "text": "You searched. Dead ends. The client does not exist in any way you can verify. You built the system because the engineering was too good to refuse." },
+        { "requires": { "has_tag": "accepts_gig" }, "text": "You didn't look. The spec was extraordinary. The money was exact. You built." },
+        { "default": true, "text": "You backed the van up to the loading dock." }
+      ],
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_005",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_005",
+      "text": "The system hums. Not audibly — mechanically. A vibration you feel through your fingertips on the deck. Drivers at idle. You know this vibration. You've felt it a thousand times.\n\nIt is not, today, quite the same.\n\nA harmonic you don't recognize. Low — below the range of the drivers, below anything you've built. Coming from the floor. Your RTA shows the usual idle curve and then, below it, at a frequency your phone's microphone should not detect — a signal. Steady. Rhythmic. Like a heartbeat.\n\nRiding on top of the heartbeat, so faint you almost miss it — your chamfer frequency. Your signature. Playing back from underneath the building. As if the concrete heard your mark and learned it.\n\nYou put your hand flat on the floor.\n\nThe floor is warm.\n\nYou stand up. Brush off your knees. Probably resonance from the building's HVAC. The chamfer frequency is sympathetic vibration. It's physics. You make a note on your iPad: sub-audible harmonic present, source building infrastructure, chamfer frequency detected, sympathetic vibration, coincidence. You underline not concerned because writing it down makes it more true.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_006",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_006",
+      "text": "The DJ arrives. You use this word loosely.\n\nSomething arrives at the decks and begins interfacing with your system — technically proficient, conceptually disorienting. Pink gloves connecting cables with a speed that suggests either extensive practice or a total lack of human fumbling. The fog machines — which you did not set up, which produce fog from canisters without brand labels — fill the space between you and the decks.\n\nYou walk over. You are a professional. You introduce yourself to the talent at every gig.\n\n\"Hey,\" you say. \"I'm running the system tonight. Just want to make sure we're good on levels.\"\n\nNo response. A pink glove adjusts a send level on the mixer. Your iPad updates. The adjustment is correct. Not approximately correct. Correct. The kind of correct that implies the operator knows your system's transfer function from memory — impossible, proprietary, ten years of development.\n\n\"Okay,\" you say. \"Cool. I'll be at the rack if you need me.\"\n\nAn eye — green, the size of a golf ball, set into what appears to be a knitted surface — rotates in your direction. It regards you for approximately two seconds. It returns to its previous orientation.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_007",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_007",
+      "text": "Back at the rack. Everything nominal. The sub-audible harmonic is stronger now. Your thermal management dashboard is showing a new interface element — a panel you don't recognize, rendered in a color your UI framework doesn't support. It appears to be monitoring the temperature of the concrete floor.\n\nYou tap the panel. It expands. A real-time thermal map of the floor in concentric rings radiating from a point directly under your subwoofer stack. The center is warm. The edges are cold. The pattern looks like a cross-section of a speaker cone. Or a heartbeat rendered in thermal data. Or something else.\n\nYou close the panel. You open it again. Still there. You check your installed applications. The module is not listed. It is running. It is not installed. These two facts are irreconcilable and you reconcile them by deciding it's a firmware glitch from the last OS update and you'll investigate tomorrow.\n\nYou write in your notes: sub-floor thermal monitoring module appeared, source unknown, possibly firmware artifact, data appears valid, will investigate post-event. You do not underline anything this time.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "The harmonic from load-in, the eye that looked at you, and now a module that doesn't exist reporting data that does. Three data points. You are not making a pattern. You are noting coincidences. There is a difference."
+        }
+      ],
+      "oor_action": "DJ OOR adjusts the gain staging on the subwoofer send. The adjustment is correct to a decimal place you did not share.",
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "You tap the panel again. Something is talking to you through your own system.",
+          "next": "b_008",
+          "tag": "investigates_module",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "The data appears valid. You have a gig to run.",
+          "next": "b_008",
+          "tag": "trusts_data",
+          "arrival": null,
+          "requires": null
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_008",
+      "text": "The portal opens and your system handles it beautifully.\n\nYou don't know that the portal opens. What you know is: DJ OOR drops the first note and your twenty drivers reproduce it with a fidelity that makes you want to cry. The snail-shell coil assemblies do exactly what the PDF predicted — phase alignment across all five enclosures perfect, harmonic distortion unmeasurable, bass extending into frequencies your drivers should not physically be capable of producing. The Homewreckers are exceeding their specifications. This should not be possible. You are not complaining.\n\nThe concrete is vibrating in phase with your system. The thermal map pulses, concentric rings expanding and contracting with the bass pattern. Center temperature climbing. The voice coils are running cool — cooler than they should be, given the draw across ten circuits. The heat is going somewhere. Not into the air. Not into the enclosures. Somewhere else.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "investigates_module" }, "text": "The module is reporting data you didn't ask for. The data is beautiful. You are reading it." },
+        { "requires": { "has_tag": "trusts_data" }, "text": "The module exists. You filed it. Your attention is on the system." },
+        { "default": true, "text": "The first note drops." }
+      ],
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": [
+        { "requires": { "has_tag": "investigates_module" }, "target": "b_009a" },
+        { "default": true, "target": "b_009b" }
+      ],
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_009a",
+      "text": "You pull a panel cover on the side of the amp rack to check the ventilation. Behind the panel, where there should be a cavity containing cable management and a cooling fan, there is — something else.\n\nThe cables are there. The fan is there. But the surface behind them is wrong. It's not the inside of a road case. It's textured — organic, dark, faintly luminous, pulsing at the same frequency as the bass. It looks like the inside of a throat.\n\nYou close the panel. You open it again. Cables. Fan. Normal road case interior. Whatever you saw is not there or was never there or is there and has chosen to look like the inside of a road case because that's what you expect to see when you open a panel cover on an amp rack.\n\nYou make a note: ventilation check complete, all nominal. You do not describe what you saw. Your notes are a professional document. Professional documents do not contain references to the inside of throats.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_010",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_009b",
+      "text": "People are arriving. The room is filling. The bass is extraordinary — you can feel it in your teeth, in your sternum, in the soles of your feet through the concrete. The Homewreckers are doing something they have never done before. They are not reproducing sound. They are channeling it. The sound originates from somewhere below the floor and your system is amplifying it and shaping it and projecting it into a room full of bodies that are beginning to move.\n\nYou built these speakers. You machined the heat sinks. You printed the horns. You wired every connection. And tonight they are doing something you did not design them to do — or, and this thought arrives uninvited and refuses to leave, you designed them to do exactly this, and the PDF knew it, and the spec was not a set of instructions for building speakers. It was a set of instructions for building an organ. A vocal organ. For something that needed a voice in this realm and found an engineer who could build one.\n\nYou sit down on your road case. You drink some water. The water tastes like ozone. You decide this is normal.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_010",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_010",
+      "text": "The fog machines need attention at 10:15. One is producing fog that smells like petrichor — wet earth, mineral, alive. You open the reservoir. Correct color. You taste it, because you are the kind of person who troubleshoots with all available senses. Tastes like fog fluid. Smells like a forest floor after rain. You refill the reservoir and move on. The output normalizes. Mostly.\n\nAt 10:30 the lighting truss develops a new fixture. This is not a metaphor. You hung fourteen fixtures. There are now fifteen. The fifteenth is projecting a pattern you don't recognize in a color at the boundary between violet and pressure. Not on the DMX chain. Operating independently. Tracking something in the crowd.\n\nYou unplug it. It continues to operate. The power cable runs into the truss and disappears. Not behind. Into. The metal has accepted the cable the way a vine accepts a trellis.\n\nYou plug it back in. \"Okay,\" you say to no one. The fixture adjusts its beam angle by three degrees. You choose to interpret this as an acknowledgment.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "The petrichor. The fixture. The harmonic, the module, the eye that regarded you for two seconds. You are keeping a list you did not decide to start."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_011",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_011",
+      "text": "At 10:45 a new module appears on your iPad — uninvited, uninstalled, running. No name. No text. A waveform display unlike anything in your suite: not frequency spectrum, not time-domain. A visualization of density, or flow, or a quantity you don't have a word for. Low waveform. Target line above — a threshold.\n\nYou watch it. It's beautiful, actually. Pulses with the bass. You push the sub output up 1.5 dB. The waveform responds — climbs marginally — and the display blooms warm amber. Fades. A visual sigh. Satisfaction, rendered in data.\n\nYou push further. Deeper amber, longer hold. You understand without language what is being asked. The fader wants to go up. The thing underneath wants more. You have twenty drivers and the ability, so you give it more, because the data is requesting an adjustment and the data has not been wrong yet.\n\nTen years learning to read what a system needs by listening. Tonight the system is showing you instead.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates_module" },
+          "append": "You are adjusting the output of a subwoofer system based on instructions from a module that does not exist, on an iPad communicating with something underneath a concrete floor. You note this. You adjust the output anyway."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_012",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_012",
+      "text": "The DJ OOR Slide pulls you out from behind the rack. You don't mean to go. You are monitoring thermals — the voice coils are cold, getting colder, the heat sinks frosting slightly at the chamfered edges, and the system is outputting more power than ten twenty-amp circuits can physically supply. Your distro box is reporting a draw that exceeds the rating by a margin you will not write down. The breakers have not tripped. The breakers, you suspect, have been asked politely not to trip by something that understands electricity at a level that makes your ten years of system design feel like fingerpainting.\n\nBut the Slide is happening and your feet know what to do and your body goes.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": "DJ OOR's output extends into frequencies the drivers should not produce. The system does not object. The system complies.",
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_013",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_013",
+      "text": "You dance the way you work — precisely, with full attention, aware of the system you're inside. You can feel the Homewreckers through the floor. You built them. You know their voice the way a parent knows their child's cry in a crowded room. Their voice tonight is bigger. Deeper. The snail-shell coils are producing harmonics below their physical capability, below the audible spectrum, into a range where sound stops being sound and becomes structural.\n\nThe bass is not in the room. The bass is the room. A resonant cavity, your twenty drivers as the excitation source, extending through the concrete, through the earth, into a space that does not have coordinates.\n\nIn the deepest register — your chamfer frequency. Clean, steady, unmistakable. Twenty hand-filed flanges amplified by something beneath the floor, played back from the other side of the aperture. Your signature, returned. Sooboont learned your name and is saying it.\n\nYou are crying. Not unusual for you — you cry at good sound. The system you built is doing something impossible and it is doing it beautifully.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "You were always building toward this. Every heat sink you machined. Every horn you printed. Every late night with the modeling software, arguing with the physics. You were building a voice for something that did not yet have one. It knows who built its throat."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "Stay on the floor. The system doesn't need you right now. You need this.",
+          "next": "b_014a",
+          "tag": "stays_floor",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "Return to the rack. The thermals are impossible and someone has to be watching.",
+          "next": "b_014b",
+          "tag": "returns_rack",
+          "arrival": null,
+          "requires": null
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_014a",
+      "text": "You are on the floor during the Mating Ritual. The antlered figures are moving through the crowd and you are inside the sound you built. From here the Homewreckers sound different — not louder, not better. Present. You are inside the instrument.\n\nSomeone is near you. Boundary between bodies dissolving. You don't mind. The bass is structural — not in the air, in the skeleton, in the concrete, in you.\n\nThe antlered woman passes close. The rod in her hand does not respond to you. You are not a deposit. You are not raw material. You are infrastructure. A different category entirely. The instrument that reads the room does not read the person who built the room's voice.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "stays_floor" }, "text": "You stayed. The floor is warm and your face is wet and the bass is yours." },
+        { "default": true, "text": "You are on the floor." }
+      ],
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["on_floor"],
+      "choices": [],
+      "next": "b_015",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_014b",
+      "text": "Back at the rack. Half-watching the Mating Ritual through the fog, half-monitoring. The unnamed module's waveform is climbing toward the threshold.\n\nYou are adjusting crossover points in real time based on what the data asks for. The Q is narrow. The boost is at a frequency you chose because the waveform responded to it — a frequency that, unbeknownst to you, makes the divining rod sing louder across the room. You are tuning the instrument. The instrument is tuning the harvest.\n\nThe waveform climbs. The amber deepens. The threshold is closer.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "returns_rack" }, "text": "You went back. Someone has to watch the data. Someone has to be the person who understands what the system is doing even when what it's doing is impossible." },
+        { "default": true, "text": "You are at the rack." }
+      ],
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "trusts_data" },
+          "append": "Your notes are empty. You stopped writing things down an hour ago. You do not remember deciding to stop."
+        }
+      ],
+      "oor_action": "DJ OOR's ear sweeps the room once. The construct makes no adjustment. Your crossover setting is holding the field.",
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["at_rack"],
+      "choices": [],
+      "next": "b_015",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_015",
+      "text": "DJ OOR's ear rotates. It has been scanning the crowd all night — slow sweep, left to right, pausing on density. Now it stops. Orients toward you. Toward the amp rack. Toward the system you built.\n\nAn eye follows the ear. Green. Misaligned. It looks at you with something you don't have a word for. Not recognition, not gratitude — something between. One instrument acknowledging another.\n\nA pink glove lifts from the mixer. Opens. In the palm, a small component — the bronchial branching from the PDF, the ancient design. On the mounting flange: a chamfer. Forty-five degrees. Hand-filed. Your mark, on a material with no name, in a design that predates your career by an interval you cannot calculate. And from inside it, faintly — your frequency. Singing from material that should not vibrate at that wavelength.\n\nThe glove closes. The eye returns to the crowd. The ear resumes. Four seconds. The most significant professional recognition you have ever received. It came from a construct of yarn and cosmic forces. It will never appear on your CV. You will think about it every day for the rest of your life.\n\nOn your iPad, the module blooms amber, holds, fades — the visual equivalent of a hand placed briefly on a shoulder. Then the waveform returns. There is work to do.\n\nYou sit down on your road case. You are smiling so hard your face hurts.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "on_floor" }, "text": "You came back from the floor. Your face is still wet. DJ OOR's ear finds you at the rack before you've sat down." },
+        { "requires": { "has_tag": "at_rack" }, "text": "You've been at the rack all night. Reading data. Adjusting crossovers. Filing impossibilities. The ear stops sweeping. It points at you." },
+        { "default": true, "text": "Something changes behind the decks." }
+      ],
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "The burner email. The forty-seven pages. The phase alignment from mathematics that hadn't been published. The payment before invoice. You understand now. You were not hired. You were heard."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": "beauty",
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "This changes everything. The spec, the build, the system — it was always leading here.",
+          "next": "b_016",
+          "tag": "accepts_meaning",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "Four seconds. Note it. The thermals are still impossible and someone needs to monitor them.",
+          "next": "b_016",
+          "tag": "files_it",
+          "arrival": null,
+          "requires": null
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_016",
+      "text": "You watch the closing from behind the rack, hand on the amp, feeling it work.\n\nThe crowd descends. The bass descends. Sub-harmonics of sub-harmonics — a Russian nesting doll of low-end extending through the floor. The thermal map shows rings converging, contracting. The module's waveform approaches the threshold. Touches it. Passes through. The display doesn't flash — it deepens. Colors shift into a register you couldn't name. The waveform dissolves into a spiral. Pulses once. Goes still.\n\nThe voice coils are at absolute zero. Not possible. You check three times. Heat sinks covered in frost — except at the chamfers. The chamfers are warm. Your frequency still singing, the last vibration in a system that has gone silent everywhere else.\n\nThe amp is drawing power from a source that is not the ten twenty-amp circuits because the circuits are off. Breakers open. The system is running on something else. How long? You check your notes. The anomaly is not in your notes. You didn't notice it. Or you noticed and didn't write it down. Or you wrote it down and the note is gone.",
+      "arrival_variants": [
+        { "requires": { "has_tag": "accepts_meaning" }, "text": "You understand what the system is doing. You understood since the glove opened. The closing is confirmation." },
+        { "requires": { "has_tag": "files_it" }, "text": "Your hand is on the amp. The data is exceeding every parameter you have a name for." },
+        { "default": true, "text": "The music is completing." }
+      ],
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_017",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_017",
+      "text": "The bass drops. Silence. Your system shuts down — not a power-off, a completion. The way a sentence ends with a period. The indicators go dark. The heat sinks begin to warm, returning to ambient. The frost sublimates. The thermal map fades.\n\nThe unnamed module displays one final thing — not text, not a waveform. Your chamfer frequency, rendered as a single clean spectral line, held for three seconds on a warm amber field. Then it fades. Then the module is gone.\n\nIt was never in your installed applications. It was never on your iPad. The screenshots you took are still in your camera roll. When you look at them later, they will show your normal monitoring interface. Nothing else. You will check three times.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "accepts_meaning" },
+          "append": "The amber held for exactly three seconds and the three seconds were longer than they should have been. The module was saying something. The module was saying your name in the only language it had."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_018",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_018",
+      "text": "You begin teardown. This is ritual. Cables first, then drivers, then enclosures. You handle each piece with the care of someone who understands what these objects did tonight.\n\nThe snail-shell coils are warm to the touch — body temperature, exactly, as if something living had been holding them. The horns smell faintly of petrichor. The heat sinks — the beautiful, ancient, bronchial-tree heat sinks — have developed a patina overnight that would normally take years of oxidation. They look ancient. They look earned.\n\nYou load the van. The warehouse is empty. The fog machines are off. The fifteenth lighting fixture is not on the truss. There are fourteen fixtures. There have always been fourteen fixtures. You count them twice.\n\nYou drive home in silence. Not because you don't want music. Because your ears are calibrated to a frequency they didn't know before tonight and everything else sounds thin. It will take three days for this to fade. You will spend those three days in your workshop, staring at the PDF, tracing the hand-drawn sine waves with your finger. The copperplate engravings. The mathematics that hasn't been published yet. The specifications for a voice that something needed built.",
+      "arrival_variants": null,
+      "conditional_text": null,
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": "b_019",
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "b_019",
+      "text": "In your toolbox, under your calipers, you find a heat sink you did not machine. It is the one from the glove. The material is warm. It will always be warm.\n\nThe geometry is the ancient design from the PDF — the bronchial trees, the river deltas. But on the mounting flange, there is a chamfer. Forty-five degrees. Hand-filed. Your mark, on a component you did not build, in a material that predates metallurgy.\n\nYou hold it close to your ear in a quiet room and you can hear it — your frequency. Faint. Clean. Steady. Singing from inside a material that should not resonate, at a wavelength that should not exist, in a key that is unmistakably, inarguably yours.\n\nYou will keep it on your workbench for the rest of your life. People will pick it up and turn it over and say what's this and you will say heat sink prototype and they will put it down because heat sinks are not interesting to people who don't build speakers. It will hide in plain sight. The most sacred object you own, disguised as shop clutter.\n\nAnd on quiet nights in the workshop, when the house is still and the tools are cold, you will hold it to your ear and listen to yourself, playing back from somewhere you cannot name, and you will know that you were heard.",
+      "arrival_variants": null,
+      "conditional_text": [
+        {
+          "condition": { "has_tag": "accepts_meaning" },
+          "append": "The spec was a collaboration. The email was a commission across an incomprehensible distance. You were not a contractor. You were a co-creator. The heat sink is a receipt for services rendered to something that cannot write receipts."
+        },
+        {
+          "condition": { "has_tag": "investigates" },
+          "append": "The data was real. Every impossible reading, every unnamed module, every amber bloom. This is the proof that survived the event. Everything else — the screenshots, the thermal maps — will be gone by morning. This stays."
+        },
+        {
+          "condition": { "has_tag": "files_it" },
+          "append": "You filed every impossibility. The harmonic. The module. The eye. The four seconds. The heat sink cannot be filed. It is warm and it will not stop singing and it asks every question you chose not to ask."
+        },
+        {
+          "condition": null,
+          "append": "It is warm. It will always be warm."
+        }
+      ],
+      "conditional_mode": "first_match",
+      "oor_action": null,
+      "temperature": "cold",
+      "awards_transcendental": null,
+      "awards_artifact": "heat_sink",
+      "awards_tags": [],
+      "choices": [],
+      "next": null,
+      "terminal": true,
+      "outcome": "recognition"
+    }
+  ]
+}

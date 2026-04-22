@@ -1,5 +1,5 @@
 # Story Design — The Pilgrim's Path
-*Canonical reference. Takes precedence over in-world lore-viewer for structural questions.*
+*Canonical worldbuilding and systems reference. Takes precedence over lore-viewer and node files for structural questions.*
 
 ---
 
@@ -43,7 +43,7 @@ Never witnessed. The yield goes somewhere. That somewhere is Sooboont. The circu
 
 ## Human Resonance Profiles
 
-These are not selectable character classes. They emerge from accumulated tags. A writer or player reading tags can identify which profile is active. Five profiles cover the full spectrum from complete sync to complete rejection.
+These are not selectable character classes. They emerge from persistent tags plus transcendental outcomes. A writer or player reading state can identify which profile is active. Five profiles cover the full spectrum from complete sync to complete rejection.
 
 ### The Ancient
 *"The pull feels like memory."*
@@ -51,7 +51,7 @@ These are not selectable character classes. They emerge from accumulated tags. A
 Has been through this before — not necessarily this building, this night, but this mechanism. The consciousness has been refined by prior harvests. Yield is concentrated, high-grade. Syncs early and deeply. The horror of the Ancient's arc is different from the Wanderer's: they don't discover the harvest was always happening. They remember it.
 
 - **Entry**: `drawn` — followed the bass without question
-- **Tags they accumulate**: `drawn`, `willing`, `accepts`, `surrenders`, optionally `resonant` if ancient-pull is seeded at entry
+- **Tags they accumulate**: `drawn`, `willing`, `accepts` (low `self_monitoring`, low `holds`)
 - **Yield quality**: Refined, concentrated
 - **Likely outcome**: Transcendence
 - **Arc**: Recognition, not discovery
@@ -62,7 +62,7 @@ Has been through this before — not necessarily this building, this night, but 
 First-timer but intentional. Something drew them — a friend, a rumor, a feeling. High yield because they arrived open. Their participation is conscious enough to generate clean transcendental deposits.
 
 - **Entry**: `drawn` — intentional arrival
-- **Tags**: `drawn`, `willing`, `approaching`, `accepts`, `surrenders`
+- **Tags**: `drawn`, `willing`, `accepts` (with likely full transcendental completion)
 - **Yield**: High, relatively raw
 - **Likely outcome**: Transcendence or Harvest
 - **Arc**: Discovery and acceptance
@@ -73,7 +73,7 @@ First-timer but intentional. Something drew them — a friend, a rumor, a feelin
 Passive arrival. No strong pull in either direction. The harvest takes what it finds. Yield is average — sufficient for Harvest outcome, unlikely to reach Transcendence without significant engagement choices.
 
 - **Entry**: `drifting` — arrived without clear intention
-- **Tags**: `drifting`, mixed middle-path choices
+- **Tags**: `drifting`, mixed middle-path choices, mixed transcendental completion
 - **Yield**: Average
 - **Likely outcome**: Harvest
 - **Arc**: Carried by events rather than driving them
@@ -95,8 +95,8 @@ The most dramatically rich profile. Feels the pull as intensely as the Ancient b
 
 Left before the harvest completed. Not safe — incomplete. The refusal is encoded in the body. Not the frequency of completion but the shape of having refused it. The dark longing outcome.
 
-- **Entry**: `wary` → `withdraws` at spine_005
-- **Tags**: `wary`, `denies`, eventually `withdraws`, `refused`
+- **Entry**: `wary` with exit choice at `spine_005`
+- **Tags**: `wary`, `denies`, eventually `refused`
 - **Yield**: Unrealized
 - **Outcome**: Escape — dark longing terminal
 - **Arc**: Refusal. The ongoing cost. Years of reaching toward a frequency that won't resolve.
@@ -104,99 +104,40 @@ Left before the harvest completed. Not safe — incomplete. The refusal is encod
 
 ---
 
-## Master Tag Reference
+## State Model (Implemented)
 
-### Entry tags (spine_001)
+### Persistent tags (character inventory)
+Only these tags persist in `state.tags`:
+
 | Tag | Meaning | Profile signal |
 |---|---|---|
 | `drawn` | Followed something here — intentional or instinctive | Ancient, Seeker |
 | `drifting` | Arrived without clear direction | Drifter |
-| `resonant` | Optional seed: feels like memory, not discovery | Ancient specifically |
+| `willing` | Wanted the warmth — body said yes before mind | Ancient, Seeker |
+| `wary` | Knew something was wrong, came in anyway | Resistant, Escapee |
+| `accepts` | Accepted the mechanics as real | Ancient, Seeker |
+| `denies` | Refused to accept what was seen | Resistant, Escapee |
+| `self_monitoring` | Continues observing/performance self | Resistant signature |
+| `holds` | Maintains self-hold through Unity | Resistant signature |
+| `refused` | Explicitly chose escape path | Escapee |
 
-### Threshold tags (spine_002)
-| Tag | Meaning |
-|---|---|
-| `willing` | Wanted the warmth — body said yes before the mind |
-| `wary` | Knew something was wrong. Came in anyway. |
+### Transcendentals (within-run inventory)
+Stored in `state.transcendentals[]` and reset per run:
+- `unity`
+- `beauty`
+- `truth`
+- `goodness`
 
-### Observation tags (spine_003–004)
-| Tag | Meaning |
-|---|---|
-| `approaching` | Moved closer to the decks |
-| `observing` | Stayed at the edge — watched |
-| `accepts` | Accepted what they saw as real |
-| `denies` | Refused to accept what they saw |
+Use `transcendentals_complete` (`state.transcendentals.length === 4`) for full-harvest checks.  
+`all_four` is deprecated and no longer used.
 
-### Surrender/exit tags (spine_005)
-| Tag | Meaning |
-|---|---|
-| `surrenders` | Steps into the crowd |
-| `withdraws` | Takes the door. The escape path. |
-| `called` | Pulled toward OOR — requires `pale_antler` artifact |
+### Arrival bridge text (transient, non-state)
+Local branch flavor is now carried by `choice.arrival` and consumed by the next node render.
+- It is not persisted in tags.
+- It replaces older local/procedural tags like `yielding`, `releases`, `descends`, `integrated`, `aware_of_loss`, etc.
 
-### Engagement tags (engage_001 → unity arc)
-| Tag | Meaning |
-|---|---|
-| `yielding` | Body found the pattern before the mind decided |
-| `self_monitoring` | Still watching themselves move — Resistant signature |
-| `releases` | Stopped monitoring |
-| `holds` | Maintained self-watching through Unity |
-| `descends` | Went lower in the Slide |
-| `laughing` | Lost in the comedy of it |
-
-### Post-unity tags
-| Tag | Meaning |
-|---|---|
-| `integrated` | Matter-of-fact return to self after Unity |
-| `changed` | Unsettled by the return |
-| `open` | Already answering the next music |
-
-### Beauty tags
-| Tag | Meaning |
-|---|---|
-| `leaning` | Stayed inside the withholding |
-| `searching` | Tried to name what was missing |
-| `aware` | Noticed the taking |
-| `lingering` | Wanted to stay inside the moment |
-
-### Familiar encounter tags (post_beauty)
-| Tag | Meaning |
-|---|---|
-| `assessed` | Let the familiar finish her circuit |
-| `following` | Followed the familiar |
-| `receding` | Stepped back from the measurement |
-
-### Truth tags
-| Tag | Meaning |
-|---|---|
-| `still` | Stayed in place |
-| `toward` | Moved toward the loudest music |
-| `clarified` | Room looks different from this state |
-| `surfacing` | Returned to self slowly |
-
-### Goodness tags
-| Tag | Meaning |
-|---|---|
-| `noticing` | Noticed someone else in need |
-| `touched` | Made physical contact |
-| `stayed` | Presence without words |
-
-### Closing tags
-| Tag | Meaning |
-|---|---|
-| `converging` | Felt the night ending, moved toward center |
-| `all_four` | All four transcendentals yielded — full harvest |
-| `grounded` | Face close to the floor, feeling the source |
-| `aware_of_height` | Watching the space above during descent |
-
-### Terminal tags
-| Tag | Meaning |
-|---|---|
-| `aware_of_loss` | Knows something was taken |
-| `uncertain` | Doesn't know what happened |
-| `transcendence_complete` | Full harvest completion |
-| `refused` | Explicitly chose to leave |
-| `almost` | Got close before refusing |
+### Artifacts (cross-run inventory)
+Stored in `state.artifacts[]`; used for gates like `has_artifact: pale_antler`.
 
 ---
 

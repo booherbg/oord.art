@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OOR Worldforge</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0d1117; --panel:#151b24; --line:#273245; --text:#e6edf5; --muted:#9fb0c6; --accent:#7ab8ff; --ok:#69d18f; --warn:#ffce6a; }
+    * { box-sizing: border-box; } body { margin: 0; font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+    .top { position: sticky; top: 0; background: #101722; border-bottom: 1px solid var(--line); padding: 10px 14px; z-index: 5; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; } input, select, textarea, button { width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:#0f1621; color:var(--text); font:inherit; }
+    button { cursor:pointer; background:#162236; } button:hover { border-color: var(--accent); } button.primary { background:#1d3552; border-color:#2c4e78; }
+    .tabs { display:flex; gap:8px; margin-top:10px; } .tab.active { background:#274a74; border-color:#3f6ea5; }
+    .layout { display:grid; grid-template-columns:340px 1fr; min-height:calc(100vh - 82px); } .left, .right { padding:14px; } .left { border-right:1px solid var(--line); background:var(--panel); }
+    .tool { display:none; } .tool.active { display:block; } .card { border:1px solid var(--line); border-radius:10px; background:#111a27; padding:12px; margin-bottom:12px; }
+    .card h3 { margin:0 0 10px; font-size:14px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; } .status { font-size:12px; color:var(--muted); min-height:18px; }
+    .ok { color:var(--ok); } .warn { color:var(--warn); } .ideas { max-height:300px; overflow:auto; display:grid; gap:8px; } .idea { border:1px solid var(--line); border-radius:8px; padding:8px; background:#0e151f; }
+    .idea .row { display:flex; gap:8px; margin-top:8px; } .pill { display:inline-block; margin:2px; padding:4px 8px; border:1px solid #36577e; border-radius:999px; font-size:12px; color:#b9d7ff; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; } .rounds { max-height:350px; overflow:auto; } .round { border:1px solid var(--line); border-radius:8px; padding:8px; margin-bottom:8px; background:#0d141f; }
+    .nodes { max-height:220px; overflow:auto; border:1px solid var(--line); border-radius:8px; padding:8px; } .nodebtn { margin-bottom:6px; text-align:left; } .nodebtn.active { border-color: var(--accent); background:#1a2b43; }
+    .flow { width:100%; height:340px; border:1px solid var(--line); border-radius:8px; background:#0b1119; } textarea { min-height:130px; resize:vertical; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="grid"><input id="baseUrl" value="http://127.0.0.1:1234" /><input id="model" value="mistralai/ministral-3-3b" /><select id="endpointStyle"><option value="auto">Auto</option><option value="legacy">Legacy /api/v1/chat</option><option value="openai">OpenAI /v1/chat/completions</option></select></div>
+    <div class="grid" style="margin-top:8px;"><input id="temperature" type="number" min="0" max="2" step="0.1" value="0.8" /><input id="maxTokens" type="number" min="128" max="4096" value="900" /><button id="saveAllContext">Save Shared Context Snapshot</button></div>
+    <div class="tabs"><button class="tab active" data-tab="ideasTool">1) Idea Generator</button><button class="tab" data-tab="sandboxTool">2) Storyline Sandbox</button><button class="tab" data-tab="compiledTool">3) Compiled Explorer</button></div>
+  </div>
+  <div class="layout">
+    <aside class="left">
+      <div class="card">
+        <h3>Shared Inspiration Memory</h3>
+        <div id="acceptedPills"></div>
+        <label style="margin-top:8px;">Idea context mode</label>
+        <select id="ideaContextMode">
+          <option value="summary" selected>Summary markdown (recommended)</option>
+          <option value="full">Full lore-viewer HTML (large)</option>
+        </select>
+        <div class="grid" style="margin-top:8px;">
+          <button id="reloadContexts">Reload Context</button>
+          <button id="togglePromptView">Show Prompt Inspector</button>
+          <div id="contextFreshness" class="status"></div>
+        </div>
+        <div id="sharedStatus" class="status"></div>
+      </div>
+      <div id="ideasTool" class="tool active"><div class="card"><h3>Generate Ideas</h3><label>Idea kind</label><select id="ideaKind"><option>oor actions</option><option>character profiles</option><option>scene descriptions</option><option>artifacts</option><option>ritual mechanics</option><option>environmental details</option><option>sensory motifs</option><option>npc familiar behaviors</option><option>outcome twists</option><option>lore fragments</option></select><label>How many ideas</label><input id="ideaCount" type="number" min="3" max="20" value="10" /><label>Prompt focus</label><textarea id="ideaGoal">Generate ideas that increase engagement and creepy-fun energy while staying in canon tone.</textarea><button class="primary" id="generateIdeas">Generate Idea Set</button><button id="saveAcceptedIdeas" style="margin-top:8px;">Save Accepted Ideas JSON</button><div id="ideasStatus" class="status"></div></div></div>
+      <div id="sandboxTool" class="tool"><div class="card"><h3>Open-Ended CYOA</h3><label>Run seed / opening prompt</label><textarea id="runSeed">Start in a liminal warehouse threshold with rising bass pressure and a difficult emotional choice.</textarea><button id="startRun">Start 10-Round Run</button><label style="margin-top:8px;">Your next decision</label><textarea id="playerChoice" placeholder="Type your move, or click one of the generated options in the right panel."></textarea><button class="primary" id="nextRound">Play Next Round</button><div class="grid" style="margin-top:8px;"><button id="regenRoundProse">Regen selected round prose</button><button id="regenRoundChoices">Regen selected round choices</button><button id="saveRun">Save Run JSON</button></div><div id="sandboxStatus" class="status"></div></div></div>
+      <div id="compiledTool" class="tool"><div class="card"><h3>Compiled Story Inspector</h3><label>Source file</label><select id="compiledFile"></select><button id="loadCompiled">Load File</button><div class="grid" style="margin-top:8px;"><button id="regenNodeProse">Regen current node prose</button><button id="regenNodeChoices">Regen current node choices</button><button id="writeCompiled">Write updated JSON</button></div><div id="compiledStatus" class="status"></div></div></div>
+    </aside>
+    <main class="right">
+      <div id="ideasPanel" class="tool active"><div class="card"><h3>Idea Results (accept/reject)</h3><div id="ideasList" class="ideas"></div></div></div>
+      <div id="promptPanel" class="tool active" style="display:none;">
+        <div class="card">
+          <h3>Prompt Inspector</h3>
+          <label>Last system prompt</label>
+          <textarea id="lastSystemPrompt" class="mono" style="min-height:80px;"></textarea>
+          <label>Last user prompt</label>
+          <textarea id="lastUserPrompt" class="mono" style="min-height:220px;"></textarea>
+        </div>
+      </div>
+      <div id="sandboxPanel" class="tool"><div class="card"><h3>Run Timeline</h3><div id="roundsList" class="rounds"></div></div></div>
+      <div id="compiledPanel" class="tool"><div class="card"><h3>Nodes</h3><div id="nodesList" class="nodes"></div></div><div class="card"><h3>Current Node</h3><div id="nodeView" class="mono"></div></div><div class="card"><h3>Flow Diagram</h3><svg id="flowSvg" class="flow"></svg></div></div>
+    </main>
+  </div>
+  <script src="./worldforge.js"></script>
+</body>
+</html>

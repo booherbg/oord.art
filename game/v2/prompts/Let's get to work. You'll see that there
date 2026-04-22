@@ -1,0 +1,11 @@
+  Let's get to work. You'll see that there are files in the game/v2 folder - that's what we're building out of. We want to follow the game_spec document to
+  build the html page for the game. If you look in the v1 folder you'll see the old demo viewer - can use this for reference but what we're building supercedes 
+  this. We're building the choose your own adventure game based on the nodes in the v2/game_nodes folder. These files all derive from the beat_maps files,       
+  which in turn derive from their respective prose documents for the three perspectives: wanderer, familiar, builder. There's also the evening timeline that     
+  helped start it all along with some helper guides on how to generate characters and beat maps.s                                                                
+                                                                                                                                                                 
+  What we're going to build here is the html page that will live on oord.art. First pass should be polished and playable. Take extra care to double check for    
+  playability and consistency - note any anomolies, concerns, gotchas into a document in the v2 folder if needed. I'm going to set this to run overnight so      
+  please take your time and think through the design and implementation. Feel free to make creative decisions and take direction as long as it aligns with the   
+  overeall feel and story. Keep an eye out for things like weird phrasing or nodes that need to be edited - continue anyway but note them in your report. Ask    
+  me any questions now - and otherwise let's get cracking.     
