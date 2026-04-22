@@ -4,7 +4,7 @@
   "tagline": "The email arrived six weeks ago.",
   "start_node": "b_001",
   "unlock_requires": {
-    "completed_characters": ["wanderer", "familiar"]
+    "has_artifact": "pale_antler"
   },
   "nodes": [
     {

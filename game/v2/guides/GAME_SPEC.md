@@ -270,11 +270,21 @@ On terminal render, the outcome is recorded and the character is added to `persi
 
 | Outcome | Characters | Meaning |
 |---|---|---|
-| `transcendence` | Wanderer | Full participation. All transcendentals yielded. The plant always wins. You would come again. |
+| `transcendence` | Wanderer | Full participation. All four transcendentals yielded. See design note below. |
 | `harvest` | Wanderer | Partial participation. Something taken you didn't offer. Lighter. Not sure this is good. |
 | `escape` | Wanderer | Withdrew. Intact. Safe — and this is the exact problem. The dark longing. Incompletion. |
 | `recognition` | Builder | You were heard. The heat sink sings your frequency. The mechanism acknowledged who built its throat. |
 | `dissolution` | Familiar | The body is optional. The function is complete. You are — |
+
+### Transcendence — Design Note
+
+The following is the design spirit of the transcendence ending. It should inform the terminal node prose when the Wanderer's full-participation path is written, and the `w_called_001` node once the called path is built.
+
+---
+
+All four transcendentals yielded. The Kabbalists said the world is made of light that shattered into matter — holy sparks in everything, waiting to be returned. After your experience tonight, you understand what they meant. The same process ran through the first fire circles, through every gathering where humans moved together and felt the boundary between them become optional. Tonight was one of those gatherings. What moved through you wasn't created here. It was always present — in a certain quality of winter light, kind gesture between strangers, in the moment two dancers moved to the same flow and felt it without looking. Tonight you were open and it all moved through you. What you felt was alignment: the specific resonance of focusing your presence on what is real. Goodness. Truth. Beauty. Unity. These don't require a cosmic warehouse dance party. What the experience gave you was permission — a signal loud enough to get past the reasons you keep yourself at a distance. You know the frequency now. You can find it anywhere you're willing to look for it.
+
+---
 
 **Outcome rendering:** Terminal nodes use the outcome card styling (yellow border, Bebas Neue outcome label). The outcome label is displayed but the meaning is NOT explained to the player — the prose delivers the meaning. The label is a single word, not a description.
 
