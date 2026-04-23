@@ -297,6 +297,14 @@
       opacity: 0.55;
     }
 
+    .node-id.dev-strong {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--orange);
+      opacity: 0.95;
+      font-weight: 700;
+    }
+
     /* ─── ARRIVAL ─────────────────────────────────────── */
     .arrival {
       color: var(--yellow);
@@ -573,6 +581,80 @@
 
     .dev-edit-btn:hover { background: rgba(232, 96, 16, 0.2); border-color: var(--orange); }
 
+    .dev-inline-tools {
+      position: absolute;
+      top: 8px; right: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 3;
+    }
+
+    .dev-inline-status {
+      font-size: 11px;
+      color: var(--text-dim);
+      min-width: 86px;
+      text-align: right;
+    }
+
+    .dev-inline-status.ok { color: var(--goodness); }
+    .dev-inline-status.err { color: var(--pink); }
+
+    .dev-inline-editable {
+      outline: 1px dashed rgba(232, 96, 16, 0.35);
+      border-radius: 2px;
+      padding: 1px 2px;
+    }
+
+    .dev-inline-editable:focus {
+      outline: 1px solid var(--orange);
+      background: rgba(232, 96, 16, 0.08);
+    }
+
+    .node-text-editable {
+      white-space: pre-wrap;
+      line-height: 1.8;
+    }
+
+    .dev-inline-note {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #d0c6bd;
+      margin: 6px 0 4px;
+    }
+
+    .dev-inline-note .state-on,
+    .dev-tech-row .state-on {
+      color: #90e0a8;
+    }
+
+    .dev-inline-note .state-off,
+    .dev-tech-row .state-off {
+      color: #f090b0;
+    }
+
+    .dev-inline-note .state-default,
+    .dev-tech-row .state-default {
+      color: #e0c890;
+    }
+
+    .dev-inline-note .state-runtime,
+    .dev-tech-row .state-runtime {
+      color: #9cc8ff;
+    }
+
+    .dev-inline-note .state-when,
+    .dev-tech-row .state-when {
+      color: #c6beb6;
+    }
+
+    .dev-tech-row {
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+
     .dev-panel {
       border: 1px solid rgba(232, 96, 16, 0.4);
       border-radius: 2px;
@@ -671,7 +753,7 @@
     /* ─── DEV CONSOLE ────────────────────────────────── */
     .dev-console {
       /* boost --text-dim locally so dense UI stays readable */
-      --text-dim: #9A9088;
+      --text-dim: #c5bbb2;
       margin-top: 12px;
       border: 1px solid rgba(232, 96, 16, 0.5);
       border-radius: 2px;
@@ -687,11 +769,48 @@
     .dev-section:last-child { border-bottom: none; }
 
     .dev-section-label {
-      font-size: 11px;
-      letter-spacing: 0.18em;
+      font-size: 12px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--orange);
+      color: #ffad66;
       margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .dev-flow-summary {
+      font-size: 12px;
+      color: #d8cec5;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .dev-flow-row {
+      font-size: 12px;
+      color: #d8cec5;
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .dev-flow-row strong {
+      color: var(--text-bright);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 50px;
+    }
+
+    .dev-flow-pill {
+      border: 1px solid rgba(232, 96, 16, 0.35);
+      border-radius: 999px;
+      padding: 1px 7px;
+      color: var(--orange);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-right: 6px;
     }
 
     /* nav */
@@ -1076,6 +1195,141 @@
 
     .restart-btn:hover { border-color: var(--orange); color: var(--orange); }
 
+    .node-map-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      background: rgba(5, 4, 9, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .node-map-modal[hidden] { display: none !important; }
+
+    .node-map-toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .node-map-surface {
+      flex: 1;
+      border: 1px solid rgba(232, 96, 16, 0.35);
+      border-radius: 2px;
+      background: #0d0a12;
+      overflow: auto;
+      position: relative;
+    }
+
+    .node-map-canvas {
+      position: relative;
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    .node-map-svg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .node-map-node {
+      position: absolute;
+      width: 190px;
+      min-height: 64px;
+      border: 1px solid rgba(255,255,255,0.34);
+      border-radius: 2px;
+      background: rgba(12, 9, 18, 0.98);
+      color: #e8ddd3;
+      padding: 9px 10px;
+      font-size: 12px;
+      line-height: 1.35;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      pointer-events: auto;
+      text-align: left;
+    }
+    .node-map-node:hover { border-color: var(--orange); color: var(--orange); }
+    .node-map-node.current { border-color: var(--orange); box-shadow: 0 0 0 1px rgba(232,96,16,0.35) inset; }
+    .node-map-node.selected { box-shadow: 0 0 0 2px rgba(156, 200, 255, 0.55) inset; }
+    .node-map-node.merge { border-left: 3px solid #9cc8ff; }
+    .node-map-node.gate { border-right: 3px solid #f090b0; }
+    .node-map-node.taggy { box-shadow: 0 0 0 1px rgba(224,200,144,0.22) inset; }
+
+    .node-map-node-id {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .node-map-icons {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .node-map-icon {
+      font-size: 11px;
+      line-height: 1;
+      padding: 2px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .node-map-icon.artifact { border-color: rgba(224, 200, 144, 0.8); color: #e0c890; }
+    .node-map-icon.trans { color: #ffffff; border-color: transparent; font-weight: 700; }
+    .node-map-icon.hidden { border-color: rgba(240, 144, 176, 0.8); color: #f090b0; }
+    .node-map-icon.taggy { border-color: rgba(255, 173, 102, 0.85); color: #ffad66; }
+    .node-map-icon.trans.unity { background: #4f7fc9; }
+    .node-map-icon.trans.beauty { background: #b84f7f; }
+    .node-map-icon.trans.truth { background: #a8862a; }
+    .node-map-icon.trans.goodness { background: #4e9f6b; }
+
+    .node-map-legend-item { margin-right: 10px; white-space: nowrap; }
+    .node-map-legend-item.artifact { color: #e0c890; }
+    .node-map-legend-item.trans.unity { color: #70a8e8; }
+    .node-map-legend-item.trans.beauty { color: #e070a0; }
+    .node-map-legend-item.trans.truth { color: #e0c878; }
+    .node-map-legend-item.trans.goodness { color: #70c888; }
+    .node-map-legend-item.hidden { color: #f090b0; }
+    .node-map-legend-item.taggy { color: #ffad66; }
+    .node-map-legend-item.merge { color: #9cc8ff; }
+    .node-map-legend-item.gate { color: #f090b0; }
+
+    .node-map-inspector {
+      border: 1px solid rgba(232, 96, 16, 0.35);
+      border-radius: 2px;
+      background: rgba(232, 96, 16, 0.04);
+      padding: 12px 14px;
+      max-height: 220px;
+      overflow: auto;
+    }
+
+    .node-map-inspector .dev-flow-summary {
+      font-size: 13px;
+      color: #dfd4ca;
+      line-height: 1.55;
+    }
+
+    .node-map-preview {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border: 1px dashed rgba(232, 96, 16, 0.35);
+      border-radius: 2px;
+      color: #f1e7dd;
+      font-size: 14px;
+      line-height: 1.65;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
     /* ─── LOADING ─────────────────────────────────────── */
     .loading {
       padding: 48px 0;
@@ -1176,8 +1430,23 @@
     <div class="state-right">
       <div class="state-tags" id="tag-display"></div>
       <span class="dev-badge" id="dev-badge" hidden>DEV</span>
+      <button class="restart-btn" id="dev-map-toggle" onclick="devToggleNodeMap()" hidden>Node Map</button>
       <button class="restart-btn" id="restart-btn" onclick="restartCharacter()">Restart</button>
     </div>
+  </div>
+
+  <div class="node-map-modal" id="node-map-modal" hidden>
+    <div class="node-map-toolbar">
+      <span class="dev-badge">Node Map</span>
+      <select class="dev-mini-select" id="node-map-char-select"></select>
+      <button class="dev-sm-btn" id="node-map-open-editor-btn">open in editor</button>
+      <button class="dev-sm-btn" id="node-map-close-btn">close</button>
+    </div>
+    <div class="dev-flow-summary" id="node-map-legend"></div>
+    <div class="node-map-surface">
+      <div class="node-map-canvas" id="node-map-canvas"></div>
+    </div>
+    <div class="node-map-inspector" id="node-map-inspector"></div>
   </div>
 
 <script>
@@ -1395,6 +1664,7 @@ async function loadCharacter(charId) {
     charMeta = data;
     nodeMap  = {};
     (data.nodes || []).forEach(n => { nodeMap[n.id] = n; });
+    buildDevFlowIndex();
 
     run = {
       character:       charId,
@@ -1484,7 +1754,9 @@ function renderNode() {
   document.body.className = 'temp-' + (node.temperature || 'cold');
 
   // ── arrival text ────────────────────────────────────────
+  const pendingArrivalText = run.pending_arrival || null;
   let arrivalText = null;
+  let arrivalVariantIdx = null;
   if (run.pending_arrival) {
     arrivalText = run.pending_arrival;
     run.pending_arrival = null;
@@ -1494,11 +1766,16 @@ function renderNode() {
     const match = nonDefault.find(v => evaluate(v.requires));
     if (match) {
       arrivalText = match.text;
+      arrivalVariantIdx = node.arrival_variants.indexOf(match);
     } else {
       const def = node.arrival_variants.find(v => v.default === true);
-      if (def) arrivalText = def.text;
+      if (def) {
+        arrivalText = def.text;
+        arrivalVariantIdx = node.arrival_variants.indexOf(def);
+      }
     }
   }
+  const activeArrivalIdx = arrivalVariantIdx;
 
   // ── conditional text ────────────────────────────────────
   const conditionals = [];
@@ -1530,7 +1807,9 @@ function renderNode() {
   });
 
   // ── choices ─────────────────────────────────────────────
-  const visibleChoices = (node.choices || []).filter(c => !c.requires || evaluate(c.requires));
+  const visibleChoices = (node.choices || [])
+    .map((choice, index) => ({ choice, index }))
+    .filter(({ choice }) => !choice.requires || evaluate(choice.requires));
   const isAutoAdvance  = visibleChoices.length === 0 && !node.terminal;
   const nextId         = isAutoAdvance ? resolveNext(node.next) : null;
 
@@ -1539,33 +1818,80 @@ function renderNode() {
 
   // ── build HTML ──────────────────────────────────────────
   let html = `<div class="node-card${isDissolution ? ' dissolving-card' : ''}" data-node-id="${esc(node.id)}">`;
-  html += `<div class="node-id">${esc(node.id)}</div>`;
-  if (devMode) html += `<button class="dev-edit-btn" id="dev-edit-btn">edit</button>`;
+  html += `<div class="node-id${devMode ? ' dev-strong' : ''}">${esc(node.id)}</div>`;
+  if (devMode) {
+    html += `<div class="dev-inline-tools">
+      <button class="dev-edit-btn dev-save-btn" id="dev-save-btn">save</button>
+      <span class="dev-inline-status" id="dev-inline-status"></span>
+    </div>`;
+  }
 
-  if (arrivalText) {
+  if (devMode) {
+    if (pendingArrivalText) {
+      html += `<div class="dev-inline-note">arrival · <span class="state-on">shown</span> · <span class="state-runtime">runtime source</span>: pending choice arrival</div>`;
+      html += `<div class="arrival">${esc(pendingArrivalText)}</div>`;
+    }
+    if (Array.isArray(node.arrival_variants) && node.arrival_variants.length > 0) {
+      node.arrival_variants.forEach((v, idx) => {
+        const visible = idx === activeArrivalIdx;
+        const condLabel = v.default ? 'default' : (v.requires ? descCond(v.requires) : 'always');
+        const stateClass = visible ? 'state-on' : 'state-off';
+        const condClass = v.default ? 'state-default' : 'state-when';
+        html += `<div class="dev-inline-note">arrival_variants[${idx}] · <span class="${stateClass}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="${condClass}">${esc(condLabel)}</span></div>`;
+        html += `<div class="arrival dev-inline-editable" contenteditable="true" data-dev-arrival-idx="${idx}">${esc(v.text || '')}</div>`;
+      });
+    } else if (arrivalText && !pendingArrivalText) {
+      html += `<div class="dev-inline-note">arrival · <span class="state-on">shown</span></div>`;
+      html += `<div class="arrival">${esc(arrivalText)}</div>`;
+    }
+  } else if (arrivalText) {
     html += `<div class="arrival">${esc(arrivalText)}</div>`;
   }
 
   // base text paragraphs — staggered animation
-  const paragraphs = (node.text || '').split('\n\n').filter(p => p.trim());
   html += '<div class="node-text">';
-  paragraphs.forEach((p, i) => {
-    const delay = (0.15 + i * 0.1).toFixed(2);
-    html += `<p style="animation-delay:${delay}s">${esc(p)}</p>`;
-  });
+  if (devMode) {
+    html += `<div class="node-text-editable dev-inline-editable" contenteditable="true" data-dev-field="text">${esc(node.text || '')}</div>`;
+  } else {
+    const paragraphs = (node.text || '').split('\n\n').filter(p => p.trim());
+    paragraphs.forEach((p, i) => {
+      const delay = (0.15 + i * 0.1).toFixed(2);
+      html += `<p style="animation-delay:${delay}s">${esc(p)}</p>`;
+    });
+  }
   html += '</div>';
 
   // conditional text blocks
-  conditionals.forEach(ct => {
-    const cParagraphs = (ct.append || '').split('\n\n').filter(p => p.trim());
-    cParagraphs.forEach(p => {
-      html += `<div class="conditional">${esc(p)}</div>`;
+  if (devMode && Array.isArray(node.conditional_text) && node.conditional_text.length > 0) {
+    const activeCondIdxs = new Set();
+    if (node.conditional_mode === 'first_match') {
+      const matchIdx = node.conditional_text.findIndex(ct => evaluate(ct.condition));
+      if (matchIdx >= 0) activeCondIdxs.add(matchIdx);
+    } else {
+      node.conditional_text.forEach((ct, idx) => { if (evaluate(ct.condition)) activeCondIdxs.add(idx); });
+    }
+    node.conditional_text.forEach((ct, idx) => {
+      const visible = activeCondIdxs.has(idx);
+      const condLabel = ct.condition ? descCond(ct.condition) : 'always';
+      html += `<div class="dev-inline-note">conditional_text[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="state-when">${esc(condLabel)}</span></div>`;
+      html += `<div class="conditional dev-inline-editable" contenteditable="true" data-dev-cond-idx="${idx}">${esc(ct.append || '')}</div>`;
     });
-  });
+  } else {
+    conditionals.forEach(ct => {
+      const cParagraphs = (ct.append || '').split('\n\n').filter(p => p.trim());
+      cParagraphs.forEach(p => {
+        html += `<div class="conditional">${esc(p)}</div>`;
+      });
+    });
+  }
 
   // oor action
   if (node.oor_action) {
-    html += `<div class="oor-action">${esc(node.oor_action)}</div>`;
+    if (devMode) {
+      html += `<div class="oor-action dev-inline-editable" contenteditable="true" data-dev-field="oor_action">${esc(node.oor_action)}</div>`;
+    } else {
+      html += `<div class="oor-action">${esc(node.oor_action)}</div>`;
+    }
   }
 
   // transcendental award flash
@@ -1580,8 +1906,12 @@ function renderNode() {
       html += `<div class="auto-advance-wrap" id="advance-wrap"></div>`;
     } else if (visibleChoices.length > 0) {
       html += '<div class="choices">';
-      visibleChoices.forEach((choice, i) => {
-        html += `<button class="choice-btn" data-idx="${i}">${esc(choice.text)}</button>`;
+      visibleChoices.forEach(({ choice, index }, i) => {
+        if (devMode) {
+          html += `<button class="choice-btn" data-idx="${i}"><span class="dev-inline-editable" contenteditable="true" data-dev-choice-idx="${index}">${esc(choice.text)}</span></button>`;
+        } else {
+          html += `<button class="choice-btn" data-idx="${i}">${esc(choice.text)}</button>`;
+        }
       });
       html += '</div>';
     }
@@ -1665,19 +1995,23 @@ function renderNode() {
 
   // ── attach event listeners ──────────────────────────────
 
-  // dev edit button
-  const devBtn = document.getElementById('dev-edit-btn');
-  if (devBtn) devBtn.addEventListener('click', () => openDevEditor(node.id));
-
-  // close any open dev panel on new node
-  const devPanel = document.getElementById('dev-panel');
-  if (devPanel) { devPanel.hidden = true; devPanel.innerHTML = ''; }
+  if (devMode) {
+    const saveBtn = document.getElementById('dev-save-btn');
+    if (saveBtn) saveBtn.addEventListener('click', () => devSaveInline(node.id));
+  }
 
   // choice buttons
   gameEl.querySelectorAll('.choice-btn').forEach(btn => {
     const idx = parseInt(btn.dataset.idx, 10);
-    btn.addEventListener('click', () => makeChoice(visibleChoices[idx]));
+    btn.addEventListener('click', () => makeChoice(visibleChoices[idx]?.choice));
   });
+  if (devMode) {
+    gameEl.querySelectorAll('[data-dev-choice-idx]').forEach(el => {
+      ['mousedown', 'click', 'keydown'].forEach(evt =>
+        el.addEventListener(evt, ev => ev.stopPropagation())
+      );
+    });
+  }
 
   // auto-advance button — appears after 3.5s to prevent rushing
   if (isAutoAdvance && nextId) {
@@ -1761,17 +2095,293 @@ let _lastRenderedNode = null; // only scroll to top when node actually changes
 let devSeqTimer = null;
 let devHistory = [];      // node ID stack for back navigation
 let _devChoiceCache = []; // current node's full choices array (for unlock by index)
+let devFlowOpen = false;
+let devFlowIndex = { incoming: {}, spineSet: new Set() };
+let devNodeMapOpen = false;
+let devNodeMapCharacter = null;
+let devNodeMapSelectedNode = null;
+const devNodeMapCache = {};
 const DEV_SAVES_KEY = 'pilgrims_path_dev_saves';
 
 function toggleDevMode() {
   devMode = !devMode;
   const badge = document.getElementById('dev-badge');
   if (badge) badge.hidden = !devMode;
+  const mapBtn = document.getElementById('dev-map-toggle');
+  if (mapBtn) mapBtn.hidden = !devMode;
+  if (!devMode) {
+    devNodeMapOpen = false;
+    const modal = document.getElementById('node-map-modal');
+    if (modal) modal.hidden = true;
+  }
   const panel = document.getElementById('dev-panel');
   if (panel) { panel.hidden = true; panel.innerHTML = ''; }
   const dc = document.getElementById('dev-console');
   if (dc) dc.innerHTML = '';
   if (run) renderNode();
+}
+
+function devToggleNodeMap() {
+  devNodeMapOpen = !devNodeMapOpen;
+  if (run && !devNodeMapCharacter) devNodeMapCharacter = run.character;
+  const modal = document.getElementById('node-map-modal');
+  if (!modal) return;
+  modal.hidden = !devNodeMapOpen;
+  if (devNodeMapOpen) renderNodeMapModal();
+}
+
+async function devSetNodeMapCharacter(charId) {
+  devNodeMapCharacter = charId;
+  devNodeMapSelectedNode = null;
+  if (devNodeMapOpen) await renderNodeMapModal();
+}
+
+async function devOpenNodeInEditor(charId, nodeId) {
+  if (!charId || !nodeId) return;
+  if (!run || run.character !== charId) {
+    await loadCharacter(charId);
+  }
+  if (run && nodeMap[nodeId]) {
+    run.node = nodeId;
+    devNodeMapOpen = false;
+    const modal = document.getElementById('node-map-modal');
+    if (modal) modal.hidden = true;
+    renderNode();
+  }
+}
+
+function buildDevFlowIndex() {
+  const nodes = (charMeta && Array.isArray(charMeta.nodes)) ? charMeta.nodes : [];
+  const incoming = {};
+
+  const pushIncoming = (target, fromId) => {
+    if (!target || !fromId) return;
+    if (!incoming[target]) incoming[target] = [];
+    if (!incoming[target].includes(fromId)) incoming[target].push(fromId);
+  };
+
+  nodes.forEach(n => {
+    const fromId = n.id;
+    (n.choices || []).forEach(c => pushIncoming(c.next, fromId));
+    if (typeof n.next === 'string') {
+      pushIncoming(n.next, fromId);
+    } else if (Array.isArray(n.next)) {
+      n.next.forEach(nx => pushIncoming(nx && nx.target, fromId));
+    }
+  });
+
+  const spineSet = new Set();
+  const visited = new Set();
+  let cur = charMeta ? charMeta.start_node : null;
+  while (cur && !visited.has(cur) && nodeMap[cur]) {
+    visited.add(cur);
+    spineSet.add(cur);
+    const n = nodeMap[cur];
+    let nextId = null;
+    if (typeof n.next === 'string') {
+      nextId = n.next;
+    } else if (Array.isArray(n.next) && n.next.length) {
+      const d = n.next.find(x => x && x.default === true);
+      nextId = (d && d.target) || (n.next[0] && n.next[0].target) || null;
+    } else if (Array.isArray(n.choices) && n.choices.length) {
+      nextId = n.choices[0].next || null;
+    }
+    cur = nextId;
+  }
+
+  devFlowIndex = { incoming, spineSet };
+}
+
+function devToggleFlow() {
+  devFlowOpen = !devFlowOpen;
+  renderDevConsole(nodeMap[run.node]);
+}
+
+function nodeLaneLabel(node) {
+  if (!node) return 'unknown';
+  if (node.terminal) return 'terminal';
+  const hasGate = (node.choices || []).some(c => c.requires) ||
+    (Array.isArray(node.next) && node.next.some(n => n && n.requires)) ||
+    (node.conditional_text || []).some(ct => ct.condition);
+  if (devFlowIndex.spineSet.has(node.id)) return hasGate ? 'spine+gate' : 'spine';
+  return hasGate ? 'branch+gate' : 'branch';
+}
+
+function nodeTargets(node) {
+  if (!node) return [];
+  const targets = [];
+  (node.choices || []).forEach(c => { if (c.next) targets.push(c.next); });
+  if (typeof node.next === 'string' && node.next) {
+    targets.push(node.next);
+  } else if (Array.isArray(node.next)) {
+    node.next.forEach(nx => { if (nx && nx.target) targets.push(nx.target); });
+  }
+  return [...new Set(targets)];
+}
+
+function nodeEdges(node) {
+  if (!node) return [];
+  const edges = [];
+  (node.choices || []).forEach((c, idx) => {
+    edges.push({
+      label: `choice ${idx + 1}${c.requires ? ' (gated)' : ''}`,
+      target: c.next || '—',
+      visible: !c.requires || evaluate(c.requires)
+    });
+  });
+  if (typeof node.next === 'string') {
+    edges.push({ label: 'next', target: node.next, visible: true });
+  } else if (Array.isArray(node.next)) {
+    node.next.forEach((nx, idx) => edges.push({
+      label: `next ${idx + 1}${nx && nx.default ? ' (default)' : ''}${nx && nx.requires ? ' (gated)' : ''}`,
+      target: (nx && nx.target) || '—',
+      visible: !(nx && nx.requires) || evaluate(nx && nx.requires)
+    }));
+  }
+  return edges;
+}
+
+function analyzeNodeMapGraph(data) {
+  const nodes = (data && Array.isArray(data.nodes)) ? data.nodes : [];
+  const byId = {};
+  nodes.forEach(n => { byId[n.id] = n; });
+  const incoming = {};
+  const outgoing = {};
+  const pushIncoming = (target, fromId) => {
+    if (!target || !fromId) return;
+    if (!incoming[target]) incoming[target] = [];
+    if (!incoming[target].includes(fromId)) incoming[target].push(fromId);
+  };
+  const pushOutgoing = (fromId, target) => {
+    if (!fromId || !target) return;
+    if (!outgoing[fromId]) outgoing[fromId] = [];
+    if (!outgoing[fromId].includes(target)) outgoing[fromId].push(target);
+  };
+
+  nodes.forEach(n => {
+    const from = n.id;
+    (n.choices || []).forEach(c => {
+      if (!c.next) return;
+      pushIncoming(c.next, from);
+      pushOutgoing(from, c.next);
+    });
+    if (typeof n.next === 'string') {
+      pushIncoming(n.next, from);
+      pushOutgoing(from, n.next);
+    } else if (Array.isArray(n.next)) {
+      n.next.forEach(nx => {
+        if (!nx || !nx.target) return;
+        pushIncoming(nx.target, from);
+        pushOutgoing(from, nx.target);
+      });
+    }
+  });
+
+  // Layer assignment:
+  // 1) shortest-path depth from start
+  // 2) relaxation pass to push obvious backward edges rightward
+  const depthById = {};
+  const queue = [{ id: data.start_node, depth: 0 }];
+  while (queue.length) {
+    const cur = queue.shift();
+    if (!cur || !cur.id || !byId[cur.id]) continue;
+    if (depthById[cur.id] !== undefined && depthById[cur.id] <= cur.depth) continue;
+    depthById[cur.id] = cur.depth;
+    (outgoing[cur.id] || []).forEach(nextId => queue.push({ id: nextId, depth: cur.depth + 1 }));
+  }
+  nodes.forEach(n => {
+    if (depthById[n.id] === undefined) depthById[n.id] = 0;
+  });
+
+  // Reduce backward edges in mostly-DAG graphs.
+  for (let iter = 0; iter < nodes.length; iter++) {
+    let changed = false;
+    nodes.forEach(n => {
+      const fromD = depthById[n.id] || 0;
+      (outgoing[n.id] || []).forEach(t => {
+        const toD = depthById[t] || 0;
+        if (toD < fromD) {
+          depthById[t] = fromD + 1;
+          changed = true;
+        }
+      });
+    });
+    if (!changed) break;
+  }
+
+  const minDepth = Math.min(...Object.values(depthById));
+  if (Number.isFinite(minDepth) && minDepth !== 0) {
+    Object.keys(depthById).forEach(id => {
+      depthById[id] -= minDepth;
+    });
+  }
+
+  return { byId, incoming, outgoing, depthById };
+}
+
+async function getNodeMapData(charId) {
+  if (!charId) return null;
+  if (devNodeMapCache[charId]) return devNodeMapCache[charId];
+  if (charMeta && charMeta.character === charId) {
+    devNodeMapCache[charId] = charMeta;
+    return charMeta;
+  }
+  const resp = await fetch(NODE_FILES[charId]);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
+  devNodeMapCache[charId] = data;
+  return data;
+}
+
+function buildFlowLookahead(nodeId, extraLayers = 2) {
+  const maxDepth = 1 + extraLayers;
+  const lines = [];
+  const walk = (curId, depth, pathSet) => {
+    if (depth > maxDepth || !curId || !nodeMap[curId]) return;
+    if (pathSet.has(curId)) return;
+
+    const edges = nodeEdges(nodeMap[curId]).filter(e => e.target && e.target !== '—');
+    edges.forEach(edge => {
+      const indent = '&nbsp;'.repeat((depth - 1) * 4);
+      lines.push(
+        `${indent}${esc(edge.label)} → <span class="dev-hist-node" onclick="devGoTo('${esc(edge.target)}')">${esc(edge.target)}</span>${edge.visible ? '' : ' · hidden'}`
+      );
+      const nextPath = new Set(pathSet);
+      nextPath.add(curId);
+      walk(edge.target, depth + 1, nextPath);
+    });
+  };
+
+  walk(nodeId, 1, new Set());
+  return lines;
+}
+
+function findNearestSpineRejoin(nodeId, maxDepth = 6) {
+  if (!nodeId || !nodeMap[nodeId]) return null;
+  if (devFlowIndex.spineSet.has(nodeId)) return { nodeId, steps: 0 };
+  const queue = [{ id: nodeId, steps: 0 }];
+  const visited = new Set([nodeId]);
+  let found = null;
+
+  while (queue.length && !found) {
+    const cur = queue.shift();
+    if (!cur) break;
+    if (cur.steps >= maxDepth) continue;
+    const n = nodeMap[cur.id];
+    if (!n) continue;
+    const nextSteps = cur.steps + 1;
+    nodeTargets(n).forEach(targetId => {
+      if (found || !targetId || visited.has(targetId)) return;
+      if (devFlowIndex.spineSet.has(targetId)) {
+        found = { nodeId: targetId, steps: nextSteps };
+        return;
+      }
+      visited.add(targetId);
+      queue.push({ id: targetId, steps: nextSteps });
+    });
+  }
+
+  return found;
 }
 
 // ── history ──────────────────────────────────────────────────────────────────
@@ -1927,7 +2537,8 @@ function renderDevConsole(node) {
         <button class="dev-back-btn" onclick="devGoBack()" ${devHistory.length < 2 ? 'disabled' : ''}>← back</button>
         <span class="dev-current-node">${esc(node.id)}</span>
         <div class="dev-node-meta">${esc(node.temperature || '')}${node.terminal ? ' · terminal' : ''}${node.awards_transcendental ? ' · ◆' + node.awards_transcendental : ''}</div>
-        <button class="dev-sm-btn" onclick="openDevEditor('${esc(node.id)}')" style="flex-shrink:0">edit prose</button>
+        <button class="dev-sm-btn" onclick="devToggleFlow()" style="flex-shrink:0">${devFlowOpen ? 'hide flow' : 'flow context'}</button>
+        <button class="dev-sm-btn" onclick="focusFirstEditable()" style="flex-shrink:0">focus text</button>
       </div>
       ${trail ? `<div class="dev-history-trail">${trail}</div>` : ''}
     </div>`;
@@ -1941,11 +2552,14 @@ function renderDevConsole(node) {
       const tagPill = choice.tag ? `<span class="dev-choice-tag-pill">${esc(choice.tag)}</span>` : '';
       const condStr = (!visible && choice.requires) ? `<span class="dev-choice-cond">${esc(descCond(choice.requires))}</span>` : '';
       const unlockBtn = !visible ? `<button class="dev-sm-btn unlock" onclick="devUnlockChoice(${i})">unlock</button>` : '';
+      const choiceTextHtml = visible
+        ? `<span class="dev-choice-text">${esc(choice.text)}</span>`
+        : `<span class="dev-choice-text dev-inline-editable" contenteditable="true" data-dev-hidden-choice-idx="${i}">${esc(choice.text)}</span>`;
       choicesHtml += `
         <div class="dev-choice-row">
           <span class="dev-choice-vis ${visible ? 'on' : 'off'}">${visible ? '✓' : '✗'}</span>
           <div class="dev-choice-body">
-            <span class="dev-choice-text">${esc(choice.text)}</span>
+            ${choiceTextHtml}
             <div class="dev-choice-meta">
               ${tagPill}
               <span class="dev-choice-next">→ ${esc(nextId)}</span>
@@ -1992,6 +2606,123 @@ function renderDevConsole(node) {
     ? persistent.completed_characters.map(c => `<span class="dev-chip completed">${esc(c)}</span>`).join('')
     : `<span style="font-size:9px;color:var(--text-dim);font-style:italic;">none</span>`;
 
+  const activeCondIdxs = new Set();
+  if (Array.isArray(node.conditional_text)) {
+    if (node.conditional_mode === 'first_match') {
+      const matchIdx = node.conditional_text.findIndex(ct => evaluate(ct.condition));
+      if (matchIdx >= 0) activeCondIdxs.add(matchIdx);
+    } else {
+      node.conditional_text.forEach((ct, idx) => { if (evaluate(ct.condition)) activeCondIdxs.add(idx); });
+    }
+  }
+
+  const techCondHtml = Array.isArray(node.conditional_text) && node.conditional_text.length
+    ? node.conditional_text.map((ct, idx) => {
+      const visible = activeCondIdxs.has(idx);
+      const cond = ct.condition ? descCond(ct.condition) : 'always';
+      return `<div class="dev-tech-row">
+        <span class="dev-choice-vis ${visible ? 'on' : 'off'}">${visible ? '✓' : '✗'}</span>
+        conditional_text[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="state-when">${esc(cond)}</span>
+      </div>`;
+    }).join('')
+    : `<div style="font-size:9px;color:var(--text-dim);font-style:italic;">none</div>`;
+
+  const activeArrivalIdx = Array.isArray(node.arrival_variants)
+    ? (() => {
+      const nonDefault = node.arrival_variants.filter(v => !v.default);
+      const match = nonDefault.find(v => evaluate(v.requires));
+      if (match) return node.arrival_variants.indexOf(match);
+      const def = node.arrival_variants.find(v => v.default === true);
+      return def ? node.arrival_variants.indexOf(def) : -1;
+    })()
+    : -1;
+  const techArrivalHtml = Array.isArray(node.arrival_variants) && node.arrival_variants.length
+    ? node.arrival_variants.map((v, idx) => {
+      const visible = idx === activeArrivalIdx;
+      const cond = v.default ? 'default fallback' : (v.requires ? descCond(v.requires) : 'always');
+      const condClass = v.default ? 'state-default' : 'state-when';
+      return `<div class="dev-tech-row">
+        <span class="dev-choice-vis ${visible ? 'on' : 'off'}">${visible ? '✓' : '✗'}</span>
+        arrival_variants[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="${condClass}">${esc(cond)}</span>
+      </div>`;
+    }).join('')
+    : `<div style="font-size:9px;color:var(--text-dim);font-style:italic;">none</div>`;
+  const techChoiceHtml = _devChoiceCache.length
+    ? _devChoiceCache.map((choice, idx) => {
+      const visible = !choice.requires || evaluate(choice.requires);
+      const cond = choice.requires ? descCond(choice.requires) : 'always';
+      return `<div class="dev-tech-row">
+        <span class="dev-choice-vis ${visible ? 'on' : 'off'}">${visible ? '✓' : '✗'}</span>
+        choice[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="state-when">${esc(cond)}</span>
+      </div>`;
+    }).join('')
+    : `<div style="font-size:9px;color:var(--text-dim);font-style:italic;">none</div>`;
+  const awardArtifactVal = node.awards_artifact || '';
+  const awardTransVal = node.awards_transcendental || '';
+  const allArtifactsForNode = Object.keys(ARTIFACT_NAMES);
+  const transOptions = ['unity', 'beauty', 'truth', 'goodness'];
+  const nodeAwardsHtml = `
+    <div class="dev-row">
+      <select class="dev-mini-select" id="dev-node-award-artifact">
+        <option value="">artifact: none</option>
+        ${allArtifactsForNode.map(a => `<option value="${esc(a)}" ${awardArtifactVal === a ? 'selected' : ''}>artifact: ${esc(ARTIFACT_NAMES[a] || a)}</option>`).join('')}
+      </select>
+      <select class="dev-mini-select" id="dev-node-award-trans">
+        <option value="">transcendental: none</option>
+        ${transOptions.map(t => `<option value="${t}" ${awardTransVal === t ? 'selected' : ''}>transcendental: ${esc(TRANSCENDENTAL_LABELS[t] || t)}</option>`).join('')}
+      </select>
+      <button class="dev-sm-btn" id="dev-node-award-save">save awards</button>
+      <span class="dev-flow-summary" id="dev-node-award-status" style="margin:0"></span>
+    </div>`;
+  const techContextHtml = `<div class="dev-flow-summary">for node ${esc(node.id)} · evaluated on current run state (tags: ${(run.tags || []).length ? esc(run.tags.join(', ')) : 'none'})</div>`;
+  const techHtml = `<div class="dev-section">
+      <div class="dev-section-label">Technical Conditions (This Node)</div>
+      ${techContextHtml}
+      <div class="dev-section-label" style="margin-top:0">Choice Visibility</div>
+      ${techChoiceHtml}
+      <div class="dev-section-label" style="margin-top:0">Conditional Text Visibility</div>
+      ${techCondHtml}
+      <div class="dev-section-label" style="margin-top:10px">Arrival Variant Visibility</div>
+      ${techArrivalHtml}
+      <div class="dev-section-label" style="margin-top:10px">Node Awards</div>
+      ${nodeAwardsHtml}
+    </div>`;
+  let flowHtml = '';
+  if (devFlowOpen) {
+    const incoming = devFlowIndex.incoming[node.id] || [];
+    const outgoing = nodeEdges(node);
+
+    const lane = nodeLaneLabel(node);
+    const depth = Math.max(0, devHistory.length - 1);
+    const rejoin = findNearestSpineRejoin(node.id, 7);
+    let branchHint = 'on spine';
+    if (!devFlowIndex.spineSet.has(node.id)) {
+      if (rejoin) {
+        const hopWord = rejoin.steps === 1 ? 'step' : 'steps';
+        branchHint = `rejoins at ${rejoin.nodeId} (${rejoin.steps} ${hopWord})`;
+      } else {
+        branchHint = 'no nearby spine rejoin';
+      }
+    }
+    const incomingStr = incoming.length
+      ? incoming.map(id => `<span class="dev-hist-node" onclick="devGoTo('${esc(id)}')">${esc(id)}</span>`).join(', ')
+      : 'none';
+    const outgoingStr = outgoing.length
+      ? outgoing.map(o => `<span>${esc(o.label)} → <span class="dev-hist-node" onclick="devGoTo('${esc(o.target)}')">${esc(o.target)}</span>${o.visible ? '' : ' · hidden'}</span>`).join('<br>')
+      : 'none';
+    const lookaheadLines = buildFlowLookahead(node.id, 2);
+    const lookaheadStr = lookaheadLines.length ? lookaheadLines.join('<br>') : 'none';
+
+    flowHtml = `
+      <div class="dev-section">
+        <div class="dev-section-label">Flow Context</div>
+        <div class="dev-flow-summary"><span class="dev-flow-pill">${esc(lane)}</span>depth from start: ${depth} · ${esc(branchHint)}</div>
+        <div class="dev-flow-row"><strong>from</strong><span>${incomingStr}</span></div>
+        <div class="dev-flow-row"><strong>to</strong><span>${outgoingStr}</span></div>
+        <div class="dev-flow-row"><strong>ahead</strong><span>${lookaheadStr}</span></div>
+      </div>`;
+  }
+
   // ── saves section ────────────────────────────────────────────────────
   const slotsHtml = ['A','B','C'].map(slot => {
     const s = saves[slot];
@@ -2011,6 +2742,8 @@ function renderDevConsole(node) {
   // ── assemble ─────────────────────────────────────────────────────────
   el.innerHTML = `<div class="dev-console">
     ${navHtml}
+    ${flowHtml}
+    ${techHtml}
     <div class="dev-section">
       <div class="dev-section-label">Choices</div>
       ${choicesHtml}
@@ -2041,69 +2774,415 @@ function renderDevConsole(node) {
   // wire up tag input enter key
   const ti = document.getElementById('dev-tag-input');
   if (ti) ti.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); devAddCustomTag(); } });
+  const awardBtn = document.getElementById('dev-node-award-save');
+  if (awardBtn) awardBtn.addEventListener('click', () => devSaveNodeAwards(node.id));
 }
 
-function openDevEditor(nodeId) {
+async function renderNodeMapModal() {
+  const modal = document.getElementById('node-map-modal');
+  const canvas = document.getElementById('node-map-canvas');
+  const inspector = document.getElementById('node-map-inspector');
+  const legend = document.getElementById('node-map-legend');
+  const charSelect = document.getElementById('node-map-char-select');
+  const closeBtn = document.getElementById('node-map-close-btn');
+  const openBtn = document.getElementById('node-map-open-editor-btn');
+  if (!modal || !canvas || !inspector || !legend || !charSelect || !closeBtn || !openBtn) return;
+  if (!devNodeMapOpen || !devMode) { modal.hidden = true; return; }
+  modal.hidden = false;
+
+  const selectedChar = devNodeMapCharacter || (run ? run.character : 'wanderer');
+  devNodeMapCharacter = selectedChar;
+
+  charSelect.innerHTML = CHAR_DEFS.map(c =>
+    `<option value="${esc(c.id)}" ${c.id === selectedChar ? 'selected' : ''}>${esc(c.display_name)}</option>`
+  ).join('');
+  charSelect.onchange = async (e) => { await devSetNodeMapCharacter(e.target.value); };
+  closeBtn.onclick = () => { devNodeMapOpen = false; modal.hidden = true; };
+
+  try {
+    const data = await getNodeMapData(selectedChar);
+    const graph = analyzeNodeMapGraph(data);
+    const nodes = data.nodes || [];
+    const byDepth = {};
+    nodes.forEach(n => {
+      const d = graph.depthById[n.id] !== undefined ? graph.depthById[n.id] : 999;
+      if (!byDepth[d]) byDepth[d] = [];
+      byDepth[d].push(n);
+    });
+    const depths = Object.keys(byDepth).map(x => parseInt(x, 10)).sort((a, b) => a - b);
+
+    // ERD-ish layered layout: depth columns with parent-influenced ordering
+    const depthOrder = {};
+    depths.forEach((depth, depthIdx) => {
+      const layer = (byDepth[depth] || []).slice();
+      if (depthIdx === 0) {
+        layer.sort((a, b) => a.id.localeCompare(b.id));
+      } else {
+        layer.sort((a, b) => {
+          const aIn = (graph.incoming[a.id] || []).map(pid => depthOrder[pid]).filter(v => v !== undefined);
+          const bIn = (graph.incoming[b.id] || []).map(pid => depthOrder[pid]).filter(v => v !== undefined);
+          const aScore = aIn.length ? (aIn.reduce((s, v) => s + v, 0) / aIn.length) : 9999;
+          const bScore = bIn.length ? (bIn.reduce((s, v) => s + v, 0) / bIn.length) : 9999;
+          if (aScore !== bScore) return aScore - bScore;
+          return a.id.localeCompare(b.id);
+        });
+      }
+      byDepth[depth] = layer;
+      layer.forEach((n, idx) => { depthOrder[n.id] = idx; });
+    });
+
+    const xGap = 300;
+    const yGap = 145;
+    const leftPad = 70;
+    const topPad = 150;
+    const nodeW = 190;
+    const nodeH = 64;
+
+    const pos = {};
+    let maxY = topPad + 80;
+    depths.forEach(depth => {
+      const list = byDepth[depth];
+      list.forEach((n, i) => {
+        const x = leftPad + depth * xGap;
+        const y = topPad + i * yGap;
+        pos[n.id] = { x, y };
+        maxY = Math.max(maxY, y + nodeH + 30);
+      });
+    });
+    const maxDepth = depths.length ? depths[depths.length - 1] : 0;
+    const width = leftPad + (maxDepth + 1) * xGap + nodeW + 80;
+    const height = Math.max(440, maxY);
+
+    const edgeList = [];
+    nodes.forEach(n => {
+      const from = n.id;
+      if (!pos[from]) return;
+      (n.choices || []).forEach((c, i) => {
+        if (!c.next || !pos[c.next]) return;
+        edgeList.push({
+          from, to: c.next, label: `choice ${i + 1}`, gated: !!c.requires, tag: c.tag || null
+        });
+      });
+      if (typeof n.next === 'string' && n.next && pos[n.next]) {
+        edgeList.push({ from, to: n.next, label: 'next', gated: false, tag: null });
+      } else if (Array.isArray(n.next)) {
+        n.next.forEach((nx, i) => {
+          if (!nx || !nx.target || !pos[nx.target]) return;
+          edgeList.push({
+            from, to: nx.target, label: `next ${i + 1}${nx.default ? ' default' : ''}`, gated: !!nx.requires, tag: null
+          });
+        });
+      }
+    });
+
+    const pairCounts = {};
+    edgeList.forEach(e => {
+      const k = `${e.from}->${e.to}`;
+      pairCounts[k] = (pairCounts[k] || 0) + 1;
+    });
+    const pairOffsets = {};
+
+    const svgEdges = edgeList.map(e => {
+      const from = pos[e.from];
+      const to = pos[e.to];
+      const key = `${e.from}->${e.to}`;
+      pairOffsets[key] = (pairOffsets[key] || 0) + 1;
+      const n = pairCounts[key];
+      const idx = pairOffsets[key];
+      const offset = (idx - (n + 1) / 2) * 14;
+      const isBackward = to.x <= from.x;
+      const dy = to.y - from.y;
+      const useVerticalPins = Math.abs(dy) > (nodeH * 0.62);
+      let x1 = from.x + nodeW;
+      let y1 = from.y + nodeH / 2 + offset;
+      let x2 = to.x;
+      let y2 = to.y + nodeH / 2 + offset;
+      let pathD = '';
+      const col = e.gated ? '#f090b0' : (e.tag ? '#e0c890' : '#7e7a74');
+      const markerId = e.gated ? 'nm-arrow-gate' : (e.tag ? 'nm-arrow-tag' : 'nm-arrow-default');
+      let mx = 0;
+      let my = 0;
+      let showLabel = true;
+      if (isBackward) {
+        // Route backward links over the top so source/target are obvious.
+        x1 = from.x + nodeW * 0.5 + offset * 0.2;
+        y1 = from.y;
+        x2 = to.x + nodeW * 0.5 - offset * 0.2;
+        y2 = to.y;
+        const lift = 70 + Math.abs(x2 - x1) * 0.12;
+        const cy = Math.min(y1, y2) - lift;
+        pathD = `M ${x1} ${y1} C ${x1} ${cy}, ${x2} ${cy}, ${x2} ${y2}`;
+        // Keep backward-edge labels near source node exit.
+        mx = x1 + 10;
+        my = y1 - 12 - Math.abs(offset) * 0.15;
+      } else {
+        if (useVerticalPins) {
+          if (dy > 0) {
+            // Flowing down: exit bottom, enter top.
+            x1 = from.x + nodeW * 0.56 + offset * 0.18;
+            y1 = from.y + nodeH;
+            x2 = to.x + nodeW * 0.44 - offset * 0.18;
+            y2 = to.y;
+          } else {
+            // Flowing up: exit top, enter bottom.
+            x1 = from.x + nodeW * 0.56 + offset * 0.18;
+            y1 = from.y;
+            x2 = to.x + nodeW * 0.44 - offset * 0.18;
+            y2 = to.y + nodeH;
+          }
+          const cy1 = y1 + (dy > 0 ? 60 : -60);
+          const cy2 = y2 - (dy > 0 ? 60 : -60);
+          pathD = `M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}`;
+        } else {
+          // Mostly horizontal: keep left/right center anchors.
+          x1 = from.x + nodeW;
+          y1 = from.y + nodeH / 2 + offset;
+          x2 = to.x;
+          y2 = to.y + nodeH / 2 + offset;
+          const cx1 = x1 + 88;
+          const cx2 = x2 - 88;
+          pathD = `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+        }
+        // Put label near curve midpoint for left/right readability.
+        mx = (x1 + x2) / 2;
+        my = (y1 + y2) / 2;
+      }
+      const labelLift = ((idx % 2) ? -8 : 8) + (useVerticalPins ? (dy > 0 ? -6 : 6) : 0);
+      const tagText = e.tag ? `tag:${e.tag}` : (e.gated ? 'gated' : 'tag:none');
+      return `
+        <path d="${pathD}" stroke="${col}" stroke-width="1.4" fill="none" opacity="0.95" marker-end="url(#${markerId})"></path>
+        ${showLabel ? `<text x="${mx}" y="${my + labelLift}" fill="${col}" font-size="10" text-anchor="middle" letter-spacing="0.04em" stroke="#07050a" stroke-width="1.4" paint-order="stroke">${esc(tagText)}</text>` : ''}
+      `;
+    }).join('');
+
+    const selectedId = devNodeMapSelectedNode || (run && run.character === selectedChar ? run.node : data.start_node);
+    const nodeButtons = nodes.map(n => {
+      if (!pos[n.id]) return '';
+      const merge = (graph.incoming[n.id] || []).length > 1;
+      const hasGate = (n.choices || []).some(c => c.requires) ||
+        (Array.isArray(n.next) && n.next.some(nx => nx && nx.requires)) ||
+        (n.conditional_text || []).some(ct => ct.condition) ||
+        (n.arrival_variants || []).some(v => v.requires);
+      const hasTag = (n.choices || []).some(c => c.tag) || (n.awards_tags || []).length > 0;
+      const canGainArtifact = !!n.awards_artifact || (n.conditional_text || []).some(ct => !!ct.awards_artifact);
+      const transType = n.awards_transcendental || null;
+      const canGainTrans = !!transType;
+      const hasHiddenOptions = (n.choices || []).some(c => !!c.requires) ||
+        (Array.isArray(n.next) && n.next.some(nx => !!(nx && nx.requires)));
+      const hasTagInteraction = (n.choices || []).some(c => !!c.tag) || (n.awards_tags || []).length > 0;
+      const current = run && run.character === selectedChar && run.node === n.id;
+      const selected = n.id === selectedId;
+      const classes = ['node-map-node', merge ? 'merge' : '', hasGate ? 'gate' : '', hasTag ? 'taggy' : '', current ? 'current' : '', selected ? 'selected' : '']
+        .filter(Boolean).join(' ');
+      const icons = [
+        canGainArtifact ? `<span class="node-map-icon artifact" title="artifact can be gained">◈</span>` : '',
+        canGainTrans ? `<span class="node-map-icon trans ${esc(transType)}" title="awards ${esc(transType)}">◆${esc((transType || '').slice(0,1).toUpperCase())}</span>` : '',
+        hasHiddenOptions ? `<span class="node-map-icon hidden" title="has hidden/gated options">✦</span>` : '',
+        hasTagInteraction ? `<span class="node-map-icon taggy" title="tag interaction (award or branch tag)">#</span>` : ''
+      ].join('');
+      return `<button class="${classes}" data-map-node="${esc(n.id)}" style="left:${pos[n.id].x}px;top:${pos[n.id].y}px;"><span class="node-map-node-id">${esc(n.id)}</span>${icons ? `<span class="node-map-icons">${icons}</span>` : ''}</button>`;
+    }).join('');
+
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.innerHTML = `
+      <svg class="node-map-svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+        <defs>
+          <marker id="nm-arrow-default" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#7e7a74"></path>
+          </marker>
+          <marker id="nm-arrow-gate" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f090b0"></path>
+          </marker>
+          <marker id="nm-arrow-tag" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#e0c890"></path>
+          </marker>
+        </defs>
+        ${svgEdges}
+      </svg>
+      ${nodeButtons}
+    `;
+
+    const selected = graph.byId[selectedId] || nodes[0];
+    devNodeMapSelectedNode = selected ? selected.id : null;
+    legend.innerHTML = `legend:
+      <span class="node-map-legend-item artifact">◈ artifact gain</span>
+      <span class="node-map-legend-item trans unity">◆U unity</span>
+      <span class="node-map-legend-item trans beauty">◆B beauty</span>
+      <span class="node-map-legend-item trans truth">◆T truth</span>
+      <span class="node-map-legend-item trans goodness">◆G goodness</span>
+      <span class="node-map-legend-item hidden">✦ hidden nav options</span>
+      <span class="node-map-legend-item taggy"># tag interaction</span>
+      <span class="node-map-legend-item merge">left blue bar=merge</span>
+      <span class="node-map-legend-item gate">right pink bar=gated</span>`;
+
+    if (selected) {
+      const inCount = (graph.incoming[selected.id] || []).length;
+      const outEdges = edgeList.filter(e => e.from === selected.id);
+      inspector.innerHTML = `
+        <div class="dev-section-label" style="margin-top:0">Node ${esc(selected.id)}</div>
+        <div class="dev-flow-summary">incoming: ${inCount} · outgoing edges: ${outEdges.length} · merges_here: ${inCount > 1 ? 'yes' : 'no'}</div>
+        <div class="dev-flow-summary">choices: ${(selected.choices || []).length} · gated: ${(selected.choices || []).filter(c => c.requires).length}</div>
+        <div class="dev-flow-summary">choice edges: ${(selected.choices || []).map((c, i) => `#${i + 1}→${c.next || '—'}${c.tag ? ` [tag:${c.tag}]` : ''}${c.requires ? ` [${descCond(c.requires)}]` : ''}`).join(' · ') || 'none'}</div>
+        <div class="dev-flow-summary">conditional_text: ${(selected.conditional_text || []).map((c, i) => `#${i}${c.condition ? ` [${descCond(c.condition)}]` : ''}`).join(' · ') || 'none'}</div>
+        <div class="dev-flow-summary">arrival_variants: ${(selected.arrival_variants || []).map((a, i) => `#${i}${a.default ? ' [default]' : ''}${a.requires ? ` [${descCond(a.requires)}]` : ''}`).join(' · ') || 'none'}</div>
+        <div class="node-map-preview">${esc(selected.text || '—')}</div>
+      `;
+      openBtn.disabled = false;
+      openBtn.onclick = async () => { await devOpenNodeInEditor(selectedChar, selected.id); };
+    } else {
+      inspector.innerHTML = `<div class="dev-flow-summary">no node selected</div>`;
+      openBtn.disabled = true;
+      openBtn.onclick = null;
+    }
+
+    canvas.querySelectorAll('[data-map-node]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        devNodeMapSelectedNode = btn.dataset.mapNode;
+        renderNodeMapModal();
+      });
+    });
+  } catch (e) {
+    canvas.innerHTML = '';
+    inspector.innerHTML = `<div class="dev-flow-summary">error loading map: ${esc(e.message || 'unknown')}</div>`;
+    openBtn.disabled = true;
+    openBtn.onclick = null;
+  }
+}
+
+function focusFirstEditable() {
+  const first = document.querySelector('[data-dev-field="text"]');
+  if (!first) return;
+  first.focus();
+  const sel = window.getSelection();
+  if (!sel) return;
+  const range = document.createRange();
+  range.selectNodeContents(first);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function getEditableText(el) {
+  return (el ? el.innerText : '').replace(/\r\n/g, '\n').trim();
+}
+
+function setInlineStatus(msg, type = '') {
+  const status = document.getElementById('dev-inline-status');
+  if (!status) return;
+  status.textContent = msg;
+  status.className = `dev-inline-status${type ? ' ' + type : ''}`;
+}
+
+async function devSaveInline(nodeId) {
   const node = nodeMap[nodeId];
   if (!node) return;
-  const panel = document.getElementById('dev-panel');
-  if (!panel) return;
 
-  panel.hidden = false;
-  panel.innerHTML = `
-    <div class="dev-panel">
-      <div class="dev-field">
-        <label>text — ${esc(nodeId)}</label>
-        <textarea id="dev-text" rows="8">${esc(node.text || '')}</textarea>
-      </div>
-      <div class="dev-field">
-        <label>oor_action</label>
-        <textarea id="dev-oor" rows="2">${esc(node.oor_action || '')}</textarea>
-      </div>
-      <div class="dev-actions">
-        <button class="dev-save-btn" id="dev-save-btn">Save</button>
-        <button class="dev-cancel-btn" id="dev-cancel-btn">Cancel</button>
-        <span class="dev-status" id="dev-status"></span>
-      </div>
-    </div>`;
+  const updates = {};
+  const textEl = document.querySelector('[data-dev-field="text"]');
+  if (textEl) updates.text = getEditableText(textEl);
 
-  document.getElementById('dev-cancel-btn').addEventListener('click', () => {
-    panel.hidden = true;
-    panel.innerHTML = '';
-  });
+  const oorEl = document.querySelector('[data-dev-field="oor_action"]');
+  if (oorEl) {
+    const raw = getEditableText(oorEl);
+    updates.oor_action = raw || null;
+  } else if (node.oor_action) {
+    updates.oor_action = null;
+  }
 
-  document.getElementById('dev-save-btn').addEventListener('click', () => devSave(nodeId));
-}
+  const choiceEdits = document.querySelectorAll('[data-dev-choice-idx]');
+  if (Array.isArray(node.choices) && choiceEdits.length > 0) {
+    const nextChoices = node.choices.map(c => ({ ...c }));
+    choiceEdits.forEach(el => {
+      const idx = parseInt(el.dataset.devChoiceIdx, 10);
+      if (Number.isNaN(idx) || !nextChoices[idx]) return;
+      nextChoices[idx].text = getEditableText(el);
+    });
+    updates.choices = nextChoices;
+  }
+  const hiddenChoiceEdits = document.querySelectorAll('[data-dev-hidden-choice-idx]');
+  if (Array.isArray(node.choices) && hiddenChoiceEdits.length > 0) {
+    const nextChoices = (updates.choices || node.choices).map(c => ({ ...c }));
+    hiddenChoiceEdits.forEach(el => {
+      const idx = parseInt(el.dataset.devHiddenChoiceIdx, 10);
+      if (Number.isNaN(idx) || !nextChoices[idx]) return;
+      nextChoices[idx].text = getEditableText(el);
+    });
+    updates.choices = nextChoices;
+  }
 
-async function devSave(nodeId) {
-  const textVal = document.getElementById('dev-text').value;
-  const oorRaw  = document.getElementById('dev-oor').value.trim();
-  const oorVal  = oorRaw || null;
-  const status  = document.getElementById('dev-status');
+  const condEdits = document.querySelectorAll('[data-dev-cond-idx]');
+  if (Array.isArray(node.conditional_text) && condEdits.length > 0) {
+    const nextConditional = node.conditional_text.map(ct => ({ ...ct }));
+    const grouped = new Map();
+    condEdits.forEach(el => {
+      const idx = parseInt(el.dataset.devCondIdx, 10);
+      if (Number.isNaN(idx) || !nextConditional[idx]) return;
+      if (!grouped.has(idx)) grouped.set(idx, []);
+      grouped.get(idx).push(getEditableText(el));
+    });
+    grouped.forEach((parts, idx) => {
+      nextConditional[idx].append = parts.filter(Boolean).join('\n\n');
+    });
+    updates.conditional_text = nextConditional;
+  }
+  const arrivalEdits = document.querySelectorAll('[data-dev-arrival-idx]');
+  if (Array.isArray(node.arrival_variants) && arrivalEdits.length > 0) {
+    const nextArrival = node.arrival_variants.map(v => ({ ...v }));
+    arrivalEdits.forEach(el => {
+      const idx = parseInt(el.dataset.devArrivalIdx, 10);
+      if (Number.isNaN(idx) || !nextArrival[idx]) return;
+      nextArrival[idx].text = getEditableText(el);
+    });
+    updates.arrival_variants = nextArrival;
+  }
 
-  status.textContent = 'saving…';
-  status.className = 'dev-status';
-
+  setInlineStatus('saving...');
   try {
     const res = await fetch('/dev/save', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ character: run.character, nodeId, updates: { text: textVal, oor_action: oorVal } })
+      body:    JSON.stringify({ character: run.character, nodeId, updates })
     });
     const data = await res.json();
-    if (data.ok) {
-      nodeMap[nodeId].text       = textVal;
-      nodeMap[nodeId].oor_action = oorVal;
-      status.textContent = 'saved ✓';
-      status.className = 'dev-status ok';
-      setTimeout(() => renderNode(), 800);
-    } else {
-      status.textContent = data.error || 'error';
-      status.className = 'dev-status err';
+    if (!data.ok) {
+      setInlineStatus(data.error || 'error', 'err');
+      return;
     }
+    Object.assign(nodeMap[nodeId], updates);
+    setInlineStatus('saved ✓', 'ok');
   } catch (e) {
-    status.textContent = 'server not running — start with: node server.js';
-    status.className = 'dev-status err';
+    setInlineStatus('server not running — start with: node server.js', 'err');
+  }
+}
+
+async function devSaveNodeAwards(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  const artEl = document.getElementById('dev-node-award-artifact');
+  const transEl = document.getElementById('dev-node-award-trans');
+  const statusEl = document.getElementById('dev-node-award-status');
+  const updates = {
+    awards_artifact: artEl && artEl.value ? artEl.value : null,
+    awards_transcendental: transEl && transEl.value ? transEl.value : null
+  };
+  if (statusEl) statusEl.textContent = 'saving...';
+  try {
+    const res = await fetch('/dev/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ character: run.character, nodeId, updates })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      if (statusEl) statusEl.textContent = data.error || 'error';
+      return;
+    }
+    Object.assign(nodeMap[nodeId], updates);
+    if (statusEl) statusEl.textContent = 'saved ✓';
+    renderNode();
+  } catch (e) {
+    if (statusEl) statusEl.textContent = 'server not running';
   }
 }
 
