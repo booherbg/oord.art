@@ -90,6 +90,51 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === 'POST' && req.url === '/dev/delete-node') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const { character, nodeId } = JSON.parse(body);
+        const targetId = (nodeId || '').trim();
+        if (!character) throw new Error('Missing character');
+        if (!targetId) throw new Error('Node id is required');
+
+        const file = path.join(ROOT, 'story_nodes', `${character}_nodes.json`);
+        const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+        if (!Array.isArray(data.nodes)) data.nodes = [];
+        const idx = data.nodes.findIndex(n => n && n.id === targetId);
+        if (idx < 0) throw new Error(`Node not found: ${targetId}`);
+        if (data.start_node === targetId) {
+          throw new Error('Cannot delete start_node');
+        }
+
+        const incomingFrom = [];
+        data.nodes.forEach(n => {
+          if (!n || !n.id || n.id === targetId) return;
+          const fromId = n.id;
+          const hitsTarget = (n.choices || []).some(c => c && c.next === targetId) ||
+            (typeof n.next === 'string' && n.next === targetId) ||
+            (Array.isArray(n.next) && n.next.some(nx => nx && nx.target === targetId));
+          if (hitsTarget) incomingFrom.push(fromId);
+        });
+        if (incomingFrom.length > 0) {
+          throw new Error(`Cannot delete node with incoming links from: ${incomingFrom.join(', ')}`);
+        }
+
+        data.nodes.splice(idx, 1);
+        fs.writeFileSync(file, JSON.stringify(data, null, 2));
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true, nodeId: targetId, start_node: data.start_node }));
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, error: e.message }));
+      }
+    });
+    return;
+  }
+
   // ── static file serving ────────────────────────
   const url  = req.url.split('?')[0];
   const file = path.normalize(path.join(ROOT, url === '/' ? 'index.html' : url));

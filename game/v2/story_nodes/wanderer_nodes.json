@@ -337,7 +337,7 @@
         },
         {
           "text": "This is getting weird. You've seen enough.",
-          "next": "w_exit_001",
+          "next": "w_exit_002",
           "tag": "retreating",
           "arrival": null
         }
@@ -417,29 +417,6 @@
       "terminal": false,
       "outcome": null,
       "subtitle": "INSIDE THE DANCE CIRCLE"
-    },
-    {
-      "id": "w_010b",
-      "text": "The arrow moves on. The circle continues without you.\n\nSomeone else steps in. The crowd watches them — the same weight of attention it aimed at you a moment ago, transferred, precise. You are standing in the ring of bodies in the space where the wanting used to be. The person in the circle is dancing and the crowd is with them and the room has moved on the way a current moves past a stone that chose to stay on the bank.\n\nThe cold begins at the back of your neck.",
-      "arrival_variants": null,
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "retreats"
-          },
-          "append": "You've been cold before tonight. At the edge, at the bar, in the alley. It keeps finding you."
-        }
-      ],
-      "oor_action": "DJ OOR does not note your refusal. DJ OOR does not note anything about you individually.",
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [],
-      "next": "w_011",
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "(DELETE - DIDNT DANCE IN CIRCLE)"
     },
     {
       "id": "w_011",
@@ -558,7 +535,7 @@
       "next": null,
       "terminal": true,
       "outcome": "harvest",
-      "subtitle": null
+      "subtitle": "THE EPILOGUE"
     },
     {
       "id": "w_exit_001",
@@ -590,7 +567,7 @@
       "awards_artifact": null,
       "awards_tags": [],
       "choices": [],
-      "next": "w_exit_002",
+      "next": null,
       "terminal": false,
       "outcome": null,
       "subtitle": "THE EXIT"
@@ -613,7 +590,8 @@
       "choices": [],
       "next": null,
       "terminal": true,
-      "outcome": "escape"
+      "outcome": "escape",
+      "subtitle": "THE DRIVE HOME"
     },
     {
       "id": "W_003b",

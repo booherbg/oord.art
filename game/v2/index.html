@@ -1335,7 +1335,7 @@
     .node-map-node {
       position: absolute;
       width: 190px;
-      min-height: 64px;
+      min-height: 82px;
       border: 1px solid rgba(255,255,255,0.34);
       border-radius: 2px;
       background: rgba(12, 9, 18, 0.98);
@@ -1358,7 +1358,20 @@
 
     .node-map-node-id {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+    }
+
+    .node-map-node-subtitle {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 10px;
+      line-height: 1.25;
+      letter-spacing: 0.03em;
+      text-transform: none;
+      color: #cbbfb3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .node-map-icons {
@@ -1535,6 +1548,7 @@
       <select class="dev-mini-select" id="node-map-char-select"></select>
       <button class="dev-sm-btn" id="node-map-add-node-btn">+ new node</button>
       <button class="dev-sm-btn" id="node-map-open-editor-btn">open in editor</button>
+      <button class="dev-sm-btn" id="node-map-delete-node-btn">delete node</button>
       <button class="dev-sm-btn" id="node-map-close-btn">close</button>
     </div>
     <div class="dev-flow-summary" id="node-map-legend"></div>
@@ -1963,12 +1977,15 @@ function renderNode() {
   }
 
   // oor action
-  if (nodeOorValue) {
-    if (devMode) {
+  if (devMode) {
+    if (nodeOorValue) {
       html += `<div class="oor-action dev-inline-editable" contenteditable="true" data-dev-field="oor_action">${esc(nodeOorValue)}</div>`;
     } else {
-      html += `<div class="oor-action">${esc(nodeOorValue)}</div>`;
+      html += `<div class="dev-inline-note">oor text · <span class="state-off">none</span></div>`;
+      html += `<button class="dev-sm-btn" id="dev-add-oor-btn">+ add oor text</button>`;
     }
+  } else if (nodeOorValue) {
+    html += `<div class="oor-action">${esc(nodeOorValue)}</div>`;
   }
 
   // transcendental award flash
@@ -2075,6 +2092,13 @@ function renderNode() {
   if (devMode) {
     const saveBtn = document.getElementById('dev-save-btn');
     if (saveBtn) saveBtn.addEventListener('click', () => devSaveInline(node.id));
+    const addOorBtn = document.getElementById('dev-add-oor-btn');
+    if (addOorBtn) {
+      addOorBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        devAddOorAction(node.id);
+      });
+    }
     const arrivalEditor = document.getElementById('dev-arrival-editor');
     if (arrivalEditor) {
       arrivalEditor.addEventListener('click', (e) => {
@@ -2685,6 +2709,45 @@ async function devCreateNodeFromMap(charId) {
   }
 
   devNodeMapSelectedNode = nodeId;
+  await renderNodeMapModal();
+}
+
+async function devDeleteNodeFromMap(charId, nodeId) {
+  if (!charId || !nodeId) return;
+  const ok = window.confirm(`Delete node "${nodeId}"? This removes it from JSON.`);
+  if (!ok) return;
+
+  try {
+    const res = await fetch('/dev/delete-node', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ character: charId, nodeId })
+    });
+    const result = await res.json();
+    if (!result.ok) {
+      alert(result.error || 'Could not delete node');
+      return;
+    }
+  } catch (e) {
+    alert('server not running — start with: node server.js');
+    return;
+  }
+
+  const data = devNodeMapCache[charId];
+  if (data && Array.isArray(data.nodes)) {
+    data.nodes = data.nodes.filter(n => n && n.id !== nodeId);
+  }
+  if (charMeta && charMeta.character === charId) {
+    if (data) charMeta = data;
+    nodeMap = {};
+    (charMeta.nodes || []).forEach(n => { nodeMap[n.id] = n; });
+    buildDevFlowIndex();
+    if (run && run.character === charId && run.node === nodeId) {
+      run.node = charMeta.start_node || ((charMeta.nodes && charMeta.nodes[0]) ? charMeta.nodes[0].id : run.node);
+      renderNode();
+    }
+  }
+  devNodeMapSelectedNode = null;
   await renderNodeMapModal();
 }
 
@@ -3360,7 +3423,8 @@ async function renderNodeMapModal() {
   const addNodeBtn = document.getElementById('node-map-add-node-btn');
   const closeBtn = document.getElementById('node-map-close-btn');
   const openBtn = document.getElementById('node-map-open-editor-btn');
-  if (!modal || !canvas || !inspector || !legend || !charSelect || !addNodeBtn || !closeBtn || !openBtn) return;
+  const deleteBtn = document.getElementById('node-map-delete-node-btn');
+  if (!modal || !canvas || !inspector || !legend || !charSelect || !addNodeBtn || !closeBtn || !openBtn || !deleteBtn) return;
   if (!devNodeMapOpen || !devMode) { modal.hidden = true; return; }
   modal.hidden = false;
 
@@ -3410,11 +3474,11 @@ async function renderNodeMapModal() {
     });
 
     const xGap = 300;
-    const yGap = 145;
+    const yGap = 160;
     const leftPad = 70;
     const topPad = 150;
     const nodeW = 190;
-    const nodeH = 64;
+    const nodeH = 82;
 
     const pos = {};
     let maxY = topPad + 80;
@@ -3558,7 +3622,12 @@ async function renderNodeMapModal() {
         hasHiddenOptions ? `<span class="node-map-icon hidden" title="has hidden/gated options">✦</span>` : '',
         hasTagInteraction ? `<span class="node-map-icon taggy" title="tag interaction (award or branch tag)">#</span>` : ''
       ].join('');
-      return `<button class="${classes}" data-map-node="${esc(n.id)}" style="left:${pos[n.id].x}px;top:${pos[n.id].y}px;"><span class="node-map-node-id">${esc(n.id)}</span>${icons ? `<span class="node-map-icons">${icons}</span>` : ''}</button>`;
+      const subtitle = (n.subtitle || '').trim();
+      const subtitleShort = subtitle.length > 42 ? subtitle.slice(0, 42) + '…' : subtitle;
+      const subtitleHtml = subtitle
+        ? `<span class="node-map-node-subtitle" title="${esc(subtitle)}">${esc(subtitleShort)}</span>`
+        : '';
+      return `<button class="${classes}" data-map-node="${esc(n.id)}" style="left:${pos[n.id].x}px;top:${pos[n.id].y}px;"><span class="node-map-node-id">${esc(n.id)}</span>${subtitleHtml}${icons ? `<span class="node-map-icons">${icons}</span>` : ''}</button>`;
     }).join('');
 
     canvas.style.width = `${width}px`;
@@ -3606,14 +3675,20 @@ async function renderNodeMapModal() {
         <div class="dev-flow-summary">choice edges: ${(selected.choices || []).map((c, i) => `#${i + 1}→${c.next || '—'}${c.tag ? ` [tag:${c.tag}]` : ''}${c.requires ? ` [${descCond(c.requires)}]` : ''}`).join(' · ') || 'none'}</div>
         <div class="dev-flow-summary">conditional_text: ${(selected.conditional_text || []).map((c, i) => `#${i}${c.condition ? ` [${descCond(c.condition)}]` : ''}`).join(' · ') || 'none'}</div>
         <div class="dev-flow-summary">arrival_variants: ${(selected.arrival_variants || []).map((a, i) => `#${i}${a.default ? ' [default]' : ''}${a.requires ? ` [${descCond(a.requires)}]` : ''}`).join(' · ') || 'none'}</div>
+        <div class="dev-flow-summary">delete: ${selected.id === data.start_node ? 'blocked (start node)' : 'allowed if no incoming links from other nodes'}</div>
         <div class="node-map-preview">${esc(selected.text || '—')}</div>
       `;
       openBtn.disabled = false;
       openBtn.onclick = async () => { await devOpenNodeInEditor(selectedChar, selected.id); };
+      const canDelete = selected.id !== data.start_node;
+      deleteBtn.disabled = !canDelete;
+      deleteBtn.onclick = canDelete ? (async () => { await devDeleteNodeFromMap(selectedChar, selected.id); }) : null;
     } else {
       inspector.innerHTML = `<div class="dev-flow-summary">no node selected</div>`;
       openBtn.disabled = true;
       openBtn.onclick = null;
+      deleteBtn.disabled = true;
+      deleteBtn.onclick = null;
     }
 
     canvas.querySelectorAll('[data-map-node]').forEach(btn => {
@@ -3627,6 +3702,8 @@ async function renderNodeMapModal() {
     inspector.innerHTML = `<div class="dev-flow-summary">error loading map: ${esc(e.message || 'unknown')}</div>`;
     openBtn.disabled = true;
     openBtn.onclick = null;
+    deleteBtn.disabled = true;
+    deleteBtn.onclick = null;
   }
 }
 
@@ -3645,6 +3722,27 @@ function focusFirstEditable() {
 
 function getEditableText(el) {
   return (el ? el.innerText : '').replace(/\r\n/g, '\n').trim();
+}
+
+function devAddOorAction(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  devCaptureMainDraft(nodeId);
+  node.oor_action = '';
+  devSetNodeDraftField(nodeId, 'oor_action', '');
+  renderNode();
+  setTimeout(() => {
+    const oorEl = document.querySelector('[data-dev-field="oor_action"]');
+    if (!oorEl) return;
+    oorEl.focus();
+    const sel = window.getSelection();
+    if (!sel) return;
+    const range = document.createRange();
+    range.selectNodeContents(oorEl);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }, 0);
 }
 
 function devAddChoice(nodeId) {
