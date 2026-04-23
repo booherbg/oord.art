@@ -50,6 +50,46 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === 'POST' && req.url === '/dev/create-node') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const { character, node } = JSON.parse(body);
+        if (!character) throw new Error('Missing character');
+        if (!node || typeof node !== 'object') throw new Error('Missing node payload');
+        const nodeId = (node.id || '').trim();
+        if (!nodeId) throw new Error('Node id is required');
+
+        const file = path.join(ROOT, 'story_nodes', `${character}_nodes.json`);
+        const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+        if (!Array.isArray(data.nodes)) data.nodes = [];
+        if (data.nodes.some(n => n && n.id === nodeId)) {
+          throw new Error(`Node already exists: ${nodeId}`);
+        }
+
+        const newNode = {
+          id: nodeId,
+          subtitle: node.subtitle || '',
+          text: node.text || '',
+          choices: Array.isArray(node.choices) ? node.choices : [],
+          conditional_text: Array.isArray(node.conditional_text) ? node.conditional_text : [],
+          arrival_variants: Array.isArray(node.arrival_variants) ? node.arrival_variants : []
+        };
+        data.nodes.push(newNode);
+        if (!data.start_node) data.start_node = nodeId;
+        fs.writeFileSync(file, JSON.stringify(data, null, 2));
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true, node: newNode, start_node: data.start_node }));
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, error: e.message }));
+      }
+    });
+    return;
+  }
+
   // ── static file serving ────────────────────────
   const url  = req.url.split('?')[0];
   const file = path.normalize(path.join(ROOT, url === '/' ? 'index.html' : url));

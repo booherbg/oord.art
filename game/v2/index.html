@@ -318,12 +318,24 @@
     }
 
     /* ─── BODY TEXT ───────────────────────────────────── */
+    .node-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+      opacity: 0.98;
+      font-weight: 700;
+    }
+
     .node-text {
       margin-top: 4px;
     }
 
     .node-text p {
       margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.78;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
     }
@@ -408,6 +420,79 @@
       background: rgba(232, 96, 16, 0.06);
       border-color: var(--orange);
       color: var(--text-bright);
+    }
+
+    .dev-choice-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .dev-choice-edit-row {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 10px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .dev-choice-edit-text {
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .dev-choice-edit-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .dev-choice-edit-meta label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 3px;
+    }
+
+    .dev-choice-edit-meta input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 2px;
+      color: var(--text-bright);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      padding: 6px 8px;
+    }
+
+    .dev-choice-edit-meta select {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 2px;
+      color: var(--text-bright);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      padding: 6px 8px;
+    }
+
+    .dev-choice-edit-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .dev-arrival-row {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 8px;
+      margin-bottom: 8px;
+      background: rgba(255,255,255,0.02);
     }
 
     /* ─── AUTO-ADVANCE ────────────────────────────────── */
@@ -748,6 +833,15 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       background: rgba(232, 96, 16, 0.08);
+    }
+
+    .dev-badge-btn {
+      font-family: 'DM Mono', monospace;
+      cursor: pointer;
+    }
+
+    .dev-badge-btn:hover {
+      background: rgba(232, 96, 16, 0.16);
     }
 
     /* ─── DEV CONSOLE ────────────────────────────────── */
@@ -1429,7 +1523,7 @@
     </div>
     <div class="state-right">
       <div class="state-tags" id="tag-display"></div>
-      <span class="dev-badge" id="dev-badge" hidden>DEV</span>
+      <button class="dev-badge dev-badge-btn" id="dev-badge" onclick="toggleDevMode()" hidden>DEV</button>
       <button class="restart-btn" id="dev-map-toggle" onclick="devToggleNodeMap()" hidden>Node Map</button>
       <button class="restart-btn" id="restart-btn" onclick="restartCharacter()">Restart</button>
     </div>
@@ -1439,6 +1533,7 @@
     <div class="node-map-toolbar">
       <span class="dev-badge">Node Map</span>
       <select class="dev-mini-select" id="node-map-char-select"></select>
+      <button class="dev-sm-btn" id="node-map-add-node-btn">+ new node</button>
       <button class="dev-sm-btn" id="node-map-open-editor-btn">open in editor</button>
       <button class="dev-sm-btn" id="node-map-close-btn">close</button>
     </div>
@@ -1817,6 +1912,10 @@ function renderNode() {
   const isDissolution = node.terminal && node.outcome === 'dissolution';
 
   // ── build HTML ──────────────────────────────────────────
+  const nodeDraft = devGetNodeDraft(node.id);
+  const nodeTextValue = (nodeDraft && nodeDraft.text !== undefined) ? nodeDraft.text : (node.text || '');
+  const nodeSubtitleValue = (nodeDraft && nodeDraft.subtitle !== undefined) ? nodeDraft.subtitle : (node.subtitle || '');
+  const nodeOorValue = (nodeDraft && nodeDraft.oor_action !== undefined) ? nodeDraft.oor_action : (node.oor_action || '');
   let html = `<div class="node-card${isDissolution ? ' dissolving-card' : ''}" data-node-id="${esc(node.id)}">`;
   html += `<div class="node-id${devMode ? ' dev-strong' : ''}">${esc(node.id)}</div>`;
   if (devMode) {
@@ -1827,23 +1926,7 @@ function renderNode() {
   }
 
   if (devMode) {
-    if (pendingArrivalText) {
-      html += `<div class="dev-inline-note">arrival · <span class="state-on">shown</span> · <span class="state-runtime">runtime source</span>: pending choice arrival</div>`;
-      html += `<div class="arrival">${esc(pendingArrivalText)}</div>`;
-    }
-    if (Array.isArray(node.arrival_variants) && node.arrival_variants.length > 0) {
-      node.arrival_variants.forEach((v, idx) => {
-        const visible = idx === activeArrivalIdx;
-        const condLabel = v.default ? 'default' : (v.requires ? descCond(v.requires) : 'always');
-        const stateClass = visible ? 'state-on' : 'state-off';
-        const condClass = v.default ? 'state-default' : 'state-when';
-        html += `<div class="dev-inline-note">arrival_variants[${idx}] · <span class="${stateClass}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="${condClass}">${esc(condLabel)}</span></div>`;
-        html += `<div class="arrival dev-inline-editable" contenteditable="true" data-dev-arrival-idx="${idx}">${esc(v.text || '')}</div>`;
-      });
-    } else if (arrivalText && !pendingArrivalText) {
-      html += `<div class="dev-inline-note">arrival · <span class="state-on">shown</span></div>`;
-      html += `<div class="arrival">${esc(arrivalText)}</div>`;
-    }
+    html += `<div id="dev-arrival-editor">${devArrivalRowsHtml(node, pendingArrivalText)}</div>`;
   } else if (arrivalText) {
     html += `<div class="arrival">${esc(arrivalText)}</div>`;
   }
@@ -1851,9 +1934,15 @@ function renderNode() {
   // base text paragraphs — staggered animation
   html += '<div class="node-text">';
   if (devMode) {
-    html += `<div class="node-text-editable dev-inline-editable" contenteditable="true" data-dev-field="text">${esc(node.text || '')}</div>`;
+    html += `<div class="dev-inline-note">subtitle</div>`;
+    html += `<div class="node-subtitle dev-inline-editable" contenteditable="true" data-dev-field="subtitle">${esc(nodeSubtitleValue || '')}</div>`;
+  } else if (nodeSubtitleValue) {
+    html += `<div class="node-subtitle">${esc(nodeSubtitleValue)}</div>`;
+  }
+  if (devMode) {
+    html += `<div class="node-text-editable dev-inline-editable" contenteditable="true" data-dev-field="text">${esc(nodeTextValue)}</div>`;
   } else {
-    const paragraphs = (node.text || '').split('\n\n').filter(p => p.trim());
+    const paragraphs = nodeTextValue.split('\n\n').filter(p => p.trim());
     paragraphs.forEach((p, i) => {
       const delay = (0.15 + i * 0.1).toFixed(2);
       html += `<p style="animation-delay:${delay}s">${esc(p)}</p>`;
@@ -1862,20 +1951,8 @@ function renderNode() {
   html += '</div>';
 
   // conditional text blocks
-  if (devMode && Array.isArray(node.conditional_text) && node.conditional_text.length > 0) {
-    const activeCondIdxs = new Set();
-    if (node.conditional_mode === 'first_match') {
-      const matchIdx = node.conditional_text.findIndex(ct => evaluate(ct.condition));
-      if (matchIdx >= 0) activeCondIdxs.add(matchIdx);
-    } else {
-      node.conditional_text.forEach((ct, idx) => { if (evaluate(ct.condition)) activeCondIdxs.add(idx); });
-    }
-    node.conditional_text.forEach((ct, idx) => {
-      const visible = activeCondIdxs.has(idx);
-      const condLabel = ct.condition ? descCond(ct.condition) : 'always';
-      html += `<div class="dev-inline-note">conditional_text[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="state-when">${esc(condLabel)}</span></div>`;
-      html += `<div class="conditional dev-inline-editable" contenteditable="true" data-dev-cond-idx="${idx}">${esc(ct.append || '')}</div>`;
-    });
+  if (devMode) {
+    html += `<div id="dev-conditional-editor">${devConditionalRowsHtml(node)}</div>`;
   } else {
     conditionals.forEach(ct => {
       const cParagraphs = (ct.append || '').split('\n\n').filter(p => p.trim());
@@ -1886,11 +1963,11 @@ function renderNode() {
   }
 
   // oor action
-  if (node.oor_action) {
+  if (nodeOorValue) {
     if (devMode) {
-      html += `<div class="oor-action dev-inline-editable" contenteditable="true" data-dev-field="oor_action">${esc(node.oor_action)}</div>`;
+      html += `<div class="oor-action dev-inline-editable" contenteditable="true" data-dev-field="oor_action">${esc(nodeOorValue)}</div>`;
     } else {
-      html += `<div class="oor-action">${esc(node.oor_action)}</div>`;
+      html += `<div class="oor-action">${esc(nodeOorValue)}</div>`;
     }
   }
 
@@ -1902,16 +1979,16 @@ function renderNode() {
 
   // choices or auto-advance (button injected by timer below)
   if (!node.terminal) {
-    if (isAutoAdvance && nextId) {
+    if (devMode) {
+      html += '<div class="choices dev-choice-editor" id="dev-choice-editor">';
+      html += devChoiceRowsHtml(node);
+      html += '</div>';
+    } else if (isAutoAdvance && nextId) {
       html += `<div class="auto-advance-wrap" id="advance-wrap"></div>`;
     } else if (visibleChoices.length > 0) {
       html += '<div class="choices">';
-      visibleChoices.forEach(({ choice, index }, i) => {
-        if (devMode) {
-          html += `<button class="choice-btn" data-idx="${i}"><span class="dev-inline-editable" contenteditable="true" data-dev-choice-idx="${index}">${esc(choice.text)}</span></button>`;
-        } else {
-          html += `<button class="choice-btn" data-idx="${i}">${esc(choice.text)}</button>`;
-        }
+      visibleChoices.forEach(({ choice }, i) => {
+        html += `<button class="choice-btn" data-idx="${i}">${esc(choice.text)}</button>`;
       });
       html += '</div>';
     }
@@ -1998,6 +2075,74 @@ function renderNode() {
   if (devMode) {
     const saveBtn = document.getElementById('dev-save-btn');
     if (saveBtn) saveBtn.addEventListener('click', () => devSaveInline(node.id));
+    const arrivalEditor = document.getElementById('dev-arrival-editor');
+    if (arrivalEditor) {
+      arrivalEditor.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (target.id === 'dev-add-arrival-btn') {
+          e.stopPropagation();
+          devAddArrivalVariant(node.id);
+          return;
+        }
+        if (target.dataset.devDeleteArrivalIdx !== undefined) {
+          e.stopPropagation();
+          const idx = parseInt(target.dataset.devDeleteArrivalIdx, 10);
+          if (!Number.isNaN(idx)) devDeleteArrivalVariant(node.id, idx);
+        }
+      });
+    }
+    const choiceEditor = document.getElementById('dev-choice-editor');
+    if (choiceEditor) {
+      choiceEditor.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (target.id === 'dev-add-choice-btn') {
+          e.stopPropagation();
+          devAddChoice(node.id);
+          return;
+        }
+        if (target.id === 'dev-add-continue-choice-btn') {
+          e.stopPropagation();
+          devAddContinueChoice(node.id);
+          return;
+        }
+        if (target.id === 'dev-save-inline-mid-btn') {
+          e.stopPropagation();
+          devSaveInline(node.id);
+          return;
+        }
+        if (target.dataset.devFollowChoiceIdx !== undefined) {
+          e.stopPropagation();
+          const idx = parseInt(target.dataset.devFollowChoiceIdx, 10);
+          if (!Number.isNaN(idx)) devFollowChoiceFromEditor(node.id, idx);
+          return;
+        }
+        if (target.dataset.devDeleteChoiceIdx !== undefined) {
+          e.stopPropagation();
+          const idx = parseInt(target.dataset.devDeleteChoiceIdx, 10);
+          if (!Number.isNaN(idx)) devDeleteChoice(node.id, idx);
+        }
+      });
+    }
+    const conditionalEditor = document.getElementById('dev-conditional-editor');
+    if (conditionalEditor) {
+      conditionalEditor.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (target.id === 'dev-add-conditional-btn') {
+          e.stopPropagation();
+          devAddConditionalText(node.id);
+          return;
+        }
+        if (target.dataset.devDeleteCondIdx !== undefined) {
+          e.stopPropagation();
+          const idx = parseInt(target.dataset.devDeleteCondIdx, 10);
+          if (!Number.isNaN(idx)) devDeleteConditionalText(node.id, idx);
+        }
+      });
+    }
+    devBindRealtimeDraft(node.id);
   }
 
   // choice buttons
@@ -2006,7 +2151,7 @@ function renderNode() {
     btn.addEventListener('click', () => makeChoice(visibleChoices[idx]?.choice));
   });
   if (devMode) {
-    gameEl.querySelectorAll('[data-dev-choice-idx]').forEach(el => {
+    gameEl.querySelectorAll('[data-dev-choice-text-idx]').forEach(el => {
       ['mousedown', 'click', 'keydown'].forEach(evt =>
         el.addEventListener(evt, ev => ev.stopPropagation())
       );
@@ -2102,6 +2247,340 @@ let devNodeMapCharacter = null;
 let devNodeMapSelectedNode = null;
 const devNodeMapCache = {};
 const DEV_SAVES_KEY = 'pilgrims_path_dev_saves';
+const DEV_NODE_DRAFTS_KEY = 'pilgrims_path_dev_node_drafts';
+
+function devDraftNodeKey(nodeId) {
+  return `${run ? run.character : 'unknown'}::${nodeId}`;
+}
+
+function devLoadDrafts() {
+  try { return JSON.parse(localStorage.getItem(DEV_NODE_DRAFTS_KEY) || '{}'); } catch (e) { return {}; }
+}
+
+function devSaveDrafts(drafts) {
+  localStorage.setItem(DEV_NODE_DRAFTS_KEY, JSON.stringify(drafts));
+}
+
+function devGetNodeDraft(nodeId) {
+  const drafts = devLoadDrafts();
+  return drafts[devDraftNodeKey(nodeId)] || null;
+}
+
+function devSetNodeDraftField(nodeId, field, value) {
+  const drafts = devLoadDrafts();
+  const key = devDraftNodeKey(nodeId);
+  if (!drafts[key]) drafts[key] = {};
+  drafts[key][field] = value;
+  devSaveDrafts(drafts);
+}
+
+function devClearNodeDraft(nodeId) {
+  const drafts = devLoadDrafts();
+  delete drafts[devDraftNodeKey(nodeId)];
+  devSaveDrafts(drafts);
+}
+
+function devCaptureMainDraft(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  const textEl = document.querySelector('[data-dev-field="text"]');
+  const subtitleEl = document.querySelector('[data-dev-field="subtitle"]');
+  const oorEl = document.querySelector('[data-dev-field="oor_action"]');
+  if (textEl) {
+    const v = getEditableText(textEl);
+    devSetNodeDraftField(nodeId, 'text', v);
+    node.text = v;
+  }
+  if (subtitleEl) {
+    const v = getEditableText(subtitleEl);
+    devSetNodeDraftField(nodeId, 'subtitle', v);
+    node.subtitle = v || null;
+  }
+  if (oorEl) {
+    const v = getEditableText(oorEl);
+    devSetNodeDraftField(nodeId, 'oor_action', v);
+    node.oor_action = v || null;
+  }
+}
+
+function devCaptureChoiceEditsToNode(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.choices)) return;
+  const choiceEdits = document.querySelectorAll('[data-dev-choice-text-idx]');
+  if (!choiceEdits.length) return;
+  const nextChoices = node.choices.map(c => ({ ...c }));
+  choiceEdits.forEach(el => {
+    const idx = parseInt(el.dataset.devChoiceTextIdx, 10);
+    if (Number.isNaN(idx) || !nextChoices[idx]) return;
+    const nextEl = document.querySelector(`[data-dev-choice-next-idx="${idx}"]`);
+    const tagEl = document.querySelector(`[data-dev-choice-tag-idx="${idx}"]`);
+    const reqTagEl = document.querySelector(`[data-dev-choice-req-tag-idx="${idx}"]`);
+    const reqArtifactEl = document.querySelector(`[data-dev-choice-req-artifact-idx="${idx}"]`);
+    nextChoices[idx].text = getEditableText(el);
+    nextChoices[idx].next = nextEl ? nextEl.value.trim() : (nextChoices[idx].next || '');
+    const tagVal = tagEl ? tagEl.value.trim() : '';
+    if (tagVal) nextChoices[idx].tag = tagVal; else delete nextChoices[idx].tag;
+    const existingReq = (nextChoices[idx].requires && typeof nextChoices[idx].requires === 'object')
+      ? { ...nextChoices[idx].requires }
+      : {};
+    delete existingReq.has_tag;
+    delete existingReq.has_artifact;
+    const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+    const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+    if (reqTagVal) existingReq.has_tag = reqTagVal;
+    if (reqArtifactVal) existingReq.has_artifact = reqArtifactVal;
+    if (Object.keys(existingReq).length > 0) nextChoices[idx].requires = existingReq;
+    else delete nextChoices[idx].requires;
+  });
+  node.choices = nextChoices;
+}
+
+function devCaptureArrivalEditsToNode(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.arrival_variants)) return;
+  const arrivalEdits = document.querySelectorAll('[data-dev-arrival-idx]');
+  if (!arrivalEdits.length) return;
+  const nextArrival = node.arrival_variants.map(v => ({ ...v }));
+  arrivalEdits.forEach(el => {
+    const idx = parseInt(el.dataset.devArrivalIdx, 10);
+    if (Number.isNaN(idx) || !nextArrival[idx]) return;
+    nextArrival[idx].text = getEditableText(el);
+    const reqTagEl = document.querySelector(`[data-dev-arrival-req-tag-idx="${idx}"]`);
+    const reqArtifactEl = document.querySelector(`[data-dev-arrival-req-artifact-idx="${idx}"]`);
+    const defaultEl = document.querySelector(`[data-dev-arrival-default-idx="${idx}"]`);
+    const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+    const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+    const req = {};
+    if (reqTagVal) req.has_tag = reqTagVal;
+    if (reqArtifactVal) req.has_artifact = reqArtifactVal;
+    if (Object.keys(req).length > 0) nextArrival[idx].requires = req;
+    else delete nextArrival[idx].requires;
+    if (defaultEl) nextArrival[idx].default = !!defaultEl.checked;
+  });
+  const defaultIdxs = [];
+  nextArrival.forEach((v, i) => { if (v.default) defaultIdxs.push(i); });
+  if (defaultIdxs.length > 1) defaultIdxs.slice(1).forEach(i => { nextArrival[i].default = false; });
+  node.arrival_variants = nextArrival;
+}
+
+function devCaptureConditionalEditsToNode(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.conditional_text)) return;
+  const condEdits = document.querySelectorAll('[data-dev-cond-idx]');
+  if (!condEdits.length) return;
+  const nextConditional = node.conditional_text.map(ct => ({ ...ct }));
+  const grouped = new Map();
+  condEdits.forEach(el => {
+    const idx = parseInt(el.dataset.devCondIdx, 10);
+    if (Number.isNaN(idx) || !nextConditional[idx]) return;
+    if (!grouped.has(idx)) grouped.set(idx, []);
+    grouped.get(idx).push(getEditableText(el));
+  });
+  grouped.forEach((parts, idx) => {
+    nextConditional[idx].append = parts.filter(Boolean).join('\n\n');
+    const reqTagEl = document.querySelector(`[data-dev-cond-req-tag-idx="${idx}"]`);
+    const reqArtifactEl = document.querySelector(`[data-dev-cond-req-artifact-idx="${idx}"]`);
+    const awardArtifactEl = document.querySelector(`[data-dev-cond-award-artifact-idx="${idx}"]`);
+    const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+    const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+    const awardArtifactVal = awardArtifactEl ? awardArtifactEl.value.trim() : '';
+    const cond = (nextConditional[idx].condition && typeof nextConditional[idx].condition === 'object')
+      ? { ...nextConditional[idx].condition }
+      : {};
+    delete cond.has_tag;
+    delete cond.has_artifact;
+    if (reqTagVal) cond.has_tag = reqTagVal;
+    if (reqArtifactVal) cond.has_artifact = reqArtifactVal;
+    if (Object.keys(cond).length > 0) nextConditional[idx].condition = cond;
+    else delete nextConditional[idx].condition;
+    if (awardArtifactVal) nextConditional[idx].awards_artifact = awardArtifactVal;
+    else delete nextConditional[idx].awards_artifact;
+  });
+  node.conditional_text = nextConditional;
+}
+
+function devChoiceRowsHtml(node) {
+  const allChoices = node.choices || [];
+  const artifactOptions = Object.keys(ARTIFACT_NAMES)
+    .sort((a, b) => a.localeCompare(b))
+    .map(a => ({ id: a, label: ARTIFACT_NAMES[a] || a }));
+  const nextNodeOptions = Object.values(nodeMap)
+    .map(n => {
+      const subtitle = (n.subtitle || '').trim();
+      const subShort = subtitle.length > 42 ? subtitle.slice(0, 42) + '…' : subtitle;
+      const label = subtitle ? `${n.id} — ${subShort}` : n.id;
+      return { id: n.id, label };
+    })
+    .sort((a, b) => a.id.localeCompare(b.id));
+  let html = '';
+  allChoices.forEach((choice, idx) => {
+    const visible = !choice.requires || evaluate(choice.requires);
+    const reqTag = choice.requires && choice.requires.has_tag ? choice.requires.has_tag : '';
+    const reqArtifact = choice.requires && choice.requires.has_artifact ? choice.requires.has_artifact : '';
+    const reqArtifactOptionsHtml =
+      `<option value="">(none)</option>` +
+      artifactOptions.map(o => `<option value="${esc(o.id)}" ${reqArtifact === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('');
+    const nextOptionsHtml =
+      `<option value="">(select node)</option>` +
+      nextNodeOptions.map(o => `<option value="${esc(o.id)}" ${choice.next === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('');
+    html += `<div class="dev-choice-edit-row" data-dev-choice-row="${idx}">
+      <div class="dev-inline-note">choice[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · leads to: <span class="state-when">${esc(choice.next || '—')}</span></div>
+      <div class="dev-choice-edit-text dev-inline-editable" contenteditable="true" data-dev-choice-text-idx="${idx}">${esc(choice.text || '')}</div>
+      <div class="dev-choice-edit-meta">
+        <div><label>leads to</label><select data-dev-choice-next-idx="${idx}">${nextOptionsHtml}</select></div>
+        <div><label>tag</label><input data-dev-choice-tag-idx="${idx}" value="${esc(choice.tag || '')}" /></div>
+        <div><label>requires tag</label><input data-dev-choice-req-tag-idx="${idx}" value="${esc(reqTag)}" /></div>
+        <div><label>requires artifact</label><select data-dev-choice-req-artifact-idx="${idx}">${reqArtifactOptionsHtml}</select></div>
+      </div>
+      <div class="dev-choice-edit-actions">
+        <button class="dev-sm-btn" data-dev-follow-choice-idx="${idx}">follow</button>
+        <button class="dev-sm-btn" data-dev-delete-choice-idx="${idx}">delete</button>
+      </div>
+    </div>`;
+  });
+  html += `<div class="dev-choice-edit-actions">
+    <button class="dev-sm-btn" id="dev-add-choice-btn">+ add choice</button>
+    <button class="dev-sm-btn" id="dev-add-continue-choice-btn">+ add continue choice</button>
+    <button class="dev-save-btn" id="dev-save-inline-mid-btn">save</button>
+  </div>`;
+  return html;
+}
+
+function devRefreshChoiceEditor(nodeId) {
+  const node = nodeMap[nodeId];
+  const wrap = document.getElementById('dev-choice-editor');
+  if (!node || !wrap) return;
+  wrap.innerHTML = devChoiceRowsHtml(node);
+}
+
+function devConditionalRowsHtml(node) {
+  const allConditional = node.conditional_text || [];
+  const artifactOptions = Object.keys(ARTIFACT_NAMES)
+    .sort((a, b) => a.localeCompare(b))
+    .map(a => ({ id: a, label: ARTIFACT_NAMES[a] || a }));
+  const activeCondIdxs = new Set();
+  if (Array.isArray(node.conditional_text)) {
+    if (node.conditional_mode === 'first_match') {
+      const matchIdx = node.conditional_text.findIndex(ct => evaluate(ct.condition));
+      if (matchIdx >= 0) activeCondIdxs.add(matchIdx);
+    } else {
+      node.conditional_text.forEach((ct, idx) => { if (evaluate(ct.condition)) activeCondIdxs.add(idx); });
+    }
+  }
+  let html = '';
+  allConditional.forEach((ct, idx) => {
+    const visible = activeCondIdxs.has(idx);
+    const condLabel = ct.condition ? descCond(ct.condition) : 'always';
+    const reqTag = ct.condition && ct.condition.has_tag ? ct.condition.has_tag : '';
+    const reqArtifact = ct.condition && ct.condition.has_artifact ? ct.condition.has_artifact : '';
+    const awardsArtifact = ct.awards_artifact || '';
+    const reqArtifactOptionsHtml =
+      `<option value="">(none)</option>` +
+      artifactOptions.map(o => `<option value="${esc(o.id)}" ${reqArtifact === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('');
+    const awardArtifactOptionsHtml =
+      `<option value="">(none)</option>` +
+      artifactOptions.map(o => `<option value="${esc(o.id)}" ${awardsArtifact === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('');
+    html += `<div class="dev-arrival-row" data-dev-cond-row="${idx}">
+      <div class="dev-inline-note">conditional_text[${idx}] · <span class="${visible ? 'state-on' : 'state-off'}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="state-when">${esc(condLabel)}</span></div>
+      <div class="conditional dev-inline-editable" contenteditable="true" data-dev-cond-idx="${idx}">${esc(ct.append || '')}</div>
+      <div class="dev-choice-edit-meta" style="margin:6px 0 12px 0">
+        <div><label>requires tag</label><input data-dev-cond-req-tag-idx="${idx}" value="${esc(reqTag)}" /></div>
+        <div><label>requires artifact</label><select data-dev-cond-req-artifact-idx="${idx}">${reqArtifactOptionsHtml}</select></div>
+        <div><label>awards artifact</label><select data-dev-cond-award-artifact-idx="${idx}">${awardArtifactOptionsHtml}</select></div>
+      </div>
+      <div class="dev-choice-edit-actions">
+        <button class="dev-sm-btn" data-dev-delete-cond-idx="${idx}">delete conditional</button>
+      </div>
+    </div>`;
+  });
+  if (!allConditional.length) {
+    html += `<div class="dev-inline-note">conditional_text · <span class="state-off">none</span></div>`;
+  }
+  html += `<button class="dev-sm-btn" id="dev-add-conditional-btn">+ add conditional text</button>`;
+  return html;
+}
+
+function devRefreshConditionalEditor(nodeId) {
+  const node = nodeMap[nodeId];
+  const wrap = document.getElementById('dev-conditional-editor');
+  if (!node || !wrap) return;
+  wrap.innerHTML = devConditionalRowsHtml(node);
+}
+
+function devArrivalRowsHtml(node, pendingArrivalText) {
+  let html = '';
+  const artifactOptions = Object.keys(ARTIFACT_NAMES)
+    .sort((a, b) => a.localeCompare(b))
+    .map(a => ({ id: a, label: ARTIFACT_NAMES[a] || a }));
+  const activeArrivalIdx = Array.isArray(node.arrival_variants)
+    ? (() => {
+      const nonDefault = node.arrival_variants.filter(v => !v.default);
+      const match = nonDefault.find(v => evaluate(v.requires));
+      if (match) return node.arrival_variants.indexOf(match);
+      const def = node.arrival_variants.find(v => v.default === true);
+      return def ? node.arrival_variants.indexOf(def) : -1;
+    })()
+    : -1;
+
+  if (pendingArrivalText) {
+    html += `<div class="dev-inline-note">arrival · <span class="state-on">shown</span> · <span class="state-runtime">runtime source</span>: pending choice arrival</div>`;
+    html += `<div class="arrival">${esc(pendingArrivalText)}</div>`;
+  }
+
+  if (Array.isArray(node.arrival_variants) && node.arrival_variants.length > 0) {
+    node.arrival_variants.forEach((v, idx) => {
+      const visible = idx === activeArrivalIdx;
+      const condLabel = v.default ? 'default' : (v.requires ? descCond(v.requires) : 'always');
+      const stateClass = visible ? 'state-on' : 'state-off';
+      const condClass = v.default ? 'state-default' : 'state-when';
+      const reqTag = v.requires && v.requires.has_tag ? v.requires.has_tag : '';
+      const reqArtifact = v.requires && v.requires.has_artifact ? v.requires.has_artifact : '';
+      const reqArtifactOptionsHtml =
+        `<option value="">(none)</option>` +
+        artifactOptions.map(o => `<option value="${esc(o.id)}" ${reqArtifact === o.id ? 'selected' : ''}>${esc(o.label)}</option>`).join('');
+      html += `<div class="dev-arrival-row" data-dev-arrival-row="${idx}">
+        <div class="dev-inline-note">arrival_variants[${idx}] · <span class="${stateClass}">${visible ? 'shown' : 'hidden'}</span> · when: <span class="${condClass}">${esc(condLabel)}</span></div>
+        <div class="arrival dev-inline-editable" contenteditable="true" data-dev-arrival-idx="${idx}">${esc(v.text || '')}</div>
+        <div class="dev-choice-edit-meta" style="margin-top:8px">
+          <div><label>requires tag</label><input data-dev-arrival-req-tag-idx="${idx}" value="${esc(reqTag)}" /></div>
+          <div><label>requires artifact</label><select data-dev-arrival-req-artifact-idx="${idx}">${reqArtifactOptionsHtml}</select></div>
+          <div><label>default</label><input type="checkbox" data-dev-arrival-default-idx="${idx}" ${v.default ? 'checked' : ''} /></div>
+        </div>
+        <div class="dev-choice-edit-actions">
+          <button class="dev-sm-btn" data-dev-delete-arrival-idx="${idx}">delete variant</button>
+        </div>
+      </div>`;
+    });
+  } else if (!pendingArrivalText) {
+    html += `<div class="dev-inline-note">arrival · <span class="state-off">none</span></div>`;
+  }
+  html += `<button class="dev-sm-btn" id="dev-add-arrival-btn">+ add arrival variant</button>`;
+  return html;
+}
+
+function devRefreshArrivalEditor(nodeId) {
+  const node = nodeMap[nodeId];
+  const wrap = document.getElementById('dev-arrival-editor');
+  if (!node || !wrap) return;
+  wrap.innerHTML = devArrivalRowsHtml(node, run ? run.pending_arrival : null);
+}
+
+function devBindRealtimeDraft(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  const bind = (field, normalizeNull = false) => {
+    const el = document.querySelector(`[data-dev-field="${field}"]`);
+    if (!el) return;
+    el.addEventListener('input', () => {
+      const raw = getEditableText(el);
+      devSetNodeDraftField(nodeId, field, raw);
+      node[field] = normalizeNull ? (raw || null) : raw;
+    });
+  };
+  bind('text', false);
+  bind('subtitle', true);
+  bind('oor_action', true);
+}
 
 function toggleDevMode() {
   devMode = !devMode;
@@ -2148,6 +2627,65 @@ async function devOpenNodeInEditor(charId, nodeId) {
     if (modal) modal.hidden = true;
     renderNode();
   }
+}
+
+async function devCreateNodeFromMap(charId) {
+  if (!charId) return;
+  const data = await getNodeMapData(charId);
+  if (!data || !Array.isArray(data.nodes)) return;
+
+  const nodeIdRaw = window.prompt('New node id:', '');
+  if (nodeIdRaw === null) return;
+  const nodeId = nodeIdRaw.trim();
+  if (!nodeId) {
+    alert('Node id is required.');
+    return;
+  }
+  if (data.nodes.some(n => n && n.id === nodeId)) {
+    alert('A node with that id already exists.');
+    return;
+  }
+
+  const titleRaw = window.prompt('New node title/subtitle:', '');
+  if (titleRaw === null) return;
+  const title = titleRaw.trim();
+
+  const newNode = {
+    id: nodeId,
+    subtitle: title,
+    text: '',
+    choices: [],
+    conditional_text: [],
+    arrival_variants: []
+  };
+
+  try {
+    const res = await fetch('/dev/create-node', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ character: charId, node: newNode })
+    });
+    const result = await res.json();
+    if (!result.ok) {
+      alert(result.error || 'Could not create node');
+      return;
+    }
+    const savedNode = result.node || newNode;
+    data.nodes.push(savedNode);
+    if (result.start_node) data.start_node = result.start_node;
+  } catch (e) {
+    alert('server not running — start with: node server.js');
+    return;
+  }
+
+  if (charMeta && charMeta.character === charId) {
+    charMeta = data;
+    nodeMap[nodeId] = data.nodes.find(n => n.id === nodeId) || newNode;
+    buildDevFlowIndex();
+  }
+
+  devNodeMapSelectedNode = nodeId;
+  await renderNodeMapModal();
 }
 
 function buildDevFlowIndex() {
@@ -2292,6 +2830,7 @@ function analyzeNodeMapGraph(data) {
   nodes.forEach(n => {
     if (depthById[n.id] === undefined) depthById[n.id] = 0;
   });
+  const baseDepthById = { ...depthById };
 
   // Reduce backward edges in mostly-DAG graphs.
   for (let iter = 0; iter < nodes.length; iter++) {
@@ -2309,11 +2848,40 @@ function analyzeNodeMapGraph(data) {
     if (!changed) break;
   }
 
+  // Guardrail: in cyclic graphs the relaxation pass can inflate depths and
+  // produce a long single-row horizontal strip. If it drifts too far from the
+  // shortest-path layering, snap back to the base layout.
+  const baseDepthVals = Object.values(baseDepthById);
+  const relaxedDepthVals = Object.values(depthById);
+  const baseMaxDepth = baseDepthVals.length ? Math.max(...baseDepthVals) : 0;
+  const relaxedMaxDepth = relaxedDepthVals.length ? Math.max(...relaxedDepthVals) : 0;
+  if (relaxedMaxDepth > Math.max(baseMaxDepth * 2, baseMaxDepth + 6)) {
+    Object.keys(depthById).forEach(id => { depthById[id] = baseDepthById[id] || 0; });
+  }
+
   const minDepth = Math.min(...Object.values(depthById));
   if (Number.isFinite(minDepth) && minDepth !== 0) {
     Object.keys(depthById).forEach(id => {
       depthById[id] -= minDepth;
     });
+  }
+
+  // Fallback: if depth collapses to a single column, derive a rank order
+  // from traversal so the map still lays out horizontally.
+  const depthVals = Object.values(depthById);
+  const maxDepth = depthVals.length ? Math.max(...depthVals) : 0;
+  if (maxDepth === 0 && data.start_node && byId[data.start_node]) {
+    const seen = new Set();
+    const queue2 = [{ id: data.start_node, depth: 0 }];
+    while (queue2.length) {
+      const cur = queue2.shift();
+      if (!cur || !cur.id || !byId[cur.id] || seen.has(cur.id)) continue;
+      seen.add(cur.id);
+      depthById[cur.id] = cur.depth;
+      (outgoing[cur.id] || []).forEach(nextId => {
+        if (!seen.has(nextId)) queue2.push({ id: nextId, depth: cur.depth + 1 });
+      });
+    }
   }
 
   return { byId, incoming, outgoing, depthById };
@@ -2769,6 +3337,9 @@ function renderDevConsole(node) {
       <div class="dev-section-label">State Saves</div>
       ${slotsHtml}
     </div>
+    <div class="dev-section" style="display:flex;justify-content:flex-end;">
+      <button class="dev-save-btn" id="dev-save-btn-bottom">save</button>
+    </div>
   </div>`;
 
   // wire up tag input enter key
@@ -2776,6 +3347,8 @@ function renderDevConsole(node) {
   if (ti) ti.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); devAddCustomTag(); } });
   const awardBtn = document.getElementById('dev-node-award-save');
   if (awardBtn) awardBtn.addEventListener('click', () => devSaveNodeAwards(node.id));
+  const saveBottomBtn = document.getElementById('dev-save-btn-bottom');
+  if (saveBottomBtn) saveBottomBtn.addEventListener('click', () => devSaveInline(node.id));
 }
 
 async function renderNodeMapModal() {
@@ -2784,9 +3357,10 @@ async function renderNodeMapModal() {
   const inspector = document.getElementById('node-map-inspector');
   const legend = document.getElementById('node-map-legend');
   const charSelect = document.getElementById('node-map-char-select');
+  const addNodeBtn = document.getElementById('node-map-add-node-btn');
   const closeBtn = document.getElementById('node-map-close-btn');
   const openBtn = document.getElementById('node-map-open-editor-btn');
-  if (!modal || !canvas || !inspector || !legend || !charSelect || !closeBtn || !openBtn) return;
+  if (!modal || !canvas || !inspector || !legend || !charSelect || !addNodeBtn || !closeBtn || !openBtn) return;
   if (!devNodeMapOpen || !devMode) { modal.hidden = true; return; }
   modal.hidden = false;
 
@@ -2797,6 +3371,10 @@ async function renderNodeMapModal() {
     `<option value="${esc(c.id)}" ${c.id === selectedChar ? 'selected' : ''}>${esc(c.display_name)}</option>`
   ).join('');
   charSelect.onchange = async (e) => { await devSetNodeMapCharacter(e.target.value); };
+  addNodeBtn.onclick = async () => {
+    await getNodeMapData(selectedChar);
+    devCreateNodeFromMap(selectedChar);
+  };
   closeBtn.onclick = () => { devNodeMapOpen = false; modal.hidden = true; };
 
   try {
@@ -3019,8 +3597,10 @@ async function renderNodeMapModal() {
     if (selected) {
       const inCount = (graph.incoming[selected.id] || []).length;
       const outEdges = edgeList.filter(e => e.from === selected.id);
+      const selectedSubtitle = (selected.subtitle || '').trim();
       inspector.innerHTML = `
         <div class="dev-section-label" style="margin-top:0">Node ${esc(selected.id)}</div>
+        <div class="dev-flow-summary">subtitle: ${selectedSubtitle ? esc(selectedSubtitle) : '—'}</div>
         <div class="dev-flow-summary">incoming: ${inCount} · outgoing edges: ${outEdges.length} · merges_here: ${inCount > 1 ? 'yes' : 'no'}</div>
         <div class="dev-flow-summary">choices: ${(selected.choices || []).length} · gated: ${(selected.choices || []).filter(c => c.requires).length}</div>
         <div class="dev-flow-summary">choice edges: ${(selected.choices || []).map((c, i) => `#${i + 1}→${c.next || '—'}${c.tag ? ` [tag:${c.tag}]` : ''}${c.requires ? ` [${descCond(c.requires)}]` : ''}`).join(' · ') || 'none'}</div>
@@ -3067,6 +3647,115 @@ function getEditableText(el) {
   return (el ? el.innerText : '').replace(/\r\n/g, '\n').trim();
 }
 
+function devAddChoice(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureChoiceEditsToNode(nodeId);
+  if (!Array.isArray(node.choices)) node.choices = [];
+  node.choices.push({ text: 'new choice', next: '' });
+  devRefreshChoiceEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devAddContinueChoice(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureChoiceEditsToNode(nodeId);
+  if (!Array.isArray(node.choices)) node.choices = [];
+  node.choices.push({ text: 'continue →', next: '' });
+  devRefreshChoiceEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devDeleteChoice(nodeId, idx) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.choices)) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureChoiceEditsToNode(nodeId);
+  if (idx < 0 || idx >= node.choices.length) return;
+  node.choices.splice(idx, 1);
+  devRefreshChoiceEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devAddArrivalVariant(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureArrivalEditsToNode(nodeId);
+  if (!Array.isArray(node.arrival_variants)) node.arrival_variants = [];
+  node.arrival_variants.push({ text: '', default: node.arrival_variants.length === 0 });
+  devRefreshArrivalEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devDeleteArrivalVariant(nodeId, idx) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.arrival_variants)) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureArrivalEditsToNode(nodeId);
+  if (idx < 0 || idx >= node.arrival_variants.length) return;
+  node.arrival_variants.splice(idx, 1);
+  devRefreshArrivalEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devAddConditionalText(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureConditionalEditsToNode(nodeId);
+  if (!Array.isArray(node.conditional_text)) node.conditional_text = [];
+  node.conditional_text.push({ append: '' });
+  if (!node.conditional_mode) node.conditional_mode = 'first_match';
+  devRefreshConditionalEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devDeleteConditionalText(nodeId, idx) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.conditional_text)) return;
+  devCaptureMainDraft(nodeId);
+  devCaptureConditionalEditsToNode(nodeId);
+  if (idx < 0 || idx >= node.conditional_text.length) return;
+  node.conditional_text.splice(idx, 1);
+  devRefreshConditionalEditor(nodeId);
+  renderDevConsole(nodeMap[nodeId]);
+}
+
+function devFollowChoiceFromEditor(nodeId, idx) {
+  const node = nodeMap[nodeId];
+  if (!node || !Array.isArray(node.choices) || !node.choices[idx]) return;
+  const textEl = document.querySelector(`[data-dev-choice-text-idx="${idx}"]`);
+  const nextEl = document.querySelector(`[data-dev-choice-next-idx="${idx}"]`);
+  const tagEl = document.querySelector(`[data-dev-choice-tag-idx="${idx}"]`);
+  const reqTagEl = document.querySelector(`[data-dev-choice-req-tag-idx="${idx}"]`);
+  const reqArtifactEl = document.querySelector(`[data-dev-choice-req-artifact-idx="${idx}"]`);
+
+  const nextId = nextEl ? nextEl.value.trim() : '';
+  if (!nextId) return;
+
+  const candidate = {
+    ...node.choices[idx],
+    text: textEl ? getEditableText(textEl) : (node.choices[idx].text || ''),
+    next: nextId
+  };
+  const tagVal = tagEl ? tagEl.value.trim() : '';
+  if (tagVal) candidate.tag = tagVal; else delete candidate.tag;
+
+  const req = {};
+  const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+  const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+  if (reqTagVal) req.has_tag = reqTagVal;
+  if (reqArtifactVal) req.has_artifact = reqArtifactVal;
+  if (Object.keys(req).length) candidate.requires = req; else delete candidate.requires;
+
+  if (candidate.requires && !evaluate(candidate.requires)) return;
+  makeChoice(candidate);
+}
+
 function setInlineStatus(msg, type = '') {
   const status = document.getElementById('dev-inline-status');
   if (!status) return;
@@ -3082,6 +3771,14 @@ async function devSaveInline(nodeId) {
   const textEl = document.querySelector('[data-dev-field="text"]');
   if (textEl) updates.text = getEditableText(textEl);
 
+  const subtitleEl = document.querySelector('[data-dev-field="subtitle"]');
+  if (subtitleEl) {
+    const raw = getEditableText(subtitleEl);
+    updates.subtitle = raw || null;
+  } else if (node.subtitle) {
+    updates.subtitle = null;
+  }
+
   const oorEl = document.querySelector('[data-dev-field="oor_action"]');
   if (oorEl) {
     const raw = getEditableText(oorEl);
@@ -3090,13 +3787,34 @@ async function devSaveInline(nodeId) {
     updates.oor_action = null;
   }
 
-  const choiceEdits = document.querySelectorAll('[data-dev-choice-idx]');
+  const choiceEdits = document.querySelectorAll('[data-dev-choice-text-idx]');
   if (Array.isArray(node.choices) && choiceEdits.length > 0) {
     const nextChoices = node.choices.map(c => ({ ...c }));
     choiceEdits.forEach(el => {
-      const idx = parseInt(el.dataset.devChoiceIdx, 10);
+      const idx = parseInt(el.dataset.devChoiceTextIdx, 10);
       if (Number.isNaN(idx) || !nextChoices[idx]) return;
+      const nextEl = document.querySelector(`[data-dev-choice-next-idx="${idx}"]`);
+      const tagEl = document.querySelector(`[data-dev-choice-tag-idx="${idx}"]`);
+      const reqTagEl = document.querySelector(`[data-dev-choice-req-tag-idx="${idx}"]`);
+      const reqArtifactEl = document.querySelector(`[data-dev-choice-req-artifact-idx="${idx}"]`);
+
       nextChoices[idx].text = getEditableText(el);
+      nextChoices[idx].next = nextEl ? nextEl.value.trim() : (nextChoices[idx].next || '');
+
+      const tagVal = tagEl ? tagEl.value.trim() : '';
+      if (tagVal) nextChoices[idx].tag = tagVal; else delete nextChoices[idx].tag;
+
+      const existingReq = (nextChoices[idx].requires && typeof nextChoices[idx].requires === 'object')
+        ? { ...nextChoices[idx].requires }
+        : {};
+      delete existingReq.has_tag;
+      delete existingReq.has_artifact;
+      const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+      const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+      if (reqTagVal) existingReq.has_tag = reqTagVal;
+      if (reqArtifactVal) existingReq.has_artifact = reqArtifactVal;
+      if (Object.keys(existingReq).length > 0) nextChoices[idx].requires = existingReq;
+      else delete nextChoices[idx].requires;
     });
     updates.choices = nextChoices;
   }
@@ -3123,6 +3841,23 @@ async function devSaveInline(nodeId) {
     });
     grouped.forEach((parts, idx) => {
       nextConditional[idx].append = parts.filter(Boolean).join('\n\n');
+      const reqTagEl = document.querySelector(`[data-dev-cond-req-tag-idx="${idx}"]`);
+      const reqArtifactEl = document.querySelector(`[data-dev-cond-req-artifact-idx="${idx}"]`);
+      const awardArtifactEl = document.querySelector(`[data-dev-cond-award-artifact-idx="${idx}"]`);
+      const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+      const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+      const awardArtifactVal = awardArtifactEl ? awardArtifactEl.value.trim() : '';
+      const cond = (nextConditional[idx].condition && typeof nextConditional[idx].condition === 'object')
+        ? { ...nextConditional[idx].condition }
+        : {};
+      delete cond.has_tag;
+      delete cond.has_artifact;
+      if (reqTagVal) cond.has_tag = reqTagVal;
+      if (reqArtifactVal) cond.has_artifact = reqArtifactVal;
+      if (Object.keys(cond).length > 0) nextConditional[idx].condition = cond;
+      else delete nextConditional[idx].condition;
+      if (awardArtifactVal) nextConditional[idx].awards_artifact = awardArtifactVal;
+      else delete nextConditional[idx].awards_artifact;
     });
     updates.conditional_text = nextConditional;
   }
@@ -3133,7 +3868,24 @@ async function devSaveInline(nodeId) {
       const idx = parseInt(el.dataset.devArrivalIdx, 10);
       if (Number.isNaN(idx) || !nextArrival[idx]) return;
       nextArrival[idx].text = getEditableText(el);
+      const reqTagEl = document.querySelector(`[data-dev-arrival-req-tag-idx="${idx}"]`);
+      const reqArtifactEl = document.querySelector(`[data-dev-arrival-req-artifact-idx="${idx}"]`);
+      const defaultEl = document.querySelector(`[data-dev-arrival-default-idx="${idx}"]`);
+      const reqTagVal = reqTagEl ? reqTagEl.value.trim() : '';
+      const reqArtifactVal = reqArtifactEl ? reqArtifactEl.value.trim() : '';
+      const req = {};
+      if (reqTagVal) req.has_tag = reqTagVal;
+      if (reqArtifactVal) req.has_artifact = reqArtifactVal;
+      if (Object.keys(req).length > 0) nextArrival[idx].requires = req;
+      else delete nextArrival[idx].requires;
+      if (defaultEl) nextArrival[idx].default = !!defaultEl.checked;
     });
+    // Keep a single default for deterministic fallback.
+    const defaultIdxs = [];
+    nextArrival.forEach((v, i) => { if (v.default) defaultIdxs.push(i); });
+    if (defaultIdxs.length > 1) {
+      defaultIdxs.slice(1).forEach(i => { nextArrival[i].default = false; });
+    }
     updates.arrival_variants = nextArrival;
   }
 
@@ -3150,6 +3902,7 @@ async function devSaveInline(nodeId) {
       return;
     }
     Object.assign(nodeMap[nodeId], updates);
+    devClearNodeDraft(nodeId);
     setInlineStatus('saved ✓', 'ok');
   } catch (e) {
     setInlineStatus('server not running — start with: node server.js', 'err');
