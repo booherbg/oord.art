@@ -76,11 +76,19 @@
           "arrival": null
         },
         {
-          "text": "Walk over to the group by the loading dock.",
-          "next": "w_exit_002",
+          "text": "Talk to the bouncer and try to get in.",
+          "next": "w_bouncer_run2",
           "arrival": null,
           "requires": {
-            "has_artifact": "fabric_strip"
+            "has_artifact": "yarn_knot"
+          }
+        },
+        {
+          "text": "Walk over to the group by the loading dock.",
+          "next": "w_loading_dock",
+          "arrival": null,
+          "requires": {
+            "has_artifact": "matchbook"
           }
         }
       ],
@@ -101,6 +109,12 @@
       "conditional_text": [
         {
           "append": "A woman near you is swaying with her eyes closed. Scuffed white sneakers, a pen mark on the left toe - a tiny star. She looks like she forgot anyone could see her."
+        },
+        {
+          "condition": {
+            "has_tag": "lost_yarn"
+          },
+          "append": "You pass the bar. The bartender is making a drink - same quiet fascination with her own hands. Sitting on top of it where a garnish should be is your yarn knot. Tied around a little stick like a cocktail pick. She slides the drink across the bar to someone without looking up. You keep walking."
         }
       ],
       "oor_action": null,
@@ -251,6 +265,13 @@
           "text": "That was intense - let's get a drink.",
           "next": "w_007e",
           "arrival": null
+        },
+        {
+          "text": "Keep dancing - you love this song.",
+          "next": "w_slide_run2a",
+          "requires": {
+            "has_artifact": "yarn_knot"
+          }
         }
       ],
       "next": null,
@@ -495,13 +516,6 @@
             "has_tag": "entered_circle"
           },
           "append": "DJ OOR is gone. All that remains are two pink gloves draped over the mixer and a few small scraps of yellow yarn."
-        },
-        {
-          "condition": {
-            "has_tag": "willing"
-          },
-          "append": "",
-          "awards_artifact": "yarn_knot"
         }
       ],
       "oor_action": null,
@@ -538,45 +552,28 @@
         },
         {
           "condition": {
-            "has_artifacts": [
-              "warm_stone",
-              "fabric_strip",
-              "humming_shard",
-              "yarn_knot"
-            ]
+            "has_tag": "goodness"
           },
-          "append": "All four transcendentals yielded. The Kabbalists said the world is made of light that shattered into matter - holy sparks in everything, waiting to be returned. After your experience tonight, you understand what they meant. The same process ran through the first fire circles, through every gathering where humans moved together and felt the boundary between them become optional. Tonight was one of those gatherings. What moved through you wasn't created here. It was always present - in a certain quality of winter light, kind gesture between strangers, in the moment two dancers moved to the same flow and felt it without looking. Tonight you were open and it all moved through you. What you felt was alignment: the specific resonance of focusing your presence on what is real. Goodness. Truth. Beauty. Unity. These don't require a cosmic warehouse dance party. What the experience gave you was permission - a signal loud enough to get past the reasons you keep yourself at a distance. You know the frequency now. You can find it anywhere you're willing to look for it."
+          "append": "You put your hand in your coat pocket and find a matchbook. You don't smoke. You've never seen this matchbook before. The cover has a name on it - a bar, maybe - but the letters rearrange when you try to focus on them. You tilt it under the sodium light. For a second the text resolves into something that makes you stop breathing. Then it's just a matchbook again. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting.",
+          "awards_artifact": "matchbook"
         },
         {
           "condition": {
-            "has_tag": "entered_circle"
+            "has_tag": "stays"
           },
-          "append": "A strip of fabric, thin, almost translucent. Warm. You hold it to the sodium light and there is writing on it that shifts when you try to read it. It smells like the fog from inside. Your body remembers the bass - a phantom vibration in your sternum that will take days to fully fade. You will come back.",
-          "awards_artifact": "fabric_strip"
+          "append": "You put your hand in your coat pocket and find a strand of yarn. Orange. Warm. It wasn't cut - it was pulled from something. You close your hand around it and the frequency in your chest pulses once, faintly, like a heartbeat that isn't yours. You will come back. You're not sure why you know this.",
+          "awards_artifact": "yarn_knot"
         },
         {
           "condition": {
             "has_tag": "met_bartender"
           },
-          "append": "A shard of something - glass, or crystal, or resin. It hums faintly. The sodium light refracts through it and for a moment the gravel lot looks like somewhere older. You put it back in your pocket quickly. Your body remembers the bass - a phantom vibration in your sternum that will take days to fully fade. You will come back.",
-          "awards_artifact": "humming_shard"
-        },
-        {
-          "condition": {
-            "has_tag": "participated_ritual"
-          },
-          "append": "A small smooth stone. Warm despite the cold. You close your hand around it and for a moment you can feel the crowd - not remember them, feel them, as if the boundary never fully reformed. Your body remembers the bass - a phantom vibration in your sternum that will take days to fully fade. You will come back.",
-          "awards_artifact": "warm_stone"
-        },
-        {
-          "condition": {
-            "has_tag": "willing"
-          },
-          "append": "A small knot of yarn, orange and yellow, soft. Warm. It wasn't cut - it was pulled from something. You think of the hand that held yours. You don't know their name. You know exactly how their palm felt. Your body remembers the bass - a phantom vibration in your sternum that will take days to fully fade. You will come back.",
+          "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Warm. It smells faintly like the drink the bartender made you - sweet, slightly wrong. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting.",
           "awards_artifact": "yarn_knot"
         },
         {
-          "append": "Your pockets are empty. There is nothing except the cold and the walk and the phantom vibration and the knowledge that something happened and you weren't quite in it. You will come back. You're not sure why you know this."
+          "append": "You put your hand in your coat pocket and find a strand of yarn. Warm. You don't know what color it is in the sodium light. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting. You will come back. You're not sure why you know this.",
+          "awards_artifact": "yarn_knot"
         }
       ],
       "conditional_mode": "first_match",
@@ -652,6 +649,148 @@
       ],
       "conditional_text": [],
       "arrival_variants": []
+    },
+    {
+      "id": "w_bouncer_run2",
+      "subtitle": "THE BOUNCER, AGAIN",
+      "text": "The bouncer looks at you. Same jacket. SECURITY in block letters. Same stance - the picture-of-standing-once stance. Same eyes that go to your hands before your face.\n\n\"Show me an empty pocket,\" he says.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["returned"],
+      "choices": [
+        {
+          "text": "Turn out your left pocket.",
+          "next": "w_bouncer_run2_left"
+        },
+        {
+          "text": "Turn out your right pocket.",
+          "next": "w_bouncer_run2_right"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null,
+      "requires": {
+        "has_artifact": "yarn_knot"
+      }
+    },
+    {
+      "id": "w_bouncer_run2_left",
+      "subtitle": "WRONG POCKET",
+      "text": "Easy. You reach in with the casual confidence of someone who knows the answer. Your fingers close around something warm and the confidence evaporates.\n\nThe yarn - orange, yellow, knotted tight. You stare at it. You don't remember putting it there. You don't remember putting it there because you didn't put it there. Your face is doing something you hope looks calm.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something older than both.\n\nHe gives it back. \"Wrong pocket. Right answer.\" He steps aside.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["kept_yarn"],
+      "choices": [
+        {
+          "text": "Go through the door.",
+          "next": "w_003"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_bouncer_run2_right",
+      "subtitle": "WRONG POCKET",
+      "text": "You reach in and your fingers close around something warm. You weren't expecting that. A knot of yarn - orange, yellow, tight. You pull it out and your brain does something it doesn't usually do, which is nothing. No explanation. No theory. Just a small warm object in a pocket you're certain was empty.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something older than both.\n\nHe pockets it. Not aggressively - matter-of-factly, the way a toll collector takes a token. He steps aside. You're in. The yarn is not.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["lost_yarn"],
+      "choices": [
+        {
+          "text": "Go through the door.",
+          "next": "w_003"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_slide_run2a",
+      "subtitle": "THE CUPID SHUFFLE, AGAIN",
+      "text": "The vocoded voice calls out and your body lights up. You know this song. You don't know how you know it but your feet know it and your hips know it and something in your chest is already moving before the first call lands.\n\nDown, down, do your dance, do your dance.\n\nThe crowd drops. You drop with them. The synchronization is instant - two hundred bodies locked into the same ancient pattern. Your body is ahead of the beat. You know what comes next.",
+      "arrival_variants": [
+        {
+          "default": true,
+          "text": "The music shifts and your body recognizes it before your ears do."
+        }
+      ],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "To the left, to the left.",
+          "next": "w_slide_run2b"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_slide_run2b",
+      "subtitle": "WRONG WAY",
+      "text": "To the right, to the right, to the right, to the right.\n\nThe call came after you moved. You were ahead of it. You were wrong. The pattern reversed and your body was running on something older than tonight and it didn't know.\n\nSomeone's elbow catches your ribs. For one terrible second you are the only person in a room of two hundred moving the wrong way.\n\nA hand grabs your arm. Paint on the knuckles - house paint, trim work. He pulls you back into the flow. \"Wrong way,\" he yells, grinning like this is the funniest thing he's seen all night. You're laughing too. The embarrassment burns off in the heat of the room and what's left underneath it is something simpler - the specific relief of being caught by someone who didn't have to catch you.\n\nSomething loosens in your chest. Not the embarrassment fading - something underneath it. You were holding a shape in your body like a template and the music just tore it out of your hands. You don't know the next move. You don't know any of the moves. For the first time tonight you are actually here - not performing being here. Here. And it is terrifying and it is a relief.\n\nYou are moving together now. Not because the frequency aligned you. Because he reached out and you let him.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": "DJ OOR reversed the pattern. Three people stumbled. Two hundred didn't. The construct notes which bodies are following memory and which are following the signal. The distinction matters.",
+      "temperature": "hot",
+      "awards_transcendental": "goodness",
+      "awards_artifact": null,
+      "awards_tags": ["goodness"],
+      "choices": [
+        {
+          "text": "continue →",
+          "next": "w_010a_run2"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_010a_run2",
+      "subtitle": "INSIDE THE DANCE CIRCLE, AGAIN",
+      "text": "The circle is bright. The arrow points at you and you don't hesitate. You can't explain why - the weight of two hundred pairs of eyes should freeze you in place but your body is already moving. Whatever the experience at the slide stripped out of you hasn't grown back yet.\n\nYou dance. Not carefully, not for anyone. You dance the way the paint-knuckle man dances - enormous, committed, free. The part of you that watches yourself doing things has gone quiet and what's left is just the doing.\n\nThe floor responds. The fractal layers beneath the concrete press up, warm, and something is being taken from you but you can feel what you're giving. Not presence. Something more specific - the willingness to be foolish, to be wrong in front of strangers and let them help you anyway. It leaves you the way laughter leaves you - because it was never yours to keep.\n\nThe crowd holds you when you finish. Not physically - but the sound they make, the way the room breathes, it feels like being held. You step back into them and you don't know where you end and they begin and you don't need to.",
+      "arrival_variants": [],
+      "conditional_text": [
+        {
+          "append": "The paint-knuckle man is at the edge of the ring. He nods. Not cheering this time. Just a nod. Like he knew you had it in you."
+        }
+      ],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["entered_circle"],
+      "choices": [
+        {
+          "text": "continue →",
+          "next": "w_011"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
     }
   ]
 }
