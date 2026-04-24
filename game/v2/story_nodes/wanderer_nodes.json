@@ -474,6 +474,13 @@
       "arrival_variants": [
         {
           "requires": {
+            "has_tag": "truth"
+          },
+          "text": "The voice is still quiet. The closing finds you in the silence - not empty, not waiting. Present.",
+          "default": false
+        },
+        {
+          "requires": {
             "has_tag": "entered_circle"
           },
           "text": "You are still warm from the circle. You gave something up in there and the absence feels like relief. If anything you feel more open, like a door left ajar on purpose.",
@@ -499,6 +506,12 @@
         }
       ],
       "conditional_text": [
+        {
+          "condition": {
+            "has_tag": "truth"
+          },
+          "append": "The jacket woman is near the door. She's carrying her jacket over one arm. She sees you and doesn't wave. She just looks at you and the look is enough. Two people who were holding and then stopped holding and then discovered that the holding was the only thing that was heavy. She walks out into the cold. You don't follow. You don't need to. The silence you share doesn't require proximity."
+        },
         {
           "condition": {
             "has_tag": "saw_oor"
@@ -549,6 +562,13 @@
             "has_tag": "met_bartender"
           },
           "append": "On your way out you passed a chair by the door. A jacket folded neatly on it - SECURITY in block letters. The bouncer must have left in a hurry."
+        },
+        {
+          "condition": {
+            "has_tag": "truth"
+          },
+          "append": "You put your hand in your coat pocket and find a piece of glass. Or crystal. Or something in between that hasn't decided what it is yet. It hums faintly - the same frequency as the rod, the same specificity. You hold it up to the sodium light and for a moment the gravel lot looks like somewhere much older. Somewhere the concrete was built on top of. You put it back in your pocket. The voice in your head is quieter than it used to be. It has less to say. What it does say is cleaner. You don't know if that's a loss or a gift. You know you'll come back to find out.",
+          "awards_artifact": "truth_shard"
         },
         {
           "condition": {
@@ -785,6 +805,98 @@
       "choices": [
         {
           "text": "continue →",
+          "next": "w_011"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_loading_dock",
+      "subtitle": "THE LOADING DOCK",
+      "text": "Three people are standing by the loading dock sharing a cigarette. The door behind them is propped open with a cinder block. Bass leaks through the gap - not the front-door bass, something rawer, less filtered. Like hearing a song through the wall of the room where it's being mixed.\n\nYou walk over. One of them - short, beanie, vape in the other hand - looks at you the way people look at someone approaching a group they're not part of. You reach into your pocket for nothing in particular and pull out the matchbook.\n\nShe takes it. Opens it. Reads something on the inside cover. Her face changes. \"Huh,\" she says. Not surprised. Not confused. Like someone just answered a question she'd been carrying around for days.\n\nShe passes it to the guy next to her - tall, denim jacket, the one who's been here the most. He looks at it and his mouth does something complicated. \"...hmm.\" He passes it to the third person without comment.\n\nThe third one barely glances at it. \"You going in?\" She's already stepping toward the door.\n\n\"You been before?\" the denim jacket guy asks you. He doesn't wait for your answer. \"I follow OOR on instagram. Three followers. Me, some girl named Ashley, and an account called left pocket empty that's never posted.\" He says this like it's credentials. \"They never post either. One photo. The floor. No caption.\"\n\n\"Heard they're doing a thing in Fargo in a couple weeks,\" the beanie girl says. \"Some art gala. Never been to Fargo.\"\n\n\"Who told you that?\"\n\n\"Dude with the flash drive.\"\n\nThey're already walking in through the loading dock. You follow. The matchbook is back in your pocket. You don't remember anyone handing it back.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["loading_dock"],
+      "choices": [
+        {
+          "text": "Go in through the side door.",
+          "next": "w_bartender_run3"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_bartender_run3",
+      "subtitle": "THE TUNING",
+      "text": "The side door puts you behind the bar. Not in front of it - behind it, in the narrow corridor where the bottles are. The bartender is three feet away. She doesn't look up.\n\nShe's making something. Not a whiskey sour this time - something with no name, built from bottles you don't recognize, poured in an order that seems more like ceremony than recipe. She holds each bottle with both hands. She tilts them at precise angles. She is counting something under her breath that isn't numbers.\n\nShe slides it across the bar to you without looking. The glass is warm. The liquid inside is the color of amber held up to firelight. It smells like the ozone from the dance floor and something else - cedar, maybe, or the inside of a very old book.\n\nYou drink it. It tastes like the moment right before you remember something important. Not the memory itself - the threshold. The tip-of-the-tongue feeling, sustained, stretched across your whole body.\n\nSomething adjusts inside you. Not your mood. Something deeper - the lens you look through. The filter between you and the room. It gets thinner. You didn't ask for this. She didn't offer it. It just happened, the way the yarn appeared in your pocket, the way the matchbook showed everyone something different. The mechanism does what it needs to do.\n\nYou step out from behind the bar. The room is the same room but you are seeing it differently. The edges are sharper. The fog is less opaque. The people are more specific.",
+      "arrival_variants": [],
+      "conditional_text": [
+        {
+          "append": "The denim jacket guy from the loading dock is already on the floor. He's dancing with his eyes closed. He looks like he's been doing this for years. He probably has."
+        }
+      ],
+      "oor_action": "The bartender's adjustments are not sanctioned by the construct. They are tolerated. The distinction is important to no one except the bartender.",
+      "temperature": "warm",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["tuned"],
+      "choices": [
+        {
+          "text": "The room is different now. Look around.",
+          "next": "w_silence_run3"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_silence_run3",
+      "subtitle": "THE SILENCE",
+      "text": "You are walking through the crowd and you are watching yourself walk through the crowd. The voice in your head - the one that has narrated every experience you have ever had, the one that collects and catalogues and describes - is talking.\n\nThe fog clings to the shoulders of the man in the denim jacket. The condensation on the plastic cups catches the orange light. The bass has shifted register since the Slide - darker now, more textured. A woman near the speakers is dancing with her whole body, elbows out, chin up, completely gone. The paint-knuckle man is leaning against a pillar with a drink, watching the floor the way you watch the floor. You notice these things because the voice tells you to notice them. Or you notice them and the voice claims them. You're not sure anymore which comes first.\n\nYou see the woman with the jacket.\n\nShe is standing near the edge of the floor - not in it, not watching it. Her jacket is zipped. Her arms are crossed. She has built a structure around herself and she is living inside it. You know this because you do the same thing. You watch. You collect. You narrate the experience instead of having it.\n\nShe uncrosses her arms.\n\nNot because someone asked. Not because the music demanded it. She uncrosses her arms the way you might set down a bag you forgot you were carrying. The weight was so familiar it had become invisible and now it is on the ground and her shoulders are different.\n\nThe jacket comes off. She folds it over her arm with the care of someone who understands exactly what she is removing.\n\nAnd the voice - your voice, the narrator, the collector -\n\ngoes quiet.\n\nNot fades. Not trails off. Goes quiet the way a signal goes quiet when the transmitter is switched off. Between one thought and the absence of the next thought there is a gap and the gap is not empty. The gap is full. The gap is so full that the voice was the thing making it seem empty - filling the silence with description so you wouldn't notice that the silence was already complete.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": "The aperture registers a new flow. The construct did not initiate this one. The bartender did. Or the room did. Or the woman with the jacket did. Causality is not the construct's concern. Yield is.",
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": ["silence"],
+      "choices": [
+        {
+          "text": "Approach her.",
+          "next": "w_jacket_woman"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_jacket_woman",
+      "subtitle": "THE MIRROR",
+      "text": "You walk toward her and the voice does not describe you walking toward her. You are just walking. The floor is warm under your feet. The bass is in your chest. These are facts, not observations.\n\nShe looks at you. You look at her. Neither of you says anything for a moment and the silence between you is the same silence - the one behind the voice, the one that was always complete.\n\n\"How long have you been coming here?\" she asks.\n\nYou don't know how to answer that. You're not sure how many times you've been here. You're not sure it matters.\n\n\"I almost didn't come back,\" she says. She's looking at the dance floor, not at you. \"I kept the jacket on last time. Stayed at the edge. Watched everyone else.\" She pauses. \"That's what I do. I watch. I hold onto things so I can describe them later. So I can prove I was here.\"\n\nShe looks at you and her eyes are clear and specific.\n\n\"You do that too.\"\n\nIt's not a question. She's not guessing. She looked at you and saw the collector. The narrator. The one who stands slightly outside every experience and takes notes.\n\n\"I don't know what's different tonight,\" she says. \"The jacket came off and I didn't decide to take it off. Something underneath the deciding just... did it.\" She looks at her hands. \"It's lighter without it.\"\n\nThe voice has not come back. You are standing in a warehouse full of bass and fog and two hundred people and you are having a conversation with a stranger and you are not documenting it. You are not collecting this moment. You are inside it.\n\nSomething below the floor shifts. A warmth. A recognition. Not from the DJ - from further down. From the place where the fractal layers go. Something down there felt what just passed between you and responded. Not with gratitude. With a shift in pressure, the way an ocean shifts when a river reaches it.",
+      "arrival_variants": [],
+      "conditional_text": [
+        {
+          "append": "She picks up her jacket from where she folded it. Underneath it on the railing is a small object - glass or crystal or something in between. She sees you looking at it. \"That wasn't there before,\" she says. Neither of you reaches for it. It hums faintly. The sound is familiar. The rod made the same sound when it passed you at the bar. The same frequency. The same specificity. Like it was made for exactly one person to find."
+        }
+      ],
+      "oor_action": "Truth yielded. The internal audience dissolved. What was taken: the surplus narration. What remains: a voice that speaks when there is something to say.",
+      "temperature": "hot",
+      "awards_transcendental": "truth",
+      "awards_artifact": null,
+      "awards_tags": ["truth"],
+      "choices": [
+        {
+          "text": "The closing is starting. You can feel it.",
           "next": "w_011"
         }
       ],
