@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>◈ SYSTEM TEST</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #07050a;
+      --orange:      #E86010;
+      --yellow:      #D4A820;
+      --violet:      #6020C0;
+      --text:        #C8BCA8;
+      --text-dim:    #6A6058;
+      --text-bright: #E8DCC8;
+      --border:      #201818;
+      --border-warm: #3A2818;
+      --amber:       rgba(232, 144, 32, 0.08);
+      --amber-bright:rgba(232, 144, 32, 0.18);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 2.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 0 20px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── GATE SCREEN ──────────────────────── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      cursor: pointer;
+      background: var(--bg);
+    }
+
+    #gate .gate-symbol {
+      font-size: 32px;
+      color: var(--orange);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: gatePulse 2s ease infinite, gateIn 1s ease 0.3s forwards;
+    }
+
+    #gate .gate-label {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      opacity: 0;
+      animation: gateIn 1s ease 0.6s forwards;
+    }
+
+    #gate .gate-hint {
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      opacity: 0;
+      animation: gateIn 1s ease 1.2s forwards;
+      margin-top: 32px;
+    }
+
+    @keyframes gateIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gatePulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(232, 96, 16, 0.2); }
+      50% { text-shadow: 0 0 40px rgba(232, 96, 16, 0.5); }
+    }
+
+    #gate.dismissed {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease;
+    }
+
+    /* ─── PHASES ────────────────────────────── */
+    body.phase-amber {
+      background: #0d0a08;
+    }
+
+    .amber-glow {
+      position: fixed;
+      inset: 0;
+      opacity: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(232, 144, 32, 0.06) 0%, transparent 70%);
+      transition: opacity 2s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.phase-amber .amber-glow { opacity: 1; }
+
+    body.phase-bloom .amber-glow {
+      opacity: 1;
+      background: radial-gradient(ellipse at 50% 60%, rgba(232, 144, 32, 0.14) 0%, transparent 70%);
+    }
+
+    body.phase-settled .amber-glow {
+      animation: chamferPulse 4s ease infinite;
+    }
+
+    @keyframes chamferPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── STATUS TEXT ───────────────────────── */
+    #status {
+      padding-top: 28vh;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    #status.visible { opacity: 1; }
+
+    #status-lines {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      line-height: 2.2;
+      color: var(--text-dim);
+      white-space: pre;
+    }
+
+    #status-lines .highlight { color: var(--orange); }
+    #status-lines .heard { color: var(--yellow); font-weight: 500; }
+
+    /* ─── VOICE TEXT ────────────────────────── */
+    #voice-text {
+      text-align: center;
+      padding-top: 40vh;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--yellow);
+      letter-spacing: 0.06em;
+    }
+
+    #voice-text.visible { opacity: 1; }
+    #voice-text.dismissed {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    /* ─── PROSE ─────────────────────────────── */
+    #prose {
+      padding-top: 60px;
+      display: none;
+    }
+
+    #prose.visible {
+      display: block;
+    }
+
+    #prose .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+      font-weight: 700;
+      opacity: 0;
+    }
+
+    #prose p {
+      margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.78;
+      opacity: 0;
+    }
+
+    #prose p:last-of-type { margin-bottom: 0; }
+
+    .oor-action {
+      font-style: italic;
+      font-size: 12px;
+      color: var(--orange);
+      margin-top: 24px;
+      padding: 12px 16px;
+      background: rgba(232, 96, 16, 0.04);
+      border-left: 2px solid rgba(232, 96, 16, 0.5);
+      line-height: 1.6;
+      opacity: 0;
+    }
+
+    .award-flash {
+      margin-top: 18px;
+      padding: 9px 14px;
+      border-radius: 2px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(208,72,112,0.1);
+      color: #e070a0;
+      border-left: 2px solid #D04870;
+      opacity: 0;
+    }
+
+    /* ─── RETURN ────────────────────────────── */
+    #return-btn {
+      margin-top: 36px;
+      background: none;
+      border: 1px solid var(--border-warm);
+      border-radius: 2px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      line-height: 1.55;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      opacity: 0;
+      width: 100%;
+    }
+
+    #return-btn:hover {
+      background: rgba(232, 96, 16, 0.06);
+      border-color: var(--orange);
+      color: var(--text-bright);
+    }
+
+    /* ─── WAVEFORM CANVAS ──────────────────── */
+    #waveform {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #waveform.visible { opacity: 0.5; }
+    #waveform.settled { opacity: 0.15; }
+
+    /* ─── ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeUp 0.6s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="amber-glow"></div>
+  <canvas id="waveform"></canvas>
+
+  <!-- click-to-enter gate (browser autoplay policy) -->
+  <div id="gate">
+    <div class="gate-symbol">◈</div>
+    <div class="gate-label">system test</div>
+    <div class="gate-hint">[ click to initialize ]</div>
+  </div>
+
+  <div class="wrap">
+    <div id="status">
+      <div id="status-lines"></div>
+    </div>
+
+    <div id="voice-text">"Sound good out there?"</div>
+
+    <div id="prose">
+      <div class="subtitle">THE SOUNDCHECK</div>
+
+      <p>The Builder looks at you. You look at the Builder. The heat sink in your pocket is warm.</p>
+
+      <p>The bass drops to nothing. The crowd keeps dancing. The fog keeps rolling. But the sound is gone — all of it, the music, the crowd noise, the shuffling feet, the glasses at the bar. Total silence. Like someone pressed mute on the building.</p>
+
+      <p>Then you hear it. Coming from everywhere and nowhere. From the speakers and the floor and the walls and the heat sink in your pocket, all at once:</p>
+
+      <p>A soundcheck.</p>
+
+      <p>The system the Builder built, the system that Sooboont specified, the system that DJ OOR has been operating all night — it runs a soundcheck. For you. A sine sweep that starts below hearing and climbs through your skeleton and up through your chest and into your ears and past your ears into a register that isn't sound anymore. The Homewreckers cycle through their range — all twenty drivers, all five enclosures — and you can feel each one individually, like fingers on a piano, and then together, like a choir, and the sound they make together is not a frequency. It is a name.</p>
+
+      <p>Your name. Not the one on your ID. The one that lives in the gap between what you notice and what you are. The one the rod measured at the bar. The one the silence revealed. The one the Builder chamfered into every flange.</p>
+
+      <p>The soundcheck ends. The music comes back. The Builder is looking at their iPad. The crowd is dancing. Nothing has changed. Everything has changed. You are standing in a warehouse that just called you by name and the name it used was made of bass.</p>
+
+      <p>The heat sink in your pocket is vibrating. It has never done this before. When you take it out later, in the cold, under the sodium lights, it will still be vibrating. It will vibrate for three days. On the fourth day it will go still and you will hold it to your ear and hear nothing and feel a loss so specific it has a frequency, and the frequency will be yours.</p>
+
+      <div class="oor-action">System test complete. All parameters nominal. The Builder's instrument performs to specification. The specification was always you.</div>
+
+      <div class="award-flash">◈ beauty yielded — soundcheck</div>
+
+      <button id="return-btn">The closing is starting. You can feel it.</button>
+    </div>
+  </div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DJ OOR — SOUNDCHECK EASTER EGG
+// ══════════════════════════════════════════════════════════
+
+const CHAMFER_HZ = 55;
+const BPM = 118;
+const BEAT = 60 / BPM;
+
+let ctx;
+let masterGain;
+let compressor;
+let analyser;
+let running = false;
+
+// ── UTILITIES ──────────────────────────────────────
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+function now() {
+  return ctx.currentTime + 0.05;
+}
+
+function createNoiseBuffer(duration) {
+  const len = ctx.sampleRate * duration;
+  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) {
+    data[i] = Math.random() * 2 - 1;
+  }
+  return buf;
+}
+
+function createImpulseResponse(duration, decay) {
+  const len = ctx.sampleRate * duration;
+  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+  for (let ch = 0; ch < 2; ch++) {
+    const data = buf.getChannelData(ch);
+    for (let i = 0; i < len; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * decay));
+    }
+  }
+  return buf;
+}
+
+function makeDistortionCurve(amount) {
+  const samples = 44100;
+  const curve = new Float32Array(samples);
+  const deg = Math.PI / 180;
+  for (let i = 0; i < samples; i++) {
+    const x = (i * 2) / samples - 1;
+    curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+  }
+  return curve;
+}
+
+// ── AUDIO INIT ─────────────────────────────────────
+
+function initAudio() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  compressor = ctx.createDynamicsCompressor();
+  compressor.threshold.value = -8;
+  compressor.ratio.value = 6;
+  compressor.knee.value = 12;
+  compressor.connect(ctx.destination);
+
+  masterGain = ctx.createGain();
+  masterGain.gain.value = 0.7;
+  masterGain.connect(compressor);
+
+  analyser = ctx.createAnalyser();
+  analyser.fftSize = 2048;
+  masterGain.connect(analyser);
+}
+
+// ── PHASE 1: CHAMFER FREQUENCY ─────────────────────
+
+function playChamfer(startTime, duration, peakGain) {
+  const osc = ctx.createOscillator();
+  osc.type = 'sine';
+  osc.frequency.value = CHAMFER_HZ;
+
+  const osc2 = ctx.createOscillator();
+  osc2.type = 'sine';
+  osc2.frequency.value = CHAMFER_HZ * 2;
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0, startTime);
+  gain.gain.linearRampToValueAtTime(peakGain, startTime + 0.8);
+  gain.gain.setValueAtTime(peakGain, startTime + duration - 1);
+  gain.gain.linearRampToValueAtTime(0, startTime + duration);
+
+  const gain2 = ctx.createGain();
+  gain2.gain.setValueAtTime(0, startTime);
+  gain2.gain.linearRampToValueAtTime(peakGain * 0.15, startTime + 0.8);
+  gain2.gain.setValueAtTime(peakGain * 0.15, startTime + duration - 1);
+  gain2.gain.linearRampToValueAtTime(0, startTime + duration);
+
+  osc.connect(gain);
+  osc2.connect(gain2);
+  gain.connect(masterGain);
+  gain2.connect(masterGain);
+
+  osc.start(startTime);
+  osc.stop(startTime + duration + 0.1);
+  osc2.start(startTime);
+  osc2.stop(startTime + duration + 0.1);
+}
+
+// ── PHASE 3: REVERSED SHUFFLE ──────────────────────
+
+function playReversedShuffle(startTime) {
+  const duration = BEAT * 16; // 4 bars of 4/4
+  const submix = ctx.createGain();
+  submix.gain.setValueAtTime(0.001, startTime);
+  submix.gain.linearRampToValueAtTime(0.35, startTime + 1.5);
+  submix.gain.setValueAtTime(0.35, startTime + duration - 1.5);
+  submix.gain.linearRampToValueAtTime(0.001, startTime + duration);
+
+  // reverb
+  const convolver = ctx.createConvolver();
+  convolver.buffer = createImpulseResponse(0.8, 0.15);
+
+  const dryGain = ctx.createGain();
+  dryGain.gain.value = 0.7;
+  const wetGain = ctx.createGain();
+  wetGain.gain.value = 0.3;
+
+  submix.connect(dryGain);
+  submix.connect(convolver);
+  convolver.connect(wetGain);
+  dryGain.connect(masterGain);
+  wetGain.connect(masterGain);
+
+  // ── bass voice ──
+  const bassOsc = ctx.createOscillator();
+  bassOsc.type = 'sawtooth';
+  bassOsc.frequency.value = 58; // Bb1
+  const bassFilter = ctx.createBiquadFilter();
+  bassFilter.type = 'lowpass';
+  bassFilter.frequency.value = 120;
+  bassFilter.Q.value = 2;
+  const bassGain = ctx.createGain();
+
+  bassOsc.connect(bassFilter);
+  bassFilter.connect(bassGain);
+  bassGain.connect(submix);
+  bassOsc.start(startTime);
+  bassOsc.stop(startTime + duration + 0.1);
+
+  // reversed envelope: swells into each beat then cuts
+  for (let bar = 0; bar < 4; bar++) {
+    for (let beat = 0; beat < 4; beat++) {
+      const t = startTime + (bar * 4 + beat) * BEAT;
+      bassGain.gain.setValueAtTime(0.01, t);
+      bassGain.gain.exponentialRampToValueAtTime(0.5, t + BEAT * 0.85);
+      bassGain.gain.setValueAtTime(0.01, t + BEAT * 0.9);
+    }
+  }
+
+  // ── chord voices (vocoder-like) ──
+  const chordNotes = [116.54, 155.56, 196.00, 233.08]; // Bb2, Eb3, G3, Bb3
+  const formantFreqs = [
+    [400, 900, 2200, 3200],
+    [600, 1200, 2600, 3500],
+    [300, 800, 2000, 3000],
+    [500, 1100, 2400, 3300]
+  ];
+
+  chordNotes.forEach((note, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.value = note;
+
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.Q.value = 6;
+
+    const dist = ctx.createWaveShaper();
+    dist.curve = makeDistortionCurve(8);
+    dist.oversample = '2x';
+
+    const voiceGain = ctx.createGain();
+    voiceGain.gain.value = 0;
+
+    osc.connect(bp);
+    bp.connect(dist);
+    dist.connect(voiceGain);
+    voiceGain.connect(submix);
+    osc.start(startTime);
+    osc.stop(startTime + duration + 0.1);
+
+    // sweep formants across beats with reversed envelope
+    for (let bar = 0; bar < 4; bar++) {
+      for (let beat = 0; beat < 4; beat++) {
+        const t = startTime + (bar * 4 + beat) * BEAT;
+        const formantSet = formantFreqs[(bar + beat) % 4];
+        bp.frequency.setValueAtTime(formantSet[i], t);
+        bp.frequency.linearRampToValueAtTime(formantSet[(i + 1) % 4], t + BEAT);
+
+        // reversed swell
+        voiceGain.gain.setValueAtTime(0.001, t);
+        voiceGain.gain.exponentialRampToValueAtTime(0.12, t + BEAT * 0.8);
+        voiceGain.gain.setValueAtTime(0.001, t + BEAT * 0.88);
+      }
+    }
+  });
+
+  // ── sub-bass sine for weight ──
+  const subOsc = ctx.createOscillator();
+  subOsc.type = 'sine';
+  subOsc.frequency.value = 29; // Bb0 — one octave below bass voice
+  const subGain = ctx.createGain();
+  subOsc.connect(subGain);
+  subGain.connect(submix);
+  subOsc.start(startTime);
+  subOsc.stop(startTime + duration + 0.1);
+
+  for (let bar = 0; bar < 4; bar++) {
+    for (let beat = 0; beat < 4; beat++) {
+      const t = startTime + (bar * 4 + beat) * BEAT;
+      subGain.gain.setValueAtTime(0.01, t);
+      subGain.gain.exponentialRampToValueAtTime(0.35, t + BEAT * 0.85);
+      subGain.gain.setValueAtTime(0.01, t + BEAT * 0.9);
+    }
+  }
+
+  // ── hi-hat noise (reversed) ──
+  const hatBuf = createNoiseBuffer(0.5);
+  for (let bar = 0; bar < 4; bar++) {
+    for (let eighth = 0; eighth < 8; eighth++) {
+      const t = startTime + (bar * 8 + eighth) * (BEAT / 2);
+      const noise = ctx.createBufferSource();
+      noise.buffer = hatBuf;
+      const hpf = ctx.createBiquadFilter();
+      hpf.type = 'highpass';
+      hpf.frequency.value = 7000;
+      hpf.Q.value = 1;
+      const hatGain = ctx.createGain();
+
+      noise.connect(hpf);
+      hpf.connect(hatGain);
+      hatGain.connect(submix);
+
+      hatGain.gain.setValueAtTime(0.001, t);
+      hatGain.gain.exponentialRampToValueAtTime(0.06, t + BEAT / 2 * 0.7);
+      hatGain.gain.setValueAtTime(0.001, t + BEAT / 2 * 0.78);
+
+      noise.start(t);
+      noise.stop(t + BEAT / 2);
+    }
+  }
+
+  return duration;
+}
+
+// ── PHASE 4: VOCODER VOICE ─────────────────────────
+
+function playVocoderVoice(startTime) {
+  // "Sound good out there?" as formant-shaped noise
+  const phonemes = [
+    { f1: 5000, f2: 7000, dur: 0.18, type: 'noise' },       // S
+    { f1: 500,  f2: 1500, dur: 0.28, type: 'voiced' },       // ow
+    { f1: 350,  f2: 900,  dur: 0.18, type: 'voiced' },       // nd
+    { f1: 300,  f2: 2300, dur: 0.30, type: 'voiced' },       // goo
+    { f1: 350,  f2: 1200, dur: 0.22, type: 'voiced' },       // d
+    { f1: 600,  f2: 1200, dur: 0.20, type: 'voiced' },       // out
+    { f1: 400,  f2: 1800, dur: 0.35, type: 'voiced' },       // there
+    { f1: 450,  f2: 2000, dur: 0.25, type: 'noise' },        // ?  (breath)
+  ];
+
+  const totalDur = phonemes.reduce((s, p) => s + p.dur, 0) + 0.3;
+
+  // carrier: mix of noise and low sawtooth
+  const noiseSrc = ctx.createBufferSource();
+  noiseSrc.buffer = createNoiseBuffer(totalDur);
+
+  const voicedOsc = ctx.createOscillator();
+  voicedOsc.type = 'sawtooth';
+  voicedOsc.frequency.value = 70; // deep voice fundamental
+
+  // formant filters
+  const bp1 = ctx.createBiquadFilter();
+  bp1.type = 'bandpass'; bp1.Q.value = 8;
+  const bp2 = ctx.createBiquadFilter();
+  bp2.type = 'bandpass'; bp2.Q.value = 6;
+
+  // routing
+  const noiseMix = ctx.createGain();
+  noiseMix.gain.value = 0.3;
+  const voicedMix = ctx.createGain();
+  voicedMix.gain.value = 0;
+
+  const voiceSubmix = ctx.createGain();
+  voiceSubmix.gain.value = 0;
+
+  noiseSrc.connect(noiseMix);
+  voicedOsc.connect(voicedMix);
+  noiseMix.connect(bp1);
+  noiseMix.connect(bp2);
+  voicedMix.connect(bp1);
+  voicedMix.connect(bp2);
+
+  // heavy processing: distortion + lowpass
+  const dist = ctx.createWaveShaper();
+  dist.curve = makeDistortionCurve(20);
+  const lpf = ctx.createBiquadFilter();
+  lpf.type = 'lowpass';
+  lpf.frequency.value = 500;
+  lpf.Q.value = 1;
+
+  bp1.connect(dist);
+  bp2.connect(dist);
+  dist.connect(lpf);
+  lpf.connect(voiceSubmix);
+  voiceSubmix.connect(masterGain);
+
+  // schedule phonemes
+  let t = startTime + 0.15;
+  phonemes.forEach(p => {
+    bp1.frequency.setValueAtTime(p.f1, t);
+    bp2.frequency.setValueAtTime(p.f2, t);
+
+    if (p.type === 'voiced') {
+      voicedMix.gain.setValueAtTime(0.5, t);
+      noiseMix.gain.setValueAtTime(0.15, t);
+    } else {
+      voicedMix.gain.setValueAtTime(0.05, t);
+      noiseMix.gain.setValueAtTime(0.5, t);
+    }
+
+    voiceSubmix.gain.setValueAtTime(0.001, t);
+    voiceSubmix.gain.linearRampToValueAtTime(0.5, t + 0.06);
+    voiceSubmix.gain.setValueAtTime(0.5, t + p.dur - 0.06);
+    voiceSubmix.gain.linearRampToValueAtTime(0.001, t + p.dur);
+
+    t += p.dur;
+  });
+
+  noiseSrc.start(startTime);
+  noiseSrc.stop(startTime + totalDur);
+  voicedOsc.start(startTime);
+  voicedOsc.stop(startTime + totalDur);
+
+  return totalDur;
+}
+
+// ── ACID HOUSE LOOP ────────────────────────────────
+
+function playAcidLoop(startTime, bars) {
+  bars = bars || 4;
+  const duration = BEAT * bars * 4;
+  const sixteenth = BEAT / 4;
+
+  const submix = ctx.createGain();
+  submix.gain.setValueAtTime(0.001, startTime);
+  submix.gain.linearRampToValueAtTime(0.7, startTime + 0.6);
+  submix.gain.setValueAtTime(0.7, startTime + duration - 0.6);
+  submix.gain.linearRampToValueAtTime(0.001, startTime + duration);
+  submix.connect(masterGain);
+
+  // ── 303 bass line ──
+  // classic acid pattern in A minor: A2, C3, E3, A3 with slides and accents
+  const pattern = [
+    { note: 110.00, accent: true,  slide: false }, // A2 !
+    { note: 0,      accent: false, slide: false }, // rest
+    { note: 130.81, accent: false, slide: true  }, // C3 ~
+    { note: 164.81, accent: false, slide: false }, // E3
+    { note: 110.00, accent: false, slide: false }, // A2
+    { note: 130.81, accent: true,  slide: true  }, // C3 !~
+    { note: 0,      accent: false, slide: false }, // rest
+    { note: 164.81, accent: false, slide: false }, // E3
+    { note: 220.00, accent: true,  slide: true  }, // A3 !~
+    { note: 164.81, accent: false, slide: false }, // E3
+    { note: 130.81, accent: false, slide: true  }, // C3 ~
+    { note: 110.00, accent: false, slide: false }, // A2
+    { note: 164.81, accent: true,  slide: false }, // E3 !
+    { note: 0,      accent: false, slide: false }, // rest
+    { note: 130.81, accent: false, slide: true  }, // C3 ~
+    { note: 110.00, accent: false, slide: false }, // A2
+  ];
+
+  const bassOsc = ctx.createOscillator();
+  bassOsc.type = 'square';
+  bassOsc.frequency.value = pattern[0].note;
+
+  const bassFilter = ctx.createBiquadFilter();
+  bassFilter.type = 'lowpass';
+  bassFilter.frequency.value = 300;
+  bassFilter.Q.value = 15; // the squelch
+
+  const bassGain = ctx.createGain();
+  bassGain.gain.setValueAtTime(0.001, startTime);
+
+  bassOsc.connect(bassFilter);
+  bassFilter.connect(bassGain);
+  bassGain.connect(submix);
+  bassOsc.start(startTime);
+  bassOsc.stop(startTime + duration + 0.5);
+
+  // sequence the 303
+  for (let bar = 0; bar < bars; bar++) {
+    for (let step = 0; step < 16; step++) {
+      const p = pattern[step];
+      const t = startTime + (bar * 16 + step) * sixteenth;
+
+      if (p.note === 0) {
+        bassGain.gain.setValueAtTime(0.001, t);
+        continue;
+      }
+
+      if (p.slide) {
+        bassOsc.frequency.linearRampToValueAtTime(p.note, t + sixteenth * 0.8);
+      } else {
+        bassOsc.frequency.setValueAtTime(p.note, t);
+      }
+
+      const filterPeak = p.accent ? 3500 : 1200;
+      const ampPeak = p.accent ? 0.6 : 0.35;
+
+      bassFilter.frequency.setValueAtTime(filterPeak, t);
+      bassFilter.frequency.exponentialRampToValueAtTime(300, t + sixteenth * 2.5);
+
+      bassGain.gain.setValueAtTime(ampPeak, t);
+      if (!p.slide) {
+        bassGain.gain.setValueAtTime(ampPeak, t + sixteenth * 0.75);
+        bassGain.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.98);
+      }
+    }
+  }
+
+  // ── four-on-the-floor kick ──
+  for (let bar = 0; bar < bars; bar++) {
+    for (let beat = 0; beat < 4; beat++) {
+      const t = startTime + (bar * 4 + beat) * BEAT;
+
+      const kick = ctx.createOscillator();
+      kick.type = 'sine';
+      kick.frequency.setValueAtTime(150, t);
+      kick.frequency.exponentialRampToValueAtTime(35, t + 0.07);
+
+      const kickGain = ctx.createGain();
+      kickGain.gain.setValueAtTime(0.8, t);
+      kickGain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+
+      kick.connect(kickGain);
+      kickGain.connect(submix);
+      kick.start(t);
+      kick.stop(t + 0.3);
+    }
+  }
+
+  // ── open hi-hat on offbeats ──
+  const hatBuf = createNoiseBuffer(0.3);
+  for (let bar = 0; bar < bars; bar++) {
+    for (let beat = 0; beat < 4; beat++) {
+      const t = startTime + (bar * 4 + beat) * BEAT + BEAT / 2; // offbeat
+
+      const hat = ctx.createBufferSource();
+      hat.buffer = hatBuf;
+      const hpf = ctx.createBiquadFilter();
+      hpf.type = 'highpass';
+      hpf.frequency.value = 8000;
+      const hatGain = ctx.createGain();
+      hatGain.gain.setValueAtTime(0.12, t);
+      hatGain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+
+      hat.connect(hpf);
+      hpf.connect(hatGain);
+      hatGain.connect(submix);
+      hat.start(t);
+      hat.stop(t + 0.15);
+    }
+  }
+
+  return duration;
+}
+
+// ── SHORT VARIANTS (for story use) ─────────────────
+
+function playShortShuffle(startTime, bars) {
+  bars = bars || 2;
+  const duration = BEAT * bars * 4;
+  const submix = ctx.createGain();
+  submix.gain.setValueAtTime(0.001, startTime);
+  submix.gain.linearRampToValueAtTime(0.3, startTime + 0.5);
+  submix.gain.setValueAtTime(0.3, startTime + duration - 0.5);
+  submix.gain.linearRampToValueAtTime(0.001, startTime + duration);
+
+  const dryGain = ctx.createGain();
+  dryGain.gain.value = 0.8;
+  submix.connect(dryGain);
+  dryGain.connect(masterGain);
+
+  // bass
+  const bassOsc = ctx.createOscillator();
+  bassOsc.type = 'sawtooth';
+  bassOsc.frequency.value = 58;
+  const bassLpf = ctx.createBiquadFilter();
+  bassLpf.type = 'lowpass';
+  bassLpf.frequency.value = 120;
+  const bassGain = ctx.createGain();
+  bassOsc.connect(bassLpf);
+  bassLpf.connect(bassGain);
+  bassGain.connect(submix);
+  bassOsc.start(startTime);
+  bassOsc.stop(startTime + duration + 0.1);
+
+  for (let beat = 0; beat < bars * 4; beat++) {
+    const t = startTime + beat * BEAT;
+    bassGain.gain.setValueAtTime(0.01, t);
+    bassGain.gain.exponentialRampToValueAtTime(0.4, t + BEAT * 0.85);
+    bassGain.gain.setValueAtTime(0.01, t + BEAT * 0.9);
+  }
+
+  // one chord voice
+  const chordOsc = ctx.createOscillator();
+  chordOsc.type = 'sawtooth';
+  chordOsc.frequency.value = 116.54;
+  const bp = ctx.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.Q.value = 6;
+  const dist = ctx.createWaveShaper();
+  dist.curve = makeDistortionCurve(8);
+  const chordGain = ctx.createGain();
+  chordOsc.connect(bp);
+  bp.connect(dist);
+  dist.connect(chordGain);
+  chordGain.connect(submix);
+  chordOsc.start(startTime);
+  chordOsc.stop(startTime + duration + 0.1);
+
+  const fSets = [[400, 900], [600, 1200], [300, 800], [500, 1100]];
+  for (let beat = 0; beat < bars * 4; beat++) {
+    const t = startTime + beat * BEAT;
+    bp.frequency.setValueAtTime(fSets[beat % 4][0], t);
+    bp.frequency.linearRampToValueAtTime(fSets[(beat + 1) % 4][0], t + BEAT);
+    chordGain.gain.setValueAtTime(0.001, t);
+    chordGain.gain.exponentialRampToValueAtTime(0.1, t + BEAT * 0.8);
+    chordGain.gain.setValueAtTime(0.001, t + BEAT * 0.88);
+  }
+
+  return duration;
+}
+
+function playShortVocoder(startTime, phonemes) {
+  phonemes = phonemes || [
+    { f1: 2500, f2: 4000, dur: 0.08, type: 'noise' },
+    { f1: 300,  f2: 800,  dur: 0.20, type: 'voiced' },
+    { f1: 400,  f2: 1800, dur: 0.12, type: 'noise' },
+    { f1: 600,  f2: 1200, dur: 0.15, type: 'voiced' },
+    { f1: 350,  f2: 1100, dur: 0.10, type: 'voiced' },
+    { f1: 500,  f2: 1800, dur: 0.20, type: 'voiced' },
+    { f1: 3000, f2: 5000, dur: 0.10, type: 'noise' },
+    { f1: 400,  f2: 1500, dur: 0.15, type: 'noise' },
+  ]; // default: "to the left"
+
+  const totalDur = phonemes.reduce((s, p) => s + p.dur, 0) + 0.2;
+
+  const noiseSrc = ctx.createBufferSource();
+  noiseSrc.buffer = createNoiseBuffer(totalDur);
+  const voicedOsc = ctx.createOscillator();
+  voicedOsc.type = 'sawtooth';
+  voicedOsc.frequency.value = 70;
+
+  const noiseMix = ctx.createGain(); noiseMix.gain.value = 0.3;
+  const voicedMix = ctx.createGain(); voicedMix.gain.value = 0;
+
+  const bp1 = ctx.createBiquadFilter(); bp1.type = 'bandpass'; bp1.Q.value = 8;
+  const bp2 = ctx.createBiquadFilter(); bp2.type = 'bandpass'; bp2.Q.value = 6;
+
+  const dist = ctx.createWaveShaper(); dist.curve = makeDistortionCurve(20);
+  const lpf = ctx.createBiquadFilter(); lpf.type = 'lowpass'; lpf.frequency.value = 500;
+
+  const outGain = ctx.createGain(); outGain.gain.value = 0;
+
+  noiseSrc.connect(noiseMix); voicedOsc.connect(voicedMix);
+  noiseMix.connect(bp1); noiseMix.connect(bp2);
+  voicedMix.connect(bp1); voicedMix.connect(bp2);
+  bp1.connect(dist); bp2.connect(dist);
+  dist.connect(lpf); lpf.connect(outGain);
+  outGain.connect(masterGain);
+
+  let t = startTime + 0.1;
+  phonemes.forEach(p => {
+    bp1.frequency.setValueAtTime(p.f1, t);
+    bp2.frequency.setValueAtTime(p.f2, t);
+    voicedMix.gain.setValueAtTime(p.type === 'voiced' ? 0.5 : 0.05, t);
+    noiseMix.gain.setValueAtTime(p.type === 'voiced' ? 0.15 : 0.5, t);
+    outGain.gain.setValueAtTime(0.001, t);
+    outGain.gain.linearRampToValueAtTime(0.6, t + 0.04);
+    outGain.gain.setValueAtTime(0.6, t + p.dur - 0.03);
+    outGain.gain.linearRampToValueAtTime(0.001, t + p.dur);
+    t += p.dur;
+  });
+
+  noiseSrc.start(startTime); noiseSrc.stop(startTime + totalDur);
+  voicedOsc.start(startTime); voicedOsc.stop(startTime + totalDur);
+  return totalDur;
+}
+
+// ── PHASE 5: SINE SWEEP ────────────────────────────
+
+function playSineSweep(startTime, duration) {
+  const osc = ctx.createOscillator();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(20, startTime);
+  osc.frequency.exponentialRampToValueAtTime(240, startTime + duration);
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0, startTime);
+  gain.gain.linearRampToValueAtTime(0.25, startTime + 0.5);
+  gain.gain.setValueAtTime(0.25, startTime + duration - 0.8);
+  gain.gain.linearRampToValueAtTime(0, startTime + duration);
+
+  osc.connect(gain);
+  gain.connect(masterGain);
+
+  osc.start(startTime);
+  osc.stop(startTime + duration + 0.1);
+
+  // chamfer undertone
+  playChamfer(startTime, duration, 0.04);
+}
+
+// ── PHASE 6: AMBIENT LOOP ──────────────────────────
+
+function startAmbientLoop() {
+  const osc = ctx.createOscillator();
+  osc.type = 'sine';
+  osc.frequency.value = CHAMFER_HZ;
+
+  const gain = ctx.createGain();
+  gain.gain.value = 0.025;
+
+  // LFO for pulse
+  const lfo = ctx.createOscillator();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.25; // once per 4 seconds
+  const lfoGain = ctx.createGain();
+  lfoGain.gain.value = 0.012;
+
+  lfo.connect(lfoGain);
+  lfoGain.connect(gain.gain);
+
+  osc.connect(gain);
+  gain.connect(masterGain);
+
+  osc.start();
+  lfo.start();
+}
+
+// ── WAVEFORM VISUALIZER ────────────────────────────
+
+function initWaveform() {
+  const canvas = document.getElementById('waveform');
+  const cctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = 80;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const bufLen = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufLen);
+
+  function draw() {
+    if (!running) return;
+    requestAnimationFrame(draw);
+
+    analyser.getByteTimeDomainData(dataArray);
+
+    cctx.clearRect(0, 0, canvas.width, canvas.height);
+    cctx.lineWidth = 1;
+    cctx.strokeStyle = 'rgba(232, 144, 32, 0.4)';
+    cctx.beginPath();
+
+    const sliceWidth = canvas.width / bufLen;
+    let x = 0;
+
+    for (let i = 0; i < bufLen; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = (v * canvas.height) / 2;
+      if (i === 0) cctx.moveTo(x, y);
+      else cctx.lineTo(x, y);
+      x += sliceWidth;
+    }
+
+    cctx.lineTo(canvas.width, canvas.height / 2);
+    cctx.stroke();
+  }
+
+  draw();
+}
+
+// ── STATUS TEXT TYPEWRITER ──────────────────────────
+
+async function typeStatus() {
+  const el = document.getElementById('status-lines');
+  const lines = [
+    { text: 'SYSTEM STATUS:', cls: '' },
+    { text: '  Subwoofer array    20 drivers · 5 enclosures · snail-shell', cls: '' },
+    { text: '  Power draw         [EXCEEDS PARAMETERS]', cls: 'highlight' },
+    { text: '  Thermal status     [IMPOSSIBLE]', cls: 'highlight' },
+    { text: '  Chamfer frequency  DETECTED', cls: 'highlight' },
+    { text: '  Operator           ACKNOWLEDGED', cls: 'highlight' },
+    { text: '', cls: '' },
+    { text: '  You were heard.', cls: 'heard' },
+  ];
+
+  document.getElementById('status').classList.add('visible');
+
+  for (const line of lines) {
+    if (line.text === '') {
+      el.appendChild(document.createTextNode('\n'));
+      await sleep(400);
+      continue;
+    }
+    const span = document.createElement('span');
+    if (line.cls) span.className = line.cls;
+    el.appendChild(span);
+
+    for (let i = 0; i < line.text.length; i++) {
+      span.textContent += line.text[i];
+      await sleep(line.cls === 'heard' ? 50 : 22);
+    }
+    el.appendChild(document.createTextNode('\n'));
+    await sleep(line.cls === 'heard' ? 300 : 80);
+  }
+}
+
+// ── PROSE REVEAL ───────────────────────────────────
+
+async function revealProse() {
+  const prose = document.getElementById('prose');
+  prose.classList.add('visible');
+
+  const elements = prose.querySelectorAll('.subtitle, p, .oor-action, .award-flash, #return-btn');
+  for (const el of elements) {
+    el.style.animation = 'fadeUp 0.6s ease forwards';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    await sleep(450);
+  }
+}
+
+// ── MASTER SEQUENCE ────────────────────────────────
+
+async function runSequence() {
+  running = true;
+  const canvas = document.getElementById('waveform');
+  initWaveform();
+
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
+  const t0 = now();
+
+  // ── Phase 1: Amber + chamfer tone ──
+  document.body.classList.add('phase-amber');
+  canvas.classList.add('visible');
+  playChamfer(t0, 4, 0.35);
+  await sleep(4000);
+
+  // ── Phase 2: Silence ──
+  // the absence after the tone. the player's ears adjust.
+  await sleep(2200);
+
+  // ── Phase 3: Reversed shuffle + status typewriter ──
+  document.body.classList.add('phase-bloom');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  console.log('[soundcheck] Phase 3: reversed shuffle, ctx.time =', ctx.currentTime);
+  const shuffleDur = playReversedShuffle(now());
+  console.log('[soundcheck] shuffle scheduled, dur =', shuffleDur);
+  await sleep(1000);
+  typeStatus(); // runs concurrently
+  await sleep(shuffleDur * 1000 - 1000);
+
+  // ── Phase 3b: Acid house loop ──
+  console.log('[soundcheck] Phase 3b: acid loop, ctx.time =', ctx.currentTime);
+  const acidDur = playAcidLoop(now(), 4);
+  console.log('[soundcheck] acid scheduled, dur =', acidDur);
+  await sleep(acidDur * 1000);
+
+  // ── Phase 3c: Short reversed shuffle callback ──
+  console.log('[soundcheck] Phase 3c: short shuffle, ctx.time =', ctx.currentTime);
+  playShortShuffle(now(), 2);
+  await sleep(BEAT * 8 * 1000);
+
+  await sleep(800);
+
+  // ── Phase 4: Voice ──
+  console.log('[soundcheck] Phase 4: vocoder voice, ctx.time =', ctx.currentTime);
+  document.body.classList.remove('phase-bloom');
+  document.getElementById('status').style.opacity = '0';
+  await sleep(1000);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('voice-text').classList.add('visible');
+  const voiceDur = playVocoderVoice(now());
+  console.log('[soundcheck] voice scheduled, dur =', voiceDur);
+  await sleep(voiceDur * 1000 + 1200);
+  document.getElementById('voice-text').classList.add('dismissed');
+  await sleep(1200);
+
+  // ── Phase 5: Sine sweep + prose ──
+  console.log('[soundcheck] Phase 5: sine sweep, ctx.time =', ctx.currentTime);
+  playSineSweep(now(), 6);
+  await sleep(600);
+  revealProse(); // runs concurrently, handles its own scrolling
+  await sleep(6000);
+
+  // ── Phase 6: Settled ambient ──
+  canvas.classList.remove('visible');
+  canvas.classList.add('settled');
+  document.body.classList.add('phase-settled');
+  startAmbientLoop();
+}
+
+// ── DEBUG: ISOLATED ACID TEST ──────────────────────
+
+function debugAcid() {
+  if (!ctx) { initAudio(); ctx.resume(); }
+  const t = ctx.currentTime + 0.1; // schedule slightly in future
+  console.log('debugAcid start at', t);
+
+  // dead simple: one square osc → filter → master
+  const osc = ctx.createOscillator();
+  osc.type = 'square';
+  osc.frequency.value = 110;
+  const filt = ctx.createBiquadFilter();
+  filt.type = 'lowpass';
+  filt.frequency.value = 800;
+  filt.Q.value = 12;
+  const g = ctx.createGain();
+  g.gain.value = 0.3;
+  osc.connect(filt);
+  filt.connect(g);
+  g.connect(masterGain);
+  osc.start(t);
+  osc.stop(t + 2);
+  console.log('debugAcid: simple osc scheduled');
+
+  // now try the full acid loop
+  const dur = playAcidLoop(t + 2.5, 2);
+  console.log('debugAcid: acid loop scheduled, duration:', dur);
+}
+
+// expose for console
+window.debugAcid = debugAcid;
+
+// ── GATE HANDLER ───────────────────────────────────
+
+document.getElementById('gate').addEventListener('click', function() {
+  this.classList.add('dismissed');
+  initAudio();
+  ctx.resume().then(() => {
+    setTimeout(runSequence, 1200);
+  });
+});
+
+// ── RETURN HANDLER ─────────────────────────────────
+
+document.getElementById('return-btn').addEventListener('click', function() {
+  // award artifacts to localStorage if game state exists
+  try {
+    const stateKey = 'pilgrims_path_state';
+    const state = JSON.parse(localStorage.getItem(stateKey) || '{}');
+    if (state.artifacts && !state.artifacts.includes('soundcheck')) {
+      state.artifacts.push('soundcheck');
+      localStorage.setItem(stateKey, JSON.stringify(state));
+    }
+  } catch(e) { /* no-op */ }
+
+  window.location = 'index.html?resume=w_011';
+});
+</script>
+</body>
+</html>
