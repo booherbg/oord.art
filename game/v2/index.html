@@ -19,8 +19,8 @@
       --yellow:      #D4A820;
       --violet:      #6020C0;
       --pink:        #D04870;
-      --text:        #C8BCA8;
-      --text-dim:    #6A6058;
+      --text:        #D8D0BC;
+      --text-dim:    #8A8070;
       --text-bright: #E8DCC8;
       --border:      #201818;
       --border-warm: #3A2818;
@@ -94,9 +94,9 @@
     }
 
     .site-sub {
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 0.22em;
+      font-size: 11px;
+      color: var(--text);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-top: 12px;
     }
@@ -147,7 +147,7 @@
 
     .char-card.locked {
       border: 1px dashed #2a1820;
-      opacity: 0.45;
+      opacity: 0.55;
       cursor: default;
     }
 
@@ -172,9 +172,9 @@
 
     .char-tagline {
       font-style: italic;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--yellow);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .char-card.locked .char-tagline {
@@ -182,12 +182,12 @@
     }
 
     .char-completed-note {
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-dim);
+      color: var(--text);
       margin-top: 8px;
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     /* artifacts on select screen */
@@ -202,7 +202,7 @@
     }
 
     .artifacts-label {
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-dim);
@@ -210,7 +210,7 @@
     }
 
     .artifact-chip {
-      font-size: 9px;
+      font-size: 10px;
       padding: 3px 8px;
       border-radius: 2px;
       border: 1px solid var(--border-warm);
@@ -255,9 +255,9 @@
 
     .progress-note {
       margin-top: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-style: italic;
-      color: var(--text-dim);
+      color: var(--text);
       letter-spacing: 0.02em;
     }
 
@@ -277,17 +277,26 @@
       background: none;
       border: none;
       font-family: 'DM Mono', monospace;
-      font-size: 9px;
+      font-size: 11px;
       color: var(--text-dim);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-      padding: 0;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+      padding: 4px 8px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .select-reset:hover { opacity: 1; }
+
+    .select-reset.confirming {
+      opacity: 1;
+      color: var(--orange);
+      border-bottom: 1px solid var(--orange);
+      padding-bottom: 3px;
+    }
 
     /* ─── GAME HEADER ─────────────────────────────────── */
     #game-screen .site-header {
@@ -298,8 +307,8 @@
     }
 
     .game-back {
-      font-size: 10px;
-      color: var(--text-dim);
+      font-size: 11px;
+      color: var(--text);
       letter-spacing: 0.15em;
       text-transform: uppercase;
       background: none;
@@ -317,7 +326,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       letter-spacing: 0.12em;
-      color: var(--text-dim);
+      color: var(--text);
       flex: 1;
     }
 
@@ -362,7 +371,7 @@
     .arrival {
       color: var(--yellow);
       font-style: italic;
-      font-size: 12px;
+      font-size: 13px;
       margin-bottom: 18px;
       padding-bottom: 14px;
       border-bottom: 1px solid rgba(212, 168, 32, 0.12);
@@ -372,8 +381,8 @@
 
     /* ─── BODY TEXT ───────────────────────────────────── */
     .node-subtitle {
-      font-size: 12px;
-      letter-spacing: 0.16em;
+      font-size: 13px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--orange);
       margin-bottom: 12px;
@@ -398,7 +407,7 @@
     /* ─── CONDITIONAL TEXT ────────────────────────────── */
     .conditional {
       color: var(--text-bright);
-      font-size: 12px;
+      font-size: 13px;
       margin-top: 16px;
       padding: 10px 14px;
       border-left: 2px solid var(--violet);
@@ -411,7 +420,7 @@
     /* ─── OOR ACTION ──────────────────────────────────── */
     .oor-action {
       font-style: italic;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--orange);
       margin-top: 20px;
       padding: 12px 16px;
@@ -459,10 +468,10 @@
       background: none;
       border: 1px solid var(--border-warm);
       border-radius: 2px;
-      padding: 12px 16px;
+      padding: 13px 16px;
       color: var(--text);
       font-family: 'DM Mono', monospace;
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.55;
       text-align: left;
       cursor: pointer;
@@ -479,21 +488,24 @@
       color: var(--text-bright);
     }
 
-    .choice-btn.choice-gated {
-      border-color: rgba(212,168,32,0.4);
-      color: var(--yellow);
-      background: rgba(212,168,32,0.03);
-      box-shadow: 0 0 8px rgba(212,168,32,0.08);
-      animation: gatedPulse 3s ease-in-out infinite;
-    }
-    .choice-btn.choice-gated:hover {
+    .choice-btn.choice-gated-new {
       border-color: var(--yellow);
-      background: rgba(212,168,32,0.08);
-      color: var(--text-bright);
+      color: var(--bg);
+      background: rgba(212,168,32,0.85);
+      font-weight: 500;
+      animation: gatedGlow 2.5s ease-in-out infinite;
     }
-    @keyframes gatedPulse {
-      0%, 100% { box-shadow: 0 0 8px rgba(212,168,32,0.06); }
-      50% { box-shadow: 0 0 14px rgba(212,168,32,0.15); }
+    .choice-btn.choice-gated-new:hover {
+      background: rgba(212,168,32,0.95);
+      color: var(--bg);
+    }
+    .choice-btn.choice-gated-new .choice-icon {
+      color: var(--bg);
+      opacity: 0.6;
+    }
+    @keyframes gatedGlow {
+      0%, 100% { box-shadow: 0 0 12px rgba(212,168,32,0.15); }
+      50% { box-shadow: 0 0 24px rgba(212,168,32,0.35); }
     }
 
     .choice-icon {
@@ -503,11 +515,12 @@
       font-size: 13px;
       opacity: 0.5;
       flex-shrink: 0;
+      margin-left: auto;
     }
 
     .choice-lore .choice-icon { color: var(--text-dim); }
     .choice-branch .choice-icon { color: var(--orange); opacity: 0.7; }
-    .choice-gated .choice-icon { color: var(--yellow); opacity: 0.8; }
+    .choice-gated-new .choice-icon { color: var(--bg); opacity: 0.6; }
 
     /* legend on select screen */
     .legend {
@@ -515,10 +528,10 @@
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
-      font-size: 9px;
+      font-size: 11px;
       color: var(--text-dim);
       letter-spacing: 0.06em;
-      opacity: 0.6;
+      opacity: 0.85;
     }
     .legend-item {
       display: flex;
@@ -611,12 +624,12 @@
 
     .auto-advance-btn {
       background: none;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-warm);
       border-radius: 2px;
-      padding: 10px 16px;
-      color: var(--text-dim);
+      padding: 11px 16px;
+      color: var(--text);
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.12em;
       cursor: pointer;
       transition: border-color 0.3s, color 0.3s, opacity 0.4s;
@@ -1445,6 +1458,102 @@
 
     .restart-btn:hover { border-color: var(--orange); color: var(--orange); }
 
+    /* ─── INTRO MODAL ─────────────────────────────────── */
+    .intro-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      background: rgba(5, 4, 9, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .intro-modal[hidden] { display: none !important; }
+
+    .intro-inner {
+      max-width: 460px;
+      width: 100%;
+    }
+
+    .intro-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 24px;
+    }
+
+    .intro-body {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .intro-body p {
+      margin-bottom: 16px;
+    }
+
+    .intro-hints {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0 28px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: rgba(14, 11, 18, 0.6);
+    }
+
+    .intro-hint {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .intro-hint-icon {
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .intro-hint-text {
+      color: var(--text);
+    }
+
+    .intro-hint-text strong {
+      color: var(--text-bright);
+      font-weight: 400;
+    }
+
+    .intro-begin {
+      background: none;
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 12px 24px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+
+    .intro-begin:hover {
+      background: rgba(232, 96, 16, 0.1);
+      color: var(--text-bright);
+    }
+
     .node-map-modal {
       position: fixed;
       inset: 0;
@@ -1654,6 +1763,39 @@
 </head>
 <body class="temp-cold">
 
+  <!-- ─── INTRO MODAL ─────────────────────────────────── -->
+  <div class="intro-modal" id="intro-modal" hidden>
+    <div class="intro-inner">
+      <div class="intro-title">Before You Go In</div>
+      <div class="intro-body">
+        <p>This is a short story you play through by making choices. Your first run takes about 5 minutes. There are no wrong answers.</p>
+        <p>When you finish, you'll unlock new paths and perspectives. The same evening, experienced differently. Some choices only appear after you've carried something home from a previous run.</p>
+      </div>
+      <div class="intro-hints">
+        <div class="intro-hint">
+          <span class="intro-hint-icon">→</span>
+          <span class="intro-hint-text"><strong>Continue</strong> moves the story forward</span>
+        </div>
+        <div class="intro-hint">
+          <span class="intro-hint-icon" style="color:var(--text-dim)">↩</span>
+          <span class="intro-hint-text"><strong>Side details</strong> loop back to the main path</span>
+        </div>
+        <div class="intro-hint">
+          <span class="intro-hint-icon" style="color:var(--orange)">⑂</span>
+          <span class="intro-hint-text"><strong>Branches</strong> change where the story goes</span>
+        </div>
+        <div class="intro-hint">
+          <span class="intro-hint-icon" style="color:var(--yellow)">◈</span>
+          <span class="intro-hint-text"><strong>Gold choices</strong> are new paths unlocked by previous runs</span>
+        </div>
+      </div>
+      <div class="intro-body">
+        <p>After each run, come back and choose the same character again. New options will appear. When you've seen enough of one perspective, try another.</p>
+      </div>
+      <button class="intro-begin" id="intro-begin-btn">Enter the evening</button>
+    </div>
+  </div>
+
   <!-- ─── CHARACTER SELECT SCREEN ─────────────────────── -->
   <div id="select-screen" class="wrap">
     <header class="site-header">
@@ -1671,7 +1813,7 @@
       <span class="legend-item"><span class="legend-icon" style="color:var(--yellow)">◈</span> unlocked path</span>
     </div>
     <div style="margin-top: 24px; text-align: right;">
-      <button class="select-reset" onclick="confirmReset()">reset all progress</button>
+      <button type="button" class="select-reset" id="reset-btn" onclick="confirmReset()">reset all progress</button>
     </div>
     <div class="version-tag">v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala</div>
   </div>
@@ -1988,11 +2130,42 @@ function classifyChoices(choices) {
   });
 }
 
+// ─── INTRO MODAL ─────────────────────────────────────────────────────────────
+
+const INTRO_SEEN_KEY = 'pilgrims_path_intro_seen';
+
+function shouldShowIntro() {
+  try { return !localStorage.getItem(INTRO_SEEN_KEY); } catch(e) { return false; }
+}
+
+function showIntro(charId) {
+  const modal = document.getElementById('intro-modal');
+  modal.hidden = false;
+  const btn = document.getElementById('intro-begin-btn');
+  btn.onclick = () => {
+    modal.hidden = true;
+    try { localStorage.setItem(INTRO_SEEN_KEY, '1'); } catch(e) {}
+    loadCharacterDirect(charId);
+  };
+}
+
 // ─── CHARACTER LOADING ────────────────────────────────────────────────────────
 
 async function loadCharacter(charId) {
   const def = CHAR_DEFS.find(c => c.id === charId);
   if (!def || !isUnlocked(charId)) return;
+
+  if (persistent.runs === 0 && shouldShowIntro()) {
+    showIntro(charId);
+    return;
+  }
+
+  loadCharacterDirect(charId);
+}
+
+async function loadCharacterDirect(charId) {
+  const def = CHAR_DEFS.find(c => c.id === charId);
+  if (!def) return;
 
   document.getElementById('select-screen').hidden = true;
   document.getElementById('game-screen').hidden   = false;
@@ -2019,7 +2192,8 @@ async function loadCharacter(charId) {
       node:            data.start_node,
       tags:            [],
       transcendentals: [],
-      pending_arrival: null
+      pending_arrival: null,
+      earnedArtifact:  null
     };
 
     renderNode();
@@ -2046,19 +2220,39 @@ function restartCharacter() {
     node:            charMeta.start_node,
     tags:            [],
     transcendentals: [],
-    pending_arrival: null
+    pending_arrival: null,
+    earnedArtifact:  null
   };
   document.body.className = 'temp-cold';
   _lastRenderedNode = null; // force scroll on restart
   renderNode();
 }
 
+let resetPending = false;
+let resetTimer = null;
+
 function confirmReset() {
-  if (confirm('Clear all progress, artifacts, and completed characters?')) {
-    persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
-    savePersistent();
-    showSelectScreen();
+  const btn = document.getElementById('reset-btn');
+  if (!resetPending) {
+    resetPending = true;
+    if (btn) { btn.textContent = 'click again to confirm'; btn.classList.add('confirming'); }
+    resetTimer = setTimeout(() => {
+      resetPending = false;
+      if (btn) { btn.textContent = 'reset all progress'; btn.classList.remove('confirming'); }
+    }, 4000);
+    return;
   }
+  clearTimeout(resetTimer);
+  resetPending = false;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(INTRO_SEEN_KEY);
+  } catch(e) {}
+  persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
+  savePersistent();
+  run = null;
+  if (btn) { btn.textContent = 'reset all progress'; btn.classList.remove('confirming'); }
+  showSelectScreen();
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
@@ -2096,6 +2290,7 @@ function renderNode() {
   if (node.awards_artifact && !persistent.artifacts.includes(node.awards_artifact)) {
     persistent.artifacts.push(node.awards_artifact);
     savePersistent();
+    if (!run.earnedArtifact) run.earnedArtifact = node.awards_artifact;
   }
 
   // ── temperature ─────────────────────────────────────────
@@ -2151,6 +2346,7 @@ function renderNode() {
     if (!persistent.artifacts.includes(a)) {
       persistent.artifacts.push(a);
       savePersistent();
+      if (!run.earnedArtifact) run.earnedArtifact = a;
     }
   });
 
@@ -2249,9 +2445,9 @@ function renderNode() {
         const type = types[i];
         const icon = type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂';
         const cls = 'choice-btn'
-          + (gated ? ' choice-gated' : '')
+          + (gated ? ' choice-gated-new' : '')
           + (type !== 'continue' ? ' choice-' + type : '');
-        html += `<button class="${cls}" data-idx="${i}"><span class="choice-icon" aria-label="${type}">${icon}</span> ${esc(choice.text)}</button>`;
+        html += `<button class="${cls}" data-idx="${i}">${esc(choice.text)} <span class="choice-icon" aria-label="${type}">${icon}</span></button>`;
       });
       html += '</div>';
     }
@@ -2279,8 +2475,8 @@ function renderNode() {
       savePersistent();
     }
 
-    // show artifact earned this run (if any)
-    const newArtifact = conditionalArtifacts[0] || node.awards_artifact || null;
+    // show artifact earned this run (if any) — may have been awarded at a non-terminal node
+    const newArtifact = conditionalArtifacts[0] || node.awards_artifact || run.earnedArtifact || null;
     const artTrans = {
       yarn_knot: 'unity', matchbook: 'truth', blank_key: 'goodness',
       business_card: 'beauty', heat_sink: 'beauty', pale_antler: null
@@ -2451,7 +2647,7 @@ function renderNode() {
       const btn = document.createElement('button');
       btn.className = 'auto-advance-btn';
       btn.id = 'advance-btn';
-      btn.textContent = 'continue →';
+      btn.textContent = 'continue';
       wrap.appendChild(btn);
       btn.addEventListener('click', () => {
         run.node = nextId;
@@ -4355,6 +4551,7 @@ document.addEventListener('keydown', e => {
 
 loadPersistent();
 showSelectScreen();
+
 
 </script>
 </body>

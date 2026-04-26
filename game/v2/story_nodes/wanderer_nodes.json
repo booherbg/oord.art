@@ -11,7 +11,7 @@
       "arrival_variants": null,
       "conditional_text": [
         {
-          "append": "Other people are walking the same direction. Not together - parallel. A woman in a green coat moving quickly. A guy with his head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
+          "append": "Other people are walking the same direction. You see a woman in a green coat moving quickly. A man with his head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
         }
       ],
       "oor_action": null,
@@ -34,10 +34,17 @@
     },
     {
       "id": "w_002",
-      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end - a warehouse, something with the bones of industrial purpose. The bass is coming from inside. It's not exactly louder here. It's deeper. Like it found a lower register inside your body. You notice the distinction without understanding it.\n\nThe door on the front of the building is open. Warm air pushes through the gap - sweat and fog-machine glycerin and something underneath both, metallic, almost mineral, like the air before a thunderstorm but indoors.\n\nThere's a bouncer standing by the door talking to the woman in the green coat. She's pulling her hair back with one hand, already half-inside. You hear her say \"No I don't have anything in my left pocket\" before she disappears into the building.",
+      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end - a warehouse, something with the bones of industrial purpose. The bass is coming from inside. It's not exactly louder here. It's deeper. Like it found a lower register inside your body.\n\nThe door on the front of the building is open. Warm air pushes through the gap - sweat and fog-machine glycerin and something underneath both, metallic, almost mineral, like the feeling before a thunderstorm.\n\nThere's a bouncer standing by the door talking to the woman in the green jacket. She's pulling her hair back with one hand, already half-inside. You hear her say \"No I don't have anything in my left pocket\" before she disappears into the building.",
       "arrival_variants": [
         {
-          "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound all night? Have you heard this Sound before?",
+          "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
+          "default": false,
+          "requires": {
+            "has_artifact": "matchbook"
+          }
+        },
+        {
+          "text": "You've arrived at the source of the Sound. When did you begin to seek it? Have you been following this Sound all night? Have you heard this Sound before?",
           "default": false,
           "requires": {
             "has_tag": "drawn"
@@ -46,13 +53,6 @@
         {
           "text": "You've arrived at the source of the Sound.",
           "default": true
-        },
-        {
-          "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
-          "default": false,
-          "requires": {
-            "has_artifact": "matchbook"
-          }
         }
       ],
       "conditional_text": [
@@ -74,7 +74,9 @@
           "next": "W_003b",
           "arrival": null,
           "requires": {
-            "not": { "has_artifact": "yarn_knot" }
+            "not": {
+              "has_artifact": "yarn_knot"
+            }
           }
         },
         {
@@ -163,7 +165,7 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_005"
         },
         {
@@ -194,7 +196,7 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_005"
         },
         {
@@ -277,7 +279,9 @@
           "tag": "stays",
           "arrival": null,
           "requires": {
-            "not": { "has_artifact": "yarn_knot" }
+            "not": {
+              "has_artifact": "yarn_knot"
+            }
           }
         },
         {
@@ -285,7 +289,9 @@
           "next": "w_007e",
           "arrival": null,
           "requires": {
-            "not": { "has_artifact": "yarn_knot" }
+            "not": {
+              "has_artifact": "yarn_knot"
+            }
           }
         },
         {
@@ -366,7 +372,7 @@
       ],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_009"
         }
       ],
@@ -481,7 +487,7 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_011"
         }
       ],
@@ -567,7 +573,7 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_012"
         }
       ],
@@ -585,7 +591,9 @@
           "text": "The night is over. You are standing in the cold."
         },
         {
-          "requires": { "has_tag": "met_bartender" },
+          "requires": {
+            "has_tag": "met_bartender"
+          },
           "text": "The night is over. You are standing in the cold. On your way out you passed a chair by the door. A jacket folded neatly on it - SECURITY in block letters. The bouncer must have left in a hurry."
         }
       ],
@@ -705,15 +713,17 @@
     },
     {
       "id": "w_bouncer_run2",
-      "subtitle": "THE BOUNCER, AGAIN",
-      "text": "The bouncer looks at you. Same jacket. SECURITY in block letters. Same stance - the picture-of-standing-once stance. Same eyes that go to your hands before your face.\n\n\"Show me an empty pocket,\" he says.",
+      "subtitle": "THE BOUNCER",
+      "text": "The bouncer looks at you. SECURITY in block letters. Something about the way he holds himself feels familiar. He looks at you for a moment, then something in his posture shifts.\n\n\"Show me an empty pocket,\" he says.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["returned"],
+      "awards_tags": [
+        "returned"
+      ],
       "choices": [
         {
           "text": "Turn out your left pocket.",
@@ -733,18 +743,25 @@
     },
     {
       "id": "w_bouncer_run2_left",
-      "subtitle": "WRONG POCKET",
-      "text": "Easy. You reach in with the casual confidence of someone who knows the answer. Your fingers close around something warm and the confidence evaporates.\n\nThe yarn - orange, yellow, knotted tight. You stare at it. You don't remember putting it there. You don't remember putting it there because you didn't put it there. Your face is doing something you hope looks calm.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something older than both.\n\nHe gives it back. \"Wrong pocket. Right answer.\" He steps aside.",
-      "arrival_variants": [],
+      "subtitle": "WRONG POCKET, RIGHT ANSWER",
+      "text": "You reach into your left pocket with casual confidence. Your fingers close around something warm and that confidence evaporates.\n\nIt's a small clump of yarn - orange, yellow, knotted tight. You stare at it. You don't remember putting it there. Your face is doing something you hope looks calm.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something more curious.\n\nHe gives it back. \"Wrong pocket. Right answer.\" He steps aside.",
+      "arrival_variants": [
+        {
+          "text": "\"Show me an empty pocket\" - that's an interesting way to say hello.",
+          "default": true
+        }
+      ],
       "conditional_text": [],
       "oor_action": null,
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["kept_yarn"],
+      "awards_tags": [
+        "kept_yarn"
+      ],
       "choices": [
         {
-          "text": "Go through the door.",
+          "text": "Enter the warehouse.",
           "next": "w_bartender_run2"
         }
       ],
@@ -762,7 +779,9 @@
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["lost_yarn"],
+      "awards_tags": [
+        "lost_yarn"
+      ],
       "choices": [
         {
           "text": "Go through the door.",
@@ -776,22 +795,24 @@
     {
       "id": "w_bartender_run2",
       "subtitle": "THE BAR, AGAIN",
-      "text": "You pass the bar on your way in. The bartender is there. Same woman, same quiet focus on her own hands. She looks up when you approach. Not surprised. Not not-surprised. She looks at you the way someone looks at a sentence they've already read once and are reading again to make sure they understood it.\n\nShe's already reaching for something. Then she stops. Sets down the glass. Looks at you.\n\n\"Same thing?\" she asks. Her voice is low and unhurried. \"Or.\" She reaches under the bar and her hand comes up holding a length of clear tubing that runs along the back wall, disappearing into the base of the nearest fog machine.\n\nShe holds the tube over an empty glass and waits.",
+      "text": "You pass the bar on your way in. The bartender is there. She looks up when you approach. She's reaching for something, then stops. She sets down the class she's cleaning and looks at you.\n\n\n\"What would you like? I've got exactly two drinks tonight.\"",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": "matchbook",
-      "awards_tags": ["met_bartender"],
+      "awards_tags": [
+        "met_bartender"
+      ],
       "choices": [
         {
-          "text": "The whiskey sour. You liked it the first time.",
+          "text": "\"A whiskey sour.\" (Your favorite)",
           "next": "w_bartender_run2_drink",
           "flag": "chose_whiskey"
         },
         {
-          "text": "Show me what that is.",
+          "text": "\"A golden goblin\" (Oh?)",
           "next": "w_bartender_run2_drink",
           "flag": "chose_fog"
         }
@@ -806,11 +827,15 @@
       "text": "She's already looking at something else. The matchbook is on the bar between you. You don't remember her putting it there.\n\nPlain card stock. One side is blank. The other has something written on it, small, in ink that catches the orange light. You read it. Your chest does something. Not the bass. Not the drink. The words on the matchbook are for you. Not for the room, not for the crowd, not for the evening. For you. You read it again. The feeling doesn't fade. You put it in your pocket.",
       "arrival_variants": [
         {
-          "requires": { "has_flag": "chose_whiskey" },
+          "requires": {
+            "has_flag": "chose_whiskey"
+          },
           "text": "She makes the whiskey sour. Same ritual, same quiet fascination with her own hands. But the ratios are right this time. The bitters are mixed in. The rosemary is rosemary. She learned. She studied. She watched herself get it wrong and then she fixed it, and the drink she sets in front of you is technically flawless. Somehow that is more unsettling than when it was wrong."
         },
         {
-          "requires": { "has_flag": "chose_fog" },
+          "requires": {
+            "has_flag": "chose_fog"
+          },
           "text": "She opens something. Fog pours into the glass, thick, slow, heavier than fog should be. It pools. It settles. The surface tension holds for a moment and then it isn't fog anymore. It's liquid. Clear, faintly amber, still moving.\n\nShe adds something from a small dark bottle with no label. The liquid warms. The color deepens to the amber of old resin, old honey, old light trapped in old glass.\n\nThe garnish is a sprig of moss. Not bar moss, not decorative. Ancient-looking, the kind you'd find on a stone that hasn't been moved in centuries. The fronds are fine and feathered and under the orange light they shift color: gold, then copper, then something between green and violet that doesn't stay long enough to name. She places it on the surface of the drink and it floats, ancient and patient.\n\nThe drink smells like the room. Wet stone, cedar resin, the mineral sweetness you tasted in the air when you first walked in.\n\nYou drink it. It tastes like cold water from a deep well. Clean, specific, heavy with minerals. Then the warmth follows, delayed, rising through your chest the way the bass rises through the floor. It leaves a hum. Low, steady, familiar. The same feeling you followed down the alley. The Sound, distilled, sitting in your sternum like it was always supposed to be there."
         },
         {
@@ -826,7 +851,7 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_003"
         }
       ],
@@ -870,10 +895,12 @@
       "temperature": "hot",
       "awards_transcendental": "truth",
       "awards_artifact": null,
-      "awards_tags": ["truth"],
+      "awards_tags": [
+        "truth"
+      ],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_010a_run2"
         }
       ],
@@ -895,10 +922,12 @@
       "temperature": "hot",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["entered_circle"],
+      "awards_tags": [
+        "entered_circle"
+      ],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_011"
         }
       ],
@@ -916,7 +945,9 @@
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["loading_dock"],
+      "awards_tags": [
+        "loading_dock"
+      ],
       "choices": [
         {
           "text": "Go in through the side door.",
@@ -938,11 +969,15 @@
       "arrival_variants": [],
       "conditional_text": [
         {
-          "condition": { "has_flag": "chose_whiskey" },
+          "condition": {
+            "has_flag": "chose_whiskey"
+          },
           "append": "It's the whiskey sour. Your whiskey sour. The ratios are right. The rosemary is rosemary. She made this for you once, and you chose it again, and now she's made it a third time without being asked. The drink is identical. The fact that she knew is not something you can explain."
         },
         {
-          "condition": { "has_flag": "chose_fog" },
+          "condition": {
+            "has_flag": "chose_fog"
+          },
           "append": "It's the fog drink. Your fog drink. Amber, heavy with minerals, the moss floating on the surface, ancient and patient. She made this for you once, and you chose it, and now she's made it again without being asked. The drink is identical. The fact that she knew is not something you can explain."
         },
         {
@@ -956,7 +991,9 @@
       "temperature": "warm",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["tuned"],
+      "awards_tags": [
+        "tuned"
+      ],
       "choices": [
         {
           "text": "The room is different now. Look around.",
@@ -977,7 +1014,9 @@
       "temperature": "hot",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["silence"],
+      "awards_tags": [
+        "silence"
+      ],
       "choices": [
         {
           "text": "Approach her.",
@@ -1002,7 +1041,9 @@
       "temperature": "hot",
       "awards_transcendental": "goodness",
       "awards_artifact": null,
-      "awards_tags": ["goodness"],
+      "awards_tags": [
+        "goodness"
+      ],
       "choices": [
         {
           "text": "The closing is starting. You can feel it.",
@@ -1023,10 +1064,12 @@
       "temperature": "warm",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["examined_rings"],
+      "awards_tags": [
+        "examined_rings"
+      ],
       "choices": [
         {
-          "text": "continue →",
+          "text": "continue",
           "next": "w_004"
         }
       ],
@@ -1044,7 +1087,9 @@
       "temperature": "cool",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["saw_instagram"],
+      "awards_tags": [
+        "saw_instagram"
+      ],
       "choices": [
         {
           "text": "Follow them inside.",
@@ -1065,7 +1110,9 @@
       "temperature": "warm",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["saw_builder"],
+      "awards_tags": [
+        "saw_builder"
+      ],
       "choices": [
         {
           "text": "Watch them work.",
@@ -1083,7 +1130,9 @@
       "arrival_variants": [],
       "conditional_text": [
         {
-          "condition": { "has_tag": "saw_oor" },
+          "condition": {
+            "has_tag": "saw_oor"
+          },
           "append": "From here the thing behind the decks looks different. You saw it before and it was terrifying - the ear, the eyes, the sense that you were inside something that was eating you. But from here, through this person's attention, you can see the cables running from their rack into the decks. They built part of this. Their hands are in the thing that frightened you."
         }
       ],
@@ -1091,7 +1140,9 @@
       "temperature": "hot",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["witnessed_craft"],
+      "awards_tags": [
+        "witnessed_craft"
+      ],
       "choices": [
         {
           "text": "Stay until they notice you.",
@@ -1109,7 +1160,9 @@
       "arrival_variants": [],
       "conditional_text": [
         {
-          "condition": { "has_tag": "silence" },
+          "condition": {
+            "has_tag": "silence"
+          },
           "append": "The voice in your head does not narrate this. There is nothing to narrate. You were here and you saw it and the seeing was enough."
         }
       ],
@@ -1117,7 +1170,9 @@
       "temperature": "hot",
       "awards_transcendental": "beauty",
       "awards_artifact": null,
-      "awards_tags": ["beauty"],
+      "awards_tags": [
+        "beauty"
+      ],
       "choices": [
         {
           "text": "The closing is starting. You can feel it.",
