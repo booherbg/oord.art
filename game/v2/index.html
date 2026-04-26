@@ -508,6 +508,51 @@
       50% { box-shadow: 0 0 24px rgba(212,168,32,0.35); }
     }
 
+    /* artifact-colored glow overrides — unity/goodness/truth/beauty */
+    .choice-btn.choice-gated-yarn-knot {
+      border-color: var(--unity);
+      background: rgba(64,128,208,0.85);
+      animation: gatedGlowUnity 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated-yarn-knot:hover { background: rgba(64,128,208,0.95); }
+    @keyframes gatedGlowUnity {
+      0%, 100% { box-shadow: 0 0 12px rgba(64,128,208,0.15); }
+      50% { box-shadow: 0 0 24px rgba(64,128,208,0.35); }
+    }
+
+    .choice-btn.choice-gated-matchbook {
+      border-color: var(--truth);
+      background: rgba(212,168,32,0.85);
+      animation: gatedGlowTruth 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated-matchbook:hover { background: rgba(212,168,32,0.95); }
+    @keyframes gatedGlowTruth {
+      0%, 100% { box-shadow: 0 0 12px rgba(212,168,32,0.15); }
+      50% { box-shadow: 0 0 24px rgba(212,168,32,0.35); }
+    }
+
+    .choice-btn.choice-gated-blank-key {
+      border-color: var(--goodness);
+      background: rgba(64,160,96,0.85);
+      animation: gatedGlowGoodness 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated-blank-key:hover { background: rgba(64,160,96,0.95); }
+    @keyframes gatedGlowGoodness {
+      0%, 100% { box-shadow: 0 0 12px rgba(64,160,96,0.15); }
+      50% { box-shadow: 0 0 24px rgba(64,160,96,0.35); }
+    }
+
+    .choice-btn.choice-gated-business-card {
+      border-color: var(--beauty);
+      background: rgba(208,72,112,0.85);
+      animation: gatedGlowBeauty 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated-business-card:hover { background: rgba(208,72,112,0.95); }
+    @keyframes gatedGlowBeauty {
+      0%, 100% { box-shadow: 0 0 12px rgba(208,72,112,0.15); }
+      50% { box-shadow: 0 0 24px rgba(208,72,112,0.35); }
+    }
+
     .choice-icon {
       display: inline-block;
       width: 18px;
@@ -1878,10 +1923,10 @@ const NODE_FILES = {
 };
 
 const TRANSCENDENTAL_LABELS = {
-  unity:    'Unity yielded — many bodies, one motion',
-  beauty:   'Beauty yielded — form exceeding function',
-  truth:    'Truth yielded — presence without performance',
-  goodness: 'Goodness yielded — care without audience'
+  unity:    'Unity harvested — many bodies, one motion',
+  beauty:   'Beauty harvested — form exceeding function',
+  truth:    'Truth harvested — presence without performance',
+  goodness: 'Goodness harvested — care without audience'
 };
 
 const OUTCOME_LABELS = {
@@ -2323,6 +2368,7 @@ function renderNode() {
   // ── conditional text ────────────────────────────────────
   const conditionals = [];
   const conditionalArtifacts = [];
+  const conditionalTranscendentals = [];
 
   if (Array.isArray(node.conditional_text)) {
     if (node.conditional_mode === 'first_match') {
@@ -2330,12 +2376,14 @@ function renderNode() {
       if (match) {
         conditionals.push(match);
         if (match.awards_artifact) conditionalArtifacts.push(match.awards_artifact);
+        if (match.awards_transcendental) conditionalTranscendentals.push(match.awards_transcendental);
       }
     } else {
       node.conditional_text.forEach(ct => {
         if (evaluate(ct.condition)) {
           conditionals.push(ct);
           if (ct.awards_artifact) conditionalArtifacts.push(ct.awards_artifact);
+          if (ct.awards_transcendental) conditionalTranscendentals.push(ct.awards_transcendental);
         }
       });
     }
@@ -2347,6 +2395,14 @@ function renderNode() {
       persistent.artifacts.push(a);
       savePersistent();
       if (!run.earnedArtifact) run.earnedArtifact = a;
+    }
+  });
+
+  // award transcendentals from conditional_text
+  conditionalTranscendentals.forEach(t => {
+    if (!run.transcendentals.includes(t)) {
+      run.transcendentals.push(t);
+      if (!awardedTranscendental) awardedTranscendental = t;
     }
   });
 
@@ -2442,10 +2498,12 @@ function renderNode() {
       html += '<div class="choices">';
       visibleChoices.forEach(({ choice }, i) => {
         const gated = choice.requires && (choice.requires.has_artifact || choice.requires.has_artifacts);
+        const artifactKey = gated && (choice.requires.has_artifact || (choice.requires.has_artifacts && choice.requires.has_artifacts[0]));
+        const artifactClass = artifactKey ? ` choice-gated-${artifactKey.replace(/_/g, '-')}` : '';
         const type = types[i];
         const icon = type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂';
         const cls = 'choice-btn'
-          + (gated ? ' choice-gated-new' : '')
+          + (gated ? ' choice-gated-new' + artifactClass : '')
           + (type !== 'continue' ? ' choice-' + type : '');
         html += `<button class="${cls}" data-idx="${i}">${esc(choice.text)} <span class="choice-icon" aria-label="${type}">${icon}</span></button>`;
       });

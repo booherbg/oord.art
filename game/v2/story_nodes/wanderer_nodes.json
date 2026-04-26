@@ -34,7 +34,7 @@
     },
     {
       "id": "w_002",
-      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end - a warehouse, something with the bones of industrial purpose. The bass is coming from inside. It's not exactly louder here. It's deeper. Like it found a lower register inside your body.\n\nThe door on the front of the building is open. Warm air pushes through the gap - sweat and fog-machine glycerin and something underneath both, metallic, almost mineral, like the feeling before a thunderstorm.\n\nThere's a bouncer standing by the door talking to the woman in the green jacket. She's pulling her hair back with one hand, already half-inside. You hear her say \"No I don't have anything in my left pocket\" before she disappears into the building.",
+      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end — a warehouse, something with the bones of industrial purpose. The bass is coming from inside. Not exactly louder out here. Deeper. Like it found a lower register inside your body.\n\nThe door is open. No line. The woman in the green coat is ahead of you, moving toward the entrance.\n\nThere’s a man in a chair off to the side, maybe fifteen feet from the entrance. SECURITY in block letters on his jacket. He might be on break. He might be watching you. From here it’s difficult to say which.",
       "arrival_variants": [
         {
           "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
@@ -70,22 +70,10 @@
       "awards_tags": [],
       "choices": [
         {
-          "text": "Talk to the bouncer and try to get in.",
-          "next": "W_003b",
+          "text": "Walk toward the entrance.",
+          "next": "w_002b",
           "arrival": null,
-          "requires": {
-            "not": {
-              "has_artifact": "yarn_knot"
-            }
-          }
-        },
-        {
-          "text": "Talk to the bouncer and try to get in.",
-          "next": "w_bouncer_run2",
-          "arrival": null,
-          "requires": {
-            "has_artifact": "yarn_knot"
-          }
+          "requires": null
         },
         {
           "text": "Walk over to the group by the loading dock.",
@@ -100,6 +88,37 @@
       "terminal": false,
       "outcome": null,
       "subtitle": "THE WAREHOUSE"
+    },
+    {
+      "id": "w_002b",
+      "subtitle": "THE WAREHOUSE",
+      "text": "You walk toward the entrance. The man in the chair is closer than he looked from the lot. He’s watching you — or he’s watching the door, and you happen to be in his line of sight. Hard to say.\n\nThe woman in the green coat doesn’t stop. She walks straight through the door and he watches her go and doesn’t move. You wait for something to happen. Nothing does.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "cool",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "Go talk to the bouncer.",
+          "next": "W_003b",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "Head straight for the door.",
+          "next": "w_bouncer_run2",
+          "arrival": null,
+          "requires": {
+            "has_artifact": "yarn_knot"
+          }
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
     },
     {
       "id": "w_003",
@@ -603,38 +622,44 @@
             "has_tag": "beauty"
           },
           "append": "You put your hand in your coat pocket and find a business card. Plain card stock, slightly too warm. One side is blank. The other has a URL in small type — oord.art — and nothing else. You turn it over. The ink is wet. You touch it and your fingerprint stays, clean and specific, as if the card was printed seconds ago. Or as if the ink never dries. Or as if the card was always waiting for exactly this thumbprint.\n\nYou hold it under the sodium light. For a moment the letters rearrange — not into a different URL, into a frequency. The same frequency as the angled cuts on the speaker cabinets. The Builder's signature, printed on card stock, carried home in your pocket like a receipt for something you witnessed but did not purchase.\n\nYou put it back. The card is still warm. It will always be warm.",
-          "awards_artifact": "business_card"
+          "awards_artifact": "business_card",
+          "awards_transcendental": "beauty"
         },
         {
           "condition": {
             "has_tag": "truth"
           },
-          "append": "You put your hand in your coat pocket. The matchbook is still there. You pull it out. The message on the inside is still legible under the sodium light. Still for you. Still true. You hold it for a moment, then put it back. The hum in your chest is quieter than it used to be. It has less to say. What it says is cleaner."
+          "append": "You put your hand in your coat pocket. The matchbook is still there. You pull it out. The message on the inside is still legible under the sodium light. Still for you. Still true. You hold it for a moment, then put it back. The hum in your chest is quieter than it used to be. It has less to say. What it says is cleaner.",
+          "awards_transcendental": "truth"
         },
         {
           "condition": {
             "has_tag": "goodness"
           },
           "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A key. Small, metal, warm from your body heat or from something else. You turn it over. No teeth. The shaft is smooth where the cuts should be. It opens nothing. It is the shape of a key without the function of one. You close your hand around it. The door was never locked.",
-          "awards_artifact": "blank_key"
+          "awards_artifact": "blank_key",
+          "awards_transcendental": "goodness"
         },
         {
           "condition": {
             "has_tag": "stays"
           },
           "append": "You put your hand in your coat pocket and find a strand of yarn. Orange. Warm. It wasn't cut - it was pulled from something. You close your hand around it and the frequency in your chest pulses once, faintly, like a heartbeat that isn't yours. You will come back. You're not sure why you know this.",
-          "awards_artifact": "yarn_knot"
+          "awards_artifact": "yarn_knot",
+          "awards_transcendental": "unity"
         },
         {
           "condition": {
             "has_tag": "met_bartender"
           },
           "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Warm. It smells faintly like the drink the bartender made you - sweet, slightly wrong. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting.",
-          "awards_artifact": "yarn_knot"
+          "awards_artifact": "yarn_knot",
+          "awards_transcendental": "unity"
         },
         {
           "append": "You put your hand in your coat pocket and find a strand of yarn. Warm. You don't know what color it is in the sodium light. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting. You will come back. You're not sure why you know this.",
-          "awards_artifact": "yarn_knot"
+          "awards_artifact": "yarn_knot",
+          "awards_transcendental": "unity"
         }
       ],
       "conditional_mode": "first_match",
@@ -701,7 +726,7 @@
     {
       "id": "W_003b",
       "subtitle": "THE SECURITY GUARD",
-      "text": "The bouncer looks at you and you think you're not getting in.\n\nHe's big. SECURITY on the jacket in block letters. He's standing the way someone stands when they saw a picture of standing once and committed to it. Nothing moves except his eyes, and his eyes don't go to your face. They go lower. Your hands. Your pockets.\n\n\"Left side,\" he says.\n\nYou pat your left pocket. Empty. You try to remember if someone said there was a cover. He looks at you for a moment. Then something in his posture unlocks.\n\n\"You're fine.\", he says as he executes a well articulated wink.",
+      "text": "He looks up when you stop in front of him. A beat — not suspicion, not recognition. Something closer to surprise. You came to him. He wasn’t standing between you and anything.\n\nHe gets to his feet. SECURITY on the jacket. His eyes go to your hands. Then your pockets.\n\n“Left side,” he says, with a look like he knows something you don’t.\n\nYou pat your left pocket. Empty. You shrug — not sure what he’s looking for — and he watches this happen. Then something settles in his expression — a small decision.\n\n“Right. Empty.” His arm comes up — not quite a wave, not quite a point. Something between. You go through.",
       "choices": [
         {
           "text": "Go through the door. Pass through the threshold.",
@@ -714,7 +739,7 @@
     {
       "id": "w_bouncer_run2",
       "subtitle": "THE BOUNCER",
-      "text": "The bouncer looks at you. SECURITY in block letters. Something about the way he holds himself feels familiar. He looks at you for a moment, then something in his posture shifts.\n\n\"Show me an empty pocket,\" he says.",
+      "text": "You walk toward the door.\n\nYou're maybe eight feet out when he says \"Hey.\"\n\nJust that. You stop. He's standing now — you didn't see him get up. He steps between you and the entrance.\n\n\"There's a cover tonight,\" he says. \"Cash or equivalent.\"\n\nYou don't have cash. Your hand goes to your pocket — a nervous tick to buy some time — and your fingers close around something warm. A small clump of yarn you're not sure you've seen before. You pull it out.\n\nHe examines the yarn. After a moment of careful study, he pulls a small pair of snips from his jacket pocket. He clips a piece from the end of the yarn and pockets it. He returns the remainder of the yarn and steps aside with a nod.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
@@ -724,73 +749,13 @@
       "awards_tags": [
         "returned"
       ],
-      "choices": [
-        {
-          "text": "Turn out your left pocket.",
-          "next": "w_bouncer_run2_left"
-        },
-        {
-          "text": "Turn out your right pocket.",
-          "next": "w_bouncer_run2_right"
-        }
-      ],
-      "next": null,
+      "choices": [],
+      "next": "w_bartender_run2",
       "terminal": false,
       "outcome": null,
       "requires": {
         "has_artifact": "yarn_knot"
       }
-    },
-    {
-      "id": "w_bouncer_run2_left",
-      "subtitle": "WRONG POCKET, RIGHT ANSWER",
-      "text": "You reach into your left pocket with casual confidence. Your fingers close around something warm and that confidence evaporates.\n\nIt's a small clump of yarn - orange, yellow, knotted tight. You stare at it. You don't remember putting it there. Your face is doing something you hope looks calm.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something more curious.\n\nHe gives it back. \"Wrong pocket. Right answer.\" He steps aside.",
-      "arrival_variants": [
-        {
-          "text": "\"Show me an empty pocket\" - that's an interesting way to say hello.",
-          "default": true
-        }
-      ],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "kept_yarn"
-      ],
-      "choices": [
-        {
-          "text": "Enter the warehouse.",
-          "next": "w_bartender_run2"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_bouncer_run2_right",
-      "subtitle": "WRONG POCKET",
-      "text": "You reach in and your fingers close around something warm. You weren't expecting that. A knot of yarn - orange, yellow, tight. You pull it out and your brain does something it doesn't usually do, which is nothing. No explanation. No theory. Just a small warm object in a pocket you're certain was empty.\n\nThe bouncer takes it from your hand. Holds it up to the light. Turns it over. He looks at you with an expression you can't read - not suspicion, not recognition. Something older than both.\n\nHe pockets it. Not aggressively - matter-of-factly, the way a toll collector takes a token. He steps aside. You're in. The yarn is not.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "lost_yarn"
-      ],
-      "choices": [
-        {
-          "text": "Go through the door.",
-          "next": "w_bartender_run2"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
     },
     {
       "id": "w_bartender_run2",
