@@ -702,7 +702,7 @@ The absence of an artifact is the Familiar's unique ending. If the player notice
 | Hand-holder | f_018 (implied in "seed") | Part of the crowd. One of them. | Held their hand during closing | Does not notice |
 | Bartender familiar | f_002, f_009, f_012 | Partner. Pouring approximate drinks. Then antlered, precise. Then back to pouring. | Accepted drinks without question | Does not notice |
 | Bouncer familiar | f_002, f_020 | Does not know what security means. SECURITY jacket on empty chair. | Walked past without question | Does not notice |
-| DJ OOR | f_003, f_006, f_008, f_013 | Construct. Reactor. Mechanism. The thing inside the casing is not a thing. | Terrifying shape, pink gloves | Operator who knows transfer function |
+| DJ OOR | f_003, f_006, f_008, f_013 | Construct. Reactor. Mechanism. The thing inside the casing is not a thing. | Terrifying shape, green tentacles | Operator who knows transfer function |
 | The bass / Homewreckers | f_004 | Sooboont exhaling. Humans interpret as bass. | Bass in sternum | Built them |
 | The fog | f_002 | "A nice touch. Your idea. Obscures where architecture becomes unreliable." | Walked through, smelled glycerin | Petrichor anomaly |
 | The rod's hum | f_011 | The rod responding to the Wanderer — genuine measurement, confirmed deliberate. | Felt it respond when antlered woman passed | Not perceived |

@@ -217,6 +217,59 @@
       color: var(--yellow);
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      cursor: help;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .artifact-chip:hover {
+      background: rgba(212,168,32,0.08);
+    }
+    .artifact-chip .artifact-desc {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14,11,18,0.95);
+      border: 1px solid var(--border-warm);
+      padding: 8px 12px;
+      font-size: 11px;
+      line-height: 1.5;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text);
+      white-space: normal;
+      width: 220px;
+      border-radius: 3px;
+      z-index: 10;
+    }
+    .artifact-chip:hover .artifact-desc,
+    .artifact-chip.active .artifact-desc {
+      display: block;
+    }
+
+    @media (pointer: coarse) {
+      .artifact-chip:hover .artifact-desc { display: none; }
+      .artifact-chip.active .artifact-desc { display: block; }
+    }
+
+    .progress-note {
+      margin-top: 20px;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    .version-tag {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 9px;
+      color: var(--text-dim);
+      opacity: 0.4;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
     }
 
     .select-reset {
@@ -414,12 +467,68 @@
       text-align: left;
       cursor: pointer;
       transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 44px;
     }
 
     .choice-btn:hover {
       background: rgba(232, 96, 16, 0.06);
       border-color: var(--orange);
       color: var(--text-bright);
+    }
+
+    .choice-btn.choice-gated {
+      border-color: rgba(212,168,32,0.4);
+      color: var(--yellow);
+      background: rgba(212,168,32,0.03);
+      box-shadow: 0 0 8px rgba(212,168,32,0.08);
+      animation: gatedPulse 3s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated:hover {
+      border-color: var(--yellow);
+      background: rgba(212,168,32,0.08);
+      color: var(--text-bright);
+    }
+    @keyframes gatedPulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(212,168,32,0.06); }
+      50% { box-shadow: 0 0 14px rgba(212,168,32,0.15); }
+    }
+
+    .choice-icon {
+      display: inline-block;
+      width: 18px;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .choice-lore .choice-icon { color: var(--text-dim); }
+    .choice-branch .choice-icon { color: var(--orange); opacity: 0.7; }
+    .choice-gated .choice-icon { color: var(--yellow); opacity: 0.8; }
+
+    /* legend on select screen */
+    .legend {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      opacity: 0.6;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend-icon {
+      font-size: 12px;
+      width: 16px;
+      text-align: center;
     }
 
     .dev-choice-editor {
@@ -635,6 +744,36 @@
     .outcome-artifact.beauty   { color: #e070a0; border-left-color: rgba(208,72,112,0.4); background: rgba(208,72,112,0.03); }
     .outcome-artifact.truth    { color: var(--yellow); border-left-color: rgba(212,168,32,0.4); }
     .outcome-artifact.goodness { color: #70c888; border-left-color: rgba(64,160,96,0.4); background: rgba(64,160,96,0.03); }
+
+    .outcome-artifact-desc {
+      font-size: 10px;
+      letter-spacing: normal;
+      text-transform: none;
+      margin-top: 6px;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .outcome-unlock {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--orange);
+      margin-bottom: 14px;
+      padding: 10px 14px;
+      border: 1px solid rgba(232,96,16,0.3);
+      border-radius: 2px;
+      background: rgba(232,96,16,0.04);
+      animation: fadeUp 0.5s ease 0.6s both;
+    }
+
+    @keyframes unlockGlow {
+      0%, 100% { box-shadow: 0 0 8px rgba(232,96,16,0.1); }
+      50% { box-shadow: 0 0 20px rgba(232,96,16,0.25); }
+    }
+
+    .outcome-unlock {
+      animation: fadeUp 0.5s ease 0.6s both, unlockGlow 2s ease-in-out 1.1s 3;
+    }
 
     .outcome-progress {
       font-size: 10px;
@@ -1256,6 +1395,23 @@
       flex-wrap: wrap;
     }
 
+    .state-artifacts {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .state-artifact {
+      padding: 2px 6px;
+      border-radius: 2px;
+      border: 1px solid rgba(212,168,32,0.3);
+      color: var(--yellow);
+      text-transform: uppercase;
+      font-size: 7px;
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+    }
+
     .state-tags {
       display: flex;
       gap: 4px;
@@ -1502,14 +1658,22 @@
   <div id="select-screen" class="wrap">
     <header class="site-header">
       <div class="site-title">The Pilgrim's<span>Path</span></div>
-      <div class="site-sub">An evening in three perspectives</div>
+      <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle :)</div>
     </header>
     <div class="divider"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
+    <div id="progress-section"></div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-icon">→</span> continue</span>
+      <span class="legend-item"><span class="legend-icon">↩</span> optional detail</span>
+      <span class="legend-item"><span class="legend-icon">⑂</span> story branch</span>
+      <span class="legend-item"><span class="legend-icon" style="color:var(--yellow)">◈</span> unlocked path</span>
+    </div>
     <div style="margin-top: 24px; text-align: right;">
       <button class="select-reset" onclick="confirmReset()">reset all progress</button>
     </div>
+    <div class="version-tag">v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala</div>
   </div>
 
   <!-- ─── GAME SCREEN ─────────────────────────────────── -->
@@ -1535,6 +1699,7 @@
       </div>
     </div>
     <div class="state-right">
+      <div class="state-artifacts" id="bar-artifacts"></div>
       <div class="state-tags" id="tag-display"></div>
       <button class="dev-badge dev-badge-btn" id="dev-badge" onclick="toggleDevMode()" hidden>DEV</button>
       <button class="restart-btn" id="dev-map-toggle" onclick="devToggleNodeMap()" hidden>Node Map</button>
@@ -1610,12 +1775,21 @@ const CHAR_DEFS = [
 ];
 
 const ARTIFACT_NAMES = {
-  warm_stone:    'Warm Stone',
-  fabric_strip:  'Fabric Strip',
-  humming_shard: 'Humming Shard',
-  yarn_knot:     'Yarn Knot',
-  heat_sink:     'Heat Sink',
-  pale_antler:   'Pale Antler'
+  yarn_knot:      'Yarn Knot',
+  matchbook:      'Matchbook',
+  blank_key: 'Blank Key',
+  business_card:  'Business Card',
+  heat_sink:      'Heat Sink',
+  pale_antler:    'Pale Antler'
+};
+
+const ARTIFACT_DESCRIPTIONS = {
+  yarn_knot:      'A strand of yarn, warm to the touch. Pulled from something larger.',
+  matchbook:      'Plain card stock with a message only you can read. Warm.',
+  blank_key: 'A key with no teeth. Smooth where the cuts should be. The door was never locked.',
+  business_card:  'Plain card stock, warm. One side reads oord.art in small type. The ink hasn\'t dried — or it did, and then started again.',
+  heat_sink:      'Warm metal of unknown origin. Carries a frequency — the builder\'s signature.',
+  pale_antler:    'What remains of something that dissolved. Still faintly resonant.'
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
@@ -1636,11 +1810,12 @@ function loadPersistent() {
     }
   } catch(e) { /* ignore parse errors */ }
   if (!persistent || typeof persistent !== 'object') {
-    persistent = { completed_characters: [], artifacts: [], runs: 0 };
+    persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
   }
   // ensure arrays exist
   if (!Array.isArray(persistent.completed_characters)) persistent.completed_characters = [];
   if (!Array.isArray(persistent.artifacts))            persistent.artifacts = [];
+  if (!Array.isArray(persistent.flags))                persistent.flags = [];
   if (typeof persistent.runs !== 'number')             persistent.runs = 0;
 }
 
@@ -1656,6 +1831,7 @@ function evaluate(condition) {
   if (!condition) return true;
   if (condition.has_tag)              return run ? run.tags.includes(condition.has_tag) : false;
   if (condition.has_transcendental)   return run ? run.transcendentals.includes(condition.has_transcendental) : false;
+  if (condition.has_flag)              return persistent.flags.includes(condition.has_flag);
   if (condition.has_artifact)         return persistent.artifacts.includes(condition.has_artifact);
   if (condition.has_artifacts)        return condition.has_artifacts.every(a => persistent.artifacts.includes(a));
   // handle both singular and plural forms (schema inconsistency in familiar JSON)
@@ -1707,6 +1883,7 @@ function showSelectScreen() {
   document.body.className = 'temp-cold';
   renderCharCards();
   renderArtifacts();
+  renderProgress();
 }
 
 function renderCharCards() {
@@ -1743,10 +1920,72 @@ function renderArtifacts() {
   let html = '<div class="artifacts-row"><span class="artifacts-label">Carried</span>';
   persistent.artifacts.forEach(a => {
     const name = ARTIFACT_NAMES[a] || a;
-    html += `<span class="artifact-chip">${esc(name)}</span>`;
+    const desc = ARTIFACT_DESCRIPTIONS[a] || '';
+    html += `<span class="artifact-chip">◈ ${esc(name)}${desc ? `<span class="artifact-desc">${esc(desc)}</span>` : ''}</span>`;
   });
   html += '</div>';
   el.innerHTML = html;
+  el.querySelectorAll('.artifact-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasActive = chip.classList.contains('active');
+      el.querySelectorAll('.artifact-chip').forEach(c => c.classList.remove('active'));
+      if (!wasActive) chip.classList.add('active');
+    });
+  });
+}
+
+function renderProgress() {
+  const el = document.getElementById('progress-section');
+  const unlocked = CHAR_DEFS.filter(c => isUnlocked(c.id)).length;
+  const total = CHAR_DEFS.length;
+  if (unlocked >= total && persistent.runs === 0) {
+    el.innerHTML = '';
+    return;
+  }
+  let msg = '';
+  if (persistent.runs === 0) {
+    msg = 'Begin your first evening.';
+  } else if (unlocked < total) {
+    msg = `${unlocked} of ${total} perspectives unlocked. Keep playing to discover more.`;
+  } else {
+    msg = `All ${total} perspectives unlocked. ${persistent.runs} evening${persistent.runs !== 1 ? 's' : ''} experienced.`;
+  }
+  el.innerHTML = `<div class="progress-note">${esc(msg)}</div>`;
+}
+
+// ─── CHOICE CLASSIFICATION ───────────────────────────────────────────────────
+
+function traceLinear(nodeId, maxDepth) {
+  const visited = new Set();
+  let id = nodeId;
+  for (let d = 0; d < maxDepth && id && !visited.has(id); d++) {
+    visited.add(id);
+    const n = nodeMap[id];
+    if (!n || n.terminal) break;
+    if (n.choices && n.choices.length === 1) { id = n.choices[0].next; }
+    else if (!n.choices || n.choices.length === 0) {
+      id = typeof n.next === 'string' ? n.next : resolveNext(n.next);
+    } else break;
+  }
+  return visited;
+}
+
+function classifyChoices(choices) {
+  if (choices.length <= 1) return ['continue'];
+  const siblingTargets = new Set(choices.map(c => c.next));
+
+  return choices.map((choice) => {
+    const target = nodeMap[choice.next];
+    if (target && target.terminal && target.outcome === 'escape') return 'continue';
+
+    const reachable = traceLinear(choice.next, 3);
+    for (const sid of siblingTargets) {
+      if (sid === choice.next) continue;
+      if (reachable.has(sid)) return 'lore';
+    }
+    return 'branch';
+  });
 }
 
 // ─── CHARACTER LOADING ────────────────────────────────────────────────────────
@@ -1816,7 +2055,7 @@ function restartCharacter() {
 
 function confirmReset() {
   if (confirm('Clear all progress, artifacts, and completed characters?')) {
-    persistent = { completed_characters: [], artifacts: [], runs: 0 };
+    persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
     savePersistent();
     showSelectScreen();
   }
@@ -2003,9 +2242,16 @@ function renderNode() {
     } else if (isAutoAdvance && nextId) {
       html += `<div class="auto-advance-wrap" id="advance-wrap"></div>`;
     } else if (visibleChoices.length > 0) {
+      const types = classifyChoices(visibleChoices.map(v => v.choice));
       html += '<div class="choices">';
       visibleChoices.forEach(({ choice }, i) => {
-        html += `<button class="choice-btn" data-idx="${i}">${esc(choice.text)}</button>`;
+        const gated = choice.requires && (choice.requires.has_artifact || choice.requires.has_artifacts);
+        const type = types[i];
+        const icon = type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂';
+        const cls = 'choice-btn'
+          + (gated ? ' choice-gated' : '')
+          + (type !== 'continue' ? ' choice-' + type : '');
+        html += `<button class="${cls}" data-idx="${i}"><span class="choice-icon" aria-label="${type}">${icon}</span> ${esc(choice.text)}</button>`;
       });
       html += '</div>';
     }
@@ -2016,7 +2262,7 @@ function renderNode() {
   // terminal outcome card
   if (node.terminal) {
     // transcendence = all 4 Wanderer artifacts collected across runs (persistent)
-    const WANDERER_ARTIFACTS = ['warm_stone', 'fabric_strip', 'humming_shard', 'yarn_knot'];
+    const WANDERER_ARTIFACTS = ['yarn_knot', 'matchbook', 'blank_key', 'business_card'];
     let outcome = node.outcome;
     if (outcome === 'harvest') {
       const hasAll = WANDERER_ARTIFACTS.every(a => persistent.artifacts.includes(a));
@@ -2025,7 +2271,8 @@ function renderNode() {
 
     const label = OUTCOME_LABELS[outcome] || (outcome || 'END').toUpperCase();
 
-    // record completion
+    // record completion + detect newly unlocked perspectives
+    const prevUnlocked = CHAR_DEFS.filter(c => isUnlocked(c.id)).map(c => c.id);
     if (!persistent.completed_characters.includes(run.character)) {
       persistent.completed_characters.push(run.character);
       persistent.runs++;
@@ -2035,35 +2282,47 @@ function renderNode() {
     // show artifact earned this run (if any)
     const newArtifact = conditionalArtifacts[0] || node.awards_artifact || null;
     const artTrans = {
-      warm_stone: 'unity', fabric_strip: 'truth', humming_shard: 'beauty',
-      yarn_knot: 'goodness', heat_sink: 'beauty'
+      yarn_knot: 'unity', matchbook: 'truth', blank_key: 'goodness',
+      business_card: 'beauty', heat_sink: 'beauty', pale_antler: null
     };
     let artifactHtml = '';
     if (newArtifact) {
       const aName = ARTIFACT_NAMES[newArtifact] || newArtifact;
+      const aDesc = ARTIFACT_DESCRIPTIONS[newArtifact] || '';
       const trans  = artTrans[newArtifact] || null;
       const desc   = outcome === 'dissolution' ? 'left in the form' : 'carried home';
       artifactHtml = `<div class="outcome-artifact${trans ? ' ' + trans : ''}">` +
         `◈ ${esc(aName)} — ${desc}` +
+        (aDesc ? `<div class="outcome-artifact-desc">${esc(aDesc)}</div>` : '') +
         `</div>`;
     }
 
-    // dissolution: success note + unlock note
+    // detect newly unlocked perspectives
+    const nowUnlocked = CHAR_DEFS.filter(c => isUnlocked(c.id)).map(c => c.id);
+    const newlyUnlocked = nowUnlocked.filter(id => !prevUnlocked.includes(id));
+    let unlockHtml = '';
+    newlyUnlocked.forEach(id => {
+      const def = CHAR_DEFS.find(c => c.id === id);
+      if (def) {
+        unlockHtml += `<div class="outcome-unlock">◈ New perspective unlocked: ${esc(def.display_name)}</div>`;
+      }
+    });
+
+    // dissolution: success note
     let dissolutionHtml = '';
     if (outcome === 'dissolution') {
-      const builderNowOpen = persistent.completed_characters.includes('wanderer') &&
-                             persistent.artifacts.includes('pale_antler');
-      dissolutionHtml = `<div class="outcome-note">The work is complete. The harvest succeeded. This is the intended ending for this arc — the body was always optional.</div>` +
-        (builderNowOpen ? `<div class="outcome-unlock">◈ The Builder's path is now open</div>` : '');
+      dissolutionHtml = `<div class="outcome-note">The work is complete. The harvest succeeded. This is the intended ending for this arc — the body was always optional.</div>`;
     }
 
-    // wanderer: show artifact progress toward transcendence
+    // wanderer: show artifact progress
     let progressHtml = '';
     if (run.character === 'wanderer' && outcome !== 'transcendence' && outcome !== 'escape') {
       const earned = WANDERER_ARTIFACTS.filter(a => persistent.artifacts.includes(a));
       if (earned.length > 0) {
-        const remaining = 4 - earned.length;
-        progressHtml = `<div class="outcome-progress">${earned.length} of 4 carried — ${remaining} path${remaining !== 1 ? 's' : ''} remain</div>`;
+        const remaining = WANDERER_ARTIFACTS.length - earned.length;
+        progressHtml = remaining > 0
+          ? `<div class="outcome-progress">${earned.length} of ${WANDERER_ARTIFACTS.length} artifacts carried — ${remaining} path${remaining !== 1 ? 's' : ''} remain</div>`
+          : `<div class="outcome-progress">All artifacts carried. Something deeper awaits.</div>`;
       }
     }
 
@@ -2071,6 +2330,7 @@ function renderNode() {
       <div class="outcome-label">${esc(label.toUpperCase())}</div>
       ${dissolutionHtml}
       ${artifactHtml}
+      ${unlockHtml}
       ${progressHtml}
       <div class="outcome-buttons">
         <button class="outcome-btn" onclick="restartCharacter()">Begin again</button>
@@ -2208,6 +2468,10 @@ function makeChoice(choice) {
   if (choice.tag && !run.tags.includes(choice.tag)) {
     run.tags.push(choice.tag);
   }
+  if (choice.flag && !persistent.flags.includes(choice.flag)) {
+    persistent.flags.push(choice.flag);
+    savePersistent();
+  }
   if (choice.arrival) {
     run.pending_arrival = choice.arrival;
   }
@@ -2248,6 +2512,15 @@ function updateStateBar(node) {
     const pip = document.getElementById('t-' + t);
     if (pip) pip.classList.toggle('earned', run ? run.transcendentals.includes(t) : false);
   });
+
+  // artifacts in bar
+  const barArt = document.getElementById('bar-artifacts');
+  if (barArt) {
+    barArt.innerHTML = persistent.artifacts.map(a => {
+      const name = ARTIFACT_NAMES[a] || a;
+      return `<span class="state-artifact">◈ ${esc(name)}</span>`;
+    }).join('');
+  }
 
   // tags
   const tagEl = document.getElementById('tag-display');

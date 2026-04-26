@@ -490,7 +490,7 @@ Node shape:
   - participated_ritual (without circle): "You were in it. The closing takes you the rest of the way down."
   - default: "Something in the music is finishing."
 - Base text (~170 words): beats 69–75, 77. Longest node. Justified — this is the payoff. Each beat is a sentence. The rhythm is a descent: OOR knows, the crowd lowers, the hand, the floor, the membrane, the stillness, the portal seals, stand up. Beat 73 is the lore climax: "you are the membrane." The Wanderer doesn't understand this. Their body does.
-- Conditional: beat 76 (if approaching or entered_circle — "DJ OOR is behind the decks. The shape is still. The pink gloves are resting on the mixer. The eyes are dark.")
+- Conditional: beat 76 (if approaching or entered_circle — "DJ OOR is behind the decks. The shape is still. The green tentacles are resting on the mixer. The eyes are dark.")
 - OOR action: none. The earned silence. An OOR block here would break it.
 - Temperature: hot → stillness
 - Auto-advance → w_012

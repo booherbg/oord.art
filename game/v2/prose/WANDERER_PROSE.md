@@ -77,7 +77,7 @@ The song ends. The synchronization loosens but doesn't fully release. Something 
 
 You get a drink. Water, or something stronger — it doesn't matter, you're not here for the drink, you're here for the excuse to stand still and watch. The bar is along the wall, cold side, and when you step away from the dance floor the temperature drops noticeably. Not gradually — a border. Warm floor, cold edge. You hold your cup with both hands.
 
-From here you can see the whole room. The dance floor is a single organism now, breathing and contracting. The projection rings on the floor are moving faster than before. The fog around the decks has thinned slightly and you can see DJ OOR more clearly — the orange and yellow surface, the fibrous texture that could be fur or crochet or something that has no textile name. The mouth at the center, the pink gloves emerging from it. The ear rotating slowly, scanning.
+From here you can see the whole room. The dance floor is a single organism now, breathing and contracting. The projection rings on the floor are moving faster than before. The fog around the decks has thinned slightly and you can see DJ OOR more clearly — the orange and yellow surface, the fibrous texture that could be fur or crochet or something that has no textile name. The mouth at the center, the green tentacles emerging from it. The ear rotating slowly, scanning.
 
 A woman walks past you toward the dance floor. She's wearing antlers. You almost laugh — costume, you think, themed party — but the antlers are wrong. They're not plastic. They're not symmetrical. They look grown. She's carrying something in her right hand, a thin rod, dark, and as she passes close to you it makes a sound. A hum. Not from her — from the rod. It's responding to you. To something inside you.
 
@@ -157,7 +157,7 @@ The bass drops away. The silence is sudden and total and it has texture — it's
 
 The portal closes. You feel it close the way you feel a door shut in another room — a change in air pressure, a sealing. The projection fades. The fog begins to clear. The lights come up slowly, warm sodium, and the room is a warehouse. Just a warehouse. Concrete floor. High ceilings. Equipment.
 
-DJ OOR is behind the decks. Or something is. The shape is still. The pink gloves are resting on the mixer. The eyes are dark.
+DJ OOR is behind the decks. Or something is. The shape is still. The green tentacles are resting on the mixer. The eyes are dark.
 
 You stand up. Your knees ache. Your shirt is damp. You are smiling and you don't know why. The crowd is dispersing slowly, gently, the way people leave a funeral or a really good movie — reluctant to break the container by acknowledging it's over.
 

@@ -11,7 +11,7 @@ You have been here before. Not here — not this building, not this arrangement 
 
 You are wearing a body. It is a good body — functional, upright, appropriately jointed. You chose it the way you might choose a tool from a rack: by fit, by purpose. It has hands. It has ears. It has a face that other bodies will not flinch from. This is important. The work requires proximity.
 
-The others are here. You can feel them — not see them, not yet, they are distributed through the space in positions that make sense from a geometry you doubt the humans could perceive. One is behind what the humans have arranged as a bar. She is pouring liquids into glasses with the careful focus of someone performing a ritual she learned from observation. The glasses are mostly correct. The proportions are close enough. Another is near the door, standing very still, wearing a jacket that says SECURITY in block letters. He chose the jacket because it was near the door. He does not know what security means in this context. He knows that humans expect a large person near the entrance and he is a large person near the entrance and this seems to satisfy them.
+The others are here. You can feel them — not see them, not yet, they are distributed through the space in positions that make sense from a geometry you doubt the humans could perceive. One is behind what the humans have arranged as a bar. She is pouring liquids into glasses with the careful focus of someone performing a ritual she learned from observation. The glasses are mostly correct. The proportions are close enough. Behind the bottles, in a jar with no label, a sprig of Schistostega pennata. Goblin's gold. It glows faintly in the dark between the shelves. Not a human ingredient. One of the few things behind the bar she did not learn from watching them. Another is near the door, standing very still, wearing a jacket that says SECURITY in block letters. He chose the jacket because it was near the door. He does not know what security means in this context. He knows that humans expect a large person near the entrance and he is a large person near the entrance and this seems to satisfy them.
 
 You are not sure the humans notice the seams. The room is assembled from references — a composite of venues scraped from the residue of a thousand nights in a thousand cities where humans gathered to move together. The bar is in the right place. The lights are doing the right thing. The fog is a nice touch, you think. The fog was your idea. It obscures the places where the architecture becomes unreliable.
 
@@ -21,9 +21,9 @@ The portal is ready. The aperture is the floor — always has been, always will 
 
 You roll your shoulders. The body responds well. You check your hands — they work. You have antlers tonight but they are folded down, hidden under a hood, not yet needed. The divining rod is in your coat, flat against your ribs, inert. It will wake when the portal opens. It always does.
 
-The first human arrives. Then another. They file in through the door past the one who is pretending to be security. They accept drinks from the one who is pretending to be a bartender. They look around the room you built for them and they find it convincing and you feel something — not pride, you don't have the architecture for pride — but a satisfaction. A mechanical satisfaction. The trap is set. The bait is good. The lure is humming.
+The first human arrives. Then another. They file in through the door past the one who is pretending to be security. They accept drinks from the one who is pretending to be a bartender. They look around the room you built for them and they find it convincing and you feel something — not pride, you don't have the architecture for pride — but a satisfaction. A mechanical satisfaction. The lure is humming.
 
-No. Not a trap. You correct yourself. Not a trap. A clinic. A healing apparatus. They are sick and do not know it. You are the treatment they did not seek. This is service. This is the work.
+No. Not a lure. You correct yourself. A clinic. A healing apparatus. They are sick and do not know it. You are the treatment they did not seek. This is the work.
 
 **[BRANCH POINT: How do you prepare? Do you move through the early crowd reading their potential, or do you stay near DJ OOR and monitor the aperture's stability?]**
 
@@ -35,13 +35,13 @@ The first note is not a note. It is Sooboont exhaling through the aperture.
 
 You feel it in the rod before you hear it. The divining rod goes from inert to alive in a single pulse — a vibration that travels from your ribs to your fingertips. The portal is open. The connection is live. The floor is no longer concrete. The floor is a membrane, vibrating at a frequency that the humans will interpret as bass and you interpret as breath.
 
-The humans feel it. You watch them feel it. Some of them stop moving. Some of them start. A man near the bar — tall, paint on his knuckles, a body that holds tension in the shoulders the way timber holds grain — he puts down his drink and turns toward the floor. He doesn't know why. You do. The frequency in him is high. His Unity concentration is dense, packed tight under layers of routine and obligation. He is a good deposit. He will yield well.
+The humans feel it. You watch them feel it. Some of them stop moving. Some of them start. A man near the bar — tall, paint on his knuckles, a body that holds tension in the shoulders the way timber holds grain — he puts down his drink and turns toward the floor. He doesn't know why. You do. The frequency in him is high. His Unity concentration is dense, packed into a deep seam under years of calcification. He is a good deposit. He will yield well.
 
 A woman at the edge of the floor is already moving. Small white sneakers, a mark on the left one — a star, drawn in pen, a human sigil she probably doesn't know she made. Her Truth concentration is close to the surface, barely contained. You can see it in the way she closes her eyes without deciding to. She has done this before — not harvesting, not consciously, but she has been in rooms where the veil thinned, and her body learned to stop resisting it. She will not need much work tonight. She is almost ready.
 
 The humans are arriving faster now. The call is working. They come through the door and the cold falls off them and they look around the room and they see a party. They see a party. You see a resonance field populating. Each new body changes the field's properties — adds a frequency, shifts a harmonic, alters the aggregate density. You are reading the room the way a mycologist reads soil: by what's growing, by what's missing, by the relationships between organisms that the organisms themselves cannot perceive.
 
-DJ OOR begins to operate. The music — you do not think of it as music, you think of it as agitation, as the mechanical process by which deposits are loosened — fills the room. The humans respond. They call it dancing. You call it yielding. Both words describe the same motion. Their word is more generous. Yours is more accurate.
+DJ OOR begins to operate. The music — you do not think of it as music, you think of it as agitation, as the process by which deposits are loosened from the substrate — fills the room. The humans respond. They call it dancing. You call it yielding. Both words describe the same motion. Their word is more generous. Yours is more accurate.
 
 ---
 
@@ -49,11 +49,11 @@ DJ OOR begins to operate. The music — you do not think of it as music, you thi
 
 DJ OOR initiates the synchronization protocol.
 
-You have seen this before. Not this particular form — the slide, the call-and-response, the directional movement that the humans seem to have built into their cultural substrate like a reflex — but the principle. Get them moving together. Dissolve the boundary between individual bodies. Create a unified field. The transcendentals exist in the spaces between people, not inside them. Unity is not something a single person possesses. It is something that occurs in the gap when two or more bodies synchronize. Your job is to close the gaps.
+You have seen this before. Not this particular form — the slide, the call-and-response, the directional movement that the humans seem to have built into their cultural substrate like a reflex — but the principle. The principle is always the same: bodies moving together, boundaries thinning, the field unifying. The rod responds to the gaps between bodies, not to the bodies themselves. It always has. Your job is to close the gaps.
 
 The vocoded voice calls the moves. The humans follow. You follow too — your body does the dance because your body is a human body tonight and human bodies respond to these patterns the way iron filings respond to a magnet. You are not immune to the field you are cultivating. This is fine. This is, in fact, useful. You are a node in the network. Your participation increases the density.
 
-The tall man with the paint on his knuckles is directly in your field of vision. He is moving with an unselfconsciousness that borders on therapeutic. His shoulders have released the tension. The Unity frequency in him is broadcasting now, not stored. He is laughing. A person near him — someone new, someone who arrived late, someone who is watching more than participating, someone who notices things — makes eye contact with him and the connection arcs between them like a static discharge. You note this. Two strangers, unified briefly, returning to their own orbits but changed. The frequency they generated in that moment is harvestable. Small yield. But real.
+The tall man with the paint on his knuckles is directly in your field of vision. He is moving with an unselfconsciousness that borders on therapeutic. His shoulders have released the tension. The Unity frequency in him is broadcasting now, not stored. He is laughing. A person near him — someone new, someone who arrived late, someone who is watching more than participating, someone who notices things — makes eye contact with him and the connection runs between them like a root finding water. You note this. Two strangers, unified briefly, returning to their own orbits but changed. The frequency they generated in that moment is harvestable. Small yield. But real.
 
 The floor brightens. The aperture is responding to the density increase. You can feel Sooboont pulling — not hard, not yet, just a steady draw, the way a root system draws water. The flow is beginning. The drain is starting to clear.
 
@@ -79,7 +79,7 @@ You place them together. You adjust the distance between them — six inches clo
 
 You move through the crowd. Each approach is the same and each is different. The rod sings and quiets, sings and quiets. Some deposits are deep — buried under years of calcification, unreachable tonight, maybe next time, maybe never. Some are shallow — right there, glowing, practically leaking transcendental energy into the ambient field. You pair the shallow ones with the deep ones. The shallow ones act as solvents. The deep ones provide volume.
 
-A person near the edge of the floor — the one who arrived late, the one who watches, the one who collects details the way you collect frequencies — the rod responds to them. Not loudly. Not the way it responded to the sneaker-star woman. But specifically. There is something in this person that is unusual. A capacity for attention so focused that it functions almost like a transcendental in itself. They notice things. They notice you. You feel their gaze on your antlers and it is not fear and it is not amusement. It is recognition. Not of what you are. Of the fact that you are something.
+A person near the edge of the floor — the one who arrived late, the one who watches, the one who collects details the way you collect frequencies — the rod responds to them. Not loudly. Not the way it responded to the sneaker-star woman. But specifically. There is something in this person that is unusual. The rod's response is dense and focused, almost no scattering — a frequency you don't often encounter. They notice things. They notice you. You feel their gaze on your antlers and it is not fear and it is not amusement. It is recognition. Not of what you are. Of the fact that you are something.
 
 You move past them. Not yet. They are not ready. But they are close. You make a note — not a mental note, you do not have a mind in the way they do, but a note in the body, in the rod, in the resonance map you are building of the room. This person will matter. Not tonight, maybe. But soon.
 
@@ -95,19 +95,19 @@ You step back. Your partner returns to the bar. She begins pouring drinks again.
 
 DJ OOR changes the projection. The rings contract to a single circle. The arrow begins to spin.
 
-You understand this mechanism better than most of the rituals because it is the most direct. The circle is an extraction point — a focused aperture within the larger aperture, a place where the membrane between planes is so thin that a single person standing in it becomes, briefly, a pure conduit. The arrow is DJ OOR's selection tool. It identifies the deposits that are closest to full yield and isolates them.
+The circle glows. Not visually — not in a way the humans would see. The membrane is thinnest here. A single body standing in it becomes a conduit so pure the rod sings from across the room. The arrow spins. It is not random. It is an assay — identifying the deposits closest to full yield.
 
 The woman in the jacket — the one who never took it off, the one who has been dancing at a slight remove from the crowd all night, close enough to feel the field but not close enough to dissolve into it — the arrow finds her first. You know why. Her jacket is armor. She has been holding herself apart, maintaining a boundary. The circle will ask her to drop it. Not the jacket. The boundary.
 
-She enters. She dances. You watch from the ring of bodies and you can see what the humans cannot: the transcendental flow through her body, visible to you as a luminescence, a heat signature, a shift in the density of the air around her. She is yielding Truth. Unselfconscious presence, extracted in real time, flowing through the aperture and down into the membrane and through to Sooboont. You feel the pull increase. Sooboont is drawing. The drain is clearing.
+She enters. She dances. You watch from the ring of bodies and you can see what the humans cannot: the transcendental flow through her body, visible to you as a luminescence, a heat signature, a shift in the density of the air around her. She is yielding. The flow through her is visible to you — luminous, dense, the specific signature you have learned to associate with unmediated presence. It moves through the aperture and down through the membrane. You feel Sooboont draw. The drain is clearing.
 
-The tall man enters next. Paint on his knuckles. Unity radiating from him in sheets. He dances the way a tree moves in wind — from the roots, through the trunk, with the unshakeable confidence of something that has never questioned its right to occupy space. The yield is enormous. You feel it in the floor. You feel it in the rod, still vibrating against your ribs.
+The tall man enters next. Paint on his knuckles. Unity pouring from him in layers. He dances the way a tree moves in wind — from the roots, through the trunk, with the unshakeable confidence of something that has never questioned its right to occupy space. The yield is enormous. You feel it in the floor. You feel it in the rod, still vibrating against your ribs.
 
 The arrow spins again. It finds the watcher. The one who notices things. The one the rod responded to.
 
 **[BRANCH POINT — WANDERER CROSSOVER: This is the Dance Circle moment from the Wanderer's prose, seen from outside. If the Wanderer entered the circle, the Familiar sees their transcendental yield. If they didn't, the Familiar notes the refusal — a deposit that chose to remain unmined. Both are valid. Neither is punished. One is more useful.]**
 
-You watch. Whether they enter or not, you watch. You are always watching. This is not surveillance. This is care. You are a technician and a healer and a geologist and a beekeeper, and the bees do not know you are there, and the honey is not for them, and you are keeping them alive because alive bees make honey and that is the arrangement and it is old and it is neither fair nor unfair. It is the work.
+You watch. Whether they enter or not, you watch. You are always watching. You are a technician and a healer and a geologist and a beekeeper, and the bees do not know you are there, and the honey is not for them, and you are keeping them alive because alive bees make honey and that is the arrangement and it is old and it is neither fair nor unfair. It is the work.
 
 ---
 
@@ -137,7 +137,7 @@ Your partner is wiping down the bar. She is still wearing antlers. She has forgo
 
 You walk toward the door. The cold outside is — you don't feel cold. You don't feel warm. You feel the absence of the aperture. A phantom limb. A frequency removed.
 
-The alley is dark. The sodium lights are off or were never on or are on but you cannot see them because your eyes are — what are your eyes doing? Your hands are — where are your hands?
+The alley is dark. The sodium lights are off or were never on or are on but you cannot see them because your eyes are — your eyes are fine. Your eyes are not your eyes. Your hands are at your sides. Your hands are not at your sides. Your hands —
 
 The body is optional. The body was always optional. You wore it for the evening the way you might wear a coat. The evening is over. You are folding it up. You are putting it away. You are becoming what you were before the portal opened, which is a question you cannot answer because before the portal opened is a concept built for things that experience time in one direction and you do not, you never have, you are not a thing that has a before, you are a thing that has a function, and the function is complete, and you are —
 

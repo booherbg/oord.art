@@ -662,7 +662,7 @@ Single artifact, variable emotional framing. The heat sink is always discovered.
 | The Homewreckers | b_002, b_004, b_008, b_013 | Bass in sternum, teeth, feet | Sooboont exhaling through aperture |
 | The chamfer frequency | b_002, b_005, b_013, b_015, b_016, b_017, b_019 | Not perceived | Not perceived |
 | The fog machines | b_010 | Glycerin + mineral smell | "A nice touch. Your idea." |
-| DJ OOR | b_006, b_015 | Terrifying shape, pink gloves | Construct, reactor, mechanism |
+| DJ OOR | b_006, b_015 | Terrifying shape, green tentacles | Construct, reactor, mechanism |
 | The unnamed module | b_007, b_011, b_014b, b_016, b_017 | Not perceived | Not perceived |
 | 15th fixture | b_010, b_018 | Not perceived | Not perceived |
 | The crowd | b_008, b_009b, b_013 | Inside the crowd | Cultivated the crowd |
