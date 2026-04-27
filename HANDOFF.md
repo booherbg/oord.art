@@ -2,7 +2,7 @@
 
 **Date:** 2026-04-27
 **Branch:** `publish-v1`
-**Status:** Run 1 bartender mandatory, Run 2 unity passage rewritten, whiskey sour prose cleaned up
+**Status:** Run 1 bartender mandatory, Run 2 unity passage rewritten, Familiar path full editorial pass complete
 
 ---
 
@@ -55,6 +55,51 @@ Trimmed the editorial overshoot on the Run 2 whiskey sour arrival. New ending:
 - w_006 choice texts updated: "Stay on the floor." → "Find something solid to lean against." / kept drink text
 - w_010a_run2 choice text: "Carry the momentum forward..." → "Stay in it."
 
+### Familiar Path Full Editorial Pass (all 22 nodes)
+
+Node-by-node prose cleanup of the entire Familiar character path. Changes:
+
+**Em dashes:** ~60 instances replaced with periods, commas, colons across all non-dissolution nodes. f_020 dissolution em dashes preserved (character fragmenting mid-thought).
+
+**"Frequency" as free-pass mystical:** Grounded through the rod in f_005a ("The rod is already pulling toward him"), f_008 ("The rod reads his Unity as open now"), f_018 ("His Unity is still radiating, faintly, like heat from a stone after the sun has gone").
+
+**Lab/systems language scrubbed:**
+- "synchronization protocol" → "calls the first move" (f_007)
+- "homogeneous mixture in which the transcendentals are suspended" (f_010b, f_012) → "The transcendentals are moving, loosened from their deposits, dissolving into the space between bodies"
+- "aggregate density" / "threshold" (f_005b, f_006) → "thickening" / "what the construct needs"
+- "node in the network" (f_008) → "Your participation thickens it"
+- "yield data" / "aggregate" / "a number in the total" (f_015) → "The rod confirmed what it measured"
+- "configuration" (f_011) → "You have not encountered this before"
+- "living index that updates" (f_005b) → "The rod hums with the room's composition, thickening with every arrival"
+- "in the data now" (f_012) → "in the body now"
+- "the system fails/clears" (f_003, f_017) → "the basin overflows" / "the drain clears"
+- "resonance field populating" (f_005b) → "a harvest assembling"
+
+**f_015 beekeeper rebuilt:** Cut the four-role categorization ("technician and healer and geologist and beekeeper"), cut the 56-word non-dissolution run-on, cut the fourth "this is the work" refrain. Now just the bees: "The bees do not know you are here. The honey is not for them."
+
+**"This is the work" refrain:** Removed from f_003, f_004 (arrival), f_009 (3 of 4 instances). The Familiar shows the work instead of declaring it.
+
+**Not-X-not-Y-but-Z patterns fixed:** f_009 antler unfurling ("not mechanically, not like a mechanism deploying, but" → straight to "the way a fern unfurls"), f_014 watcher conditional.
+
+**Authorial intrusion cut:** "The work requires proximity" (f_001), "Their word is more generous. Yours is more accurate" / "Effectiveness and quality are the same thing" (f_006), "Your job is to close the gaps" (f_007), "You are the treatment they did not seek. This is the work." (f_003), "The language is insufficient in every direction" (f_010a).
+
+**Subtitles added to all 22 nodes:** THE ARRIVAL, THE CONSTRUCT, THE APERTURE, THE FIRST NOTE, READING THE CROWD, THE FIELD, THE AGITATION, THE SLIDE, THE DANCE, THE UNFURLING, THE PAIRING, THE PAIRINGS, THE WATCHER, THE SETTLING, THE CIRCLE, THE YIELD, THE BEEKEEPER, THE HARVEST, THE CLOSING, THE DISPERSAL, THE PARTNER, THE DISSOLUTION.
+
+**Not changed:** f_020 (dissolution) left intact — em dashes, run-on, missing final period all intentional and earned.
+
+### Wanderer Run 3 Audit (completed, not yet edited)
+
+Full audit of Run 3 nodes (w_loading_dock through w_jacket_woman). Key findings for next session:
+
+**High priority:**
+- w_silence_run3: authorial intrusion in 3 places ("You watch. You collect. You narrate the experience instead of having it"), "built a structure" abstract metaphor, "not fades, not trails off" categorization
+- w_jacket_woman: "These are facts, not observations" (authorial), "the collector, the narrator" (naming archetype when dialogue carries it)
+- w_bartender_run3: "The lens you look through. The filter between you and the room." (abstract, redundant with physical description that follows)
+
+**Medium:** Em dashes across all Run 3 nodes. "The fact that she knew is not something you can explain" (telling not showing, appears in both drink conditionals).
+
+**Structural gap:** w_011 has no `has_tag: goodness` arrival variant. Run 3's journey gets the generic closing.
+
 ---
 
 ## Previous Session (2026-04-26)
@@ -76,22 +121,27 @@ See git history for details.
 
 ## Open Tasks (priority order)
 
-1. **Run 3 general audit** — node flow, prose, consistency with Run 1/2 overhaul (audit in progress)
-2. **Workshop Ashley/bouncer Instagram thread** — loading dock connection doesn't land
-3. **Run 2 repeated content** — w_003 through w_005 still shared between runs; consider parallel Run 2 versions
-4. **OOR branch icons** — both choices show fork icon when one should show lore track
-5. **Color-tag UI for branch orientation** — run identity in the UI
-6. **Transcendentals in w_011** — award earlier for flash?
-7. **Exit nodes** — should they feel more ominous?
-8. **End-of-run stats / post-completion instructions**
-9. **W_003b capital W** — cosmetic inconsistency
-10. **Closing ceremony repetition** — base text in w_011/w_012 repeats across runs
+1. **Wanderer Run 3 prose edit** — audit complete, findings documented above. w_silence_run3 needs the most work.
+2. **w_011 goodness arrival variant** — Run 3 has no custom closing text (structural gap)
+3. **Workshop Ashley/bouncer Instagram thread** — loading dock connection doesn't land
+4. **Run 2 repeated content** — w_003 through w_005 still shared between runs; consider parallel Run 2 versions
+5. **OOR branch icons** — both choices show fork icon when one should show lore track
+6. **Color-tag UI for branch orientation** — run identity in the UI
+7. **Transcendentals in w_011** — award earlier for flash?
+8. **Exit nodes** — should they feel more ominous?
+9. **End-of-run stats / post-completion instructions**
+10. **W_003b capital W** — cosmetic inconsistency
+11. **Closing ceremony repetition** — base text in w_011/w_012 repeats across runs
+12. **Builder path audit** — not yet audited
 
 ## Resolved
 - ~~Reset button~~ — works now
 - ~~w_006 Run 1 choice conditions~~ — both go to bartender
 - ~~Whiskey sour prose~~ — trimmed
-- ~~Em dash cleanup (unity passage)~~ — done for w_008f, deferred elsewhere
+- ~~Em dash cleanup (unity passage)~~ — done for w_008f
+- ~~Familiar path editorial pass~~ — all 22 nodes cleaned, subtitles added
+- ~~Run 3 audit~~ — completed, not yet edited
+- ~~Familiar em dashes~~ — ~60 instances fixed
 
 ---
 
@@ -138,7 +188,7 @@ w_002b → w_bouncer_run2 → w_bartender_run2 → w_bartender_run2_drink → w_
 - **W_003b capital W** — inconsistent with lowercase convention
 - **Goodness artifact** — blank_key is provisional
 - **Closing ceremony repetition** — base text in w_011/w_012 repeats across runs; conditionals may not be enough
-- **Em dash cleanup** — retroactive cleanup deferred (done for w_008f only)
+- **Em dash cleanup** — done for w_008f and all Familiar nodes. Wanderer Run 3 still pending. Run 1/2 wanderer nodes not yet swept.
 
 ## Key Memory Files
 

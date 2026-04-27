@@ -9,7 +9,7 @@
   "nodes": [
     {
       "id": "f_001",
-      "text": "You have been here before. Not here — not this building, not this arrangement of concrete and iron and wiring that hums at frequencies the builders never intended. But here. The moment before a harvest. The stillness that precedes the opening.\n\nYou have stood in forests older than language and felt this same anticipation in the root systems underfoot. You have crouched in tide pools at the edge of continents that no longer exist and felt the water change temperature in exactly this way.\n\nYou are wearing a body. It is a good body — functional, upright, appropriately jointed. You chose it the way you might choose a tool from a rack: by fit, by purpose. It has hands. It has ears. It has a face that other bodies will not flinch from. The work requires proximity.\n\nYou roll your shoulders. The body responds well. You check your hands — they work. You have antlers tonight but they are folded down, hidden under a hood. The divining rod is in your coat, flat against your ribs, inert. It will wake when the portal opens. It always does.",
+      "text": "You have been here before. Not here. Not this building, not this arrangement of concrete and iron and conduit that hums at frequencies no one intended. But here. The moment before a harvest. The stillness that precedes the opening.\n\nYou have stood in forests older than language and felt this same anticipation in the root systems underfoot. You have crouched in tide pools at the edge of continents that no longer exist and felt the water change temperature in exactly this way.\n\nYou are wearing a body. It is a good body, functional, upright, appropriately jointed. You chose it the way you might choose a tool from a rack: by fit, by purpose. It has hands. It has ears. It has a face that other bodies will not flinch from.\n\nYou roll your shoulders. The body responds well. You check your hands. They work. You have antlers tonight but they are folded down, hidden under a hood. The divining rod is in your coat, flat against your ribs, inert. It will wake when the portal opens. It always does.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -20,11 +20,12 @@
       "choices": [],
       "next": "f_002",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE ARRIVAL"
     },
     {
       "id": "f_002",
-      "text": "The others are here. You can feel them — distributed through the space in positions that make sense from a geometry you doubt the humans could perceive.\n\nOne is behind what the humans have arranged as a bar. She is pouring liquids into glasses with the careful focus of someone performing a ritual she learned from observation. The glasses are mostly correct. The proportions are close enough. Behind the bottles, in a jar with no label, a sprig of Schistostega pennata. Goblin's gold. It glows faintly in the dark between the shelves. Not a human ingredient. One of the few things behind the bar she did not learn from watching them.\n\nAnother is near the door, standing very still, wearing a jacket that says SECURITY in block letters. He chose the jacket because it was near the door. He does not know what security means in this context. He knows that humans expect a large person near the entrance and he is a large person near the entrance and this seems to satisfy them.\n\nYou are not sure the humans notice the seams. The room is assembled from references — a composite of venues scraped from the residue of a thousand nights in a thousand cities where humans gathered to move together. The bar is in the right place. The lights are doing the right thing. The fog is a nice touch, you think. The fog was your idea. It obscures the places where the architecture becomes unreliable.",
+      "text": "The others are here. You can feel them, distributed through the space in positions that make sense from a geometry you doubt the humans could perceive.\n\nOne is behind what the humans have arranged as a bar. She is pouring liquids into glasses with the careful focus of someone performing a ritual she learned from observation. The glasses are mostly correct. The proportions are close enough. Behind the bottles, in a jar with no label, a sprig of Schistostega pennata. Goblin's gold. It glows faintly in the dark between the shelves. Not a human ingredient. One of the few things behind the bar she did not learn from watching them.\n\nAnother is near the door, standing very still, wearing a jacket that says SECURITY in block letters. He chose the jacket because it was near the door. He does not know what security means in this context. He knows that humans expect a large person near the entrance and he is a large person near the entrance and this seems to satisfy them.\n\nYou are not sure the humans notice the seams. The room is assembled from references: a composite of venues scraped from the residue of a thousand nights in a thousand cities where humans gathered to move together. The bar is in the right place. The lights are doing the right thing. The fog is a nice touch, you think. The fog was your idea. It obscures the places where the architecture becomes unreliable.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -35,11 +36,12 @@
       "choices": [],
       "next": "f_003",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE CONSTRUCT"
     },
     {
       "id": "f_003",
-      "text": "DJ OOR is at the center. You do not look at it the way the humans will. You look at it the way a technician looks at a reactor: respect, familiarity, the understanding that what it contains is not meant for the vessel. The orange and yellow casing — concessions to materiality. The thing inside is not orange. The thing inside is not a thing.\n\nThe portal is ready. The aperture is the floor — always has been. The thinnest place between planes. You can feel Sooboont on the other side. Not presence — pressure. The weight of an ocean against a dam. The flow has been blocked long enough that the humans mistake numbness for contentment. The drain must be cleared or the system fails.\n\nThe first humans arrive. Past the one pretending to be security. Drinks from the one pretending to be a bartender. They find the room convincing and you feel something — not pride, no architecture for pride — a mechanical satisfaction. The lure is humming. No. Not a lure. A clinic. They are sick and do not know it. You are the treatment they did not seek. This is the work.",
+      "text": "DJ OOR is at the center. You do not look at it the way the humans will. You look at it the way a technician looks at a reactor: respect, familiarity, the understanding that what it contains is not meant for the vessel. The orange and yellow casing. Concessions to materiality. The thing inside is not orange. The thing inside is not a thing.\n\nThe portal is ready. The aperture is the floor, always has been. The thinnest place between planes. You can feel Sooboont on the other side. Not presence. Pressure. The weight of an ocean against a dam. The flow has been blocked long enough that the humans mistake numbness for contentment. The drain must be cleared or the basin overflows.\n\nThe first humans arrive. Past the one pretending to be security. Drinks from the one pretending to be a bartender. They find the room convincing and something in your ribs settles. The lure is humming. No. Not a lure. A clinic. They are sick and do not know it.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -65,15 +67,29 @@
       ],
       "next": null,
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE APERTURE"
     },
     {
       "id": "f_004",
-      "text": "The first note is not a note. It is Sooboont exhaling through the aperture.\n\nYou feel it in the rod before you hear it. The divining rod goes from inert to alive in a single pulse — a vibration that travels from your ribs to your fingertips. The portal is open. The connection is live.\n\nThe floor is no longer concrete. The floor is a membrane, vibrating at a frequency that the humans will interpret as bass and you interpret as breath.\n\nThe humans feel it. You watch them feel it. Some of them stop moving. Some of them start.",
+      "text": "The first note is not a note. It is Sooboont exhaling through the aperture.\n\nYou feel it in the rod before you hear it. The divining rod goes from inert to alive in a single pulse, a vibration that travels from your ribs to your fingertips. The portal is open. The connection is open.\n\nThe floor is no longer concrete. The floor is a membrane, vibrating at a frequency that the humans will interpret as bass and you interpret as breath.\n\nThe humans feel it. You watch them feel it. Some of them stop moving. Some of them start.",
       "arrival_variants": [
-        { "requires": { "has_tag": "reads_crowd" }, "text": "You moved through them before the first note. You know what they're carrying. The rod is about to confirm it." },
-        { "requires": { "has_tag": "monitors_aperture" }, "text": "You felt Sooboont's pressure build behind the membrane until the construct released it. The note was an exhale — not yours." },
-        { "default": true, "text": "The portal opens. The work begins." }
+        {
+          "requires": {
+            "has_tag": "reads_crowd"
+          },
+          "text": "You moved through them before the first note. You know what they're carrying. The rod is about to confirm it."
+        },
+        {
+          "requires": {
+            "has_tag": "monitors_aperture"
+          },
+          "text": "You felt Sooboont's pressure build behind the membrane until the construct released it. The note was an exhale. Not yours."
+        },
+        {
+          "default": true,
+          "text": "The portal opens."
+        }
       ],
       "conditional_text": null,
       "oor_action": null,
@@ -83,15 +99,24 @@
       "awards_tags": [],
       "choices": [],
       "next": [
-        { "requires": { "has_tag": "reads_crowd" }, "target": "f_005a" },
-        { "default": true, "target": "f_005b" }
+        {
+          "requires": {
+            "has_tag": "reads_crowd"
+          },
+          "target": "f_005a"
+        },
+        {
+          "default": true,
+          "target": "f_005b"
+        }
       ],
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE FIRST NOTE"
     },
     {
       "id": "f_005a",
-      "text": "A man near the bar — tall, paint on his knuckles, a body that holds tension in the shoulders the way timber holds grain. He puts down his drink and turns toward the floor. He doesn't know why. You do. The frequency in him is high. His Unity concentration is dense, packed into a deep seam under years of calcification. A good deposit. He will yield well.\n\nA woman at the edge of the floor is already moving. Small white sneakers, a mark on the left one — a star, drawn in pen. A human sigil she probably doesn't know she made. Her Truth concentration is close to the surface, barely contained. You can see it in the way she closes her eyes without deciding to. She has been in rooms where the veil thinned before. Her body learned to stop resisting. She will not need much work tonight.\n\nThe rod is responding to both of them already. Registering density before you've taken a step.",
+      "text": "A man near the bar, tall, paint on his knuckles, a body that holds tension in the shoulders the way timber holds grain. He puts down his drink and turns toward the floor. He doesn't know why. You do. The rod is already pulling toward him. His Unity concentration is dense, packed into a deep seam under years of calcification. A good deposit. He will yield well.\n\nA woman at the edge of the floor is already moving. Small white sneakers, a mark on the left one, a star, drawn in pen. A human sigil she probably doesn't know she made. Her Truth concentration is close to the surface, barely contained. You can see it in the way she closes her eyes without deciding to. She has been in rooms where the membrane thinned before. Her body learned to stop resisting. She will not need much work tonight.\n\nThe rod is responding to both of them already. Registering density before you've taken a step.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -102,11 +127,12 @@
       "choices": [],
       "next": "f_006",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "READING THE CROWD"
     },
     {
       "id": "f_005b",
-      "text": "The humans are arriving faster now. The call is working. They come through the door and the cold falls off them and they look around the room and they see a party.\n\nThey see a party. You see a resonance field populating.\n\nEach new body changes the field's properties — adds a frequency, shifts a harmonic, alters the aggregate density. You are reading the room the way a mycologist reads soil: by what's growing, by what's missing, by the relationships between organisms that the organisms themselves cannot perceive.\n\nThe tall man near the bar — dense concentration, good deposit. The woman with the star on her sneaker — Truth close to the surface. You note them. You note everything. The rod vibrates with the room's composition, a living index that updates with every arrival.",
+      "text": "The humans are arriving faster now. The call is working. They come through the door and the cold falls off them and they look around the room and they see a party.\n\nThey see a party. You see a harvest assembling.\n\nEach new body changes the field, adds a vibration the rod can taste, shifts something the rod tracks but cannot name. You are reading the room the way a mycologist reads soil: by what's growing, by what's missing, by the relationships between organisms that the organisms themselves cannot perceive.\n\nThe tall man near the bar. Dense concentration, good deposit. The woman with the star on her sneaker. Truth close to the surface. You note them. You note everything. The rod hums with the room's composition, thickening with every arrival.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -117,15 +143,29 @@
       "choices": [],
       "next": "f_006",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE FIELD"
     },
     {
       "id": "f_006",
-      "text": "DJ OOR begins to operate. The music — you do not think of it as music, you think of it as agitation, as the process by which deposits are loosened from the substrate — fills the room.\n\nThe humans respond. They call it dancing. You call it yielding. Both words describe the same motion. Their word is more generous. Yours is more accurate.\n\nThe construct extends the agitation deeper into the crowd. Working the material harder. The humans interpret this as the music getting better. They are not wrong. Effectiveness and quality are the same thing in this context.",
+      "text": "DJ OOR begins to operate. The music fills the room. You do not think of it as music. You think of it as agitation, the process by which deposits are loosened from the substrate.\n\nThe humans respond. They call it dancing. You call it yielding.\n\nThe construct extends the agitation deeper into the crowd. Working the material harder. The humans interpret this as the music getting better. They are not wrong.",
       "arrival_variants": [
-        { "requires": { "has_tag": "reads_crowd" }, "text": "You know who they are now. The rod confirmed the concentrations. The agitation begins." },
-        { "requires": { "has_tag": "monitors_aperture" }, "text": "The field is populating. The aggregate density is approaching the threshold the construct needs. The agitation begins." },
-        { "default": true, "text": "The music — the agitation — fills the room." }
+        {
+          "requires": {
+            "has_tag": "reads_crowd"
+          },
+          "text": "You know who they are now. The rod confirmed the concentrations. The agitation begins."
+        },
+        {
+          "requires": {
+            "has_tag": "monitors_aperture"
+          },
+          "text": "The field is thickening. The density is approaching what the construct needs. The agitation begins."
+        },
+        {
+          "default": true,
+          "text": "The agitation fills the room."
+        }
       ],
       "conditional_text": null,
       "oor_action": null,
@@ -136,11 +176,12 @@
       "choices": [],
       "next": "f_007",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE AGITATION"
     },
     {
       "id": "f_007",
-      "text": "DJ OOR initiates the synchronization protocol.\n\nYou have seen this before. Not this particular form — the slide, the call-and-response, the directional movement humans seem to have built into their cultural substrate like a reflex — but the principle. The principle is always the same: bodies moving together, boundaries thinning, the field unifying.\n\nThe rod responds to the gaps between bodies, not to the bodies themselves. It always has. Your job is to close the gaps.",
+      "text": "DJ OOR calls the first move. The crowd responds in unison.\n\nYou have seen this before. Not this particular form. The slide, the call-and-response, the directional movement humans seem to have built into their cultural substrate like a reflex. But the principle is always the same: bodies moving together, boundaries thinning, the field unifying.\n\nThe rod responds to the gaps between bodies, not to the bodies themselves. It always has.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -151,16 +192,19 @@
       "choices": [],
       "next": "f_008",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE SLIDE"
     },
     {
       "id": "f_008",
-      "text": "The vocoded voice calls the moves. The humans follow. You follow too — your body does the dance because your body is a human body tonight and human bodies respond to these patterns the way iron filings respond to a magnet. You are not immune to the field you are cultivating. This is fine. This is useful. You are a node in the network. Your participation increases the density.\n\nThe tall man with the paint on his knuckles is directly in your field of vision. His shoulders have released the tension. The Unity frequency in him is broadcasting now, not stored. He is laughing. A person near him — someone who arrived late, someone who watches more than participates — makes eye contact with him and the connection runs between them like a root finding water. Two strangers, unified briefly, returning to their own orbits but changed. The frequency they generated in that moment is harvestable. Small yield. But real.\n\nThe floor brightens. The aperture is responding to the density increase. You can feel Sooboont pulling — not hard, not yet. A steady draw, the way a root system draws water. The flow is beginning. The drain is starting to clear.",
+      "text": "The vocoded voice calls the moves. The humans follow. You follow too. Your body does the dance because your body is a human body tonight and human bodies respond to these patterns the way iron filings respond to a magnet. You are not immune to the field you are cultivating. Your participation thickens it.\n\nThe tall man with the paint on his knuckles is directly in your field of vision. His shoulders have released the tension. The rod reads his Unity as open now, broadcasting where it was stored. He is laughing. A person near him, someone who arrived late, someone who watches more than participates, makes eye contact with him and the connection runs between them like a root finding water. Two strangers, unified briefly, returning to their own orbits but changed. The rod hums at the place where they touched. Small yield. But real.\n\nThe floor brightens. The aperture is responding to the density increase. You can feel Sooboont pulling, not hard, not yet. A steady draw, the way a root system draws water. The flow is beginning. The drain is starting to clear.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "reads_crowd" },
-          "append": "The connection between the watcher and the tall man — you note it twice. You do not usually note things twice."
+          "condition": {
+            "has_tag": "reads_crowd"
+          },
+          "append": "The connection between the watcher and the tall man. You note it twice. You do not usually note things twice."
         }
       ],
       "oor_action": "DJ OOR extends agitation into a sub-frequency range the construct should not have access to. The engineer behind the amp rack will have questions.",
@@ -186,19 +230,35 @@
       ],
       "next": null,
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE DANCE"
     },
     {
       "id": "f_009",
-      "text": "This is your work. This is what you are for.\n\nThe music shifts and you shift with it. The hood comes down. The antlers extend — not mechanically, not like a mechanism deploying, but the way a fern unfurls. Slowly. Inevitably. The divining rod comes out of your coat and into your hand and it is already singing — a low, continuous tone that exists between the notes of the music, audible to you, felt but not heard by the humans.\n\nYour partner is beside you. She was at the bar a moment ago, pouring drinks with approximate accuracy. Now she is here, antlered, present, moving with a precision that has nothing to do with choreography and everything to do with geometry. She is the direction. You are the measurement. Together you are a single instrument calibrated over intervals of time that would be meaningless to express in human units.",
+      "text": "The music shifts and you shift with it. The hood comes down. The antlers extend the way a fern unfurls. Slowly. Inevitably. The divining rod comes out of your coat and into your hand. It is already singing, a low continuous tone that exists between the notes of the music, audible to you, felt but not heard by the humans.\n\nYour partner is beside you. She was at the bar a moment ago, pouring drinks with approximate accuracy. Now she is here, antlered, present, moving with the precision of geometry. She is the direction. You are the measurement. Together you are a single instrument calibrated over intervals of time that would be meaningless to express in human units.",
       "arrival_variants": [
-        { "requires": { "has_tag": "stays_embedded" }, "text": "The field is inside you. The density you amplified is still resonating in the body. The antlers extend from inside the resonance." },
-        { "requires": { "has_tag": "pulls_back" }, "text": "You have the map. Every concentration, every deficit, every harmonic relationship — indexed. The antlers extend from inside the data." },
-        { "default": true, "text": "The music shifts. You shift with it." }
+        {
+          "requires": {
+            "has_tag": "stays_embedded"
+          },
+          "text": "The field is inside you. The density you amplified is still resonating in the body. The antlers extend from inside the resonance."
+        },
+        {
+          "requires": {
+            "has_tag": "pulls_back"
+          },
+          "text": "You have the map. Every concentration, every deficit, every harmonic relationship charted. The antlers extend from inside the survey."
+        },
+        {
+          "default": true,
+          "text": "The music shifts. You shift with it."
+        }
       ],
       "conditional_text": [
         {
-          "condition": { "has_tag": "stays_embedded" },
+          "condition": {
+            "has_tag": "stays_embedded"
+          },
           "append": "The transition is not dramatic. You were dancing. Now you are doing something else. The humans near you do not notice the change."
         }
       ],
@@ -209,15 +269,24 @@
       "awards_tags": [],
       "choices": [],
       "next": [
-        { "requires": { "has_tag": "stays_embedded" }, "target": "f_010a" },
-        { "default": true, "target": "f_010b" }
+        {
+          "requires": {
+            "has_tag": "stays_embedded"
+          },
+          "target": "f_010a"
+        },
+        {
+          "default": true,
+          "target": "f_010b"
+        }
       ],
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE UNFURLING"
     },
     {
       "id": "f_010a",
-      "text": "You approach the first — not target. Not source. Not deposit. The language is insufficient in every direction. You approach the woman with the star on her sneaker.\n\nThe rod resonates. The sound it makes is specific to her — a harmonic signature as unique as a fingerprint, as readable as text. Her Truth concentration is extraordinary. Right there, just under the surface, held in place by the thinnest shell of social self-awareness. She has been ready all night. She may have been ready for years.\n\nYou take her hand. Yours is warm. Hers is warmer. You guide her toward the man — half-closed eyes, already surrendered to the frequency. His Unity complements her Truth the way a root system complements mycelium: different organisms, shared network, mutual benefit.\n\nYou place them together. Six inches closer. Two inches left. The rod goes quiet. The resonance between them is self-sustaining. They don't need you anymore.\n\nThey look at each other and something crosses between them that you recognize but cannot name because it is a human thing and you are not, tonight, a human. You are wearing one. There is a difference.",
+      "text": "You approach the first. Not target, not source, not deposit. You approach the woman with the star on her sneaker.\n\nThe rod resonates. The sound it makes is specific to her: a harmonic signature as unique as a fingerprint, as readable as text. Her Truth concentration is extraordinary. Right there, just under the surface, held in place by the thinnest shell of social self-awareness. She has been ready all night. She may have been ready for years.\n\nYou take her hand. Yours is warm. Hers is warmer. You guide her toward the man, half-closed eyes, already given over to whatever the rod hears in him. His Unity complements her Truth the way a root system complements mycelium.\n\nYou place them together. Six inches closer. Two inches left. The rod goes quiet. The resonance between them is self-sustaining. They don't need you anymore.\n\nThey look at each other and something crosses between them that you recognize but cannot name because it is a human thing and you are not, tonight, a human. You are wearing one. There is a difference.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -228,15 +297,18 @@
       "choices": [],
       "next": "f_011",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE PAIRING"
     },
     {
       "id": "f_010b",
-      "text": "You move through the crowd. Each approach is the same and each is different. The rod sings and quiets. Sings and quiets.\n\nSome deposits are deep — buried under years of calcification, unreachable tonight, maybe next time, maybe never. Some are shallow — right there, glowing, practically leaking transcendental energy into the ambient field. You pair the shallow ones with the deep ones. The shallow act as solvents. The deep provide volume.\n\nThe sneaker-star woman — the rod sang loudest for her. Paired with the half-closed-eyes man. Resonance self-sustaining in seconds. You move on.\n\nTwelve pairings. The rod sings and quiets. The field changes composition with each one. The room is becoming a solution — a homogeneous mixture in which the transcendentals are suspended and accessible.",
+      "text": "You move through the crowd. Each approach is the same and each is different. The rod sings and quiets. Sings and quiets.\n\nSome deposits are deep. Buried under years of calcification, unreachable tonight, maybe next time, maybe never. Some are shallow, right there, glowing, practically seeping into the field around them. You pair the shallow ones with the deep ones. The shallow act as solvents. The deep provide volume.\n\nThe sneaker-star woman. The rod sang loudest for her. Paired with the half-closed-eyes man. Resonance self-sustaining in seconds. You move on.\n\nTwelve pairings. The rod sings and quiets. The field changes composition with each one. The room is becoming something else. The transcendentals are moving, loosened from their deposits, dissolving into the space between bodies.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "reads_crowd" },
+          "condition": {
+            "has_tag": "reads_crowd"
+          },
           "append": "Some people are passed over. The rod does not respond. They don't notice being passed over. This is a kindness, or an irrelevance. You are not sure which."
         }
       ],
@@ -248,16 +320,19 @@
       "choices": [],
       "next": "f_011",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE PAIRINGS"
     },
     {
       "id": "f_011",
-      "text": "A person near the edge of the floor. The one who arrived late. The one who watches. The one who collects details the way you collect frequencies.\n\nThe rod responds to them. Not loudly — not the way it responded to the sneaker-star woman. But specifically. There is something in this person that is unusual. The rod's response is dense and focused, almost no scattering — a frequency you don't often encounter. They notice things. They notice you. You feel their gaze on your antlers and it is not fear and it is not amusement. It is recognition. Not of what you are. Of the fact that you are something.\n\nNot yet. They are not ready. But they are close. You make a note — not a mental note, you do not have a mind in the way they do, but a note in the body, in the rod, in the resonance map you are building of this room. This person will matter. Not tonight, maybe. But soon.",
+      "text": "A person near the edge of the floor. The one who arrived late. The one who watches. The one who collects details the way you collect readings.\n\nThe rod responds to them. Not loudly, not the way it responded to the sneaker-star woman. But specifically. There is something in this person that is unusual. The rod's response is dense and focused, almost no scattering, a tone it has not made before tonight. They notice things. They notice you. You feel their gaze on your antlers and it is not fear and it is not amusement. It is recognition. Not of what you are. Of the fact that you are something.\n\nNot yet. They are not ready. But they are close. You make a note in the rod, in the body, in the map you are building of this room. This person will matter. Not tonight, maybe. But soon.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "reads_crowd" },
-          "append": "Their attention has a weight you do not usually assign to human perception. It is not transcendental. It is adjacent. You have not encountered this configuration before."
+          "condition": {
+            "has_tag": "reads_crowd"
+          },
+          "append": "Their attention has a weight you do not usually assign to human perception. The rod does not read it as transcendental. It reads it as something beside transcendental, close but unnamed. You have not encountered this before."
         }
       ],
       "oor_action": null,
@@ -283,19 +358,35 @@
       ],
       "next": null,
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE WATCHER"
     },
     {
       "id": "f_012",
-      "text": "The ritual completes the way a chemical reaction completes — not with a signal but with an equilibrium.\n\nThe pairs have merged into clusters. The clusters have merged into the field. The room is no longer a collection of individuals. It is a solution — a homogeneous mixture in which the transcendentals are suspended and accessible.\n\nYou fold your antlers down. You put the rod back in your coat. It is still vibrating faintly. It will not fully stop until the portal closes.\n\nYou step back. Your partner returns to the bar. She begins pouring drinks again. The humans accept them. The seam holds.",
+      "text": "The ritual completes the way a chemical reaction completes, not with a signal but with a settling.\n\nThe pairs have merged into clusters. The clusters have merged into the field. The room is no longer a collection of individuals. The transcendentals are dissolved into the space between them, available, flowing.\n\nYou fold your antlers down. You put the rod back in your coat. It is still vibrating faintly. It will not fully stop until the portal closes.\n\nYou step back. Your partner returns to the bar. She begins pouring drinks again. The humans accept them. The seam holds.",
       "arrival_variants": [
-        { "requires": { "has_tag": "notes_and_moves" }, "text": "The watcher is noted. Filed. The ritual continued." },
-        { "requires": { "has_tag": "lingers_on_watcher" }, "text": "You lingered longer than function required. The rod quieted before you moved on. That pause is in the data now." },
-        { "default": true, "text": "The ritual is completing." }
+        {
+          "requires": {
+            "has_tag": "notes_and_moves"
+          },
+          "text": "The watcher is noted. Marked. The ritual continued."
+        },
+        {
+          "requires": {
+            "has_tag": "lingers_on_watcher"
+          },
+          "text": "You lingered longer than function required. The rod quieted before you moved on. That pause is in the body now."
+        },
+        {
+          "default": true,
+          "text": "The ritual is completing."
+        }
       ],
       "conditional_text": [
         {
-          "condition": { "has_tag": "stays_embedded" },
+          "condition": {
+            "has_tag": "stays_embedded"
+          },
           "append": "Something from the embedding remains in the body. A residue you did not have before the field. The body carried the density and some of the density stayed."
         }
       ],
@@ -307,11 +398,12 @@
       "choices": [],
       "next": "f_013",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE SETTLING"
     },
     {
       "id": "f_013",
-      "text": "DJ OOR changes the projection. The rings contract to a single circle. The arrow begins to spin.\n\nThe circle glows. Not visually — not in a way the humans would see. The membrane is thinnest here. A single body standing in it becomes a conduit so pure the rod sings from across the room.\n\nThe arrow spins. It is not random. It is an assay — identifying the deposits closest to full yield.",
+      "text": "DJ OOR changes the projection. The rings contract to a single circle. The arrow begins to spin.\n\nThe circle glows. Not visually. Not in a way the humans would see. The membrane is thinnest here. A single body standing in it becomes a conduit so pure the rod sings from across the room.\n\nThe arrow spins. It is not random. It is an assay: identifying the deposits closest to full yield.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": "The arrow is not random. You have always known this.",
@@ -322,16 +414,19 @@
       "choices": [],
       "next": "f_014",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE CIRCLE"
     },
     {
       "id": "f_014",
-      "text": "The woman in the jacket — the one who never took it off, who has been dancing at a slight remove all night, close enough to feel the field but not close enough to dissolve into it. The arrow finds her first. You know why. Her jacket is armor. She has been maintaining a boundary. The circle will ask her to drop it. Not the jacket. The boundary.\n\nShe enters. She dances. You can see what the humans cannot: the transcendental flow through her body, visible to you as a luminescence, a shift in the density of the air around her. She is yielding. The flow through her is visible to you — luminous, dense, the specific signature you have learned to associate with unmediated presence. It moves through the aperture and down through the membrane. You feel Sooboont draw. The drain is clearing.\n\nThe tall man enters next. Paint on his knuckles. Unity pouring from him in layers. He dances the way a tree moves in wind — from the roots, through the trunk, with the confidence of something that has never questioned its right to occupy space. The yield is enormous.\n\nThe arrow spins again. It finds the watcher. The one who notices things. The one the rod responded to.",
+      "text": "The woman in the jacket. The one who never took it off, who has been dancing at a slight remove all night, close enough to feel the field but not close enough to dissolve into it. The arrow finds her first. You know why. Her jacket is armor. She has been maintaining a boundary. The circle will ask her to drop it. Not the jacket. The boundary.\n\nShe enters. She dances. The transcendental flow through her is visible to you as a luminescence, a shift in the density of the air around her. The rod confirms what you already knew. It moves through the aperture and down through the membrane. You feel Sooboont draw. The drain is clearing.\n\nThe tall man enters next. Paint on his knuckles. Unity pouring from him in layers. He dances the way a tree moves in wind, from the roots, through the trunk, with the confidence of something that has never questioned its right to occupy space. The yield is enormous.\n\nThe arrow spins again. It finds the watcher. The one who notices things. The one the rod responded to.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "lingers_on_watcher" },
-          "append": "You watch the watcher more closely than you watched the others. If they enter: the flow through them is not Truth exactly, not Unity exactly — attention itself, transmuted into something the aperture accepts. If they stay in the ring: the rod notes a deposit that chose to remain unmined. You are not sure why noting this feels different from noting the others."
+          "condition": {
+            "has_tag": "lingers_on_watcher"
+          },
+          "append": "You watch the watcher more closely than you watched the others. If they enter: the flow through them is something the rod cannot categorize, not quite Truth, not quite Unity, something made of attention itself, and the aperture accepts it anyway. If they stay in the ring: the rod notes a deposit that chose to remain unmined. You are not sure why noting this feels different from noting the others."
         }
       ],
       "oor_action": null,
@@ -357,15 +452,29 @@
       ],
       "next": null,
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE YIELD"
     },
     {
       "id": "f_015",
-      "text": "You watch. Whether they enter or not, you watch. You are always watching.\n\nYou are a technician and a healer and a geologist and a beekeeper, and the bees do not know you are there, and the honey is not for them, and you are keeping them alive because alive bees make honey and that is the arrangement and it is old and it is neither fair nor unfair. It is the work.",
+      "text": "You watch. Whether they enter or not, you watch. You are always watching.\n\nThe bees do not know you are here. The honey is not for them. You keep them alive because alive bees make honey and the arrangement is old and it is neither fair nor unfair.",
       "arrival_variants": [
-        { "requires": { "has_tag": "watches_yield" }, "text": "The yield data confirmed what the rod measured. The watcher's contribution is now part of the aggregate. A number in the total." },
-        { "requires": { "has_tag": "watches_person" }, "text": "You watched them. Not the flow through them. Not the yield. Them." },
-        { "default": true, "text": "You are watching." }
+        {
+          "requires": {
+            "has_tag": "watches_yield"
+          },
+          "text": "The rod confirmed what it measured. The watcher's contribution is part of the yield now."
+        },
+        {
+          "requires": {
+            "has_tag": "watches_person"
+          },
+          "text": "You watched them. Not the flow through them. Not the yield. Them."
+        },
+        {
+          "default": true,
+          "text": "You are watching."
+        }
       ],
       "conditional_text": null,
       "oor_action": null,
@@ -376,15 +485,18 @@
       "choices": [],
       "next": "f_016",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE BEEKEEPER"
     },
     {
       "id": "f_016",
-      "text": "The construct knows. You know because the construct knows, or the construct knows because you know — the causality is not linear, it runs through the rod, through the aperture, through Sooboont's pressure on the other side of the membrane. The harvest is sufficient. The flow is restored. The drain is clear.\n\nThe transcendentals are moving again — Unity, Beauty, Truth, Goodness — cycling from the material plane through the conduit of two hundred bodies through the aperture and into the Primordial Plane, where Sooboont receives them the way soil receives water.\n\nDJ OOR initiates the closing sequence. Call and response. The crowd descending, bodies lowering toward the floor. You descend with them. Your body does what their bodies do because your body is one of theirs tonight.",
+      "text": "The construct knows. You know because the construct knows, or the construct knows because you know. The causality is not linear. It runs through the rod, through the aperture, through Sooboont's pressure on the other side of the membrane. The harvest is sufficient. The flow is restored. The drain is clear.\n\nThe transcendentals are moving again. You can feel them cycling through the room, through the bodies, through the membrane and down into the place where Sooboont receives them the way soil receives water.\n\nDJ OOR begins the closing. Call and response. The crowd descending, bodies lowering toward the floor. You descend with them. Your body does what their bodies do because your body is one of theirs tonight.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "stays_embedded" },
+          "condition": {
+            "has_tag": "stays_embedded"
+          },
           "append": "Your body descends and for a moment you cannot distinguish which sensations belong to the body and which belong to the function. Something in the embedding left a residue."
         }
       ],
@@ -396,11 +508,12 @@
       "choices": [],
       "next": "f_017",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE HARVEST"
     },
     {
       "id": "f_017",
-      "text": "At the floor, face to the concrete, you can feel the membrane directly. It is thin. It is warm. It is vibrating with the passage of transcendentals — a flow so dense you can almost see it, almost taste it, a river running through the room's foundation into a place that has no coordinates.\n\nSooboont pulls. One final draw. The crowd gasps — not in unison, in ripples, the way a field of grass bends in wind, starting from one edge and rolling through. Something passes out of them. Something is restored. The balance shifts. The system clears.\n\nSilence.\n\nThe portal closes. You feel it seal — not shut, seal, the way a wound seals, the way a fracture knits. The aperture is dormant. The floor is concrete. The projection fades. The lights come up.",
+      "text": "At the floor, face to the concrete, you can feel the membrane directly. It is thin. It is warm. It is vibrating with the passage of transcendentals, a flow so dense you can almost see it, almost taste it, a river running through the room's foundation into a place that has no coordinates.\n\nSooboont pulls. One final draw. The crowd gasps, not in unison, in ripples, the way a field of grass bends in wind, starting from one edge and rolling through. Something passes out of them. Something is restored. The balance shifts. The drain clears.\n\nSilence.\n\nThe portal closes. You feel it seal. Not shut. Seal, the way a wound seals, the way a fracture knits. The aperture is dormant. The floor is concrete. The projection fades. The lights come up.",
       "arrival_variants": null,
       "conditional_text": null,
       "oor_action": null,
@@ -411,16 +524,19 @@
       "choices": [],
       "next": "f_018",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE CLOSING"
     },
     {
       "id": "f_018",
-      "text": "You stand. You look at your hands. They are still your hands. For now. The body is still functional, still upright, still appropriately jointed. You don't know how much longer that will be true. The portal is closed. Your purpose tonight is complete. The arrangement between your existence and this form is — unclear. It has always been unclear.\n\nThe humans are leaving. Collecting coats and phones and keys. Hugging strangers — pressing bodies together one more time before the container breaks.\n\nThe sneaker-star woman is near the door. Her shell is thinner now. She will be easier to reach next time.\n\nThe tall man is putting on a jacket. His Unity frequency is still broadcasting, faintly, like an echo. He will carry it for days. He will make rooms better just by being in them and he will not know why.\n\nThe watcher is gone. You didn't see them leave. They are carrying something in their coat pocket. They don't know it yet. The rod placed it there — or the aperture placed it, or Sooboont placed it, or it placed itself. Objects are less committed to causality than people suppose. A seed. They will come back.",
+      "text": "You stand. You look at your hands. They are still your hands. For now. The body is still functional, still upright, still appropriately jointed. You don't know how much longer that will be true. The portal is closed. Your purpose tonight is complete. The arrangement between your existence and this form is unclear. It has always been unclear.\n\nThe humans are leaving. Collecting coats and phones and keys. Hugging strangers, pressing bodies together one more time before the container breaks.\n\nThe sneaker-star woman is near the door. Her shell is thinner now. She will be easier to reach next time.\n\nThe tall man is putting on a jacket. His Unity is still radiating, faintly, like heat from a stone after the sun has gone. He will carry it for days. He will make rooms better just by being in them and he will not know why.\n\nThe watcher is gone. You didn't see them leave. They are carrying something in their coat pocket. They don't know it yet. The rod placed it there. Or the aperture placed it, or Sooboont placed it, or it placed itself. Objects are less committed to causality than people suppose. A seed. They will come back.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "lingers_on_watcher" },
-          "append": "The watcher left something in you. Not a frequency. Not a concentration. The rod responds to the absence the way it responds to presence — specifically, measurably. You do not have a category for this."
+          "condition": {
+            "has_tag": "lingers_on_watcher"
+          },
+          "append": "The watcher left something in you. Not a frequency. Not a concentration. The rod responds to the absence the way it responds to presence, specifically, measurably. You do not have a category for this."
         }
       ],
       "oor_action": null,
@@ -431,15 +547,18 @@
       "choices": [],
       "next": "f_019",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE DISPERSAL"
     },
     {
       "id": "f_019",
-      "text": "Your partner is wiping down the bar. She is still wearing antlers. She has forgotten to fold them down. Or she has decided not to. Or the mechanism that allows her to fold them is no longer responding.\n\nShe looks at you across the empty room and her expression is — you don't have a word for it. Familiar. Ancient. Tired in a way that has nothing to do with the body.",
+      "text": "Your partner is wiping down the bar. She is still wearing antlers. She has forgotten to fold them down. Or she has decided not to. Or the mechanism that allows her to fold them is no longer responding.\n\nShe looks at you across the empty room and her expression is something you don't have a word for. Familiar. Ancient. Tired in a way that has nothing to do with the body.",
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "watches_person" },
+          "condition": {
+            "has_tag": "watches_person"
+          },
           "append": "You want to say something to her. The body has a word for this impulse. The body calls it reaching. You do not reach. You are not sure the body is wrong."
         }
       ],
@@ -451,7 +570,8 @@
       "choices": [],
       "next": "f_020",
       "terminal": false,
-      "outcome": null
+      "outcome": null,
+      "subtitle": "THE PARTNER"
     },
     {
       "id": "f_020",
@@ -459,11 +579,15 @@
       "arrival_variants": null,
       "conditional_text": [
         {
-          "condition": { "has_tag": "watches_person" },
+          "condition": {
+            "has_tag": "watches_person"
+          },
           "append": "Something in the — is it the rod? Is the rod still — something responds. Not a deposit. A residue. The watcher. The person. The hand that held another hand. You noted them. The note persists. The note will not — the body is folding and the note is still —"
         },
         {
-          "condition": { "has_tag": "lingers_on_watcher" },
+          "condition": {
+            "has_tag": "lingers_on_watcher"
+          },
           "append": "The note in the rod. The watcher. They will matter. The note persists past the body. You do not know what carries the note when the body is —"
         },
         {
@@ -480,7 +604,8 @@
       "choices": [],
       "next": null,
       "terminal": true,
-      "outcome": "dissolution"
+      "outcome": "dissolution",
+      "subtitle": "THE DISSOLUTION"
     }
   ]
 }
