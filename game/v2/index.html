@@ -321,6 +321,7 @@
     }
 
     .game-back:hover { color: var(--orange); }
+    .game-back:disabled { color: var(--text-dim); cursor: default; }
 
     .game-char-name {
       font-family: 'Bebas Neue', sans-serif;
@@ -1804,6 +1805,14 @@
       }
     }
 
+    @media (min-width: 900px) {
+      .wrap { max-width: 720px; }
+    }
+
+    @media (min-width: 1200px) {
+      .wrap { max-width: 860px; }
+    }
+
   </style>
 </head>
 <body class="temp-cold">
@@ -1867,6 +1876,7 @@
   <div id="game-screen" class="wrap" hidden>
     <header class="site-header">
       <button class="game-back" onclick="goToSelect()">← perspectives</button>
+      <button class="game-back" id="player-back-btn" onclick="goBack()" disabled>↩ back</button>
       <div class="game-char-name" id="game-char-name"></div>
     </header>
     <div id="game"></div>
@@ -2238,7 +2248,8 @@ async function loadCharacterDirect(charId) {
       tags:            [],
       transcendentals: [],
       pending_arrival: null,
-      earnedArtifact:  null
+      earnedArtifact:  null,
+      history:         []
     };
 
     renderNode();
@@ -2266,7 +2277,8 @@ function restartCharacter() {
     tags:            [],
     transcendentals: [],
     pending_arrival: null,
-    earnedArtifact:  null
+    earnedArtifact:  null,
+    history:         []
   };
   document.body.className = 'temp-cold';
   _lastRenderedNode = null; // force scroll on restart
@@ -2500,7 +2512,7 @@ function renderNode() {
         const gated = choice.requires && (choice.requires.has_artifact || choice.requires.has_artifacts);
         const artifactKey = gated && (choice.requires.has_artifact || (choice.requires.has_artifacts && choice.requires.has_artifacts[0]));
         const artifactClass = artifactKey ? ` choice-gated-${artifactKey.replace(/_/g, '-')}` : '';
-        const type = types[i];
+        const type = choice.icon_type || types[i];
         const icon = type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂';
         const cls = 'choice-btn'
           + (gated ? ' choice-gated-new' + artifactClass : '')
@@ -2597,6 +2609,8 @@ function renderNode() {
   const gameEl = document.getElementById('game');
   gameEl.innerHTML = html;
   updateStateBar(node);
+  const backBtn = document.getElementById('player-back-btn');
+  if (backBtn) backBtn.disabled = !run.history.length;
   if (run.node !== _lastRenderedNode) window.scrollTo(0, 0);
   _lastRenderedNode = run.node;
   if (devMode) renderDevConsole(node);
@@ -2708,6 +2722,7 @@ function renderNode() {
       btn.textContent = 'continue';
       wrap.appendChild(btn);
       btn.addEventListener('click', () => {
+        run.history.push({ nodeId: run.node, tagSnapshot: [...run.tags] });
         run.node = nextId;
         renderNode();
       });
@@ -2719,6 +2734,7 @@ function renderNode() {
 
 function makeChoice(choice) {
   if (!choice) return;
+  run.history.push({ nodeId: run.node, tagSnapshot: [...run.tags] });
   if (choice.tag && !run.tags.includes(choice.tag)) {
     run.tags.push(choice.tag);
   }
@@ -2730,6 +2746,14 @@ function makeChoice(choice) {
     run.pending_arrival = choice.arrival;
   }
   run.node = choice.next;
+  renderNode();
+}
+
+function goBack() {
+  if (!run.history.length) return;
+  const prev = run.history.pop();
+  run.tags = prev.tagSnapshot;
+  run.node = prev.nodeId;
   renderNode();
 }
 
@@ -2882,6 +2906,9 @@ function devCaptureChoiceEditsToNode(nodeId) {
     if (reqArtifactVal) existingReq.has_artifact = reqArtifactVal;
     if (Object.keys(existingReq).length > 0) nextChoices[idx].requires = existingReq;
     else delete nextChoices[idx].requires;
+    const iconEl = document.querySelector(`[data-dev-choice-icon-idx="${idx}"]`);
+    const iconVal = iconEl ? iconEl.value : '';
+    if (iconVal) nextChoices[idx].icon_type = iconVal; else delete nextChoices[idx].icon_type;
   });
   node.choices = nextChoices;
 }
@@ -2979,6 +3006,12 @@ function devChoiceRowsHtml(node) {
       <div class="dev-choice-edit-text dev-inline-editable" contenteditable="true" data-dev-choice-text-idx="${idx}">${esc(choice.text || '')}</div>
       <div class="dev-choice-edit-meta">
         <div><label>leads to</label><select data-dev-choice-next-idx="${idx}">${nextOptionsHtml}</select></div>
+        <div><label>icon</label><select data-dev-choice-icon-idx="${idx}">
+          <option value="" ${!choice.icon_type ? 'selected' : ''}>(auto)</option>
+          <option value="continue" ${choice.icon_type === 'continue' ? 'selected' : ''}>→ continue</option>
+          <option value="lore" ${choice.icon_type === 'lore' ? 'selected' : ''}>↩ lore</option>
+          <option value="branch" ${choice.icon_type === 'branch' ? 'selected' : ''}>⑂ branch</option>
+        </select></div>
         <div><label>tag</label><input data-dev-choice-tag-idx="${idx}" value="${esc(choice.tag || '')}" /></div>
         <div><label>requires tag</label><input data-dev-choice-req-tag-idx="${idx}" value="${esc(reqTag)}" /></div>
         <div><label>requires artifact</label><select data-dev-choice-req-artifact-idx="${idx}">${reqArtifactOptionsHtml}</select></div>
