@@ -787,6 +787,29 @@
       color: var(--text-bright);
     }
 
+    .outcome-transcendental {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 8px 14px;
+      border-left: 2px solid rgba(212, 168, 32, 0.35);
+      background: rgba(212, 168, 32, 0.03);
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+    .outcome-transcendental.unity    { color: #70a8e8; border-left-color: rgba(64,128,208,0.4); background: rgba(64,128,208,0.03); }
+    .outcome-transcendental.beauty   { color: #e070a0; border-left-color: rgba(208,72,112,0.4); background: rgba(208,72,112,0.03); }
+    .outcome-transcendental.truth    { color: var(--yellow); border-left-color: rgba(212,168,32,0.4); }
+    .outcome-transcendental.goodness { color: #70c888; border-left-color: rgba(64,160,96,0.4); background: rgba(64,160,96,0.03); }
+    .outcome-transcendental-desc {
+      font-size: 10px;
+      letter-spacing: normal;
+      text-transform: none;
+      margin-top: 4px;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
     .outcome-artifact {
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -2344,10 +2367,12 @@ function renderNode() {
   }
 
   // node-level awards_artifact (unconditional)
-  if (node.awards_artifact && !persistent.artifacts.includes(node.awards_artifact)) {
-    persistent.artifacts.push(node.awards_artifact);
-    savePersistent();
+  if (node.awards_artifact) {
     if (!run.earnedArtifact) run.earnedArtifact = node.awards_artifact;
+    if (!persistent.artifacts.includes(node.awards_artifact)) {
+      persistent.artifacts.push(node.awards_artifact);
+      savePersistent();
+    }
   }
 
   // ── temperature ─────────────────────────────────────────
@@ -2403,10 +2428,10 @@ function renderNode() {
 
   // award artifacts from conditional_text
   conditionalArtifacts.forEach(a => {
+    if (!run.earnedArtifact) run.earnedArtifact = a;
     if (!persistent.artifacts.includes(a)) {
       persistent.artifacts.push(a);
       savePersistent();
-      if (!run.earnedArtifact) run.earnedArtifact = a;
     }
   });
 
@@ -2545,6 +2570,25 @@ function renderNode() {
       savePersistent();
     }
 
+    // show transcendentals earned this run
+    let transcendentalHtml = '';
+    if (run.transcendentals.length > 0) {
+      const TRANS_DESCS = {
+        unity:    'many bodies, one motion',
+        beauty:   'form exceeding function',
+        truth:    'presence without performance',
+        goodness: 'care without audience'
+      };
+      run.transcendentals.forEach((t, i) => {
+        const name = t.charAt(0).toUpperCase() + t.slice(1);
+        const desc = TRANS_DESCS[t] || '';
+        transcendentalHtml += `<div class="outcome-transcendental ${esc(t)}" style="animation-delay: ${0.2 + i * 0.15}s">` +
+          `◆ ${esc(name)}` +
+          (desc ? `<div class="outcome-transcendental-desc">${esc(desc)}</div>` : '') +
+          `</div>`;
+      });
+    }
+
     // show artifact earned this run (if any) — may have been awarded at a non-terminal node
     const newArtifact = conditionalArtifacts[0] || node.awards_artifact || run.earnedArtifact || null;
     const artTrans = {
@@ -2595,6 +2639,7 @@ function renderNode() {
     html += `<div class="outcome-card${outcome === 'dissolution' ? ' dissolution' : ''}">
       <div class="outcome-label">${esc(label.toUpperCase())}</div>
       ${dissolutionHtml}
+      ${transcendentalHtml}
       ${artifactHtml}
       ${unlockHtml}
       ${progressHtml}
