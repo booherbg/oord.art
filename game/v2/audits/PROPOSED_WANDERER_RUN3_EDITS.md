@@ -1,4 +1,7 @@
 # Wanderer Run 3 — Proposed Edits
+
+> **SUPERSEDED:** These line-level edits were from the first audit pass. The full rewrite (structurally different — goodness as active choice, jacket woman refusal in Run 1, cross-run threading) is in **RUN3_GOODNESS_WORKSHOP.md**. Do not apply these edits — the workshop doc's revised node text replaces them.
+
 **Source: WANDERER_RUN3_AUDIT.md**
 **Target: wanderer_nodes.json (w_bartender_run3, w_silence_run3, w_jacket_woman)**
 **w_loading_dock: no changes. Leave it.**

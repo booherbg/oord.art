@@ -2030,12 +2030,13 @@ function loadPersistent() {
     }
   } catch(e) { /* ignore parse errors */ }
   if (!persistent || typeof persistent !== 'object') {
-    persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
+    persistent = { completed_characters: [], artifacts: [], flags: [], transcendentals: [], runs: 0 };
   }
   // ensure arrays exist
   if (!Array.isArray(persistent.completed_characters)) persistent.completed_characters = [];
   if (!Array.isArray(persistent.artifacts))            persistent.artifacts = [];
   if (!Array.isArray(persistent.flags))                persistent.flags = [];
+  if (!Array.isArray(persistent.transcendentals))      persistent.transcendentals = [];
   if (typeof persistent.runs !== 'number')             persistent.runs = 0;
 }
 
@@ -2049,6 +2050,7 @@ function savePersistent() {
 
 function evaluate(condition) {
   if (!condition) return true;
+  if (condition.has_all_tags)          return run ? condition.has_all_tags.every(t => run.tags.includes(t)) : false;
   if (condition.has_tag)              return run ? run.tags.includes(condition.has_tag) : false;
   if (condition.has_transcendental)   return run ? run.transcendentals.includes(condition.has_transcendental) : false;
   if (condition.has_flag)              return persistent.flags.includes(condition.has_flag);
@@ -2057,7 +2059,7 @@ function evaluate(condition) {
   // handle both singular and plural forms (schema inconsistency in familiar JSON)
   if (condition.completed_character)  return persistent.completed_characters.includes(condition.completed_character);
   if (condition.completed_characters) return condition.completed_characters.every(c => persistent.completed_characters.includes(c));
-  if (condition.transcendentals_complete) return run ? run.transcendentals.length === 4 : false;
+  if (condition.transcendentals_complete) return persistent.transcendentals.length === 4;
   if (condition.not)                  return !evaluate(condition.not);
   return true;
 }
@@ -2364,6 +2366,10 @@ function renderNode() {
   if (node.awards_transcendental && !run.transcendentals.includes(node.awards_transcendental)) {
     run.transcendentals.push(node.awards_transcendental);
     awardedTranscendental = node.awards_transcendental;
+    if (!persistent.transcendentals.includes(node.awards_transcendental)) {
+      persistent.transcendentals.push(node.awards_transcendental);
+      savePersistent();
+    }
   }
 
   // node-level awards_artifact (unconditional)
@@ -2440,6 +2446,10 @@ function renderNode() {
     if (!run.transcendentals.includes(t)) {
       run.transcendentals.push(t);
       if (!awardedTranscendental) awardedTranscendental = t;
+    }
+    if (!persistent.transcendentals.includes(t)) {
+      persistent.transcendentals.push(t);
+      savePersistent();
     }
   });
 
@@ -2830,10 +2840,11 @@ function updateStateBar(node) {
     dot.style.background = tempMap[node.temperature] || tempMap.cold;
   }
 
-  // transcendental pips
+  // transcendental pips — persistent across runs
   ['unity', 'beauty', 'truth', 'goodness'].forEach(t => {
     const pip = document.getElementById('t-' + t);
-    if (pip) pip.classList.toggle('earned', run ? run.transcendentals.includes(t) : false);
+    if (pip) pip.classList.toggle('earned',
+      (run && run.transcendentals.includes(t)) || persistent.transcendentals.includes(t));
   });
 
   // artifacts in bar

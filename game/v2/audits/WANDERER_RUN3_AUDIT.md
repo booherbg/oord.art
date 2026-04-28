@@ -1,4 +1,7 @@
 # Wanderer Run 3 (Truth Branch) — Voice Audit
+
+> **SUPERSEDED:** This audit was the first pass. The full rewrite lives in **RUN3_GOODNESS_WORKSHOP.md** (recommendation + revised node text + variations). The jacket woman and w_009 have since been updated in the JSON — she no longer enters the circle in Run 1 (cross-run threading with Run 3 goodness arc). See workshop doc for current state.
+
 **Nodes reviewed: w_loading_dock, w_bartender_run3, w_silence_run3, w_jacket_woman**
 **Voice rules applied from: feedback_wanderer_voice.md**
 
