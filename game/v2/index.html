@@ -1153,6 +1153,16 @@
       padding: 8px 0 2px 26px;
       opacity: 0.8;
     }
+    .lore-link {
+      display: inline-block;
+      margin: 12px 0 4px;
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      letter-spacing: 0.04em;
+    }
+    .lore-link:hover { color: var(--text-secondary); }
 
     /* ─── DEV MODE ───────────────────────────────────── */
     .node-card { position: relative; }
@@ -2184,7 +2194,7 @@
       <div class="intro-body">
         <p>When you finish a chapter, come back and choose the same character again. New choices will appear — look for the <span style="color:var(--unity);font-weight:500">glowing options</span> that unlock as you go deeper. Each run through the same evening reveals something different.</p>
       </div>
-      <button class="intro-begin" id="intro-begin-btn">Enter the evening</button>
+      <button class="intro-begin" id="intro-begin-btn">Begin</button>
     </div>
   </div>
 
@@ -2195,6 +2205,7 @@
       <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle :)</div>
     </header>
     <div class="divider"></div>
+    <div id="lore-link-section"></div>
     <div id="progress-section"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
@@ -2207,7 +2218,7 @@
     <div style="margin-top: 24px; text-align: right;">
       <button type="button" class="select-reset" id="reset-btn" onclick="confirmReset()">reset all progress</button>
     </div>
-    <div class="version-tag">v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
+    <div class="version-tag">v1.1 · 2026-04-29 · 5 chapters, familiar rework, mobile polish, ux audit, lore viewer overhaul<br>v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
   </div>
 
   <!-- ─── GAME SCREEN ─────────────────────────────────── -->
@@ -2466,6 +2477,7 @@ function showSelectScreen() {
   renderCharCards();
   renderArtifacts();
   renderProgress();
+  renderLoreLink();
 }
 
 function renderCharCards() {
@@ -2637,7 +2649,7 @@ function renderProgress() {
     }
   });
   if (hint) {
-    html += `<div class="milestone-hint">${esc(hint)}</div>`;
+    html += `<div class="milestone-hint">Hint: ${esc(hint)}</div>`;
   }
   html += '</div></div>';
 
@@ -2648,6 +2660,15 @@ function renderProgress() {
   if (toggle && tracker) {
     toggle.addEventListener('click', () => tracker.classList.toggle('open'));
   }
+}
+
+function renderLoreLink() {
+  const el = document.getElementById('lore-link-section');
+  const allDone = ['unity','truth','goodness','familiar','beauty'].every(
+    ch => persistent.completed_chapters.includes(ch)
+  );
+  if (!allDone) { el.innerHTML = ''; return; }
+  el.innerHTML = '<div style="text-align:center;margin:12px 0 8px"><a href="lore-viewer.html" target="_blank" class="lore-link">Lore Catalog</a></div>';
 }
 
 // ─── CHOICE CLASSIFICATION ───────────────────────────────────────────────────
@@ -2709,7 +2730,7 @@ async function loadCharacter(charId) {
   const def = CHAR_DEFS.find(c => c.id === charId);
   if (!def || !isUnlocked(charId)) return;
 
-  if (persistent.runs === 0 && shouldShowIntro()) {
+  if (charId === 'wanderer' || (persistent.runs === 0 && shouldShowIntro())) {
     showIntro(charId);
     return;
   }
