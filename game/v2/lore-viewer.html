@@ -101,6 +101,16 @@
     position: relative;
   }
 
+  .back-link {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-bottom: 16px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--orange); }
+
   .eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -623,6 +633,7 @@
 
   <!-- HEADER -->
   <header class="site-header">
+    <a href="index.html" class="back-link">&larr; Back to the game</a>
     <div class="eyebrow">Lore Document v0.3 · Draft</div>
     <div class="site-title">
       The Pilgrim's
