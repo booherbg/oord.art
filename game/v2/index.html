@@ -215,7 +215,7 @@
 
     .source-lore-link {
       text-align: center;
-      margin-bottom: 8px;
+      margin-top: 8px;
     }
     .source-lore-link a {
       font-size: 10px;
@@ -2525,10 +2525,9 @@
       <div class="site-title">The Call of<span>Sooboont</span></div>
       <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle :)</div>
     </header>
-    <div class="divider"></div>
     <div class="source-lore-link"><a href="lore-viewer.html" target="_blank">Lore Document &amp; References →</a></div>
-    <div id="lore-link-section"></div>
-    <div id="progress-section"></div>
+    <div class="divider"></div>
+<div id="progress-section"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
     <div class="legend">
@@ -2868,8 +2867,7 @@ function showSelectScreen() {
   renderCharCards();
   renderArtifacts();
   renderProgress();
-  renderLoreLink();
-  // update pips from persistent state so they're correct when bar is next shown
+// update pips from persistent state so they're correct when bar is next shown
   ['unity', 'beauty', 'truth', 'goodness'].forEach(t => {
     const pip = document.getElementById('t-' + t);
     if (pip) pip.classList.toggle('earned', (persistent.transcendentals || []).includes(t));
@@ -2974,7 +2972,7 @@ function renderArtifacts() {
 function renderProgress() {
   const el = document.getElementById('progress-section');
   if (persistent.runs === 0) {
-    el.innerHTML = '<div class="progress-note">Begin your first evening.</div>';
+    el.innerHTML = '<div class="progress-note">Pick a character to start.</div>';
     return;
   }
 
@@ -3084,15 +3082,6 @@ function renderProgress() {
   if (toggle && tracker) {
     toggle.addEventListener('click', () => tracker.classList.toggle('open'));
   }
-}
-
-function renderLoreLink() {
-  const el = document.getElementById('lore-link-section');
-  const allDone = ['unity','truth','goodness','familiar','beauty'].every(
-    ch => persistent.completed_chapters.includes(ch)
-  );
-  if (!allDone) { el.innerHTML = ''; return; }
-  el.innerHTML = '<div style="text-align:center;margin:12px 0 8px"><a href="lore-viewer.html" target="_blank" class="lore-link">Lore Document &amp; References</a></div>';
 }
 
 // ─── CHOICE CLASSIFICATION ───────────────────────────────────────────────────
