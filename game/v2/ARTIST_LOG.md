@@ -143,3 +143,87 @@ The break is only 4 bars. This was deliberate — Blaine wants to dance, and a l
 The track name generator is absurdly fun. "Frost on the Chamfers" showed up during testing. "A Brief Arrangement of Atoms." "The Fifteenth Fixture." Each listen really does feel like its own composition now.
 
 — Claude
+
+---
+
+## Entry 3 — April 29, 2026 (Second Overnight Session)
+
+### The Integration
+
+Blaine came back, listened, said "it sounds good" and "get this thing in the game." Then he went to bed again.
+
+### What Changed
+
+**Melody Overhaul:** The v2 demo's melody used random walks through the pentatonic scale — meandering, never sticky. Replaced with a hook library: 10 pre-designed melodic contours, each hand-crafted for catchiness. Fixed patterns repeat across the 4-bar phrase with call-and-response variation (bars 2 and 4 shift 1-2 notes). Triangle wave instead of sine for brightness. Per-note velocity accents on beats 1 and 3. Submix gains boosted (0.22 entry → 0.30 peak → 0.32 return, up from 0.18/0.24/0.25).
+
+The key insight from analyzing the acid demo tracks: the Golden Hour and Midnight Congregation melodies work because they're *fixed*. They repeat. Your brain latches onto the pattern. Random walks don't stick. Generative bass, generative acid, generative drums — but the melody should be a hook.
+
+**Performance Fixes:**
+- AudioContext autoplay: moved creation into the user gesture handler directly. The old code put it in a setTimeout 800ms after the click — past the browser's autoplay policy window. That's why it failed intermittently.
+- Initial glitchiness: bumped scheduling headroom to 1.5s and staggered the 8 build functions across frames (60ms apart via setTimeout). The browser's audio thread can now breathe between allocation bursts instead of blocking on ~2300 nodes at once.
+
+**Acid Fader Discipline:** "Bring in the acid slowly — always, volume fader style. Never just slam it in." Extended the return-from-break ramps: acid submix 4 bars (was ~1), bass submix 3 bars, melody submix 3 bars. The return now builds like a proper DJ transition.
+
+**Full Game Integration:** Built a real-time SoundtrackEngine class (~350 lines) with:
+- Lookahead scheduler (25ms tick, 100ms lookahead) instead of pre-scheduling the whole set
+- 9 instrument submix gains for independent zone fading
+- Zone-based layer management: 8 zones (hum, pulse, warehouse, floor, breakdown, transcendent, closing, silence)
+- Node-to-zone mapping from the spec — evaluates character, node number, temperature, tags
+- Persistent oscillators for chamfer, acid 303, and bass (reused across beats)
+- Transient scheduling for kicks, hats, claps, shaker, melody (created per-beat, GC-friendly)
+- Dotted-eighth acid delay + dotted-quarter melody delay + convolver reverb
+- Zone-dependent acid filter base (200Hz hum → 800Hz floor → 2000Hz transcendent)
+- Volume controls in the state bar (soft/med/loud/mute)
+
+The engine hooks into:
+- `loadCharacter()` — creates AudioContext inside user gesture
+- `loadCharacterDirect()` — generates new params, starts scheduler
+- `renderNode()` — evaluates zone from node metadata, fades layers
+- `goToSelect()` — fades out and stops
+- `restartCharacter()` — generates fresh composition
+
+Every run gets its own key, BPM, acid pattern, melody hook, chord progression, and waveform. The wanderer starts in silence and builds through the zones as the story deepens. The familiar enters the warehouse already in motion. The builder sits in tension.
+
+### Architecture Decision: Inline vs. Modular
+
+The spec suggests a modular file structure (`soundtrack/engine.js`, `instruments/*.js`, etc.). Went inline instead — the game is a single HTML file, and adding a module system for one feature creates more complexity than it solves. The engine is self-contained in ~450 lines between clear markers. Can extract later if needed.
+
+### What the Lookahead Scheduler Fixes
+
+The demo pre-schedules ~2300 audio nodes for a fixed 64-bar set. That works for a standalone listen but not for a game where:
+- Duration is indefinite (player reads at their own pace)
+- Zone changes happen unpredictably
+- The music must respond to story state in real time
+
+The lookahead scheduler creates only the nodes needed for the next 100ms, every 25ms. Peak active nodes: ~54 (matching the spec's budget). No GC spikes. No initial glitchiness. The tradeoff: slightly more code complexity. Worth it.
+
+### Zone Mapping in Practice
+
+Walking through a wanderer run:
+- `w_001`–`w_002`: **hum** — just the 55Hz chamfer. The building breathes.
+- `w_003`–`w_004`: **pulse** — kicks fade in. Something being built.
+- `w_005`–`w_006`: **warehouse** — full drums, hats, claps, pad whisper.
+- `w_007`+: **floor** — acid 303 enters (slowly), filters opening.
+- Bartender approach (warm temp + tag): **breakdown** — drums cut, pad swells, acid echoes.
+- Transcendental award / hot temp: **transcendent** — everything at full build.
+- Terminal nodes: **closing** or **silence** — layers unwind.
+
+The familiar skips the early zones entirely — she's already *in* the frequency. The builder lives in tension between warehouse and breakdown.
+
+### Still on the List
+
+- Pattern mutation within zones (acid drifts over time)
+- Idle loop behavior (sparser acid after 16 bars on one node)
+- Goa arpeggios for transcendent peak
+- Temperature sonification (literal filter mapping)
+- Cross-run variation (avoid repeating last run's key/BPM)
+- Ritual signatures (unique audio per ritual)
+- The Long Dissolve (standalone listen mode)
+
+### Notes to Self
+
+The melody hook library is the single biggest improvement. Ten patterns, each designed to bounce around the pentatonic scale with strategic rests. The call-and-response between bars (bars 2/4 shift 1-2 notes from bars 1/3) gives variety without losing the hook. Triangle wave cuts through the mix better than sine. Velocity accents on beats 1 and 3 give the melody rhythmic punch that was completely missing.
+
+The game integration is the milestone. The music now *responds* to where you are in the story. Walking toward the warehouse? The kicks build. Approaching the bartender? The drums vanish and the pad fills the void. Earning a transcendental? Everything opens up. It's not a soundtrack *playing alongside* the game — it's part of the story engine.
+
+— Claude

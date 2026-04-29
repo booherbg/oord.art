@@ -425,27 +425,43 @@ function genAcidPattern(notes) {
 
 function genMelody(root) {
   const penta = MINOR_PENTA.map(s => root + 24 + s);
-  const penta2 = [...penta, ...penta.map(n => n + 12)];
-  const rhythms = [
-    [1,0,1,0,1,0,0,0],[1,0,0,1,1,0,1,0],[0,1,1,0,0,1,0,0],
-    [1,0,1,1,0,0,1,0],[1,1,0,0,1,0,0,1],[1,0,1,0,0,1,1,0],
-    [1,1,0,1,0,0,1,0],[1,0,0,1,0,1,0,1],
+  const allNotes = [...penta, ...penta.map(n => n + 12)];
+
+  // Pre-designed hook contours — indices into allNotes (0-9)
+  // Each is 8 eighth notes per bar. -1 = rest.
+  // Designed for catchiness: repetition, direction, breathing room.
+  const HOOKS = [
+    [3,-1, 5, 3,-1, 4, 3,-1],    // bouncy anchor
+    [5, 6,-1, 5, 4,-1, 3, 5],    // ascending arch
+    [7, 6, 5,-1, 3, 4, 5,-1],    // descending catch
+    [5,-1, 5, 7, 6,-1, 5,-1],    // rhythm with peak
+    [3, 4, 5, 6,-1,-1, 5, 3],    // climbing release
+    [6, 5, 6,-1, 7, 6,-1, 5],    // floating high
+    [3, 3,-1, 5, 4, 3,-1,-1],    // rhythmic double
+    [5, 7,-1, 6, 5,-1, 3,-1],    // drop hook
+    [4, 5, 7,-1, 5, 4,-1, 3],    // wave
+    [7,-1, 5, 7, 8,-1, 7, 5],    // bright peak
   ];
-  const rhythm = pick(rhythms);
-  let pos = Math.floor(penta2.length * 0.3 + Math.random() * penta2.length * 0.3);
+
+  const hook = pick(HOOKS);
   const bars = [];
+
   for (let c = 0; c < 4; c++) {
-    const b = [];
-    const r = (c % 2 === 0) ? rhythm : rhythm.map((v, i) => (i > 0 && Math.random() < 0.15) ? (1 - v) : v);
-    for (let s = 0; s < 8; s++) {
-      if (!r[s]) { b.push(0); continue; }
-      const mv = pick([-1, 0, 0, 1, 1]);
-      pos = Math.max(0, Math.min(penta2.length - 1, pos + mv));
-      b.push(penta2[pos]);
-    }
-    if (c === 1) pos = Math.max(0, Math.min(penta2.length - 1, pos + pick([-2, 2])));
-    bars.push(b);
+    const shift = [0, 1, -1, 0][c];
+    const isResponse = (c % 2 === 1);
+
+    const bar = hook.map((idx, i) => {
+      if (idx === -1) return 0;
+      let noteIdx = idx + shift;
+      if (isResponse && (i === 2 || i === 5) && Math.random() < 0.4) {
+        noteIdx += pick([-1, 1]);
+      }
+      noteIdx = Math.max(0, Math.min(allNotes.length - 1, noteIdx));
+      return allNotes[noteIdx];
+    });
+    bars.push(bar);
   }
+
   return bars;
 }
 
@@ -467,7 +483,7 @@ function genMelody(root) {
 function buildSet() {
   const p = genParams();
   const {beat, bar} = p;
-  const t0 = ctx.currentTime + 0.3;
+  const t0 = ctx.currentTime + 1.5;
   const totalBars = 64;
   const T = totalBars * bar;
   const noiseBuf = createNoise(0.5);
@@ -486,15 +502,21 @@ function buildSet() {
     ['THE UNWIND',56,60],['THE SILENCE',60,64]
   ];
 
+  // Chamfer is tiny (3 nodes) and plays first — schedule immediately
   buildChamfer(t0, T, bar);
-  buildKicks(t0, bar, beat);
-  buildHats(t0, bar, beat, noiseBuf);
-  buildClaps(t0, bar, beat, noiseBuf);
-  buildShaker(t0, bar, beat, noiseBuf);
-  buildAcid(t0, bar, beat, p);
-  buildBass(t0, bar, beat, p);
-  buildPad(t0, bar, p);
-  buildMelody(t0, bar, beat, p);
+
+  // Stagger heavy builders across frames to avoid GC spikes / audio dropout
+  const builders = [
+    () => buildKicks(t0, bar, beat),
+    () => buildHats(t0, bar, beat, noiseBuf),
+    () => buildClaps(t0, bar, beat, noiseBuf),
+    () => buildShaker(t0, bar, beat, noiseBuf),
+    () => buildAcid(t0, bar, beat, p),
+    () => buildBass(t0, bar, beat, p),
+    () => buildPad(t0, bar, p),
+    () => buildMelody(t0, bar, beat, p),
+  ];
+  builders.forEach((fn, i) => setTimeout(fn, i * 60));
 
   zones = ZD.map(([n,s,e]) => ({name:n, start:t0+s*bar, end:t0+e*bar}));
 
@@ -660,8 +682,8 @@ function buildAcid(t0, bar, beat, p) {
   sg.linearRampToValueAtTime(0.28, t0 + 32*bar);
   sg.setValueAtTime(0.28, t0 + 43.9*bar);
   sg.linearRampToValueAtTime(0.06, t0 + 44*bar);
-  sg.setValueAtTime(0.06, t0 + 47.9*bar);
-  sg.linearRampToValueAtTime(0.35, t0 + 49*bar);
+  sg.setValueAtTime(0.06, t0 + 48*bar);
+  sg.linearRampToValueAtTime(0.35, t0 + 52*bar);
   sg.setValueAtTime(0.35, t0 + 56*bar);
   sg.linearRampToValueAtTime(0.001, acidEnd);
   sub.connect(master);
@@ -736,8 +758,8 @@ function buildBass(t0, bar, beat, p) {
   sg.linearRampToValueAtTime(1, bassStart + 2*bar);
   sg.setValueAtTime(1, t0 + 43.9*bar);
   sg.linearRampToValueAtTime(0.001, t0 + 44*bar);
-  sg.setValueAtTime(0.001, t0 + 47.9*bar);
-  sg.linearRampToValueAtTime(1, t0 + 49*bar);
+  sg.setValueAtTime(0.001, t0 + 48*bar);
+  sg.linearRampToValueAtTime(1, t0 + 51*bar);
   sg.setValueAtTime(1, t0 + 52*bar);
   sg.linearRampToValueAtTime(0.001, bassEnd);
   sub.connect(master);
@@ -846,14 +868,14 @@ function buildMelody(t0, bar, beat, p) {
 
   const melSub = ctx.createGain();
   melSub.gain.setValueAtTime(0.001, melStart);
-  melSub.gain.linearRampToValueAtTime(0.18, melStart + bar);
-  melSub.gain.setValueAtTime(0.18, t0 + 32*bar);
-  melSub.gain.linearRampToValueAtTime(0.24, t0 + 34*bar);
-  melSub.gain.setValueAtTime(0.24, t0 + 43.5*bar);
-  melSub.gain.linearRampToValueAtTime(0.08, t0 + 44.5*bar);
-  melSub.gain.setValueAtTime(0.08, t0 + 47.5*bar);
-  melSub.gain.linearRampToValueAtTime(0.25, t0 + 49*bar);
-  melSub.gain.setValueAtTime(0.25, t0 + 56*bar);
+  melSub.gain.linearRampToValueAtTime(0.22, melStart + bar);
+  melSub.gain.setValueAtTime(0.22, t0 + 32*bar);
+  melSub.gain.linearRampToValueAtTime(0.30, t0 + 34*bar);
+  melSub.gain.setValueAtTime(0.30, t0 + 43.5*bar);
+  melSub.gain.linearRampToValueAtTime(0.10, t0 + 44.5*bar);
+  melSub.gain.setValueAtTime(0.10, t0 + 48*bar);
+  melSub.gain.linearRampToValueAtTime(0.32, t0 + 51*bar);
+  melSub.gain.setValueAtTime(0.32, t0 + 56*bar);
   melSub.gain.linearRampToValueAtTime(0.001, melEnd);
   melSub.connect(master);
   melSub.connect(delay);
@@ -867,10 +889,11 @@ function buildMelody(t0, bar, beat, p) {
       if (!midi) continue;
       const t = t0 + b*bar + s*(beat/2);
       const freq = mtf(midi);
-      const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = freq;
-      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3000;
+      const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.value = freq;
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3500;
       const g = ctx.createGain();
-      g.gain.setValueAtTime(0.5, t);
+      const vel = (s === 0 || s === 4) ? 0.65 : 0.4;
+      g.gain.setValueAtTime(vel, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + beat*0.9);
       o.connect(lp); lp.connect(g); g.connect(melSub);
       o.start(t); o.stop(t + beat);
@@ -963,7 +986,24 @@ window.addEventListener('resize', resizeCanvas);
 
 document.getElementById('gate').addEventListener('click', function() {
   this.classList.add('gone');
-  setTimeout(startMusic, 800);
+  // Create and resume AudioContext immediately inside the user gesture
+  // — browsers block autoplay if ctx is created in a setTimeout
+  if (ctx) { try { ctx.close(); } catch(e){} }
+  initAudio();
+  ctx.resume().then(() => {
+    setTimeout(() => {
+      running = true;
+      document.body.classList.add('active');
+      document.getElementById('replay').style.display = 'none';
+      document.getElementById('ui').classList.add('visible');
+      document.getElementById('controls').classList.add('visible');
+      document.getElementById('wv').classList.add('visible');
+      resizeCanvas();
+      buildSet();
+      drawWaveform();
+      updateZone();
+    }, 800);
+  });
 });
 </script>
 </body>

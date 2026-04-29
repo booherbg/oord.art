@@ -343,21 +343,13 @@
           "next": "w_007e",
           "tag": "came_for_stillness",
           "arrival": null,
-          "requires": {
-            "not": {
-              "has_artifact": "yarn_knot"
-            }
-          }
+          "requires": null
         },
         {
           "text": "That was intense. You need a drink.",
           "next": "w_007e",
           "arrival": null,
-          "requires": {
-            "not": {
-              "has_artifact": "yarn_knot"
-            }
-          },
+          "requires": null,
           "tag": "came_for_drink"
         }
       ],
