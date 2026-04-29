@@ -3,58 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DJ OOR</title>
+  <title>The Pilgrim's Path — DJ OOR</title>
+  <meta name="description" content="An interactive experience by DJ OOR. Live at the Plains Art Museum Spring Gala, May 2, 2026.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas class="kelp-canvas" id="kelp-canvas" aria-hidden="true"></canvas>
   <main class="page">
     <div class="page-content">
       <div class="logo">
         <img src="assets/DJOOR1.gif" alt="DJ OOR" />
       </div>
-      <section class="blurb" aria-label="About DJ OOR">
-        <p>
-          The brainchild of local DJs GrizBeard and DizzyB, DJ OOR is opening up a transcendental portal 
-          dressed like a dance party. Bring your best boogie for an evening of non-euclidean beats, 
-          bizarre rituals, and an experience that will leave you bouncing and breathless.
-        </p>
-        <p>
-          The portal is opening May 2nd 2026 at the <a href="https://plainsart.org/events/spring-gala-2026-nightmare-at-the-museum/">Plains Art Museum Spring Gala</a>.
-        </p>
-      </section>
-      <audio id="opening-ritual-audio" loop autoplay preload="auto" hidden aria-hidden="true">
-        <source src="assets/opening-ritual.mp3" type="audio/mpeg">
-      </audio>
+      <h1 class="game-title">The Pilgrim's Path</h1>
+      <a href="game/v2/index.html" class="enter-btn">Enter</a>
+      <p class="event-info">
+        Live at the <a href="https://plainsart.org/events/spring-gala-2026-nightmare-at-the-museum/">Plains Art Museum Spring Gala</a><br>
+        May 2, 2026
+      </p>
     </div>
     <footer class="page-footer">
-      © 2026 <a href="https://oord.art">oord.art</a>
+      &copy; 2026 <a href="https://oord.art">oord.art</a>
     </footer>
   </main>
-  <script>
-    (function () {
-      const audio = document.getElementById('opening-ritual-audio');
-      if (!audio) return;
-
-      const tryPlay = async () => {
-        try {
-          await audio.play();
-          return true;
-        } catch (_err) {
-          return false;
-        }
-      };
-
-      const unlockOnFirstInteraction = () => {
-        void tryPlay();
-        window.removeEventListener('pointerdown', unlockOnFirstInteraction);
-        window.removeEventListener('keydown', unlockOnFirstInteraction);
-      };
-
-      window.addEventListener('pointerdown', unlockOnFirstInteraction, { once: true });
-      window.addEventListener('keydown', unlockOnFirstInteraction, { once: true });
-      void tryPlay();
-    })();
-  </script>
 </body>
 </html>

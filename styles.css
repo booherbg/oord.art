@@ -15,8 +15,6 @@ html, body {
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  position: relative;
-  z-index: 1;
 }
 
 .page-content {
@@ -30,8 +28,7 @@ html, body {
 }
 
 .logo {
-  max-width: min(90vw, 320px);
-  height: auto;
+  max-width: min(90vw, 280px);
   display: block;
 }
 
@@ -41,85 +38,55 @@ html, body {
   display: block;
 }
 
-.kelp-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+.game-title {
+  margin: 1.25rem 0 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1a1a1a;
 }
 
-.signup {
-  margin-top: 1.5rem;
-  text-align: center;
+.enter-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffef01;
+  background: #1a1a1a;
+  border-radius: 60px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.blurb {
-  margin-top: 1.25rem;
-  max-width: min(90vw, 700px);
-  padding: 1.1rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.52);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+.enter-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25);
 }
 
-.blurb p {
-  margin: 0;
-  margin-bottom: 5px;
-  color: #202020;
-  font-size: clamp(1rem, 1.3vw, 1.12rem);
+.enter-btn:active {
+  transform: scale(0.98);
+}
+
+.event-info {
+  margin-top: 2rem;
+  font-size: 0.85rem;
   line-height: 1.6;
-  text-wrap: pretty;
+  color: #555;
 }
 
-.signup-text {
-  font-size: 0.95rem;
-  color: #333;
-  margin-bottom: 0.75rem;
+.event-info a {
+  color: #555;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.signup-form {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  gap: 0;
-  justify-content: center;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-.signup-form input[type="email"] {
-  flex: 1;
-  min-width: 0;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ff7300;
-  border-right: none;
-  font-size: 0.95rem;
-  background: #fff;
-}
-
-.signup-form input[type="email"]::placeholder {
-  color: #999;
-}
-
-.signup-form input[type="email"]:focus {
-  outline: none;
-  border-color: #ff7300;
-}
-
-.signup-form button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ff7300;
-  background: #ff7300;
-  color: #fff;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.signup-form button:hover {
-  background: #e66800;
+.event-info a:hover {
+  color: #1a1a1a;
 }
 
 .page-footer {
@@ -135,21 +102,5 @@ html, body {
 }
 
 .page-footer a:hover {
-  text-decoration: underline;
-}
-
-.message {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.home-link {
-  font-size: 0.95rem;
-  color: #ff7300;
-  text-decoration: none;
-}
-
-.home-link:hover {
   text-decoration: underline;
 }
