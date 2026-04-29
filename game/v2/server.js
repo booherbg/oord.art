@@ -1,4 +1,4 @@
-// The Pilgrim's Path — dev server
+// The Call of Sooboont — dev server
 // Usage: node server.js
 // Serves the game at http://localhost:3000
 // Exposes POST /dev/save to write node edits back to JSON

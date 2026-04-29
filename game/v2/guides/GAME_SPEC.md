@@ -1,4 +1,4 @@
-# The Pilgrim's Path — Game Design Spec (v2)
+# The Call of Sooboont — Game Design Spec (v2)
 **Canonical technical reference. Supersedes story_design.md for all mechanical questions.**
 **Narrative content lives in the prose and beat map documents. This document defines the machine that runs them.**
 
@@ -23,7 +23,7 @@ This spec is one document in a system. Here's what each document does:
 
 ## Architecture Overview
 
-The Pilgrim's Path is a single-page browser application. One HTML file, one engine, multiple JSON node files loaded per character. No build step. No framework. No server required beyond static file serving.
+The Call of Sooboont is a single-page browser application. One HTML file, one engine, multiple JSON node files loaded per character. No build step. No framework. No server required beyond static file serving.
 
 ```
 index.html                  ← shell, engine, styles, character select

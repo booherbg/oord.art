@@ -1,4 +1,4 @@
-# The Pilgrim's Path - Rich Lore Context
+# The Call of Sooboont - Rich Lore Context
 
 Canonical markdown extraction of `game/lore/lore-viewer.html`, designed for prompt injection with high lore fidelity.
 

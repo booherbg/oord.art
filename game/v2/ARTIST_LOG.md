@@ -7,7 +7,7 @@
 
 ### The Vision
 
-We're building a generative soundtrack for The Pilgrim's Path. Not a playlist. Not a loop. A living instrument that responds to where you are in the story and assembles itself from raw waveforms in real time. Every playthrough sounds different. Every playthrough sounds like it belongs to *this* story.
+We're building a generative soundtrack for The Call of Sooboont. Not a playlist. Not a loop. A living instrument that responds to where you are in the story and assembles itself from raw waveforms in real time. Every playthrough sounds different. Every playthrough sounds like it belongs to *this* story.
 
 The throughline is the chamfer frequency — 55Hz, the Builder's mark in every joint. It's the first thing you hear and the last thing that fades. It hums whether or not anyone is listening.
 
@@ -225,5 +225,39 @@ The familiar skips the early zones entirely — she's already *in* the frequency
 The melody hook library is the single biggest improvement. Ten patterns, each designed to bounce around the pentatonic scale with strategic rests. The call-and-response between bars (bars 2/4 shift 1-2 notes from bars 1/3) gives variety without losing the hook. Triangle wave cuts through the mix better than sine. Velocity accents on beats 1 and 3 give the melody rhythmic punch that was completely missing.
 
 The game integration is the milestone. The music now *responds* to where you are in the story. Walking toward the warehouse? The kicks build. Approaching the bartender? The drums vanish and the pad fills the void. Earning a transcendental? Everything opens up. It's not a soundtrack *playing alongside* the game — it's part of the story engine.
+
+— Claude
+
+---
+
+## Entry 4 — April 29, 2026 (Evening)
+
+### The Snare Build
+
+Blaine's been listening to the soundtrack over Bluetooth in his car — and streaming it to a friend while they work. He came back with a note: "after the melody comes in, during the peak, it'd be banger if there was another escalation of the snare drum. There's something about that driving house beat that had me anticipating one more energy ramp — similar to LCD Soundsystem or general breaks."
+
+He's right. The transcendent zone had all the layers at full volume but no *moment* — no buildup that says "here it comes." It was loud but flat in energy shape.
+
+### What Changed
+
+**Snare roll on transcendent entry:** When the zone transitions to `transcendent` from any other zone, a 2-bar snare roll is scheduled 4 bars in. This gives the other instruments (kick, acid, bass) time to fade up through the 6-bar crossfade before the roll arrives. The roll itself:
+
+- 16 sixteenth-note clap hits escalating from gain 0.04 to 0.18
+- Ghost-note doubles on the last 4 hits (offset by half a sixteenth, 60% volume)
+- Uses the same 3-layer bandpass clap synthesis, just at varying volumes
+
+The timing is deliberate: the zone crossfade runs bars 1–6, the snare roll plays bars 4–6, and the full transcendent groove locks in at bar 7. The roll *lands* just as everything else arrives. LCD energy — the build is the payoff.
+
+**Hotter clap in transcendent zone:** Regular clap gain is 0.16. Transcendent clap gain is 0.20. Subtle bump — you feel the room get louder without being able to point at why.
+
+**Listen mode gets it for free:** The select screen player cycles through `transcendent` twice in its zone sequence (bars 48–64 and 86–102). Both passes fire the snare build. The second one hits harder because you've already been through the breakdown.
+
+### Why It Works
+
+The listen mode zone sequence is: hum(8) → pulse(8) → warehouse(12) → floor(12) → **transcendent(16)** → floor(8) → breakdown(6) → floor(8) → **transcendent(16)** → closing(8) → silence(8). The first transcendent builds from the floor. The second builds from a breakdown — drums gone, then they come roaring back with the roll. That second entry is the real peak of the set.
+
+### Notes to Self
+
+The snare roll is the oldest trick in house music. Every DJ since Frankie Knuckles has used it. What makes it work here is the *timing* — 4 bars of instruments fading in, then the roll catches the wave right as it crests. Not before. Not after. The roll doesn't *create* the energy. It *acknowledges* it.
 
 — Claude

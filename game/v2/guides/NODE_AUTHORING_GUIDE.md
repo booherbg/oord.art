@@ -1,4 +1,4 @@
-# The Pilgrim's Path — Node Authoring Guide
+# The Call of Sooboont — Node Authoring Guide
 **For: Human author and LLM co-author**
 **Purpose: Translate prose reference documents into playable game nodes**
 **This is a decision-making framework, not a technical spec.**

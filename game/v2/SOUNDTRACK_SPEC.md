@@ -1,5 +1,5 @@
 # Generative Soundtrack System — Build Specification
-**The Pilgrim's Path · DJ OOR**
+**The Call of Sooboont · DJ OOR**
 **Draft v0.1 — April 2026**
 
 ---

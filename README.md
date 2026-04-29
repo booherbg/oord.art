@@ -1,4 +1,4 @@
-# The Pilgrim's Path
+# The Call of Sooboont
 
 An interactive fiction experience by DJ OOR.
 

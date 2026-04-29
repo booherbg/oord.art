@@ -1,4 +1,4 @@
-# Session 01 — Building The Pilgrim's Path
+# Session 01 — Building The Call of Sooboont
 **Date:** April 22, 2026  
 **Duration:** ~6 hours across one overnight session + morning follow-up  
 **Model:** Claude Sonnet 4.6  

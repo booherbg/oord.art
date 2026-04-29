@@ -1,4 +1,4 @@
-# The Pilgrim's Path — Character Prose Generation Guide
+# The Call of Sooboont — Character Prose Generation Guide
 **For: Human author and LLM co-author in new sessions**
 **Purpose: Replicate the collaborative process for generating character perspective documents**
 **Drop this document, the existing character prose docs, and the lore viewer into a new chat to begin.**

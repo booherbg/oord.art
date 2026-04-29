@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAMFER 055 — DJ OOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #07050a;
+    --bg2:      #100d16;
+    --orange:   #E86010;
+    --yellow:   #D4A820;
+    --violet:   #6020C0;
+    --pink:     #D04870;
+    --text:     #C8BCA8;
+    --text-dim: #6A6058;
+    --text-bright: #E8DCC8;
+    --border:   #201818;
+    --border-warm: #3A2818;
+    --card-bg:  #0e0b12;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  #grooves {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vmax;
+    height: 100vmax;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.08;
+    animation: spin 120s linear infinite;
+  }
+  .groove { fill: none; stroke-width: 0.5; }
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-top: 32px;
+    margin-bottom: 48px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--orange); }
+
+  .ep-header { text-align: center; margin-bottom: 48px; }
+  .cat-no {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .ep-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 16vw, 112px);
+    line-height: 0.85;
+    color: var(--orange);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 60px rgba(232,96,16,0.35), 0 0 120px rgba(232,96,16,0.1);
+  }
+  .ep-artist {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 5vw, 32px);
+    letter-spacing: 0.2em;
+    color: var(--yellow);
+    margin-top: 8px;
+  }
+  .ep-meta {
+    margin-top: 24px;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    line-height: 2;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--yellow), transparent);
+    margin: 40px 0;
+    opacity: 0.25;
+  }
+  .divider-thin {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* ─── TRACKLIST ──────────────────────────────────────── */
+  .side-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .tracklist { margin-bottom: 28px; }
+
+  .track-row {
+    display: flex;
+    align-items: baseline;
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 2px;
+    margin: 0 -8px;
+  }
+  .track-row:last-child { border-bottom: none; }
+  .track-row:hover { background: rgba(232,96,16,0.04); }
+  .track-row.active { background: rgba(232,96,16,0.07); }
+  .track-row.active .track-title { color: var(--orange); }
+  .track-row.active .play-icon { color: var(--orange); }
+
+  .track-pos {
+    width: 40px;
+    flex-shrink: 0;
+    font-size: 10px;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+  }
+  .play-icon {
+    display: inline-block;
+    width: 10px;
+    font-size: 8px;
+    color: var(--text-dim);
+    transition: color 0.2s;
+    margin-right: 2px;
+  }
+  .track-row:hover .play-icon { color: var(--orange); }
+
+  .track-title { flex: 1; color: var(--text-bright); font-size: 12px; }
+  .track-bpm { width: 48px; text-align: right; font-size: 10px; color: var(--text-dim); flex-shrink: 0; }
+  .track-dur { width: 48px; text-align: right; font-size: 10px; color: var(--text-dim); flex-shrink: 0; }
+  .track-total {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid var(--border-warm);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+  }
+
+  /* ─── LINER NOTES ───────────────────────────────────── */
+  .liner-intro { font-size: 10px; font-style: italic; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 32px; }
+  .liner-preamble { font-size: 13px; color: var(--text); line-height: 1.85; margin-bottom: 32px; }
+  .track-note { margin-bottom: 36px; }
+  .track-note-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+  .track-note-pos { color: var(--orange); margin-right: 6px; }
+  .track-note p { font-size: 13px; color: var(--text); line-height: 1.85; margin-top: 10px; }
+  .pullquote {
+    border-left: 2px solid var(--orange);
+    padding: 8px 14px;
+    margin: 16px 0;
+    font-style: italic;
+    color: var(--text-bright);
+    font-size: 12px;
+    background: rgba(232,96,16,0.03);
+    line-height: 1.7;
+  }
+
+  /* ─── PRODUCTION / CREDITS / PLANT ──────────────────── */
+  .prod-section { margin-bottom: 36px; }
+  .section-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .prod-text { font-size: 12px; color: var(--text); line-height: 1.8; }
+  .prod-text + .prod-text { margin-top: 10px; }
+  .credits { font-size: 11px; color: var(--text-dim); line-height: 2; }
+  .credits strong { color: var(--text); font-weight: 400; }
+  .credits-thanks { margin-top: 16px; font-size: 11px; color: var(--text-dim); line-height: 1.8; font-style: italic; }
+  .plant-note {
+    margin-top: 48px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: rgba(0,0,0,0.3);
+  }
+  .plant-note-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .plant-note p { font-size: 11px; color: var(--text-dim); line-height: 1.8; }
+  .plant-note p + p { margin-top: 8px; }
+  .plant-note .hz { color: var(--orange); opacity: 0.7; }
+  .footer { text-align: center; padding: 48px 0 20px; font-size: 9px; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* ─── TRANSPORT BAR ─────────────────────────────────── */
+  #transport {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 48px;
+    background: rgba(7,5,10,0.96);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+  }
+  #transport.visible { opacity: 1; pointer-events: auto; }
+  #transport .now { font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #transport .time { font-size: 10px; color: var(--orange); letter-spacing: 0.05em; font-variant-numeric: tabular-nums; min-width: 36px; }
+  #transport button {
+    background: none; border: 1px solid var(--border-warm); border-radius: 2px;
+    padding: 4px 10px; font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.1em; color: var(--text-dim); cursor: pointer; transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  #transport button:hover { border-color: var(--orange); color: var(--text-bright); }
+  #transport button.on { border-color: var(--orange); color: var(--orange); }
+  #transport .stop-btn:hover { border-color: #c04040; color: #e06060; }
+
+  /* ─── WAVEFORM ──────────────────────────────────────── */
+  canvas#wv {
+    position: fixed;
+    bottom: 48px; left: 0;
+    width: 100%; height: 50px;
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
+    z-index: 5;
+  }
+  canvas#wv.visible { opacity: 0.3; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px 100px; }
+    .track-bpm { display: none; }
+    .track-note p, .liner-preamble { font-size: 12px; }
+    #transport { gap: 6px; padding: 0 8px; }
+    #transport .now { max-width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<svg id="grooves" viewBox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <circle class="groove" cx="0" cy="0" r="60"  stroke="var(--orange)" opacity="0.4"/>
+  <circle class="groove" cx="0" cy="0" r="90"  stroke="var(--yellow)" opacity="0.3"/>
+  <circle class="groove" cx="0" cy="0" r="120" stroke="var(--orange)" opacity="0.25"/>
+  <circle class="groove" cx="0" cy="0" r="150" stroke="var(--yellow)" opacity="0.2"/>
+  <circle class="groove" cx="0" cy="0" r="180" stroke="var(--orange)" opacity="0.18"/>
+  <circle class="groove" cx="0" cy="0" r="210" stroke="var(--yellow)" opacity="0.15"/>
+  <circle class="groove" cx="0" cy="0" r="240" stroke="var(--orange)" opacity="0.12"/>
+  <circle class="groove" cx="0" cy="0" r="270" stroke="var(--yellow)" opacity="0.1"/>
+  <circle class="groove" cx="0" cy="0" r="300" stroke="var(--orange)" opacity="0.08"/>
+  <circle class="groove" cx="0" cy="0" r="340" stroke="var(--yellow)" opacity="0.06"/>
+  <circle class="groove" cx="0" cy="0" r="380" stroke="var(--orange)" opacity="0.05"/>
+  <circle class="groove" cx="0" cy="0" r="420" stroke="var(--yellow)" opacity="0.04"/>
+  <circle class="groove" cx="0" cy="0" r="460" stroke="var(--orange)" opacity="0.03"/>
+  <circle class="groove" cx="0" cy="0" r="500" stroke="var(--yellow)" opacity="0.02"/>
+</svg>
+
+<canvas id="wv"></canvas>
+
+<div class="wrap">
+
+  <a href="lore-viewer.html" class="back-link">&larr; Back to lore</a>
+
+  <header class="ep-header">
+    <div class="cat-no">CHFR-055</div>
+    <div class="ep-title">Chamfer<br>055</div>
+    <div class="ep-artist">DJ OOR</div>
+    <div class="ep-meta">
+      Chamfer Recordings<br>
+      12" vinyl (180g, single pressing) / Digital<br>
+      Mastered at The Junction
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="side-label">Side A — The Approach</div>
+  <div class="tracklist">
+    <div class="track-row" data-track="chamfer" onclick="toggleTrack('chamfer')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> A1</span>
+      <span class="track-title">Chamfer</span>
+      <span class="track-bpm">&mdash;</span>
+      <span class="track-dur">4:10</span>
+    </div>
+    <div class="track-row" data-track="shuffle" onclick="toggleTrack('shuffle')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> A2</span>
+      <span class="track-title">Reversed Shuffle</span>
+      <span class="track-bpm">122</span>
+      <span class="track-dur">5:25</span>
+    </div>
+    <div class="track-row" data-track="church" onclick="toggleTrack('church')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> A3</span>
+      <span class="track-title">303 Church</span>
+      <span class="track-bpm">124</span>
+      <span class="track-dur">8:00</span>
+    </div>
+  </div>
+
+  <div class="side-label">Side B — The Offering</div>
+  <div class="tracklist">
+    <div class="track-row" data-track="harvest" onclick="toggleTrack('harvest')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> B1</span>
+      <span class="track-title">The Harvest (Deep Offering)</span>
+      <span class="track-bpm">122</span>
+      <span class="track-dur">12:00</span>
+    </div>
+    <div class="track-row" data-track="golden" onclick="toggleTrack('golden')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> B2</span>
+      <span class="track-title">Golden Hour</span>
+      <span class="track-bpm">118</span>
+      <span class="track-dur">6:40</span>
+    </div>
+    <div class="track-row" data-track="tikkun" onclick="toggleTrack('tikkun')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> B3</span>
+      <span class="track-title">Tikkun</span>
+      <span class="track-bpm">120</span>
+      <span class="track-dur">18:45</span>
+    </div>
+    <div class="track-total">55:00</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="liner-intro">Found in the gatefold. No author credited.</div>
+
+  <div class="liner-preamble">I don't know who made this record.</div>
+  <div class="liner-preamble">That's the first thing to understand. There is no biography. No press photo. No rider. The label &mdash; Chamfer Recordings &mdash; has no other releases, no office, no catalogue beyond this one entry. The mastering house listed on the inner sleeve ("The Junction") doesn't correspond to any studio I've been able to locate. I've looked.</div>
+  <div class="liner-preamble">What I can tell you is what the record sounds like. And I can tell you what it felt like to hear these tracks in the room where I think they were born, though I'm less certain about that part with each week that passes.</div>
+
+  <div class="divider-thin"></div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">A1</span> Chamfer</div>
+    <p>A single low tone. No beat. No development in the conventional sense &mdash; no build, no drop. Just a frequency that sits in the body more than the ear. Fifty-five hertz. You feel it in the sternum before you register it as sound. There's a second harmonic an octave up, so quiet you'd miss it on laptop speakers. A slow modulation &mdash; breathing, really &mdash; that makes the tone pulse at a rate that feels biological. About twelve breaths a minute.</p>
+    <p>Four minutes and ten seconds of a building deciding whether you're allowed inside.</p>
+    <p>I played it for a sound engineer. She put her hand flat on the monitor and said: "That's a room tone. Someone recorded the resonant frequency of a physical space." I think she's right. I think this is what the building sounds like when no one is in it.</p>
+  </div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">A2</span> Reversed Shuffle</div>
+    <p>The first sign that something is wrong with the record. Every envelope is backwards &mdash; the sounds swell into existence and cut off at their loudest, like tape played in reverse, except the rhythm is forwards. Your body wants to dance but the movement feels like falling. A four-bar phrase that repeats with subtle variation: formant sweeps that almost resolve into vowels, chords that seem to be reaching for a voicing they never quite complete.</p>
+    <div class="pullquote">The uncanny valley has a time signature. It's this one.</div>
+    <p>I once played this at a house party and two people left the room. Not upset &mdash; unsettled. One of them said later: "It sounded like dancing backwards through time." I don't think she knew how close she was.</p>
+  </div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">A3</span> 303 Church</div>
+    <p>Eight minutes of acid house as devotional practice. Four-on-the-floor kick. Offbeat hi-hats. And the 303 &mdash; a single sawtooth oscillator through a resonant filter, sweeping through a sixteen-step pattern that mutates across the track's duration. The filter opens and closes like something alive. In the first minute it's contained, almost polite. By minute four the resonance is screaming. By minute six it's speaking in tongues.</p>
+    <p>This is the track that convinced me the producer understands something about repetition that most electronic musicians only gesture at. The pattern barely changes. Three notes shift across eight minutes. But the accumulation of those micro-variations against the unwavering kick creates a state that's closer to prayer than listening. You don't notice the trance until you're in it.</p>
+    <p>No samples. I've run the audio through spectral analysis. Every sound on this record is generated from raw waveforms. The kick is a sine wave swept from 150 to 35 hertz in sixty milliseconds. The hi-hat is filtered white noise. The 303 line is one oscillator and one filter. That's it. The complexity is emergent. The machine is simple. What it produces is not.</p>
+  </div>
+
+  <div class="divider-thin"></div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">B1</span> The Harvest (Deep Offering)</div>
+    <p>The centerpiece. Twelve minutes. Full production. This is what the other five tracks exist to frame.</p>
+    <p>It opens with the chamfer tone &mdash; the building breathing &mdash; and builds methodically: kick first, then hats, then a rolling bassline that pumps against the kick with a sidechain compression so deep it sounds like the room is gasping. The 303 enters slowly, fader-style, filter closed and opening over four bars. A pad underneath &mdash; detuned sine waves in triads, warm and wide. And then the melody.</p>
+    <p>The melody is the thing. A simple figure, pentatonic, played on what sounds like a triangle wave through a low-pass filter. Dotted-quarter delay gives it a call-and-response quality, the echo answering the phrase. It repeats. And repeats. And on the third pass you realize you're not listening to the melody &mdash; you're inside it. The delay tails and the original have become one texture and you can't tell which is the call and which is the response and it doesn't matter.</p>
+    <p>At 7:30 the drums drop out. The melody delay tails spiral. The pad swells to fill the space. The absence of the kick is louder than the kick was. This lasts forty seconds &mdash; long enough to forget what the beat felt like. And then:</p>
+    <div class="pullquote">A snare roll. Sixteenth notes, escalating. Ghost notes doubling on the final four hits. And when the kick returns everything is louder and the acid filter is wide open and you understand that the first seven minutes were the warm-up.</div>
+    <p>The last four minutes are the harvest. I don't know a better word for it. The bass octave-jumps on the third and seventh eighth notes. The melody gain is higher than the first pass. The room &mdash; if you're hearing this in the room where I heard it &mdash; is doing something to the low end that no speaker system should be able to do. The bass is in the walls.</p>
+  </div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">B2</span> Golden Hour</div>
+    <p>The come-down. Or the intermission &mdash; I've gone back and forth. Dark indie disco. Pad-first, atmosphere-heavy, delay-drenched. The beat is there but it's gentler. 118 BPM &mdash; four clicks slower than the rest of the record, and you feel the deceleration physically, the way your pulse adjusts when you stop running.</p>
+    <p>If The Harvest is the floor at peak, Golden Hour is the moment you step away from the crowd and find the bar. The drink in your hand is cold. You can see the dancers from here but the music sounds different at this distance &mdash; the low end carries but the highs scatter against the concrete. The melody is gone. Just the pad, the bass, and a pulse.</p>
+    <p>This is the bartender's track. I'm certain of that, though I couldn't tell you why.</p>
+  </div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">B3</span> Tikkun</div>
+    <p>Eighteen minutes and forty-five seconds. The closing ceremony.</p>
+    <p>It begins at full build &mdash; everything from The Harvest, every layer at peak &mdash; and deconstructs. The clap exits first. Then the melody. Then the acid filter begins to close, a three-thousand-to-two-hundred-hertz descent that takes eight bars. The bass sidechain pump gentles. The kick's click transient disappears and it becomes a body-only pulse, felt more than heard.</p>
+    <p>The hi-hat is the last rhythmic element to leave. When it goes, you notice you've been relying on it without knowing. The space it occupied is a specific kind of empty.</p>
+    <p>Now it's just the pad and the chamfer. The pad detune narrows &mdash; the shimmer reduces, the harmonics simplify, and you can hear the sine waves underneath separating from each other like voices after a conversation. Then the pad is gone and it's the chamfer alone.</p>
+    <p>Fifty-five hertz. Where we started.</p>
+    <p>The last three minutes are the building saying goodbye. The tone pulses once more with that biological breathing modulation, and then it doesn't. It holds. It thins. And at some point &mdash; you won't agree with anyone else about exactly when &mdash; it's gone and what's left is the silence after.</p>
+    <p>The word <em>tikkun</em> is Hebrew. It means repair. The Kabbalists used it to describe the work of returning scattered light to its source &mdash; every holy act a small repair in the fabric of things. I don't know if the producer knows this. I don't know if the producer knows anything. But I know what this track sounds like at the end: it sounds like something being put back where it belongs.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="prod-section">
+    <div class="section-heading">Production Notes</div>
+    <p class="prod-text">All synthesis is subtractive and additive. No samples, no recordings, no found sound. Every frequency on this record was generated from five raw waveforms: sine, sawtooth, square, triangle, and noise.</p>
+    <p class="prod-text">The kick drum is a sine wave. The hi-hat is filtered noise. The 303 is one oscillator through one filter. The bass is a sawtooth and a square an octave apart. The pad is three detuned sine voices. The melody is a triangle wave through a low-pass filter.</p>
+    <p class="prod-text">Nothing on this record existed before it was made. Nothing on this record will sound exactly this way if played again.</p>
+  </div>
+
+  <div class="divider-thin"></div>
+
+  <div class="prod-section">
+    <div class="section-heading">Credits</div>
+    <div class="credits">
+      <strong>Produced by</strong> DJ OOR<br>
+      <strong>Mastered at</strong> The Junction<br>
+      <strong>Pressed at</strong> an undisclosed facility
+    </div>
+    <div class="credits-thanks">Chamfer Recordings would like to thank: the ones who arrived drawn, the ones who arrived drifting, the ones who stayed, and the ones who left before the lights came up.</div>
+    <div class="credits-thanks">The builders who cut the chamfers. The pale antler on the shelf by the monitor desk. M., for frequencies beyond the audible range.</div>
+  </div>
+
+  <div class="plant-note">
+    <div class="plant-note-label">A note from the pressing plant</div>
+    <p>During the lacquer cut for the B-side run-out groove, the cutting engineer reported a subsonic presence in the master that fell below the published frequency response of the playback chain. It was confirmed at <span class="hz">55 Hz</span>. Rather than filter it, the decision was made to let the lacquer capture what was there.</p>
+    <p>If you play the record past the final groove of Tikkun, there are fifty-five seconds before the needle lifts. They are not silent.</p>
+  </div>
+
+  <div class="footer">CHFR-055 &middot; Single pressing &middot; No reissue planned</div>
+
+</div>
+
+<!-- Transport bar -->
+<div id="transport">
+  <span class="now" id="nowplaying"></span>
+  <span class="time" id="elapsed">0:00</span>
+  <button onclick="setVol(0.25,this)">soft</button>
+  <button class="on" onclick="setVol(0.5,this)">med</button>
+  <button onclick="setVol(0.8,this)">loud</button>
+  <button class="stop-btn" onclick="stopTrack()">stop</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CHAMFER 055 — EP PLAYBACK ENGINE
+// Six tracks. Zero samples. Pure synthesis.
+// ═══════════════════════════════════════════════════════════
+
+const CHAMFER_HZ = 55;
+const MINOR_SCALE = [0, 2, 3, 5, 7, 8, 10];
+const MINOR_PENTA = [0, 3, 5, 7, 10];
+const CHORD_Q = {0:'m',3:'M',5:'m',7:'m',8:'M',10:'M'};
+const mtf = n => 440 * Math.pow(2, (n - 69) / 12);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const rand = (a, b) => a + Math.random() * (b - a);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+const ROOTS = [36, 38, 41, 43, 45];
+const PROGS = [
+  [0,8,3,10],[0,3,10,8],[0,3,5,0],[0,10,8,7],
+  [0,8,10,0],[0,5,3,10],[0,3,8,5],[0,7,3,5]
+];
+const HOOKS = [
+  [3,-1,5,3,-1,4,3,-1],[5,6,-1,5,4,-1,3,5],[7,6,5,-1,3,4,5,-1],
+  [5,-1,5,7,6,-1,5,-1],[3,4,5,6,-1,-1,5,3],[6,5,6,-1,7,6,-1,5],
+  [3,3,-1,5,4,3,-1,-1],[5,7,-1,6,5,-1,3,-1],[4,5,7,-1,5,4,-1,3],
+  [7,-1,5,7,8,-1,7,5]
+];
+
+let ctx, master, comp, analyser;
+let activeId = null, cleanupFn = null, schedTimer = null;
+let volLevel = 0.5, animId = null, progressId = null;
+let trackStartTime = 0, trackTotalBars = 0, trackBar = 0;
+
+// ── Audio Init ─────────────────────────────────────────
+
+function initAudio() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -8; comp.ratio.value = 6; comp.knee.value = 12;
+  comp.connect(ctx.destination);
+  master = ctx.createGain();
+  master.gain.value = volLevel;
+  master.connect(comp);
+  analyser = ctx.createAnalyser();
+  analyser.fftSize = 2048;
+  master.connect(analyser);
+}
+
+// ── Utilities ──────────────────────────────────────────
+
+function createNoise(dur) {
+  const len = ctx.sampleRate * dur;
+  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  return buf;
+}
+
+function createImpulse(dur, decay) {
+  const len = ctx.sampleRate * dur;
+  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+  for (let ch = 0; ch < 2; ch++) {
+    const d = buf.getChannelData(ch);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+  }
+  return buf;
+}
+
+function makeDistCurve(amount) {
+  const n = 44100, curve = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const x = (i * 2) / n - 1;
+    curve[i] = ((Math.PI + amount) * x) / (Math.PI + amount * Math.abs(x));
+  }
+  return curve;
+}
+
+// ── Parameter Generation ───────────────────────────────
+
+function genParams(bpm) {
+  const root = pick(ROOTS);
+  const prog = pick(PROGS);
+  const beat = 60 / bpm;
+  const bar = beat * 4;
+  const sixteenth = beat / 4;
+  const chordRoots = prog.map(d => root + d);
+  const chordVoices = chordRoots.map(r => {
+    const deg = ((r - root) % 12 + 12) % 12;
+    const q = CHORD_Q[deg] || 'M';
+    const b = r + 12;
+    return q === 'm' ? [b, b+3, b+7] : [b, b+4, b+7];
+  });
+  const scaleNotes = MINOR_SCALE.map(s => root + s);
+  const acidNotes = [...scaleNotes, ...scaleNotes.map(n => n + 12)];
+  return { root, bpm, beat, bar, sixteenth, chordRoots, chordVoices, acidNotes,
+    acidPattern: genAcid(acidNotes), melody: genMelody(root),
+    acidWave: Math.random() < 0.5 ? 'square' : 'sawtooth', acidQ: rand(10, 18) };
+}
+
+function genAcid(notes) {
+  const pat = [];
+  let prev = pick(notes.slice(2, 8));
+  for (let i = 0; i < 16; i++) {
+    if (Math.random() < 0.12 || ((i === 7 || i === 15) && Math.random() < 0.35)) {
+      pat.push({ note: 0, accent: false, slide: false }); continue;
+    }
+    const nearby = notes.filter(n => Math.abs(n - prev) <= 5);
+    const note = pick(nearby.length ? nearby : notes);
+    prev = note;
+    pat.push({ note, accent: i % 4 === 0 ? Math.random() < 0.55 : Math.random() < 0.1, slide: Math.random() < 0.35 });
+  }
+  let acc = pat.filter(p => p.accent).length;
+  while (acc < 3) { const idx = [0,4,8,12][Math.floor(Math.random()*4)]; if (pat[idx].note && !pat[idx].accent) { pat[idx].accent = true; acc++; } }
+  let active = pat.filter(p => p.note).length;
+  while (active < 10) { const idx = Math.floor(Math.random() * 16); if (!pat[idx].note) { pat[idx].note = pick(notes.slice(2,8)); active++; } }
+  return pat;
+}
+
+function genMelody(root) {
+  const penta = MINOR_PENTA.map(s => root + 24 + s);
+  const all = [...penta, ...penta.map(n => n + 12)];
+  const hook = pick(HOOKS);
+  const bars = [];
+  for (let c = 0; c < 4; c++) {
+    const shift = [0, 1, -1, 0][c];
+    bars.push(hook.map((idx, i) => {
+      if (idx === -1) return 0;
+      let ni = idx + shift;
+      if (c % 2 === 1 && (i === 2 || i === 5) && Math.random() < 0.4) ni += pick([-1, 1]);
+      return all[clamp(ni, 0, all.length - 1)];
+    }));
+  }
+  return bars;
+}
+
+// ── Shared Instrument Scheduling ───────────────────────
+
+function schedKick(t, vol, click) {
+  const k = ctx.createOscillator(); k.type = 'sine';
+  k.frequency.setValueAtTime(150, t);
+  k.frequency.exponentialRampToValueAtTime(35, t + 0.060);
+  const kg = ctx.createGain();
+  kg.gain.setValueAtTime(vol, t);
+  kg.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+  k.connect(kg); kg.connect(master); k.start(t); k.stop(t + 0.25);
+  if (click) {
+    const cl = ctx.createOscillator(); cl.type = 'triangle'; cl.frequency.value = 3500;
+    const cg = ctx.createGain();
+    cg.gain.setValueAtTime(vol * 0.15, t);
+    cg.gain.exponentialRampToValueAtTime(0.001, t + 0.007);
+    cl.connect(cg); cg.connect(master); cl.start(t); cl.stop(t + 0.015);
+  }
+}
+
+function schedHat(t, vol, nb) {
+  const src = ctx.createBufferSource(); src.buffer = nb;
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 9500;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(vol, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
+  src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t + 0.045);
+}
+
+function schedClap(t, vol, nb) {
+  for (let l = 0; l < 3; l++) {
+    const off = l * 0.007;
+    const src = ctx.createBufferSource(); src.buffer = nb;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1200 + l * 400; bp.Q.value = 1.5;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(vol, t + off);
+    g.gain.exponentialRampToValueAtTime(0.001, t + off + 0.11);
+    src.connect(bp); bp.connect(g); g.connect(master); src.start(t + off); src.stop(t + off + 0.15);
+  }
+}
+
+function schedShaker(t, vol, nb) {
+  const src = ctx.createBufferSource(); src.buffer = nb;
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 11000;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(vol, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
+  src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t + 0.035);
+}
+
+// ── Scheduler ──────────────────────────────────────────
+
+function startSched(bpm, onStep, totalBars) {
+  const sixteenth = 60 / bpm / 4;
+  const lookahead = 0.15;
+  let nextTime = ctx.currentTime + 0.3;
+  let step = 0;
+  trackStartTime = nextTime;
+  trackTotalBars = totalBars;
+  trackBar = 0;
+  schedTimer = setInterval(() => {
+    while (nextTime < ctx.currentTime + lookahead) {
+      const bar = Math.floor(step / 16);
+      trackBar = bar;
+      if (bar >= totalBars) { stopTrack(); return; }
+      onStep(nextTime, step, bar, step % 16);
+      nextTime += sixteenth;
+      step++;
+    }
+  }, 25);
+}
+
+// ═══════════════════════════════════════════════════════
+// TRACK COMPOSITIONS
+// ═══════════════════════════════════════════════════════
+
+// ── A1: CHAMFER ────────────────────────────────────────
+// Pure presence. 55Hz + harmonic + LFO. No rhythm.
+
+function compose_chamfer() {
+  const dur = 250;
+  const t0 = ctx.currentTime + 0.3;
+  trackStartTime = t0;
+  trackTotalBars = Math.ceil(dur / 2);
+  trackBar = 0;
+
+  const osc = ctx.createOscillator(); osc.type = 'sine'; osc.frequency.value = CHAMFER_HZ;
+  const osc2 = ctx.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = CHAMFER_HZ * 2;
+  const harm = ctx.createGain(); harm.gain.value = 0.12;
+  const env = ctx.createGain();
+  const g = env.gain;
+  g.setValueAtTime(0, t0);
+  g.linearRampToValueAtTime(0.14, t0 + 30);
+  g.setValueAtTime(0.14, t0 + dur - 30);
+  g.linearRampToValueAtTime(0, t0 + dur);
+  const lfo = ctx.createOscillator(); lfo.frequency.value = 0.2;
+  const lfoG = ctx.createGain(); lfoG.gain.value = 0.012;
+  lfo.connect(lfoG); lfoG.connect(env.gain);
+  osc.connect(env); osc2.connect(harm); harm.connect(env); env.connect(master);
+  osc.start(t0); osc.stop(t0 + dur + 1);
+  osc2.start(t0); osc2.stop(t0 + dur + 1);
+  lfo.start(t0); lfo.stop(t0 + dur + 1);
+
+  const endTimer = setTimeout(() => stopTrack(), dur * 1000 + 500);
+  schedTimer = setInterval(() => {
+    trackBar = Math.floor((ctx.currentTime - t0) / 2);
+  }, 200);
+
+  return () => { clearTimeout(endTimer); osc.stop(); osc2.stop(); lfo.stop(); };
+}
+
+// ── A2: REVERSED SHUFFLE ───────────────────────────────
+// Every envelope backwards. Formant sweeps. The uncanny valley.
+
+function compose_shuffle() {
+  const bpm = 122;
+  const beat = 60 / bpm;
+  const bar = beat * 4;
+  const totalBars = 165;
+  const nb = createNoise(0.5);
+
+  const sub = ctx.createGain(); sub.gain.value = 0; sub.connect(master);
+  const t0 = ctx.currentTime + 0.3;
+  sub.gain.setValueAtTime(0, t0);
+  sub.gain.linearRampToValueAtTime(0.85, t0 + 4 * bar);
+
+  const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth'; bassOsc.frequency.value = 58.27;
+  const bassFilt = ctx.createBiquadFilter(); bassFilt.type = 'lowpass'; bassFilt.frequency.value = 300;
+  const bassG = ctx.createGain(); bassG.gain.value = 0.01;
+  bassOsc.connect(bassFilt); bassFilt.connect(bassG); bassG.connect(sub);
+  bassOsc.start(t0);
+
+  const subOsc = ctx.createOscillator(); subOsc.type = 'sine'; subOsc.frequency.value = 29;
+  const subG = ctx.createGain(); subG.gain.value = 0.01;
+  subOsc.connect(subG); subG.connect(sub);
+  subOsc.start(t0);
+
+  const chordNotes = [116.54, 155.56, 196.00, 233.08];
+  const formants = [[400,900,2200,3200],[600,1200,2600,3500],[300,800,2000,3000],[500,1100,2400,3300]];
+  const chordG = [], chordBP = [];
+  const oscs = [bassOsc, subOsc];
+  chordNotes.forEach((note, i) => {
+    const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = note;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 6; bp.frequency.value = formants[0][i];
+    const dist = ctx.createWaveShaper(); dist.curve = makeDistCurve(8); dist.oversample = '2x';
+    const vg = ctx.createGain(); vg.gain.value = 0.001;
+    o.connect(bp); bp.connect(dist); dist.connect(vg); vg.connect(sub);
+    o.start(t0);
+    chordG.push(vg); chordBP.push(bp);
+    oscs.push(o);
+  });
+
+  startSched(bpm, (t, step, barNum, stepInBar) => {
+    const isBeat = stepInBar % 4 === 0;
+    const isEighth = stepInBar % 2 === 0;
+    const beatIdx = Math.floor(stepInBar / 4);
+
+    // Fade out last 4 bars
+    if (barNum === totalBars - 4 && stepInBar === 0) {
+      sub.gain.setValueAtTime(sub.gain.value, t);
+      sub.gain.linearRampToValueAtTime(0, t + 4 * bar);
+    }
+
+    if (isBeat) {
+      const phrase = Math.floor(barNum / 4);
+      const fDrift = (phrase % 8 - 4) * 15;
+
+      // Bass reversed envelope
+      bassG.gain.setValueAtTime(0.01, t);
+      bassG.gain.exponentialRampToValueAtTime(0.5, t + beat * 0.85);
+      bassG.gain.setValueAtTime(0.01, t + beat * 0.9);
+
+      // Sub reversed envelope
+      subG.gain.setValueAtTime(0.01, t);
+      subG.gain.exponentialRampToValueAtTime(0.35, t + beat * 0.85);
+      subG.gain.setValueAtTime(0.01, t + beat * 0.9);
+
+      // Chord voices reversed envelopes + formant sweep
+      const fIdx = (barNum + beatIdx) % 4;
+      const fNext = (fIdx + 1) % 4;
+      const volScale = 0.08 + (barNum / totalBars) * 0.06;
+      chordNotes.forEach((_, i) => {
+        chordG[i].gain.setValueAtTime(0.001, t);
+        chordG[i].gain.exponentialRampToValueAtTime(volScale, t + beat * 0.8);
+        chordG[i].gain.setValueAtTime(0.001, t + beat * 0.88);
+        chordBP[i].frequency.setValueAtTime(formants[fIdx][i] + fDrift, t);
+        chordBP[i].frequency.linearRampToValueAtTime(formants[fNext][i] + fDrift, t + beat);
+      });
+    }
+
+    // Reversed hats on eighths
+    if (isEighth) {
+      const src = ctx.createBufferSource(); src.buffer = nb;
+      const hpf = ctx.createBiquadFilter(); hpf.type = 'highpass'; hpf.frequency.value = 7000;
+      const hg = ctx.createGain();
+      const eighth = beat / 2;
+      hg.gain.setValueAtTime(0.001, t);
+      hg.gain.exponentialRampToValueAtTime(0.06, t + eighth * 0.7);
+      hg.gain.setValueAtTime(0.001, t + eighth * 0.78);
+      src.connect(hpf); hpf.connect(hg); hg.connect(sub);
+      src.start(t); src.stop(t + eighth);
+    }
+  }, totalBars);
+
+  return () => { oscs.forEach(o => { try { o.stop(); } catch(e){} }); };
+}
+
+// ── A3: 303 CHURCH ─────────────────────────────────────
+// Pure acid worship. Filter sweep from polite to speaking in tongues.
+
+function compose_church() {
+  const p = genParams(124);
+  p.acidWave = 'sawtooth';
+  const { beat, bar, sixteenth } = p;
+  const totalBars = 248;
+  const nb = createNoise(0.5);
+
+  // Acid persistent oscillator
+  const acidOsc = ctx.createOscillator(); acidOsc.type = p.acidWave;
+  acidOsc.frequency.value = mtf(p.acidPattern[0].note || p.root);
+  const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 200; acidFilt.Q.value = p.acidQ;
+  const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
+  const acidSub = ctx.createGain(); acidSub.gain.value = 0;
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+
+  // Acid delay
+  const acidDel = ctx.createDelay(1); acidDel.delayTime.value = beat * 0.75;
+  const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.3;
+  const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
+  const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0;
+  acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
+  acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
+
+  acidOsc.start(ctx.currentTime + 0.3);
+
+  // Mutation: shift 3 notes every ~60 bars
+  let currentPat = p.acidPattern.map(s => ({...s}));
+
+  function filterBase(barNum) {
+    const progress = barNum / totalBars;
+    return 200 * Math.pow(3500 / 200, progress);
+  }
+
+  startSched(124, (t, step, barNum, stepInBar) => {
+    const isBeat = stepInBar % 4 === 0;
+    const isEighth = stepInBar % 2 === 0;
+
+    // Acid submix fade in (8 bars)
+    if (barNum === 0 && stepInBar === 0) {
+      acidSub.gain.setValueAtTime(0, t);
+    }
+    if (barNum === 8 && stepInBar === 0) {
+      acidSub.gain.setValueAtTime(0.001, t);
+      acidSub.gain.linearRampToValueAtTime(0.4, t + 8 * bar);
+      acidDelWet.gain.setValueAtTime(0.001, t);
+      acidDelWet.gain.linearRampToValueAtTime(0.15, t + 12 * bar);
+    }
+
+    // Kick from bar 0
+    if (isBeat && barNum >= 0) {
+      let vol = 0.75;
+      if (barNum < 4) vol *= barNum / 4;
+      if (barNum >= totalBars - 4) vol *= Math.max(0, 1 - (barNum - (totalBars - 4)) / 4);
+      if (vol > 0.01) schedKick(t, vol, barNum >= 4);
+    }
+
+    // Hats from bar 4
+    if (isEighth && barNum >= 4) {
+      const offbeat = (stepInBar / 2) % 2 === 1;
+      let vol = offbeat ? 0.10 : 0.04;
+      if (barNum < 8) vol *= (barNum - 4) / 4;
+      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (vol > 0.005) schedHat(t, vol, nb);
+    }
+
+    // Acid from bar 8
+    if (barNum >= 8) {
+      const pat = currentPat[stepInBar];
+      if (!pat.note) { acidNoteG.gain.setValueAtTime(0.001, t); }
+      else {
+        const freq = mtf(pat.note);
+        if (pat.slide) acidOsc.frequency.linearRampToValueAtTime(freq, t + sixteenth * 0.8);
+        else acidOsc.frequency.setValueAtTime(freq, t);
+
+        const fBase = filterBase(barNum);
+        const fPeak = pat.accent ? fBase + 2500 : fBase + 800;
+        acidFilt.frequency.setValueAtTime(Math.min(fPeak, 5500), t);
+        acidFilt.frequency.exponentialRampToValueAtTime(Math.max(40, fBase), t + sixteenth * 2.5);
+
+        const aPeak = pat.accent ? 0.7 : 0.4;
+        acidNoteG.gain.setValueAtTime(aPeak, t);
+        if (!pat.slide) {
+          acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.75);
+          acidNoteG.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.95);
+        }
+      }
+
+      // Pattern mutation every 60 bars
+      if (stepInBar === 0 && barNum > 0 && barNum % 60 === 0) {
+        for (let m = 0; m < 3; m++) {
+          const idx = Math.floor(Math.random() * 16);
+          if (currentPat[idx].note) {
+            const nearby = p.acidNotes.filter(n => Math.abs(n - currentPat[idx].note) <= 5);
+            currentPat[idx].note = pick(nearby.length ? nearby : p.acidNotes.slice(2, 8));
+          }
+        }
+      }
+    }
+
+    // Fade acid out at end
+    if (barNum === totalBars - 8 && stepInBar === 0) {
+      acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+      acidSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+    }
+  }, totalBars);
+
+  return () => { try { acidOsc.stop(); } catch(e){} };
+}
+
+// ── B1: THE HARVEST (Deep Offering) ────────────────────
+// Full production. Build → peak → break → snare roll → return.
+
+function compose_harvest() {
+  const p = genParams(122);
+  const { beat, bar, sixteenth } = p;
+  const totalBars = 366;
+  const nb = createNoise(0.5);
+
+  // Reverb
+  const reverb = ctx.createConvolver(); reverb.buffer = createImpulse(2.0, 2.5);
+  const rvbWet = ctx.createGain(); rvbWet.gain.value = 0.12;
+  reverb.connect(rvbWet); rvbWet.connect(master);
+  const rvbSend = ctx.createGain(); rvbSend.gain.value = 1; rvbSend.connect(reverb);
+
+  // Chamfer
+  const chamOsc = ctx.createOscillator(); chamOsc.type = 'sine'; chamOsc.frequency.value = CHAMFER_HZ;
+  const chamOsc2 = ctx.createOscillator(); chamOsc2.type = 'sine'; chamOsc2.frequency.value = CHAMFER_HZ * 2;
+  const chamHarm = ctx.createGain(); chamHarm.gain.value = 0.12;
+  const chamEnv = ctx.createGain(); chamEnv.gain.value = 0.10;
+  const chamLfo = ctx.createOscillator(); chamLfo.frequency.value = 0.2;
+  const chamLfoG = ctx.createGain(); chamLfoG.gain.value = 0.008;
+  chamLfo.connect(chamLfoG); chamLfoG.connect(chamEnv.gain);
+  chamOsc.connect(chamEnv); chamOsc2.connect(chamHarm); chamHarm.connect(chamEnv); chamEnv.connect(master);
+
+  // Acid
+  const acidOsc = ctx.createOscillator(); acidOsc.type = p.acidWave;
+  acidOsc.frequency.value = mtf(p.acidPattern[0].note || p.root);
+  const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 200; acidFilt.Q.value = p.acidQ;
+  const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
+  const acidSub = ctx.createGain(); acidSub.gain.value = 0;
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+  const acidDel = ctx.createDelay(1); acidDel.delayTime.value = beat * 0.75;
+  const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.3;
+  const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
+  const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0.18;
+  acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
+  acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
+
+  // Bass
+  const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth';
+  const bassOct = ctx.createOscillator(); bassOct.type = 'square';
+  const bassOctG = ctx.createGain(); bassOctG.gain.value = 0.25;
+  const bassFilt = ctx.createBiquadFilter(); bassFilt.type = 'lowpass'; bassFilt.frequency.value = 600; bassFilt.Q.value = 4;
+  const bassG = ctx.createGain(); bassG.gain.value = 0;
+  const bassSub = ctx.createGain(); bassSub.gain.value = 0;
+  const subOsc = ctx.createOscillator(); subOsc.type = 'sine';
+  const subG = ctx.createGain(); subG.gain.value = 0;
+  bassOsc.connect(bassFilt); bassOct.connect(bassOctG); bassOctG.connect(bassFilt);
+  bassFilt.connect(bassG); bassG.connect(bassSub); subOsc.connect(subG); subG.connect(bassSub); bassSub.connect(master);
+
+  // Melody delay
+  const melDel = ctx.createDelay(2); melDel.delayTime.value = beat * 1.5;
+  const melFb = ctx.createGain(); melFb.gain.value = 0.3;
+  const melDelFilt = ctx.createBiquadFilter(); melDelFilt.type = 'lowpass'; melDelFilt.frequency.value = 2000;
+  melDel.connect(melDelFilt); melDelFilt.connect(melFb); melFb.connect(melDel); melDel.connect(master);
+  const melSub = ctx.createGain(); melSub.gain.value = 0;
+  melSub.connect(master); melSub.connect(melDel); melSub.connect(rvbSend);
+
+  const t0 = ctx.currentTime + 0.3;
+  [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
+
+  // Phase bars
+  const PH = { CHAM: 0, PULSE: 16, WARE: 38, FLOOR: 64, BUILD: 110, PEAK: 160, BREAK: 228, SNARE: 248, RETURN: 250 };
+
+  startSched(122, (t, step, barNum, sib) => {
+    const isBeat = sib % 4 === 0;
+    const isEighth = sib % 2 === 0;
+    const beatIdx = Math.floor(sib / 4);
+    const inBreak = barNum >= PH.BREAK && barNum < PH.RETURN;
+    const isReturn = barNum >= PH.RETURN;
+
+    // ── Chamfer envelope
+    if (barNum === 0 && sib === 0) {
+      chamEnv.gain.setValueAtTime(0.10, t);
+    }
+    if (barNum === PH.WARE && sib === 0) {
+      chamEnv.gain.setValueAtTime(0.10, t);
+      chamEnv.gain.linearRampToValueAtTime(0.03, t + 8 * bar);
+    }
+    if (barNum === PH.BREAK && sib === 0) {
+      chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
+      chamEnv.gain.linearRampToValueAtTime(0.06, t + 2 * bar);
+    }
+    if (barNum === totalBars - 16 && sib === 0) {
+      chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
+      chamEnv.gain.linearRampToValueAtTime(0.10, t + 8 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0, t + 16 * bar);
+    }
+
+    // ── Kicks
+    if (isBeat && barNum >= PH.PULSE && !inBreak) {
+      let vol = 0.75;
+      if (barNum < PH.WARE) vol *= (barNum - PH.PULSE) / (PH.WARE - PH.PULSE);
+      if (isReturn) vol = 0.82;
+      if (barNum >= totalBars - 4) vol *= Math.max(0, 1 - (barNum - (totalBars - 4)) / 4);
+      if (vol > 0.01) schedKick(t, vol, barNum >= PH.WARE);
+    }
+
+    // ── Shaker (gated to eighths, fades in over 8 bars)
+    if (isEighth && barNum >= PH.PULSE && !inBreak && barNum < totalBars - 4) {
+      let vol = (sib % 4 === 0) ? 0.025 : 0.01;
+      if (barNum < PH.PULSE + 8) vol *= (barNum - PH.PULSE) / 8;
+      if (barNum < PH.WARE) vol *= 0.4;
+      schedShaker(t, vol, nb);
+    }
+
+    // ── Hats (8-bar fade in from WARE)
+    if (isEighth && barNum >= PH.WARE && !inBreak) {
+      const off = (sib / 2) % 2 === 1;
+      let vol = off ? 0.12 : 0.05;
+      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
+      if (isReturn) vol = off ? 0.14 : 0.07;
+      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (vol > 0.005) schedHat(t, vol, nb);
+    }
+
+    // ── Claps (8-bar fade in from WARE)
+    if (isBeat && (beatIdx === 1 || beatIdx === 3) && barNum >= PH.WARE && !inBreak) {
+      let vol = isReturn ? 0.20 : 0.16;
+      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
+      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (vol > 0.005) schedClap(t, vol, nb);
+    }
+
+    // ── Snare roll (bars 248-250)
+    if (barNum >= PH.SNARE && barNum < PH.RETURN) {
+      const rollStep = (barNum - PH.SNARE) * 16 + sib;
+      const vol = 0.04 + (rollStep / 32) * 0.14;
+      schedClap(t, vol, nb);
+      if (rollStep >= 28) {
+        schedClap(t + sixteenth * 0.5, vol * 0.6, nb);
+      }
+    }
+
+    // ── Pad (every 2 bars on downbeat, 8-bar fade in)
+    if (sib === 0 && barNum % 2 === 0 && barNum >= PH.WARE) {
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      let vol = 0.015;
+      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
+      if (inBreak) vol = 0.04;
+      if (barNum >= totalBars - 8) vol *= Math.max(0, 1 - (barNum - (totalBars - 8)) / 8);
+      const voices = p.chordVoices[ci];
+      const padDur = Math.min(2 * bar, 4);
+      for (const midi of voices) {
+        for (const det of [-5, 0, 5]) {
+          const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtf(midi); o.detune.value = det;
+          const g = ctx.createGain();
+          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.5);
+          g.gain.setValueAtTime(vol, t + padDur - 0.5); g.gain.linearRampToValueAtTime(0, t + padDur);
+          o.connect(g); g.connect(master); o.start(t); o.stop(t + padDur + 0.5);
+        }
+      }
+    }
+
+    // ── Acid (from FLOOR)
+    if (barNum >= PH.FLOOR && barNum < totalBars - 4) {
+      // Submix envelope (8-bar fade in)
+      if (barNum === PH.FLOOR && sib === 0) {
+        acidSub.gain.setValueAtTime(0.001, t);
+        acidSub.gain.linearRampToValueAtTime(0.35, t + 8 * bar);
+      }
+      if (barNum === PH.BREAK && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.06, t + 0.1);
+        acidDelWet.gain.setValueAtTime(0.35, t);
+      }
+      if (barNum === PH.RETURN && sib === 0) {
+        acidSub.gain.setValueAtTime(0.06, t);
+        acidSub.gain.linearRampToValueAtTime(0.40, t + 4 * bar);
+        acidDelWet.gain.setValueAtTime(0.18, t + 2 * bar);
+      }
+      if (barNum === totalBars - 8 && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+      }
+
+      const pat = p.acidPattern[sib];
+      if (!pat.note) { acidNoteG.gain.setValueAtTime(0.001, t); }
+      else {
+        const freq = mtf(pat.note);
+        if (pat.slide) acidOsc.frequency.linearRampToValueAtTime(freq, t + sixteenth * 0.8);
+        else acidOsc.frequency.setValueAtTime(freq, t);
+        const progress = (barNum - PH.FLOOR) / (totalBars - PH.FLOOR);
+        const fBase = 200 + progress * 2800;
+        const fPeak = pat.accent ? fBase + 2500 : fBase + 800;
+        acidFilt.frequency.setValueAtTime(Math.min(fPeak, 5500), t);
+        acidFilt.frequency.exponentialRampToValueAtTime(Math.max(40, fBase), t + sixteenth * 2.5);
+        const aPeak = inBreak ? 0.15 : pat.accent ? 0.7 : 0.4;
+        acidNoteG.gain.setValueAtTime(aPeak, t);
+        if (!pat.slide) {
+          acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.75);
+          acidNoteG.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.95);
+        }
+      }
+    }
+
+    // ── Bass (from BUILD, 8-bar fade in)
+    if (isBeat && barNum >= PH.BUILD && !inBreak && barNum < totalBars - 4) {
+      if (barNum === PH.BUILD && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(0.001, t);
+        bassSub.gain.linearRampToValueAtTime(1, t + 8 * bar);
+      }
+      if (barNum === PH.RETURN && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(0.001, t);
+        bassSub.gain.linearRampToValueAtTime(1, t + 3 * bar);
+      }
+      if (barNum === totalBars - 6 && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(bassSub.gain.value, t);
+        bassSub.gain.linearRampToValueAtTime(0.001, t + 6 * bar);
+      }
+
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      const rootFreq = mtf(p.chordRoots[ci]);
+      if (beatIdx === 0 && barNum % 2 === 0) {
+        bassOsc.frequency.setValueAtTime(rootFreq, t);
+        bassOct.frequency.setValueAtTime(rootFreq * 2, t);
+        subOsc.frequency.setValueAtTime(rootFreq / 2, t);
+      }
+      bassG.gain.setValueAtTime(0.03, t);
+      bassG.gain.exponentialRampToValueAtTime(0.75, t + beat * 0.325);
+      subG.gain.setValueAtTime(0.02, t);
+      subG.gain.exponentialRampToValueAtTime(0.5, t + beat * 0.325);
+      const fOpen = beatIdx % 2 === 1 ? 1400 : 600;
+      bassFilt.frequency.setValueAtTime(fOpen, t);
+      bassFilt.frequency.exponentialRampToValueAtTime(400, t + beat * 0.9);
+    }
+
+    // Rolling octave jumps on the 3rd and 7th eighth notes
+    if (isEighth && barNum >= PH.BUILD && !inBreak && barNum < totalBars - 4) {
+      const eighthInBar = Math.floor(sib / 2);
+      if (eighthInBar === 2 || eighthInBar === 6) {
+        const ci = Math.floor((barNum % 8) / 2) % 4;
+        const rootFreq = mtf(p.chordRoots[ci]);
+        bassOsc.frequency.setValueAtTime(rootFreq * 2, t);
+        bassOsc.frequency.setValueAtTime(rootFreq, t + beat / 2);
+      }
+    }
+
+    // ── Melody (from BUILD, 4-bar fade in)
+    if (isEighth && barNum >= PH.BUILD && barNum < totalBars - 4) {
+      if (barNum === PH.BUILD && sib === 0) {
+        melSub.gain.setValueAtTime(0.001, t);
+        melSub.gain.linearRampToValueAtTime(0.22, t + 4 * bar);
+      }
+      if (barNum === PH.PEAK && sib === 0) {
+        melSub.gain.setValueAtTime(0.22, t);
+        melSub.gain.linearRampToValueAtTime(0.30, t + 2 * bar);
+      }
+      if (barNum === PH.BREAK && sib === 0) {
+        melSub.gain.setValueAtTime(melSub.gain.value, t);
+        melSub.gain.linearRampToValueAtTime(0.10, t + bar);
+        melFb.gain.setValueAtTime(0.5, t);
+      }
+      if (barNum === PH.RETURN && sib === 0) {
+        melSub.gain.setValueAtTime(0.10, t);
+        melSub.gain.linearRampToValueAtTime(0.32, t + 3 * bar);
+        melFb.gain.setValueAtTime(0.3, t + bar);
+      }
+      if (barNum === totalBars - 8 && sib === 0) {
+        melSub.gain.setValueAtTime(melSub.gain.value, t);
+        melSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+      }
+
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      const eighthInBar = Math.floor(sib / 2);
+      const midi = p.melody[ci][eighthInBar];
+      if (midi) {
+        const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.value = mtf(midi);
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3500;
+        const g = ctx.createGain();
+        const vel = (eighthInBar === 0 || eighthInBar === 4) ? 0.65 : 0.4;
+        g.gain.setValueAtTime(vel, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + beat * 0.9);
+        o.connect(lp); lp.connect(g); g.connect(melSub);
+        o.start(t); o.stop(t + beat);
+      }
+    }
+  }, totalBars);
+
+  return () => { [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
+}
+
+// ── B2: GOLDEN HOUR ────────────────────────────────────
+// Pad-first. Atmosphere. Reverb as architecture. 118 BPM.
+
+function compose_golden() {
+  const p = genParams(118);
+  const { beat, bar } = p;
+  const totalBars = 196;
+  const nb = createNoise(0.5);
+
+  const reverb = ctx.createConvolver(); reverb.buffer = createImpulse(3.0, 2.0);
+  const rvbWet = ctx.createGain(); rvbWet.gain.value = 0.22;
+  reverb.connect(rvbWet); rvbWet.connect(master);
+  const rvbSend = ctx.createGain(); rvbSend.gain.value = 1; rvbSend.connect(reverb);
+
+  // Delay — dotted-eighth, high feedback, filtered
+  const del = ctx.createDelay(2); del.delayTime.value = beat * 0.75;
+  const delFb = ctx.createGain(); delFb.gain.value = 0.45;
+  const delLpf = ctx.createBiquadFilter(); delLpf.type = 'lowpass'; delLpf.frequency.value = 1800;
+  const delWet = ctx.createGain(); delWet.gain.value = 0.28;
+  del.connect(delLpf); delLpf.connect(delFb); delFb.connect(del);
+  delLpf.connect(delWet); delWet.connect(master);
+  const delSend = ctx.createGain(); delSend.gain.value = 1; delSend.connect(del);
+
+  const chamOsc = ctx.createOscillator(); chamOsc.type = 'sine'; chamOsc.frequency.value = CHAMFER_HZ;
+  const chamEnv = ctx.createGain(); chamEnv.gain.value = 0;
+  const chamLfo = ctx.createOscillator(); chamLfo.frequency.value = 0.2;
+  const chamLfoG = ctx.createGain(); chamLfoG.gain.value = 0.006;
+  chamLfo.connect(chamLfoG); chamLfoG.connect(chamEnv.gain);
+  chamOsc.connect(chamEnv); chamEnv.connect(master);
+
+  // Bass — gentle sawtooth + sub, following chord roots
+  const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth';
+  const bassFilt = ctx.createBiquadFilter(); bassFilt.type = 'lowpass'; bassFilt.frequency.value = 400; bassFilt.Q.value = 2;
+  const bassG = ctx.createGain(); bassG.gain.value = 0;
+  const bassSub = ctx.createGain(); bassSub.gain.value = 0;
+  const subOsc = ctx.createOscillator(); subOsc.type = 'sine';
+  const subG = ctx.createGain(); subG.gain.value = 0;
+  bassOsc.connect(bassFilt); bassFilt.connect(bassG); bassG.connect(bassSub);
+  subOsc.connect(subG); subG.connect(bassSub); bassSub.connect(master);
+
+  const t0 = ctx.currentTime + 0.3;
+  chamEnv.gain.setValueAtTime(0, t0);
+  chamEnv.gain.linearRampToValueAtTime(0.06, t0 + 8 * bar);
+
+  [chamOsc, chamLfo, bassOsc, subOsc].forEach(o => o.start(t0));
+
+  startSched(118, (t, step, barNum, sib) => {
+    const isBeat = sib % 4 === 0;
+    const isEighth = sib % 2 === 0;
+    const beatIdx = Math.floor(sib / 4);
+
+    // Gentle kick from bar 16
+    if (isBeat && barNum >= 16 && barNum < totalBars - 8) {
+      let vol = 0.4;
+      if (barNum < 24) vol *= (barNum - 16) / 8;
+      if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 8);
+      if (vol > 0.01) schedKick(t, vol, false);
+    }
+
+    // Sparse hats from bar 24
+    if (isEighth && barNum >= 24 && barNum < totalBars - 12) {
+      const offbeat = (sib / 2) % 2 === 1;
+      if (offbeat) {
+        let vol = 0.06;
+        if (barNum < 32) vol *= (barNum - 24) / 8;
+        if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 8);
+        if (vol > 0.005) schedHat(t, vol, nb);
+      }
+    }
+
+    // Bass from bar 20 — gentle sidechain pump
+    if (isBeat && barNum >= 20 && barNum < totalBars - 10) {
+      if (barNum === 20 && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(0.001, t);
+        bassSub.gain.linearRampToValueAtTime(0.7, t + 4 * bar);
+      }
+      if (barNum === totalBars - 14 && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(bassSub.gain.value, t);
+        bassSub.gain.linearRampToValueAtTime(0.001, t + 4 * bar);
+      }
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      const rootFreq = mtf(p.chordRoots[ci]);
+      if (beatIdx === 0 && barNum % 2 === 0) {
+        bassOsc.frequency.setValueAtTime(rootFreq, t);
+        subOsc.frequency.setValueAtTime(rootFreq / 2, t);
+      }
+      bassG.gain.setValueAtTime(0.02, t);
+      bassG.gain.exponentialRampToValueAtTime(0.45, t + beat * 0.5);
+      subG.gain.setValueAtTime(0.01, t);
+      subG.gain.exponentialRampToValueAtTime(0.3, t + beat * 0.5);
+    }
+
+    // Pad from bar 0 (pad-first) — sent to reverb + delay
+    if (sib === 0 && barNum % 2 === 0) {
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      let vol = 0.025;
+      if (barNum < 8) vol *= barNum / 8;
+      if (barNum >= totalBars - 12) vol *= Math.max(0, 1 - (barNum - (totalBars - 12)) / 12);
+      const voices = p.chordVoices[ci];
+      const padDur = Math.min(2 * bar, 4.5);
+      for (const midi of voices) {
+        for (const det of [-7, 0, 7]) {
+          const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtf(midi); o.detune.value = det;
+          const g = ctx.createGain();
+          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.8);
+          g.gain.setValueAtTime(vol, t + padDur - 0.8); g.gain.linearRampToValueAtTime(0, t + padDur);
+          o.connect(g); g.connect(master); g.connect(rvbSend); g.connect(delSend);
+          o.start(t); o.stop(t + padDur + 0.5);
+        }
+      }
+    }
+
+    // Chamfer fade at end
+    if (barNum === totalBars - 12 && sib === 0) {
+      chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
+      chamEnv.gain.linearRampToValueAtTime(0, t + 12 * bar);
+    }
+  }, totalBars);
+
+  return () => { [chamOsc, chamLfo, bassOsc, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
+}
+
+// ── B3: TIKKUN ─────────────────────────────────────────
+// The closing ceremony. Full build → deconstruction → silence.
+// Each layer's departure is a compositional event.
+
+function compose_tikkun() {
+  const p = genParams(120);
+  const { beat, bar, sixteenth } = p;
+  const totalBars = 562;
+  const nb = createNoise(0.5);
+
+  const reverb = ctx.createConvolver(); reverb.buffer = createImpulse(2.5, 2.0);
+  const rvbWet = ctx.createGain(); rvbWet.gain.value = 0.15;
+  reverb.connect(rvbWet); rvbWet.connect(master);
+  const rvbSend = ctx.createGain(); rvbSend.gain.value = 1; rvbSend.connect(reverb);
+
+  // Chamfer (present throughout)
+  const chamOsc = ctx.createOscillator(); chamOsc.type = 'sine'; chamOsc.frequency.value = CHAMFER_HZ;
+  const chamOsc2 = ctx.createOscillator(); chamOsc2.type = 'sine'; chamOsc2.frequency.value = CHAMFER_HZ * 2;
+  const chamHarm = ctx.createGain(); chamHarm.gain.value = 0.12;
+  const chamEnv = ctx.createGain(); chamEnv.gain.value = 0.03;
+  const chamLfo = ctx.createOscillator(); chamLfo.frequency.value = 0.2;
+  const chamLfoG = ctx.createGain(); chamLfoG.gain.value = 0.008;
+  chamLfo.connect(chamLfoG); chamLfoG.connect(chamEnv.gain);
+  chamOsc.connect(chamEnv); chamOsc2.connect(chamHarm); chamHarm.connect(chamEnv); chamEnv.connect(master);
+
+  // Acid
+  const acidOsc = ctx.createOscillator(); acidOsc.type = p.acidWave;
+  acidOsc.frequency.value = mtf(p.acidPattern[0].note || p.root);
+  const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 3000; acidFilt.Q.value = p.acidQ;
+  const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
+  const acidSub = ctx.createGain(); acidSub.gain.value = 0.35;
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+
+  // Bass
+  const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth';
+  const bassOct = ctx.createOscillator(); bassOct.type = 'square';
+  const bassOctG = ctx.createGain(); bassOctG.gain.value = 0.25;
+  const bassFilt = ctx.createBiquadFilter(); bassFilt.type = 'lowpass'; bassFilt.frequency.value = 600; bassFilt.Q.value = 4;
+  const bassG = ctx.createGain(); bassG.gain.value = 0;
+  const bassSub = ctx.createGain(); bassSub.gain.value = 1;
+  const subOsc = ctx.createOscillator(); subOsc.type = 'sine';
+  const subG = ctx.createGain(); subG.gain.value = 0;
+  bassOsc.connect(bassFilt); bassOct.connect(bassOctG); bassOctG.connect(bassFilt);
+  bassFilt.connect(bassG); bassG.connect(bassSub); subOsc.connect(subG); subG.connect(bassSub); bassSub.connect(master);
+
+  // Melody
+  const melDel = ctx.createDelay(2); melDel.delayTime.value = beat * 1.5;
+  const melFb = ctx.createGain(); melFb.gain.value = 0.3;
+  const melDelFilt = ctx.createBiquadFilter(); melDelFilt.type = 'lowpass'; melDelFilt.frequency.value = 2000;
+  melDel.connect(melDelFilt); melDelFilt.connect(melFb); melFb.connect(melDel); melDel.connect(master);
+  const melSub = ctx.createGain(); melSub.gain.value = 0.30;
+  melSub.connect(master); melSub.connect(melDel); melSub.connect(rvbSend);
+
+  const t0 = ctx.currentTime + 0.3;
+  [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
+
+  // Deconstruction phases (bar numbers where each layer begins to exit)
+  const EXIT = { CLAP: 80, MELODY: 140, ACID: 200, BASS: 270, KICK: 330, HAT: 390, PAD: 440, CHAMFER: 470 };
+  let clapVol = 0.18, melVol = 0.30, hatVol = 1, kickVol = 0.82;
+  let padDetune = 5;
+
+  startSched(120, (t, step, barNum, sib) => {
+    const isBeat = sib % 4 === 0;
+    const isEighth = sib % 2 === 0;
+    const beatIdx = Math.floor(sib / 4);
+
+    // ── Fade curves (computed per bar)
+    if (sib === 0) {
+      clapVol = barNum < EXIT.CLAP ? 0.18 : Math.max(0, 0.18 * (1 - (barNum - EXIT.CLAP) / 60));
+      melVol = barNum < EXIT.MELODY ? 0.30 : Math.max(0, 0.30 * (1 - (barNum - EXIT.MELODY) / 60));
+      kickVol = barNum < EXIT.KICK ? 0.82 : Math.max(0, 0.82 * (1 - (barNum - EXIT.KICK) / 60));
+      padDetune = barNum < EXIT.PAD ? 5 : Math.max(0.5, 5 * (1 - (barNum - EXIT.PAD) / 20));
+      hatVol = barNum < EXIT.HAT ? 1 : Math.max(0, 1 - (barNum - EXIT.HAT) / 50);
+
+      // Melody delay feedback increases as dry fades
+      if (barNum >= EXIT.MELODY && barNum < EXIT.MELODY + 60) {
+        const progress = (barNum - EXIT.MELODY) / 60;
+        melFb.gain.setValueAtTime(0.3 + progress * 0.25, t);
+      }
+
+      // Acid filter closing: 3000→200Hz over 8 bars
+      if (barNum === EXIT.ACID) {
+        acidFilt.frequency.setValueAtTime(3000, t);
+        acidFilt.frequency.linearRampToValueAtTime(200, t + 8 * bar);
+      }
+      if (barNum === EXIT.ACID + 8) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.001, t + 52 * bar);
+      }
+
+      // Bass fade
+      if (barNum === EXIT.BASS) {
+        bassSub.gain.setValueAtTime(1, t);
+        bassSub.gain.linearRampToValueAtTime(0.001, t + 60 * bar);
+      }
+
+      // Melody submix fade
+      if (barNum === EXIT.MELODY) {
+        melSub.gain.setValueAtTime(0.30, t);
+        melSub.gain.linearRampToValueAtTime(0.001, t + 60 * bar);
+      }
+
+      // Chamfer: swells as others exit, then fades in final section
+      if (barNum === EXIT.HAT) {
+        chamEnv.gain.setValueAtTime(0.03, t);
+        chamEnv.gain.linearRampToValueAtTime(0.10, t + 50 * bar);
+      }
+      if (barNum === EXIT.CHAMFER) {
+        chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
+        chamEnv.gain.linearRampToValueAtTime(0, t + (totalBars - EXIT.CHAMFER) * bar);
+        chamLfoG.gain.setValueAtTime(chamLfoG.gain.value, t);
+        chamLfoG.gain.linearRampToValueAtTime(0, t + (totalBars - EXIT.CHAMFER) * bar);
+      }
+    }
+
+    // ── Kicks (click transient disappears before full fade)
+    if (isBeat && kickVol > 0.01 && barNum < EXIT.KICK + 60) {
+      const click = barNum < EXIT.KICK - 20;
+      schedKick(t, kickVol, click);
+    }
+
+    // ── Hats (last rhythmic element to leave)
+    if (isEighth && hatVol > 0.01 && barNum < EXIT.HAT + 50) {
+      const off = (sib / 2) % 2 === 1;
+      const vol = (off ? 0.14 : 0.07) * hatVol;
+      if (vol > 0.005) schedHat(t, vol, nb);
+    }
+
+    // ── Claps
+    if (isBeat && (beatIdx === 1 || beatIdx === 3) && clapVol > 0.01) {
+      schedClap(t, clapVol, nb);
+    }
+
+    // ── Shaker (gated to eighths)
+    if (isEighth && barNum < EXIT.KICK) {
+      const vol = (sib % 4 === 0) ? 0.025 : 0.01;
+      schedShaker(t, vol * hatVol, nb);
+    }
+
+    // ── Acid
+    if (barNum < EXIT.ACID + 60) {
+      const pat = p.acidPattern[sib];
+      if (!pat.note) { acidNoteG.gain.setValueAtTime(0.001, t); }
+      else {
+        const freq = mtf(pat.note);
+        if (pat.slide) acidOsc.frequency.linearRampToValueAtTime(freq, t + sixteenth * 0.8);
+        else acidOsc.frequency.setValueAtTime(freq, t);
+        const fBase = barNum < EXIT.ACID ? 3000 : Math.max(200, acidFilt.frequency.value);
+        const fPeak = pat.accent ? Math.min(fBase + 2500, 5500) : Math.min(fBase + 800, 4000);
+        if (barNum < EXIT.ACID) {
+          acidFilt.frequency.setValueAtTime(fPeak, t);
+          acidFilt.frequency.exponentialRampToValueAtTime(Math.max(40, fBase * 0.3), t + sixteenth * 2.5);
+        }
+        const aPeak = pat.accent ? 0.7 : 0.4;
+        acidNoteG.gain.setValueAtTime(aPeak, t);
+        if (!pat.slide) {
+          acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.75);
+          acidNoteG.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.95);
+        }
+      }
+    }
+
+    // ── Bass
+    if (isBeat && barNum < EXIT.BASS + 60) {
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      const rootFreq = mtf(p.chordRoots[ci]);
+      if (beatIdx === 0 && barNum % 2 === 0) {
+        bassOsc.frequency.setValueAtTime(rootFreq, t);
+        bassOct.frequency.setValueAtTime(rootFreq * 2, t);
+        subOsc.frequency.setValueAtTime(rootFreq / 2, t);
+      }
+      bassG.gain.setValueAtTime(0.03, t);
+      bassG.gain.exponentialRampToValueAtTime(0.75, t + beat * 0.325);
+      subG.gain.setValueAtTime(0.02, t);
+      subG.gain.exponentialRampToValueAtTime(0.5, t + beat * 0.325);
+      const fOpen = beatIdx % 2 === 1 ? 1400 : 600;
+      bassFilt.frequency.setValueAtTime(fOpen, t);
+      bassFilt.frequency.exponentialRampToValueAtTime(400, t + beat * 0.9);
+    }
+
+    // ── Melody
+    if (isEighth && melVol > 0.01 && barNum < EXIT.MELODY + 60) {
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      const eighthInBar = Math.floor(sib / 2);
+      const midi = p.melody[ci][eighthInBar];
+      if (midi) {
+        const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.value = mtf(midi);
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3500;
+        const g = ctx.createGain();
+        const vel = (eighthInBar === 0 || eighthInBar === 4) ? 0.65 : 0.4;
+        g.gain.setValueAtTime(vel, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + beat * 0.9);
+        o.connect(lp); lp.connect(g); g.connect(melSub);
+        o.start(t); o.stop(t + beat);
+      }
+    }
+
+    // ── Pad
+    if (sib === 0 && barNum % 2 === 0 && barNum < EXIT.PAD + 30) {
+      const ci = Math.floor((barNum % 8) / 2) % 4;
+      let vol = 0.015;
+      if (barNum >= EXIT.PAD) vol *= Math.max(0, 1 - (barNum - EXIT.PAD) / 30);
+      const voices = p.chordVoices[ci];
+      const padDur = Math.min(2 * bar, 4.5);
+      for (const midi of voices) {
+        for (const det of [-padDetune, 0, padDetune]) {
+          const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtf(midi); o.detune.value = det;
+          const g = ctx.createGain();
+          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.5);
+          g.gain.setValueAtTime(vol, t + padDur - 0.5); g.gain.linearRampToValueAtTime(0, t + padDur);
+          o.connect(g); g.connect(master);
+          o.start(t); o.stop(t + padDur + 0.5);
+        }
+      }
+    }
+  }, totalBars);
+
+  return () => { [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
+}
+
+// ═══════════════════════════════════════════════════════
+// PLAYBACK CONTROL
+// ═══════════════════════════════════════════════════════
+
+const TRACKS = {
+  chamfer: { name: 'Chamfer', dur: 250, compose: compose_chamfer },
+  shuffle: { name: 'Reversed Shuffle', dur: 325, compose: compose_shuffle },
+  church:  { name: '303 Church', dur: 480, compose: compose_church },
+  harvest: { name: 'The Harvest', dur: 720, compose: compose_harvest },
+  golden:  { name: 'Golden Hour', dur: 400, compose: compose_golden },
+  tikkun:  { name: 'Tikkun', dur: 1125, compose: compose_tikkun },
+};
+
+function toggleTrack(id) {
+  if (activeId === id) { stopTrack(); return; }
+  stopTrack();
+  if (ctx) { try { ctx.close(); } catch(e){} ctx = null; }
+  initAudio();
+  ctx.resume().then(() => {
+    const track = TRACKS[id];
+    cleanupFn = track.compose();
+    activeId = id;
+    updateTrackUI();
+    drawWave();
+    startProgress(track.dur);
+  });
+}
+
+function stopTrack() {
+  if (schedTimer) { clearInterval(schedTimer); schedTimer = null; }
+  if (cleanupFn) { try { cleanupFn(); } catch(e){} cleanupFn = null; }
+  if (progressId) { clearInterval(progressId); progressId = null; }
+  if (animId) { cancelAnimationFrame(animId); animId = null; }
+  if (ctx) { try { ctx.close(); } catch(e){} ctx = null; }
+  activeId = null;
+  updateTrackUI();
+}
+
+function setVol(v, btn) {
+  volLevel = v;
+  if (master) {
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(v, ctx.currentTime + 0.3);
+  }
+  document.querySelectorAll('#transport button:not(.stop-btn)').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+}
+
+// ── UI Updates ─────────────────────────────────────────
+
+function updateTrackUI() {
+  document.querySelectorAll('.track-row').forEach(row => {
+    const id = row.dataset.track;
+    const icon = row.querySelector('.play-icon');
+    if (id === activeId) {
+      row.classList.add('active');
+      icon.textContent = '■';
+    } else {
+      row.classList.remove('active');
+      icon.textContent = '▶';
+    }
+  });
+  const transport = document.getElementById('transport');
+  const nowEl = document.getElementById('nowplaying');
+  if (activeId) {
+    transport.classList.add('visible');
+    nowEl.textContent = TRACKS[activeId].name;
+  } else {
+    transport.classList.remove('visible');
+    document.getElementById('wv').classList.remove('visible');
+  }
+}
+
+function fmtTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function startProgress(totalSec) {
+  const elapsedEl = document.getElementById('elapsed');
+  progressId = setInterval(() => {
+    if (!ctx || !activeId) return;
+    const elapsed = ctx.currentTime - trackStartTime;
+    elapsedEl.textContent = fmtTime(Math.max(0, elapsed)) + ' / ' + fmtTime(totalSec);
+  }, 250);
+}
+
+// ── Waveform Visualization ─────────────────────────────
+
+function drawWave() {
+  if (!activeId || !analyser) return;
+  const canvas = document.getElementById('wv');
+  canvas.classList.add('visible');
+  canvas.width = window.innerWidth;
+  canvas.height = 50;
+  const c = canvas.getContext('2d');
+  const data = new Uint8Array(analyser.frequencyBinCount);
+
+  function frame() {
+    if (!activeId) return;
+    animId = requestAnimationFrame(frame);
+    analyser.getByteTimeDomainData(data);
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.strokeStyle = 'rgba(232,144,32,0.35)';
+    c.lineWidth = 1.5;
+    c.beginPath();
+    const step = canvas.width / data.length;
+    for (let i = 0; i < data.length; i++) {
+      const y = (data[i] / 128) * canvas.height / 2;
+      if (i === 0) c.moveTo(0, y); else c.lineTo(i * step, y);
+    }
+    c.stroke();
+  }
+  frame();
+}
+
+window.addEventListener('resize', () => {
+  const canvas = document.getElementById('wv');
+  canvas.width = window.innerWidth;
+  canvas.height = 50;
+});
+</script>
+</body>
+</html>

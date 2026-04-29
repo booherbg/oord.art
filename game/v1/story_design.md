@@ -1,4 +1,4 @@
-# Story Design — The Pilgrim's Path
+# Story Design — The Call of Sooboont
 *Canonical worldbuilding and systems reference. Takes precedence over lore-viewer and node files for structural questions.*
 
 ---
