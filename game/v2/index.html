@@ -379,6 +379,8 @@
       opacity: 0;
       animation: fadeUp 0.5s ease 0.2s forwards;
     }
+    .arrival p { margin: 0 0 8px 0; }
+    .arrival p:last-child { margin-bottom: 0; }
 
     /* ─── BODY TEXT ───────────────────────────────────── */
     .node-subtitle {
@@ -567,6 +569,24 @@
     .choice-lore .choice-icon { color: var(--text-dim); }
     .choice-branch .choice-icon { color: var(--orange); opacity: 0.7; }
     .choice-gated-new .choice-icon { color: var(--bg); opacity: 0.6; }
+
+    .choice-locked {
+      display: block;
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.08);
+      color: var(--text-dim);
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-style: italic;
+      text-align: left;
+      opacity: 0.4;
+      cursor: default;
+      margin-top: 6px;
+      font-family: inherit;
+      line-height: 1.6;
+    }
 
     /* legend on select screen */
     .legend {
@@ -1983,7 +2003,7 @@ const CHAR_DEFS = [
     display_name:  'The Familiar',
     tagline:       'You have been here before.',
     locked_msg:    'This perspective has not opened yet.',
-    unlock:        { completed_characters: ['wanderer'] }
+    unlock:        { has_artifact: 'matchbook' }
   },
   {
     id:            'builder',
@@ -1997,7 +2017,7 @@ const CHAR_DEFS = [
 const ARTIFACT_NAMES = {
   yarn_knot:      'Yarn Knot',
   matchbook:      'Matchbook',
-  blank_key: 'Blank Key',
+  blank_key: 'Polaroid',
   business_card:  'Business Card',
   heat_sink:      'Heat Sink',
   pale_antler:    'Pale Antler'
@@ -2006,7 +2026,7 @@ const ARTIFACT_NAMES = {
 const ARTIFACT_DESCRIPTIONS = {
   yarn_knot:      'A strand of yarn, warm to the touch. Pulled from something larger.',
   matchbook:      'Plain card stock with a message only you can read. Warm.',
-  blank_key: 'A key with no teeth. Smooth where the cuts should be. The door was never locked.',
+  blank_key: 'A polaroid, still developing. Faces from tonight — the ones who stayed.',
   business_card:  'Plain card stock, warm. One side reads oord.art in small type. The ink hasn\'t dried — or it did, and then started again.',
   heat_sink:      'Warm metal of unknown origin. Carries a frequency — the builder\'s signature.',
   pale_antler:    'What remains of something that dissolved. Still faintly resonant.'
@@ -2050,18 +2070,49 @@ function savePersistent() {
 
 function evaluate(condition) {
   if (!condition) return true;
+  if (condition.and)                  return condition.and.every(c => evaluate(c));
   if (condition.has_all_tags)          return run ? condition.has_all_tags.every(t => run.tags.includes(t)) : false;
   if (condition.has_tag)              return run ? run.tags.includes(condition.has_tag) : false;
   if (condition.has_transcendental)   return run ? run.transcendentals.includes(condition.has_transcendental) : false;
+  if (condition.has_persistent_transcendental) return (persistent.transcendentals || []).includes(condition.has_persistent_transcendental);
+  if (condition.has_persistent_transcendentals) return condition.has_persistent_transcendentals.every(t => (persistent.transcendentals || []).includes(t));
   if (condition.has_flag)              return persistent.flags.includes(condition.has_flag);
   if (condition.has_artifact)         return persistent.artifacts.includes(condition.has_artifact);
   if (condition.has_artifacts)        return condition.has_artifacts.every(a => persistent.artifacts.includes(a));
   // handle both singular and plural forms (schema inconsistency in familiar JSON)
   if (condition.completed_character)  return persistent.completed_characters.includes(condition.completed_character);
   if (condition.completed_characters) return condition.completed_characters.every(c => persistent.completed_characters.includes(c));
-  if (condition.transcendentals_complete) return persistent.transcendentals.length === 4;
+  if (condition.transcendentals_complete) return (persistent.transcendentals || []).length === 4;
   if (condition.not)                  return !evaluate(condition.not);
   return true;
+}
+
+function isShowableGate(condition) {
+  if (!condition) return false;
+  if (condition.not || condition.has_tag || condition.has_all_tags || condition.has_transcendental) return false;
+  if (condition.has_artifact || condition.has_artifacts || condition.has_persistent_transcendental || condition.has_persistent_transcendentals || condition.completed_character || condition.completed_characters || condition.has_flag) return true;
+  if (condition.and) return condition.and.every(c => isShowableGate(c));
+  return false;
+}
+
+function describeGate(condition) {
+  if (!condition) return '';
+  if (condition.has_artifact) return `you carry the ${ARTIFACT_NAMES[condition.has_artifact] || condition.has_artifact}`;
+  if (condition.has_artifacts) return `you carry the ${condition.has_artifacts.map(a => ARTIFACT_NAMES[a] || a).join(' and the ')}`;
+  if (condition.has_persistent_transcendental) {
+    const t = condition.has_persistent_transcendental;
+    return `${t.charAt(0).toUpperCase() + t.slice(1)} is achieved`;
+  }
+  if (condition.has_persistent_transcendentals) {
+    const names = condition.has_persistent_transcendentals.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+    if (names.length === 1) return `${names[0]} is achieved`;
+    const last = names.pop();
+    return `${names.join(', ')}, and ${last} are achieved`;
+  }
+  if (condition.completed_character) return `the ${condition.completed_character}'s path is completed`;
+  if (condition.completed_characters) return `all required paths are completed`;
+  if (condition.and) return condition.and.map(c => describeGate(c)).join(' and ');
+  return 'certain conditions are met';
 }
 
 // ─── UNLOCK CHECK ─────────────────────────────────────────────────────────────
@@ -2366,7 +2417,8 @@ function renderNode() {
   if (node.awards_transcendental && !run.transcendentals.includes(node.awards_transcendental)) {
     run.transcendentals.push(node.awards_transcendental);
     awardedTranscendental = node.awards_transcendental;
-    if (!persistent.transcendentals.includes(node.awards_transcendental)) {
+    if (!(persistent.transcendentals || []).includes(node.awards_transcendental)) {
+      if (!persistent.transcendentals) persistent.transcendentals = [];
       persistent.transcendentals.push(node.awards_transcendental);
       savePersistent();
     }
@@ -2447,16 +2499,17 @@ function renderNode() {
       run.transcendentals.push(t);
       if (!awardedTranscendental) awardedTranscendental = t;
     }
-    if (!persistent.transcendentals.includes(t)) {
+    if (!(persistent.transcendentals || []).includes(t)) {
+      if (!persistent.transcendentals) persistent.transcendentals = [];
       persistent.transcendentals.push(t);
       savePersistent();
     }
   });
 
   // ── choices ─────────────────────────────────────────────
-  const visibleChoices = (node.choices || [])
-    .map((choice, index) => ({ choice, index }))
-    .filter(({ choice }) => !choice.requires || evaluate(choice.requires));
+  const allChoices = (node.choices || []).map((choice, index) => ({ choice, index }));
+  const visibleChoices = allChoices.filter(({ choice }) => !choice.requires || evaluate(choice.requires));
+  const lockedChoices = allChoices.filter(({ choice }) => choice.requires && !evaluate(choice.requires) && isShowableGate(choice.requires));
   const isAutoAdvance  = visibleChoices.length === 0 && !node.terminal;
   const nextId         = isAutoAdvance ? resolveNext(node.next) : null;
 
@@ -2480,7 +2533,8 @@ function renderNode() {
   if (devMode) {
     html += `<div id="dev-arrival-editor">${devArrivalRowsHtml(node, pendingArrivalText)}</div>`;
   } else if (arrivalText) {
-    html += `<div class="arrival">${esc(arrivalText)}</div>`;
+    const arrivalParas = arrivalText.split('\n\n').filter(p => p.trim());
+    html += '<div class="arrival">' + arrivalParas.map(p => `<p>${esc(p)}</p>`).join('') + '</div>';
   }
 
   // base text paragraphs — staggered animation
@@ -2540,7 +2594,7 @@ function renderNode() {
       html += '</div>';
     } else if (isAutoAdvance && nextId) {
       html += `<div class="auto-advance-wrap" id="advance-wrap"></div>`;
-    } else if (visibleChoices.length > 0) {
+    } else if (visibleChoices.length > 0 || lockedChoices.length > 0) {
       const types = classifyChoices(visibleChoices.map(v => v.choice));
       html += '<div class="choices">';
       visibleChoices.forEach(({ choice }, i) => {
@@ -2553,6 +2607,10 @@ function renderNode() {
           + (gated ? ' choice-gated-new' + artifactClass : '')
           + (type !== 'continue' ? ' choice-' + type : '');
         html += `<button class="${cls}" data-idx="${i}">${esc(choice.text)} <span class="choice-icon" aria-label="${type}">${icon}</span></button>`;
+      });
+      lockedChoices.forEach(({ choice }) => {
+        const desc = describeGate(choice.requires);
+        html += `<div class="choice-locked">This choice will be unlocked when ${esc(desc)}.</div>`;
       });
       html += '</div>';
     }
@@ -2844,7 +2902,7 @@ function updateStateBar(node) {
   ['unity', 'beauty', 'truth', 'goodness'].forEach(t => {
     const pip = document.getElementById('t-' + t);
     if (pip) pip.classList.toggle('earned',
-      (run && run.transcendentals.includes(t)) || persistent.transcendentals.includes(t));
+      (run && run.transcendentals.includes(t)) || (persistent.transcendentals || []).includes(t));
   });
 
   // artifacts in bar

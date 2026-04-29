@@ -4,7 +4,7 @@
   "tagline": "You have been here before.",
   "start_node": "f_001",
   "unlock_requires": {
-    "completed_character": "wanderer"
+    "has_artifact": "matchbook"
   },
   "nodes": [
     {

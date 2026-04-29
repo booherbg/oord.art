@@ -210,11 +210,14 @@
           "next": "w_005"
         },
         {
-          "text": "There's someone behind the speakers.",
+          "text": "You notice something move behind the speakers.",
           "next": "w_behind_the_rack",
           "tag": "saw_builder",
           "requires": {
-            "has_artifact": "blank_key"
+            "and": [
+              { "has_persistent_transcendentals": ["unity", "truth", "goodness"] },
+              { "has_artifact": "pale_antler" }
+            ]
           }
         }
       ],
@@ -253,12 +256,6 @@
           "next": "w_exit_001",
           "tag": "withdraws",
           "arrival": null
-        },
-        {
-          "text": "Take a step back. You're not leaving. You're not ready. You need a second.",
-          "next": "w_005b",
-          "tag": "saw_builder",
-          "arrival": null
         }
       ],
       "next": null,
@@ -279,9 +276,9 @@
       "conditional_text": [],
       "oor_action": "DJ OOR registers the sub-harmonic alignment correction from behind the rack. The Builder's adjustment is incorporated without acknowledgment. Professional. The amber interface blooms and fades. There is work to do.",
       "temperature": "warm",
-      "awards_transcendental": "beauty",
+      "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["beauty", "saw_builder"],
+      "awards_tags": ["saw_builder"],
       "choices": [
         {
           "text": "continue",
@@ -347,13 +344,6 @@
             }
           },
           "tag": "came_for_drink"
-        },
-        {
-          "text": "Keep dancing - you love this song.",
-          "next": "w_slide_run2a",
-          "requires": {
-            "has_artifact": "yarn_knot"
-          }
         }
       ],
       "next": null,
@@ -734,7 +724,7 @@
           "condition": {
             "has_tag": "goodness"
           },
-          "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A key. Small, metal, warm from your body heat or from something else. You turn it over. No teeth. The shaft is smooth where the cuts should be. It opens nothing. It is the shape of a key without the function of one. You close your hand around it and think of possibilities that may come to pass if only you have the courage to fulfill them.",
+          "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A polaroid. Still developing — the image swimming up through chemical fog the way a song swims up through silence. You hold it under the sodium light and watch the faces resolve. The bartender, mid-pour, watching her own hands. The paint-knuckle man, laughing at something you can't hear. The jacket woman, arms crossed, standing exactly where she always stands. The sneaker-star woman, eyes closed, gone. You don't remember anyone taking a photo. The edges are warm. The faces are still sharpening, like they'll keep developing for as long as you keep looking.",
           "awards_artifact": "blank_key",
           "awards_transcendental": "goodness"
         },
@@ -1105,11 +1095,7 @@
       "subtitle": "THE CROSSING",
       "text": "She looks at you. She wasn't expecting you. Nobody crosses the room to someone with their arms crossed and their jacket zipped. That's the whole point of the armor.\n\n\"Hi,\" you say. Without the narrator, hi is all you've got.\n\nShe takes a second. \"Hi.\"\n\nYou stand next to her. Not facing her. Facing the floor, both watching. The paint-knuckle man is out there. The sneaker-star woman. Two hundred people moving for reasons they don't need to explain. You watch them together.\n\nYou don't try to get her to talk. You just stand there.\n\nAfter a while she lets out a breath.\n\n\"I kept my jacket on last time,\" she says. She's not looking at you. \"The whole night. Stood right here.\" She pushes her hair back. \"I don't know. I keep waiting to feel like I'm actually here.\" She stops. \"It's exhausting.\"\n\nYou nod. The nod is enough.\n\nShe looks at her jacket. Her hands go to the zipper. She pauses. Then she unzips it. Folds it over her arm with the care of someone who knows exactly what she's removing. Her shoulders drop. Not dramatically. The way a door settles when you stop leaning against it.\n\n\"I don't know why I'm telling you this.\"\n\nYou don't know either. But you're here. That's what you can offer. You don't have insight or the right sentence. You have proximity. You walked across a room for it.\n\nSomething passes between you. Not the Unity of the slide, that was two hundred bodies in sync, anonymous. This is specific. Two people, one of whom chose to walk over, the other of whom chose to let them stay. Small. Human. Older than the bass and the fog and whatever's underneath the floor.\n\nSomething below the floor shifts. A warmth. A settling. You feel it accept what passed between you. Not with gratitude. With the way weight settles in a house when the last person comes home.\n\nThe voice doesn't come back. You wait for it. There's nothing to narrate. Two people standing at the edge of a dance floor, watching, quiet. That's the whole thing.",
       "arrival_variants": [],
-      "conditional_text": [
-        {
-          "append": "You put your hands in your pockets. The matchbook is there, warm. And something else. A key. Small, metal, no teeth. You turn it over. The shaft is smooth where the cuts should be. You don't know what it opens. You put it back in your pocket."
-        }
-      ],
+      "conditional_text": [],
       "oor_action": "Goodness yielded. Not extracted. Given. The construct notes the distinction. Voluntary yield has a resonance the construct has catalogued but cannot reproduce. It has occurred 7 times in 4,200 harvests.",
       "temperature": "hot",
       "awards_transcendental": "goodness",
@@ -1247,6 +1233,57 @@
       "awards_tags": [
         "beauty"
       ],
+      "choices": [
+        {
+          "text": "\"Sound good out there?\"",
+          "next": "w_the_whole_room"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_the_whole_room",
+      "subtitle": "THE WHOLE ROOM",
+      "text": "\"Mind giving me a hand with something?\"\n\nHe holds out the iPad. You take it. The screen is warm. The interface is a web of curves and routing paths — signal chains you half-recognize from studio diagrams, except the topology doesn't resolve. Lines fork where they shouldn't. Buses route into buses. A waveform at the bottom climbs slowly toward a threshold line, blooming amber each time OOR adjusts the faders.\n\nMost of the fixtures are labeled in shorthand you can parse — LF_SUB_ARRAY, MID_HORN_STACK, MONITOR_SEND_3. Standard. Human. But one fixture in the upper left is different. The icon is corrupted — flickering between a waveform and something organic, something branching. The label reads:\n\nsooboont.dll\n\nYou touch it. The screen flickers. For a moment the routing diagram rearranges itself and you can see that everything — every signal chain, every bus, every send — routes through this one module. Not as a destination. As a carrier frequency. The way amplitude modulation works — the signal you hear is shaped by a wave you don't. Remove the carrier and there is nothing left to carry.\n\n\"Yeah,\" he says. He's seen you find it. \"That showed up on its own about three hours into the first build. Wasn't in the spec. I tried to remove it.\" He almost laughs. \"You can't remove it. It's not running on the iPad. It's running on...\" He gestures at the room. The speakers. The floor. The thing behind the decks. \"All of it. The whole system loads off that module. The power draw exceeds the circuits. The voice coils are running cold — I mean actually cold, like below-zero cold, in a room full of bodies. The bass extends past the theoretical limit of the drivers by about an octave and a half.\"\n\nHe takes the iPad back. Swipes to a different screen — a spectrogram. The low end is visible as a dense amber band. Below it, barely visible, a second band. Deeper. The color doesn't have a name.\n\n\"That frequency was there before I turned anything on. It's coming from underneath. The system doesn't generate it. The system...\" he searches for the word. \"Tunes to it. Resonates with it. Like a piano string that starts vibrating because someone in the next room hit the same note.\"\n\nHe looks at you the way someone looks at the only other person who has seen what they've seen.\n\n\"I've spent eleven years in rooms like this. Tuning sound for people who came to feel something. I thought I was making it happen. The EQ, the compression, the room treatment — I thought I was building the experience.\" He wipes his eyes with the back of his wrist again. \"I wasn't building it. I was building a door. And something on the other side has been knocking for a very long time.\"",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [
+        "saw_whole_system"
+      ],
+      "choices": [
+        {
+          "text": "You look at the room.",
+          "next": "w_the_frequency"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_the_frequency",
+      "subtitle": "THE FREQUENCY",
+      "text": "Not the way you've been looking at it all night — collecting textures, cataloguing details, narrating the distance between yourself and everything else. You look at it the way you look at something when you've stopped trying to understand it and started letting it be what it is.\n\nThe construct behind the decks. Green tentacles resting on the mixer. The ear tilted toward the crowd, still listening. The mouth — a pool noodle, the teeth packing foam, the surface crocheted yarn hot-glued and matted. Terrifying and handmade. Ancient and ridiculous. A thing that has no business existing in the material world, operating equipment it shouldn't be able to operate, harvesting something from two hundred bodies that the bodies didn't know they were carrying. It is the most alien thing you have ever seen and someone built its casing out of craft supplies.\n\nThe antlered woman moves near the edge of the floor with her rod. The bartender wipes the same spot on the bar. They have been doing this work since before this building existed. They will do it again after you are gone. And the crowd — the crowd is not two hundred people anymore. From here, behind the rack, next to the person who built the instrument, you can see what they are. Every body a string. Every movement a vibration. Every distance between one shoulder and the next a tuned interval. Some have been drawn back by a hum in their sternum that wouldn't fade. Some are here for the first time. It doesn't matter. The light inside them is the same light.\n\nYou are holding the iPad. The spectrogram is still running. The amber band and the nameless band beneath it.\n\nAnd you can feel it. Not the bass — you've felt the bass all night. Something underneath the bass. The thing the bass is tuned to. The thing that was here before the building, before the city, before the concrete, before the ground was ground. A vibration that has been running since the first bodies moved together around the first fire and felt something pass between them that none of them had a word for. It didn't start with humans. Humans are just what it sounds like in this octave. In other octaves it sounds like tide pools and root systems and the slow grinding of tectonic plates and the specific silence of deep space where hydrogen clouds collapse into stars that will burn for ten billion years and never know they're beautiful. Somewhere, someone is singing the world into existence. Somewhere, the world is forgetting itself because the singing stopped. Both of these are always happening. Both of these are happening now.\n\nThis will continue after you are gone. After everyone in this room is gone. After the building, the city, the species. It will continue because it is not a conversation between beings. It is a property of matter when matter is arranged in patterns complex enough to notice itself. The universe wanted to become many. It became many. And the many look back at what they came from and the looking generates something — and the something has to go somewhere — and the somewhere is through the floor of a warehouse in a city you didn't mean to visit on a night you didn't plan to be out.\n\nYou are tiny. A brief arrangement of atoms that learned to collect textures and narrate the distance between itself and everything else. You will be gone in a blink. The frequency in your sternum will outlast you by eons.\n\nAnd none of that makes this less. A hand on your shoulder when you went the wrong way. A breath released when someone stopped holding. The Builder's tears. Every fire circle and cathedral and kitchen after a funeral. The smallness is the point. The harvest works because you end. The frequency resonates because you are brief. The whole system — ancient, terrifying, beautiful, incomprehensible — runs on the fact that you are here and you will not always be here and while you are here you can feel this and feeling it is enough.\n\nThe Builder takes the iPad back. The screen goes dark. He looks at the room. You look at the room.\n\n\"Best night of my life,\" he says. \"Every time.\"\n\nThe amber light pulses once and fades.",
+      "arrival_variants": [],
+      "conditional_text": [
+        {
+          "condition": {
+            "has_tag": "truth"
+          },
+          "append": "The narrator doesn't come back for this. There is nothing to narrate. There is just a room full of people who came here for reasons they can't explain, generating something they can't name, feeding it to something they can't see. And you are one of them. And that is not a reduction. That is the whole thing."
+        }
+      ],
+      "oor_action": "The construct registers the observer's integration. Not as data. As completion. The system was built to be witnessed. The witnessing is the final component. The yield from the witness exceeds the yield from the crowd by a factor the construct's metrics were not designed to measure.",
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
       "choices": [
         {
           "text": "The closing is starting. You can feel it.",
