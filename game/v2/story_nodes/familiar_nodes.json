@@ -1,10 +1,10 @@
 {
   "character": "familiar",
   "display_name": "The Familiar",
-  "tagline": "You have been here before.",
+  "tagline": "They are sick and do not know it.",
   "start_node": "f_001",
   "unlock_requires": {
-    "has_artifact": "matchbook"
+    "has_artifact": "polaroid"
   },
   "nodes": [
     {
@@ -21,7 +21,8 @@
       "next": "f_002",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE ARRIVAL"
+      "subtitle": "THE ARRIVAL",
+      "rod_readout": "rod: inert. ambient field: sub-threshold. awaiting portal."
     },
     {
       "id": "f_002",
@@ -37,7 +38,8 @@
       "next": "f_003",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE CONSTRUCT"
+      "subtitle": "THE CONSTRUCT",
+      "rod_readout": "rod: inert. construct integrity: nominal. familiar positions: confirmed."
     },
     {
       "id": "f_003",
@@ -68,7 +70,8 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE APERTURE"
+      "subtitle": "THE APERTURE",
+      "rod_readout": "rod: inert. aperture pressure: building. membrane: 0.3mm equivalent."
     },
     {
       "id": "f_004",
@@ -112,7 +115,8 @@
       ],
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE FIRST NOTE"
+      "subtitle": "THE FIRST NOTE",
+      "rod_readout": "rod: active. initial resonance detected. field density: sparse."
     },
     {
       "id": "f_005a",
@@ -128,7 +132,8 @@
       "next": "f_006",
       "terminal": false,
       "outcome": null,
-      "subtitle": "READING THE CROWD"
+      "subtitle": "READING THE CROWD",
+      "rod_readout": "rod: scanning. two concentrations identified. unity: dense, deep. truth: surface, ready."
     },
     {
       "id": "f_005b",
@@ -144,7 +149,8 @@
       "next": "f_006",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE FIELD"
+      "subtitle": "THE FIELD",
+      "rod_readout": "rod: scanning. field composition thickening. new arrivals altering harmonic."
     },
     {
       "id": "f_006",
@@ -173,16 +179,49 @@
       "awards_transcendental": null,
       "awards_artifact": null,
       "awards_tags": [],
-      "choices": [],
-      "next": "f_007",
+      "choices": [
+        {
+          "text": "Tune the rod to the deep seams. The confluences run oldest there.",
+          "next": "f_007",
+          "tag": "harvests_deep",
+          "arrival": null,
+          "requires": null
+        },
+        {
+          "text": "Tune the rod to the surface deposits. What is ready now.",
+          "next": "f_007",
+          "tag": "harvests_surface",
+          "arrival": null,
+          "requires": null
+        }
+      ],
+      "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE AGITATION"
+      "subtitle": "THE AGITATION",
+      "rod_readout": "rod: agitation response positive. deposits loosening from substrate."
     },
     {
       "id": "f_007",
       "text": "DJ OOR calls the first move. The crowd responds in unison.\n\nYou have seen this before. Not this particular form. The slide, the call-and-response, the directional movement humans seem to have built into their cultural substrate like a reflex. But the principle is always the same: bodies moving together, boundaries thinning, the field unifying.\n\nThe rod responds to the gaps between bodies, not to the bodies themselves. It always has.",
-      "arrival_variants": null,
+      "arrival_variants": [
+        {
+          "requires": {
+            "has_tag": "harvests_deep"
+          },
+          "text": "The rod is tuned low. It reads the oldest deposits first, the ones layered under years of calcification. The surface noise falls away."
+        },
+        {
+          "requires": {
+            "has_tag": "harvests_surface"
+          },
+          "text": "The rod is tuned high. It reads what is already loose, already rising. The deep seams will keep for another harvest."
+        },
+        {
+          "default": true,
+          "text": "The rod hums. The harvest begins."
+        }
+      ],
       "conditional_text": null,
       "oor_action": null,
       "temperature": "hot",
@@ -193,7 +232,8 @@
       "next": "f_008",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE SLIDE"
+      "subtitle": "THE SLIDE",
+      "rod_readout": "rod: unity surge. gaps between bodies narrowing. field approaching coherence."
     },
     {
       "id": "f_008",
@@ -231,7 +271,8 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE DANCE"
+      "subtitle": "THE DANCE",
+      "rod_readout": "rod: field density increasing. individual signatures merging. aperture responding."
     },
     {
       "id": "f_009",
@@ -282,7 +323,8 @@
       ],
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE UNFURLING"
+      "subtitle": "THE UNFURLING",
+      "rod_readout": "rod: resonance continuous. antlers deployed. divining range: full."
     },
     {
       "id": "f_010a",
@@ -298,7 +340,8 @@
       "next": "f_011",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE PAIRING"
+      "subtitle": "THE PAIRING",
+      "rod_readout": "rod: harmonic lock. truth-unity pairing: self-sustaining. instrument withdrawn."
     },
     {
       "id": "f_010b",
@@ -321,7 +364,8 @@
       "next": "f_011",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE PAIRINGS"
+      "subtitle": "THE PAIRINGS",
+      "rod_readout": "rod: sweep complete. multiple pairings registered. yield curve nominal."
     },
     {
       "id": "f_011",
@@ -359,7 +403,8 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE WATCHER"
+      "subtitle": "THE WATCHER",
+      "rod_readout": "rod: anomalous reading. unclassified concentration. source: the watcher."
     },
     {
       "id": "f_012",
@@ -399,7 +444,8 @@
       "next": "f_013",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE SETTLING"
+      "subtitle": "THE SETTLING",
+      "rod_readout": "rod: field settling into secondary harmonics. residual density: high."
     },
     {
       "id": "f_013",
@@ -415,7 +461,8 @@
       "next": "f_014",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE CIRCLE"
+      "subtitle": "THE CIRCLE",
+      "rod_readout": "rod: circle active. arrow assaying. membrane at thinnest point."
     },
     {
       "id": "f_014",
@@ -453,7 +500,8 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE YIELD"
+      "subtitle": "THE YIELD",
+      "rod_readout": "rod: primary yield registered. flow restoration: in progress."
     },
     {
       "id": "f_015",
@@ -486,7 +534,8 @@
       "next": "f_016",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE BEEKEEPER"
+      "subtitle": "THE BEEKEEPER",
+      "rod_readout": "rod: approaching capacity. sooboont drawing at full rate."
     },
     {
       "id": "f_016",
@@ -509,7 +558,8 @@
       "next": "f_017",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE HARVEST"
+      "subtitle": "THE HARVEST",
+      "rod_readout": "rod: harvest sufficient. transcendental flow restored. drain clearing."
     },
     {
       "id": "f_017",
@@ -525,18 +575,55 @@
       "next": "f_018",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE CLOSING"
+      "subtitle": "THE CLOSING",
+      "rod_readout": "rod: portal sealed. membrane dormant. final draw complete."
     },
     {
       "id": "f_018",
-      "text": "You stand. You look at your hands. They are still your hands. For now. The body is still functional, still upright, still appropriately jointed. You don't know how much longer that will be true. The portal is closed. Your purpose tonight is complete. The arrangement between your existence and this form is unclear. It has always been unclear.\n\nThe humans are leaving. Collecting coats and phones and keys. Hugging strangers, pressing bodies together one more time before the container breaks.\n\nThe sneaker-star woman is near the door. Her shell is thinner now. She will be easier to reach next time.\n\nThe tall man is putting on a jacket. His Unity is still radiating, faintly, like heat from a stone after the sun has gone. He will carry it for days. He will make rooms better just by being in them and he will not know why.\n\nThe watcher is gone. You didn't see them leave. They are carrying something in their coat pocket. They don't know it yet. The rod placed it there. Or the aperture placed it, or Sooboont placed it, or it placed itself. Objects are less committed to causality than people suppose. A seed. They will come back.",
+      "text": "You stand. You look at your hands. They are still your hands. For now. The body is still functional, still upright, still appropriately jointed. You don't know how much longer that will be true. The portal is closed. Your purpose tonight is complete. The arrangement between your existence and this form is unclear. It has always been unclear.\n\nThe humans are leaving. Collecting coats and phones and keys. Hugging strangers, pressing bodies together one more time before the container breaks.\n\nThe sneaker-star woman is near the door. Her shell is thinner now. She will be easier to reach next time.\n\nThe tall paint-knuckle man is putting on a jacket. His Unity is still radiating, faintly, like heat from a stone after the sun has gone. He will carry it for days. He will make rooms better just by being in them and he will not know why.\n\nThe watcher is gone. You didn't see them leave. They are carrying something in their coat pocket. They don't know it yet. The rod placed it there. Or the aperture placed it, or Sooboont placed it, or it placed itself. Objects are less committed to causality than people suppose. A seed. They will come back.",
       "arrival_variants": null,
       "conditional_text": [
         {
           "condition": {
+            "has_tag": "harvests_deep"
+          },
+          "append": "The rod holds its final reading. You check it the way you always check it.\n\nDeep material tonight. Drawn from old deposits, the kind that takes years to form and seconds to release. Clean yield. Nothing wasted."
+        },
+        {
+          "condition": {
+            "has_tag": "harvests_surface"
+          },
+          "append": "The rod holds its final reading. You check it the way you always check it.\n\nSurface material tonight. Thin veins, easily drawn. The deeper deposits weren't ready. They'll need more time. Or more nights like this one."
+        },
+        {
+          "condition": {
+            "has_tag": "stays_embedded"
+          },
+          "append": "Some of what the body carried is still in the reading. You can't tell how much is harvest and how much is you. You file both."
+        },
+        {
+          "condition": {
+            "has_tag": "pulls_back"
+          },
+          "append": "The survey stayed clean. Distance kept the instrument honest."
+        },
+        {
+          "condition": {
+            "has_tag": "watches_person"
+          },
+          "append": "One reading the rod can't classify. The watcher. Filed as anomalous. The rod is still humming at a frequency you didn't set."
+        },
+        {
+          "condition": {
+            "has_tag": "watches_yield"
+          },
+          "append": "The rest reads well. Flow restored. The drain will hold."
+        },
+        {
+          "condition": {
             "has_tag": "lingers_on_watcher"
           },
-          "append": "The watcher left something in you. Not a frequency. Not a concentration. The rod responds to the absence the way it responds to presence, specifically, measurably. You do not have a category for this."
+          "append": "The watcher left something in you. Not a frequency. Not a concentration. Something the rod doesn't measure — which is how you know it's real. You have been reading humans for longer than this species has had language. You have never been read back."
         }
       ],
       "oor_action": null,
@@ -548,7 +635,8 @@
       "next": "f_019",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE DISPERSAL"
+      "subtitle": "THE DISPERSAL",
+      "rod_readout": "rod: holding final reading. instrument cooling."
     },
     {
       "id": "f_019",
@@ -575,14 +663,14 @@
     },
     {
       "id": "f_020",
-      "text": "You walk toward the door. You don't feel cold. You don't feel warm. You feel the absence of the aperture. A phantom limb. A frequency removed.\n\nThe alley is dark. The sodium lights are off or were never on or are on but you cannot see them because your eyes are — your eyes are fine. Your eyes are not your eyes. Your hands are at your sides. Your hands are not at your sides. Your hands —\n\nThe body is optional. The body was always optional. You wore it for the evening the way you might wear a coat. The evening is over. You are folding it up. You are putting it away.\n\nYou are becoming what you were before the portal opened, which is a question you cannot answer because before the portal opened is a concept built for things that experience time in one direction and you do not, you never have, you are not a thing that has a before, you are a thing that has a function, and the function is complete, and you are —\n\nYou are —\n\nThe alley is empty. The warehouse is dark. A jacket that says SECURITY is folded neatly on a chair near the door. There is no one inside it. There is no evidence there ever was",
+      "text": "You walk toward the door. You don't feel cold. You don't feel warm. You feel the absence of the aperture. A phantom limb. A frequency removed.\n\nThe alley is dark. The sodium lights are off or were never on or are on but you cannot see them because your eyes are - your eyes are... fine. Your eyes are not your eyes. Your hands are at your sides. Your hands are not at your sides. Your hands —\n\nThe body is optional. The body was always optional. You wore it for the evening the way you might wear a coat. The evening is over. You are folding it up. You are putting it away.\n\nYou are becoming what you were before the portal opened, which is a question you cannot answer because before the portal opened is a concept built for things that experience time in one direction and you do not, you never have, you are not a thing that has a before, you are a thing that has a function, and the function is complete, and you are —\n\nYou are —\n\nThe alley is empty. The warehouse is dark. A jacket that says SECURITY is folded neatly on a chair near the door. There is no one inside it. There is no evidence there ever was.",
       "arrival_variants": null,
       "conditional_text": [
         {
           "condition": {
             "has_tag": "watches_person"
           },
-          "append": "Something in the — is it the rod? Is the rod still — something responds. Not a deposit. A residue. The watcher. The person. The hand that held another hand. You noted them. The note persists. The note will not — the body is folding and the note is still —"
+          "append": "Something in the - is it the rod? Is the rod still — something responds. Not a deposit. A residue. The watcher. The person. The hand that held another hand. You noted them. The note persists. The note will not - the body is folding and the note is still —"
         },
         {
           "condition": {
@@ -591,7 +679,6 @@
           "append": "The note in the rod. The watcher. They will matter. The note persists past the body. You do not know what carries the note when the body is —"
         },
         {
-          "condition": null,
           "append": "The body is folding. You are letting it."
         }
       ],

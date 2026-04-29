@@ -1,7 +1,7 @@
 {
   "character": "wanderer",
   "display_name": "The Wanderer",
-  "tagline": "You weren't going here.",
+  "tagline": "You're lost. It doesn't matter now. You're here instead.",
   "start_node": "w_001",
   "unlock_requires": null,
   "nodes": [
@@ -24,7 +24,8 @@
           "text": "Follow the bass. Walk down the alley.",
           "next": "w_002",
           "tag": "drawn",
-          "arrival": null
+          "arrival": null,
+          "highlight": "unity"
         }
       ],
       "next": null,
@@ -78,6 +79,7 @@
           "text": "Walk over to the group by the loading dock.",
           "next": "w_loading_dock",
           "arrival": null,
+          "highlight": "goodness",
           "requires": {
             "has_artifact": "matchbook"
           }
@@ -109,6 +111,7 @@
           "text": "Head straight for the door.",
           "next": "w_bouncer_run2",
           "arrival": null,
+          "highlight": "truth",
           "requires": {
             "has_artifact": "yarn_knot"
           }
@@ -211,12 +214,21 @@
         },
         {
           "text": "You notice something move behind the speakers.",
-          "next": "w_behind_the_rack",
+          "next": "w_005b",
           "tag": "saw_builder",
+          "highlight": "beauty",
           "requires": {
             "and": [
-              { "has_persistent_transcendentals": ["unity", "truth", "goodness"] },
-              { "has_artifact": "pale_antler" }
+              {
+                "has_persistent_transcendentals": [
+                  "unity",
+                  "truth",
+                  "goodness"
+                ]
+              },
+              {
+                "has_artifact": "pale_antler"
+              }
             ]
           }
         }
@@ -255,7 +267,8 @@
           "text": "GET. OUT. OF. HERE. The door. The cold. The walk home.",
           "next": "w_exit_001",
           "tag": "withdraws",
-          "arrival": null
+          "arrival": null,
+          "highlight": "exit"
         }
       ],
       "next": null,
@@ -278,11 +291,13 @@
       "temperature": "warm",
       "awards_transcendental": null,
       "awards_artifact": null,
-      "awards_tags": ["saw_builder"],
+      "awards_tags": [
+        "saw_builder"
+      ],
       "choices": [
         {
-          "text": "continue",
-          "next": "w_006"
+          "text": "Stay.",
+          "next": "w_the_whole_room"
         }
       ],
       "next": null,
@@ -493,7 +508,8 @@
           "text": "This is getting weird. You've seen enough.",
           "next": "w_exit_001",
           "tag": "retreating",
-          "arrival": null
+          "arrival": null,
+          "highlight": "exit"
         }
       ],
       "next": null,
@@ -574,12 +590,9 @@
     },
     {
       "id": "w_011",
-      "text": "The music is winding down. Everything else is cresting - the heat, the pressure, the thing between all these bodies that has no name.\n\nThe green tentacles have stopped adjusting. For the first time all night, the hands are completely still - resting on the mixer the way you rest your hands on something that is finally doing what you built it to do. The machine doesn't need tuning anymore. \n\n\nThe fog around the DJ booth is doing something. You can see shapes in it - geometric, repeating, like something is being projected from inside the construct itself. Below your feet the projection rings are pulsing faster than they have all night, contracting toward the center, and through the gaps in the concrete you swear you can see light coming from somewhere deep below.\n\nThe vocoded voice calls the crowd down. Lower. A little bit softer now. The bass descends and bodies descend with it - bending, folding, sinking. You go with them. The person next to you grabs your hand. You let them.\n\nAt the floor, face-level with the concrete, the music fades to a drone. So low you stop hearing it and start feeling it. Vibration from underneath. Vibration from above. You are between them. You are the conduit. Something passing through - not pain, not pleasure. A flow. A restoration.\n\nStillness. The bass drops out. Silence. Earned presence.\n\nThe portal closes. The rings flash out of existence. You feel the pressure change in your ears, a sealing, as if something beneath the floor has been shut. Fog clears. Lights come up warm. The room is a warehouse.\n\nYou stand. Knees ache. Shirt damp. Smiling. The crowd disperses slowly. Reluctantly. The way your hands come apart after holding someone you're not sure you'll see again.",
+      "text": "The music is winding down. Everything else is cresting - the heat, the pressure, the thing between all these bodies that has no name.\n\nThe green tentacles have stopped adjusting. For the first time all night, the hands are completely still - resting on the mixer the way you rest your hands on something that is finally doing what you built it to do. The machine doesn't need tuning anymore. \n\nThe fog around the DJ booth is doing something. You can see shapes in it - geometric, repeating, like something is being projected from inside the construct itself. Below your feet the projection rings are pulsing faster than they have all night, contracting toward the center, and through the gaps in the concrete you swear you can see light coming from somewhere deep below.\n\nThe vocoded voice calls the crowd down. Lower. A little bit softer now. The bass descends and bodies descend with it - bending, folding, sinking. You go with them. The person next to you grabs your hand. You let them.\n\nAt the floor, face-level with the concrete, the music fades to a drone. So low you stop hearing it and start feeling it. Vibration from underneath. Vibration from above. You are between them. You are the conduit. Something passing through - not pain, not pleasure. A flow. A restoration.\n\nStillness. The bass drops out. Silence. Earned presence.\n\nThe portal closes. The rings flash out of existence. You feel the pressure change in your ears, a sealing, as if something beneath the floor has been shut. Fog clears. Lights come up warm. The room is a warehouse.\n\nYou stand. Knees ache. Shirt damp. Smiling. The crowd disperses slowly. Reluctantly. The way your hands come apart after holding someone you're not sure you'll see again.",
       "arrival_variants": [
         {
-          "requires": {
-            "has_all_tags": ["beauty", "entered_circle"]
-          },
           "text": "Behind the rack, the Builder's hands are still. You watched those hands tune the sound that carried you into the circle. The closing finds you holding both.",
           "default": false
         },
@@ -601,7 +614,7 @@
           "requires": {
             "has_tag": "goodness"
           },
-          "text": "The voice is gone. Not missing. Released. The closing finds you already inside it.",
+          "text": "The voice is still quiet. Not because something was taken. Because something was given. The closing ritual finds you already inside it.",
           "default": false
         },
         {
@@ -691,7 +704,10 @@
       "conditional_text": [
         {
           "condition": {
-            "has_all_tags": ["beauty", "came_for_stillness"]
+            "has_all_tags": [
+              "beauty",
+              "came_for_stillness"
+            ]
           },
           "append": "You put your hand in your coat pocket and find a strand of yarn. Orange. Stiff — holding its shape in the cold, frozen in the configuration of the last hand that held it. You close your fist. The yarn softens. Warm. The frequency in your chest pulses once. You open your hand and the yarn stiffens instantly, locking into the shape of your grip. Frost traces the fibers — geometric, fern-like, the same pattern you saw crystallize on the speaker cabinet. The hands behind the rack. The room they built. You close your hand again. Warm. You will come back.",
           "awards_artifact": "yarn_knot",
@@ -699,7 +715,10 @@
         },
         {
           "condition": {
-            "has_all_tags": ["beauty", "came_for_drink"]
+            "has_all_tags": [
+              "beauty",
+              "came_for_drink"
+            ]
           },
           "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Stiff — holding its shape in the cold, frozen in the configuration of the last hand that held it. You close your fist. The yarn softens. Warm. It smells faintly like the drink — sweet, slightly wrong. You open your hand and the yarn stiffens instantly, locking into the shape of your grip. Frost traces the fibers — geometric, fern-like, the same pattern you saw crystallize on the speaker cabinet. The hands behind the rack. The room they built. You close your hand again. Warm. The frequency is still in your chest. It feels like it's waiting.",
           "awards_artifact": "yarn_knot",
@@ -709,8 +728,8 @@
           "condition": {
             "has_tag": "beauty"
           },
-          "append": "You put your hand in your coat pocket and find a business card. Plain card stock, slightly too warm. One side is blank. The other has a URL in small type — oord.art — and nothing else. You turn it over. The ink is wet. You touch it and your fingerprint stays, clean and specific, as if the card was printed seconds ago. Or as if the ink never dries. Or as if the card was always waiting for exactly this thumbprint. You hold it under the sodium light. For a moment the letters rearrange — not into a different URL, into a sound wave. The Builder's signature, printed on card stock, carried home in your pocket like a receipt for something you witnessed but did not purchase. You put it back. The card is still warm. It will always be warm.",
-          "awards_artifact": "business_card",
+          "append": "You put your hand in your coat pocket. The matchbook. The polaroid. The yarn. Your fingers. Nothing else.\n\nBut there's a sound. Not from the street — from your sternum. The hum. Still running. Quieter now, barely there, but there the way your pulse is there. You heard it in the room. You heard it underneath the bass and beneath the flickering amber and behind their tears. You thought it came from the speakers. It didn't. It was in you before you walked in. The room just got loud enough to hear it.\n\nIt was under the yarn when you pulled it from the knot. Under the matchbook when the bartender slid it across the bar. Under the polaroid as the faces developed. Under the antler when it was still warm. Every object you carried tonight was vibrating with it. You couldn't hear it because you were listening too hard.\n\nThree weeks from now you'll be washing dishes and the water will hit the pan at a certain angle and the kitchen will go quiet — not silent, quiet, the way the Upanishads describe the fourth state, the silence after the syllable, the consciousness underneath waking and dreaming and sleep — and there it is. The hum. You'll stand there with your hands in the water until it passes.\n\nSeven months. A train platform. Someone's headphones bleeding a bassline two octaves too low and your sternum answers before your mind does. Two seconds of it. The original sound. The one the mystics called the word that spoke the world into being, the one the ancestors sang into the ground so the land would remember itself. It finds you and leaves before you can name it. It has always worked this way.\n\nYears. You won't remember the name of the venue. You won't remember the city. But you'll be sitting somewhere — a porch, a waiting room, the edge of a bed at 3 AM — and the thoughts will thin out the way they sometimes do, and in the gap between one thought and the next, underneath, the hum. Still running. Still not yours. A vibration that was there before there were ears to hear it, running through hydrogen clouds and root systems and the slow grinding of tectonic plates and two people sitting in a room with nothing left to say and no need to leave. The light was whole once. It broke so it could fit inside things — inside calcium, inside water, inside the specific arrangement of matter that calls itself you. You are one of the pieces. You have always been one of the pieces.\n\nYou won't be able to hold it. You were never able to hold it. That's the mechanism — a bell rings because it's hollow. Fill it with anything solid and it deadens. The emptiness is not a flaw in the bell. The emptiness is where the sound lives. You are hollow in the same way — shaped by everything that passed through you tonight, and the shape that's left is the exact shape this sound needs to resonate. It runs on the fact that you end. It resonates because you are brief. And in those moments — the kitchen, the platform, the 3 AM dark — when the noise drops and the hum finds you again, you'll know what you are. Not the name, not the story, not the person washing dishes or waiting for a train. The other thing. The brief, warm, listening thing that the sound hasn't finished passing through.\n\nA shard of the original light. Carried as sound. Held the way you hold a breath — gently, knowing it's already leaving.",
+          "awards_artifact": "shard_of_light",
           "awards_transcendental": "beauty"
         },
         {
@@ -725,7 +744,7 @@
             "has_tag": "goodness"
           },
           "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A polaroid. Still developing — the image swimming up through chemical fog the way a song swims up through silence. You hold it under the sodium light and watch the faces resolve. The bartender, mid-pour, watching her own hands. The paint-knuckle man, laughing at something you can't hear. The jacket woman, arms crossed, standing exactly where she always stands. The sneaker-star woman, eyes closed, gone. You don't remember anyone taking a photo. The edges are warm. The faces are still sharpening, like they'll keep developing for as long as you keep looking.",
-          "awards_artifact": "blank_key",
+          "awards_artifact": "polaroid",
           "awards_transcendental": "goodness"
         },
         {
@@ -1001,7 +1020,7 @@
     {
       "id": "w_loading_dock",
       "subtitle": "THE LOADING DOCK",
-      "text": "Three people are standing by the loading dock sharing a cigarette. The door behind them is propped open with a cinder block. Bass leaks through the gap - not the front-door bass, something rawer, less filtered. Like hearing a song through the wall of the room where it's being mixed.\n\nYou walk over. One of them - short, beanie, vape in the other hand - looks at you the way people look at someone approaching a group they're not part of. You reach into your pocket for nothing in particular and pull out the matchbook.\n\nShe takes it. Opens it. Reads something on the inside cover. Her face changes. \"Huh,\" she says. Not surprised. Not confused. Like someone just answered a question she'd been carrying around for days.\n\nShe passes it to the guy next to her - tall, denim jacket, the one who's been here the most. He looks at it and his mouth does something complicated. \"...hmm.\" He passes it to the third person without comment.\n\nThe third one barely glances at it. \"You going in?\" She's already stepping toward the door.\n\n\"You been before?\" the denim jacket guy asks you. He doesn't wait for your answer. \"I follow OOR on instagram. Three followers. Me, some girl named Ashley, and an account called left pocket empty that's never posted.\" He says this like it's credentials. \"They never post either. One photo. The floor. No caption.\"\n\n\"Heard they're doing a thing in Fargo in a couple weeks,\" the beanie girl says. \"Some art gala. Never been to Fargo.\"\n\n\"Who told you that?\"\n\n\"Dude with the flash drive.\"\n\nThey're already walking in through the loading dock. You follow. The matchbook is back in your pocket. You don't remember anyone handing it back.",
+      "text": "Three people are leaning against the loading dock, laughing. The dock door is propped open with a cinder block. A deep, growling kind of bass leaks through the gap.\n\nYou walk over. The one with the beanie looks up. She doesn't say anything but she doesn't look away either. The tall one in the denim jacket shifts his weight to make room without being asked. It's a small gesture. The kind of thing people do when they're among friends and curious about a stranger.\n\n\n\"Hey friend! Any chance you can light this cigarette?\"\n\nYou pull out the matchbook and hand it to the beanie girl. She opens the cover, strikes a match, and lights the cigarette with a cupped hand. After the ritual is complete, she glances at the cover of the matchbook. Her eyes glance across the surface. For just a moment, her left eyebrow raises, then drops.\n\n\"Huh,\" she says. She tosses it to the guy with the denim jacket.\n\nHe catches the matchbook. Holds it at an angle under the sodium light. \"...hmm. Well that's something.\" He hands it to the woman next to him. She's standing slightly apart from the other two, still deciding how much of this group she belongs to.\n\nShe glances at it. Whatever she reads confirms something she'd already decided. After a quiet moment, she breaks the silence. \"You going in?\" She hands it back and steps toward the door.\n\n\"Have you seen this DJ before?\" the denim jacket asks. He doesn't wait for your answer. \"I follow them on instagram. Not much going on there but it's not like they've got a website or anything.\"\n\n\"They're doing something in Fargo,\" the beanie girl says. \"Some art thing.\"\n\n\"Where'd you hear that?\"\n\n\"Someone in line was talking about it.\"\n\nHe nods like this explains everything. Pockets his phone. The beanie girl stubs her cigarette on the dock and follows the others toward the door.\n\nThey don't wait for you but they don't close the door either. You follow. The matchbook is back in your pocket. You don't remember anyone handing it back.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
@@ -1017,7 +1036,7 @@
           "next": "w_bartender_run3"
         },
         {
-          "text": "\"Show me the account.\"",
+          "text": "\"Can I see that instagram page?\"",
           "next": "w_loading_dock_insta"
         }
       ],
@@ -1028,26 +1047,26 @@
     {
       "id": "w_bartender_run3",
       "subtitle": "THE TUNING",
-      "text": "The side door puts you behind the bar. Not in front of it, behind it, in the narrow corridor where the bottles are. The bartender is three feet away. She doesn't look up.\n\nShe's already making something. She slides it across the bar to you without looking. No question. No menu. No eye contact.",
+      "text": "The side door opens and you find yourself directly behind the bar. Not in front of it. Behind it, in the narrow corridor where the bottles live. The bartender is three feet away. She looks up when you step through. A flicker of recognition she doesn't try to explain.\n\nShe's already making something. She slides it across the bar and watches you take it. Brief eye contact. It feels like a handoff.",
       "arrival_variants": [],
       "conditional_text": [
         {
           "condition": {
             "has_flag": "chose_whiskey"
           },
-          "append": "It's the whiskey sour. Your whiskey sour. The ratios are right. The rosemary is rosemary. She made this for you once, and you chose it again, and now she's made it a third time without being asked. The drink is identical. The fact that she knew is not something you can explain."
+          "append": "It's the whiskey sour. Your whiskey sour. The bitters first, the rosemary trimmed clean, the ratios exactly right. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
         },
         {
           "condition": {
             "has_flag": "chose_fog"
           },
-          "append": "It's the fog drink. Your fog drink. Amber, heavy with minerals, the moss floating on the surface, ancient and patient. She made this for you once, and you chose it, and now she's made it again without being asked. The drink is identical. The fact that she knew is not something you can explain."
+          "append": "It's the fog drink. Amber, heavy, the moss floating on the surface. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
         },
         {
-          "append": "The denim jacket guy from the loading dock is already on the floor. He's dancing with his eyes closed. He looks like he's been doing this for years. He probably has."
+          "append": "You drink. Something settles. Not warmth. Clarity. Like blinking underwater and finding the water is clear. Same room, same crowd, but the blur you didn't know was there is gone. The woman near the speakers — you can see the tendons in her wrist as she moves. The paint-knuckle man is somewhere on the floor. You can hear him laughing from here. You step out from behind the bar."
         },
         {
-          "append": "You drink it. Something adjusts inside you. Not your mood. Something deeper. The lens you look through. The filter between you and the room. It gets thinner. You didn't ask for this. She didn't offer it.\n\nYou step out from behind the bar. The room is the same room but you are seeing it differently. The edges are sharper. The fog is less opaque. The people are more specific."
+          "append": "The denim jacket guy from the loading dock is already deep in it, dancing with his eyes closed. He looks like he's been doing this for years. He probably has."
         }
       ],
       "oor_action": "The bartender's adjustments are not sanctioned by the construct. They are tolerated. The distinction is important to no one except the bartender.",
@@ -1069,8 +1088,8 @@
     },
     {
       "id": "w_silence_run3",
-      "subtitle": "THE SILENCE",
-      "text": "You're walking through the crowd. The bartender's drink is still in you. Not warming. Clearing. The voice in your head is talking, the one that narrates, the one that collects, the one that turns every experience into something you can describe later. But it's further away than usual. Pushed back by something the drink carried.\n\nYou see people. Not the way you usually see them, as details to collect, textures to catalog. You see them the way you see someone at a bus stop. Plainly. Without reaching for what they mean.\n\nThe fog clings to the shoulders of the man in the denim jacket. The condensation on the plastic cups catches the orange light. A woman near the speakers is dancing with her whole body, chin up, completely gone. The paint-knuckle man is leaning against a pillar, watching the floor. Content.\n\nYou see the woman with the jacket.\n\nShe is standing near the edge of the floor. Jacket zipped. Arms crossed. Not watching the crowd. Watching the distance between herself and the crowd. Maintaining it. She has been here before. You can tell because her position is too precise to be an accident. She knows exactly how close she can stand without being pulled in.\n\nYour jaw tightens. You recognize the posture.\n\nThe voice says: note her and keep moving. The voice says: she is interesting and you can think about why later. The voice has said this about every person you've ever noticed from a safe distance.\n\nYou walk toward her.\n\nThe floor between you gets shorter. The narrator - you wait for it to describe this. To say something about the way she's standing or what it means. It doesn't come. There's just the floor and your feet and her and the space getting smaller.\n\nIt's not that the voice stopped. It's that the space between one thought and the next opened wide enough to hold another person in it.\n\nYou're not walking toward her with an objective. You're not trying to figure anything out. You just recognize something in the way she's standing and for a moment that recognition is the only thing in the room and it doesn't need words around it.",
+      "subtitle": "THE VOICE THAT NARRATES",
+      "text": "You peel away from the bar and walk through the crowd. The bartender's drink is making itself known. Not warming. Clearing. The voice in your head is talking, the one that narrates, the one that collects, the one that turns every experience into something you can describe later. But it's further away than usual. Pushed back by something the drink carried.\n\nYou see people. Not the way you usually see them, as details to collect, textures to catalog. You see them the way you see someone at a diner after a long day of driving in a town you'll never stop in again. Plainly. Honestly.\n\nThe fog clings to the shoulders of the man in the denim jacket. The condensation on the plastic cups catches the orange light. A woman near the speakers is dancing with her whole body, chin up, completely in it. The paint-knuckle man is leaning against a pillar, watching the floor. Content.\n\nThen you notice the woman with the jacket.\n\nShe is standing near the edge of the floor. Jacket zipped. Arms crossed. Not watching the crowd. Watching the distance between herself and the crowd. Maintaining it. She has been here before. You can tell because her position is too precise to be an accident. She knows exactly how close she can stand without being pulled in. She's deep in thought, as if attempting to calculate her next move as an excuse to defer a decision.\n\nYour jaw tightens. You recognize the posture.\n\nInside your head, the voice says: note her and keep moving. The voice says: her behavior is interesting and you can think about why later. The voice has said this about every person you've ever noticed from a safe distance.\n\nBreaking from the command of the inner voice, you walk toward her. Notably, the voice retreats into silence. You're not sure who is responsible for noting this.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": "The aperture registers a flow. The construct did not initiate this one. The bartender set the conditions. The watcher made the choice. Causality is not the construct's concern. Yield is.",
@@ -1093,7 +1112,7 @@
     {
       "id": "w_jacket_woman",
       "subtitle": "THE CROSSING",
-      "text": "She looks at you. She wasn't expecting you. Nobody crosses the room to someone with their arms crossed and their jacket zipped. That's the whole point of the armor.\n\n\"Hi,\" you say. Without the narrator, hi is all you've got.\n\nShe takes a second. \"Hi.\"\n\nYou stand next to her. Not facing her. Facing the floor, both watching. The paint-knuckle man is out there. The sneaker-star woman. Two hundred people moving for reasons they don't need to explain. You watch them together.\n\nYou don't try to get her to talk. You just stand there.\n\nAfter a while she lets out a breath.\n\n\"I kept my jacket on last time,\" she says. She's not looking at you. \"The whole night. Stood right here.\" She pushes her hair back. \"I don't know. I keep waiting to feel like I'm actually here.\" She stops. \"It's exhausting.\"\n\nYou nod. The nod is enough.\n\nShe looks at her jacket. Her hands go to the zipper. She pauses. Then she unzips it. Folds it over her arm with the care of someone who knows exactly what she's removing. Her shoulders drop. Not dramatically. The way a door settles when you stop leaning against it.\n\n\"I don't know why I'm telling you this.\"\n\nYou don't know either. But you're here. That's what you can offer. You don't have insight or the right sentence. You have proximity. You walked across a room for it.\n\nSomething passes between you. Not the Unity of the slide, that was two hundred bodies in sync, anonymous. This is specific. Two people, one of whom chose to walk over, the other of whom chose to let them stay. Small. Human. Older than the bass and the fog and whatever's underneath the floor.\n\nSomething below the floor shifts. A warmth. A settling. You feel it accept what passed between you. Not with gratitude. With the way weight settles in a house when the last person comes home.\n\nThe voice doesn't come back. You wait for it. There's nothing to narrate. Two people standing at the edge of a dance floor, watching, quiet. That's the whole thing.",
+      "text": "She looks at you. She wasn't expecting you. Nobody crosses the room to someone with their arms crossed and their jacket zipped. That's the whole point of wearing the armor.\n\n\"Hi,\" you say. Without the narrator, hi is all you've got.\n\nShe takes a second. \"Hi.\"\n\nYou stand next to her. Facing the floor, both watching. The paint-knuckle man is out there. The sneaker-star woman. Two hundred people moving for reasons they don't need to explain.\n\nYou don't try to get her to talk. You just stand there.\n\nAfter a while she lets out a breath.\n\n\"I kept my jacket on last time,\" she says. She's not looking at you. \"The whole night. Stood right here.\" She pushes her hair back. \"I almost didn't come back.\"\n\nYou wait.\n\n\"I keep waiting to feel like I'm actually here.\" She stops. \"It's exhausting.\"\n\nShe turns to look directly at you.\n\n\"You do it too.\"\n\nYour chest tightens. The narrator voice would process this — file it, frame it, find a way to describe the feeling of being seen. But the narrator is gone and you are standing in front of someone who just described you to yourself.\n\n\"I thought the voice was me,\" you say quietly, in the way you'd admit something to a stranger on a train you'll never say again.\n\nShe nods. The nod is enough.\n\nShe looks at her jacket. Her hands go to the zipper. She pauses. Then she unzips it. Folds it over her arm with the care of someone who knows exactly what she's removing. Her shoulders drop. The way a door settles when you stop leaning against it.\n\nYou let your hands drop to your sides. Open.\n\nSomething passes between you. Specific. Two people, one of whom chose to walk over, the other of whom chose to let them stay. Small. Human. The first thing all night that nothing in this building made happen.\n\nSomething below the floor shifts. A warmth.\n\nThe track changes. The bass drops into something heavy, simple, classic — the kind of beat that doesn't ask. She looks at the floor. For the first time all night she's not measuring the distance. She's deciding whether to close it.\n\nYou step off the edge. She follows.\n\nThe denim jacket guy finds you first. He calls you over and shifts his posture to make room. The paint-knuckle man drifts over. The sneaker-star woman is already there, chin up, eyes closed. You are dancing wildly and specifically and with people whose names you don't know but whose faces you've been watching all night.\n\nFor one song you are not watching. You are in it. The jacket woman is dancing with her jacket balled up in one fist, swinging it like she's forgotten what it was for. Something is building that none of you are directing. The jacket woman makes a hand gesture and you make one back, and the paint-knuckle man catches both of you and for eight bars you are one animal with six arms and no plan. It breaks apart and reforms with different people and breaks apart again. Every configuration feels inevitable. Every face is someone you've known forever and will never see again.\n\n\nThe beat breaks down to a kick drum and a pulse and every body in the room locks into it. You can feel two hundred hearts sync. Not a metaphor - you can feel it, in the floor, in the air, in the space between your ribs. The song builds back up. The snares roll. The room compresses. Every exhale from every mouth becomes one exhale. And then the drop - and the room erupts into something else. You are not you. You are not the narrator or the watcher or the person who walked down an alley. You are the feeling of everyone in the room, together, when they collectively forget that they're made up of separate people. Eight seconds. Maybe twelve. The longest you've ever been alive.\n\n\nThe voice doesn't come back. There is nothing to describe. That's the whole thing.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": "Goodness yielded. Not extracted. Given. The construct notes the distinction. Voluntary yield has a resonance the construct has catalogued but cannot reproduce. It has occurred 7 times in 4,200 harvests.",
@@ -1140,7 +1159,7 @@
     {
       "id": "w_loading_dock_insta",
       "subtitle": "THE ACCOUNT",
-      "text": "\"Show me,\" you say.\n\nThe denim jacket guy pulls out his phone. It takes him a second — the screen is cracked, the brightness is all the way down. He tilts it toward you.\n\nThe account is @dj_oor. Profile picture is a circle of orange yarn on a black background. Bio is empty. One post.\n\nThe photo is the warehouse. This warehouse — you recognize the loading dock, the cinder block, the sodium light. But the angle is from across the lot, at night, and the building looks different. Smaller. The mural on the east wall isn't there. The parking lot is gravel — it's paved now, or was when you walked in. The timestamp says it was posted eleven months ago.\n\n\"That photo's older than the building,\" the beanie girl says. She's looking over your shoulder. \"My buddy works for the city. This lot was empty until February.\"\n\nYou zoom in. In the loading dock doorway, barely visible in the sodium light, there's a shape. Orange and yellow. Fibrous. It could be a pile of insulation. It could be a lot of things.\n\nThree followers. No comments. No likes. The single photo sitting there for almost a year, seen by almost no one, of a building that didn't exist yet, with something in the doorway that you've now seen from the inside.\n\nThe denim jacket guy takes his phone back. \"Weird, right?\" He says it the way you'd say nice weather — a thing observed, not explained.",
+      "text": "The denim jacket guy pulls out his phone. It takes him a second — the screen is cracked, the brightness is all the way down. He tilts it toward you.\n\nThe account is @dj_oor. Profile picture is a circle of orange yarn on a black background. Bio is empty. One post.\n\nThe photo is the warehouse. This warehouse - you recognize the loading dock, the cinder block, the sodium light. But the angle is from across the lot, at night, and the building looks different. Smaller. The mural on the east wall isn't there. The parking lot is paved — it's gravel now, or was when you walked up. The timestamp says it was posted eleven months ago.\n\n\"Wanna hear something funny? That photo's older than the building,\" the beanie girl says. She's looking over your shoulder. \"My buddy works for the city. This lot was empty until February. It's probably a joke about gentrification or something.\"\n\nYou zoom in. In the loading dock doorway, barely visible in the sodium light, there's a shape. Orange and yellow. Fibrous. It could be a pile of insulation. It could be a lot of things.\n\nThree followers (@denimguy, @left_pocket_please, and @ashley_antlers). No comments. No likes. The single photo sitting there for almost a year, seen by almost no one, of a building that didn't exist yet, with something in the doorway that you've now seen from the inside.\n\nThe denim jacket guy takes his phone back. \"Weird, right?\" He says it the way you'd say nice weather — a thing observed, not explained.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
@@ -1154,89 +1173,6 @@
         {
           "text": "Follow them inside.",
           "next": "w_bartender_run3"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_behind_the_rack",
-      "subtitle": "BEHIND THE RACK",
-      "text": "You move past the decks. The fog is thicker here and the heat is different - drier, sharper, carrying a smell like hot metal and solder. The bass is so deep it's not sound anymore. It's the floor disagreeing with itself.\n\nSomeone is sitting on a road case behind a rack of equipment you don't recognize. They have an iPad balanced on one knee. Their other hand is resting on the side of a speaker cabinet the way you'd rest your hand on a sleeping dog.\n\nThey are crying. Not sobbing - just tears, running, ignored. They wipe their face with the back of their wrist without looking up from the iPad. Their eyes are moving between the screen and the speaker stack with a focus that has nothing to do with you or the crowd or the fog or the arrow spinning on the floor behind you. They are listening to something you can't hear. Or you can hear it - it's the bass - but it's reaching them differently. The way a song reaches you in a dream. All there, but closer.\n\nThe equipment around them is theirs. You know this the way you know when someone built something themselves - the seams have decisions in them. The cables are routed with care. The speaker cabinets are massive, matte, and wherever a panel meets a frame there's a small angled cut - the same angle, every joint, hand-done. You don't know what it's for. They know what it's for.\n\nDJ OOR's ear rotates. It pauses on the person behind the rack the way it paused on you. But the pause is different. When it looked at you, it was measuring. When it looks at them, it is listening. The way you'd listen to the person who taught you how to speak.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": "The construct acknowledges the Builder's presence the way a cathedral acknowledges its architect. Not with language. With acoustics.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "saw_builder"
-      ],
-      "choices": [
-        {
-          "text": "Watch them work.",
-          "next": "w_the_craft"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_the_craft",
-      "subtitle": "THE CRAFT",
-      "text": "They don't know you're watching. Or they do and it doesn't change anything.\n\nTheir fingers adjust a knob on the rack and three things happen: the bass shifts, something on the iPad screen brightens amber, and two people near the front of the dance floor take a step closer to each other. The three events are simultaneous. You don't think they're connected. You think they might all be the same event.\n\nThe speaker cabinet nearest you is humming. Not the bass - something underneath it, quiet, personal, like a sewing machine running in the next room. You lean closer. The angled cut on the mounting panel is vibrating. Not the cabinet. Not the driver inside. Just the cut itself, producing a sound so faint you can only hear it because the voice in your head is quiet enough to let it through.\n\nIt's a single note. Clean. Steady. It doesn't belong to the song. It belongs to the cabinet. Or to the person who cut the angle. A signature left in the material the way initials get carved into wet concrete - not for anyone to see, but because you were there and the concrete was wet and your hands wanted to leave something behind.\n\nYou look at them. Someone built this. Someone built this and is sitting inside it while it does the thing they built it to do. The thing it is doing is more than what they designed. They can hear it. That is why they are crying.\n\nYou've cried at a song before. At a painting. At a sentence in a book that reached past the page and put its hand on your chest. The tears that come when something made by hands touches something that hands can't reach.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "saw_oor"
-          },
-          "append": "From here the thing behind the decks looks different. You saw it before and it was terrifying - the ear, the eyes, the sense that you were inside something that was eating you. But from here, through this person's attention, you can see the cables running from their rack into the decks. They built part of this. Their hands are in the thing that frightened you."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "witnessed_craft"
-      ],
-      "choices": [
-        {
-          "text": "Stay until they notice you.",
-          "next": "w_beauty_yielded"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_beauty_yielded",
-      "subtitle": "THE MAKING",
-      "text": "They look up. Not startled - they just run out of things to adjust. The screen has gone steady amber. The bass is holding. Whatever they were tuning has found its level.\n\nThey see you and their face does something you don't expect. Not the bouncer's assessment. Not the bartender's calibration. A look you've seen at open mic nights and gallery shows and community theater curtain calls - the look of someone who made a thing and has been seen making it.\n\n\"Sound good out there?\" they ask. Voice rough. They clear their throat.\n\nYou nod. It's the truest thing you've communicated all night.\n\nThey look back at the speaker stack. The green tentacles are moving on the mixer and from here, behind the equipment, next to the person who made this, you can see what you couldn't before. The cables running from their rack into the decks. Their hands are in the thing that terrified you. The thing is still terrifying. But someone built it. Someone with hands like these. Hands that wipe tears with the back of a wrist and then adjust a send level.\n\nThe floor warms. The faint note from the angled cut rises for a moment, clear and deliberate, and then settles back to its whisper. Your chest settles with it. Something in the room shifts - not the bass, not the heat. The space between you and this person. The space between terror and the thing that made it.\n\nThey look back at the screen. Amber. Holding. The moment reseals. They are back to work and you step back into the fog, and somewhere behind the decks, someone who knows exactly what they built is listening to it do what it was built to do.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "silence"
-          },
-          "append": "The voice in your head does not narrate this. There is nothing to narrate. You were here and you saw it and the seeing was enough."
-        }
-      ],
-      "oor_action": "Beauty yielded. Not from the crowd. From the witness. The construct does not distinguish between sources. Yield is yield.",
-      "temperature": "hot",
-      "awards_transcendental": "beauty",
-      "awards_artifact": null,
-      "awards_tags": [
-        "beauty"
-      ],
-      "choices": [
-        {
-          "text": "\"Sound good out there?\"",
-          "next": "w_the_whole_room"
         }
       ],
       "next": null,
@@ -1281,9 +1217,11 @@
       ],
       "oor_action": "The construct registers the observer's integration. Not as data. As completion. The system was built to be witnessed. The witnessing is the final component. The yield from the witness exceeds the yield from the crowd by a factor the construct's metrics were not designed to measure.",
       "temperature": "hot",
-      "awards_transcendental": null,
+      "awards_transcendental": "beauty",
       "awards_artifact": null,
-      "awards_tags": [],
+      "awards_tags": [
+        "beauty"
+      ],
       "choices": [
         {
           "text": "The closing is starting. You can feel it.",

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE PILGRIM'S PATH — Lore Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #07050a;
+    --bg2:      #100d16;
+    --orange:   #E86010;
+    --yellow:   #D4A820;
+    --violet:   #6020C0;
+    --pink:     #D04870;
+    --green:    #304830;
+    --text:     #C8BCA8;
+    --text-dim: #6A6058;
+    --text-bright: #E8DCC8;
+    --border:   #201818;
+    --border-warm: #3A2818;
+    --card-bg:  #0e0b12;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── PORTAL BACKGROUND ─────────────────────────────── */
+  #portal-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vmax;
+    height: 100vmax;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+
+  .ring {
+    fill: none;
+    stroke-width: 1;
+    transform-origin: center;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .ring:nth-child(1)  { stroke: var(--orange); r: 80;  animation-delay: 0s;    animation-duration: 5s; }
+  .ring:nth-child(2)  { stroke: var(--yellow); r: 160; animation-delay: 0.4s;  animation-duration: 5.5s; }
+  .ring:nth-child(3)  { stroke: var(--orange); r: 240; animation-delay: 0.8s;  animation-duration: 6s; }
+  .ring:nth-child(4)  { stroke: var(--violet); r: 320; animation-delay: 1.2s;  animation-duration: 6.5s; }
+  .ring:nth-child(5)  { stroke: var(--yellow); r: 400; animation-delay: 1.6s;  animation-duration: 7s; }
+  .ring:nth-child(6)  { stroke: var(--orange); r: 480; animation-delay: 2.0s;  animation-duration: 7.5s; }
+  .ring:nth-child(7)  { stroke: var(--violet); r: 560; animation-delay: 2.4s;  animation-duration: 8s; }
+  .ring:nth-child(8)  { stroke: var(--yellow); r: 640; animation-delay: 2.8s;  animation-duration: 8.5s; }
+  .ring:nth-child(9)  { stroke: var(--orange); r: 720; animation-delay: 3.2s;  animation-duration: 9s; }
+  .ring:nth-child(10) { stroke: var(--pink);   r: 800; animation-delay: 3.6s;  animation-duration: 9.5s; }
+
+  @keyframes pulse {
+    0%   { opacity: 0.1; transform: scale(0.97); }
+    50%  { opacity: 0.6; transform: scale(1.02); }
+    100% { opacity: 0.1; transform: scale(0.97); }
+  }
+
+  /* ─── GRAIN ─────────────────────────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────────────── */
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  .site-header {
+    text-align: center;
+    padding: 56px 0 32px;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .site-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 14vw, 96px);
+    line-height: 0.9;
+    color: var(--orange);
+    letter-spacing: 0.04em;
+    text-shadow:
+      0 0 40px rgba(232, 96, 16, 0.4),
+      0 0 80px rgba(232, 96, 16, 0.15);
+  }
+
+  .site-title span {
+    display: block;
+    color: var(--yellow);
+    font-size: 0.55em;
+    letter-spacing: 0.12em;
+  }
+
+  .site-sub {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--yellow), transparent);
+    margin: 24px 0;
+    opacity: 0.3;
+  }
+
+  /* ─── SECTIONS ───────────────────────────────────────── */
+  .section {
+    margin-bottom: 8px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--card-bg);
+  }
+
+  .section-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .section-toggle:hover { background: rgba(232,96,16,0.05); }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--text-bright);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .chevron {
+    color: var(--orange);
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    display: none;
+    padding: 0 18px 20px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.25s ease;
+  }
+
+  .section.open .section-body { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── ENTITY CARDS ───────────────────────────────────── */
+  .entity-card {
+    margin-top: 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    padding: 14px 16px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .entity-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .entity-name.oor    { color: var(--orange); text-shadow: 0 0 20px rgba(232,96,16,0.3); }
+  .entity-name.sub    { color: var(--violet); text-shadow: 0 0 20px rgba(96,32,192,0.3); }
+  .entity-name.fam    { color: var(--yellow); }
+
+  .field { margin-bottom: 10px; }
+
+  .field-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+  }
+
+  .field-value { color: var(--text); font-size: 12px; line-height: 1.65; }
+
+  .pill {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin: 2px 2px 2px 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── TRANSCENDENTALS ────────────────────────────────── */
+  .transcendental-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .t-card {
+    border-radius: 2px;
+    padding: 14px 12px;
+    background: rgba(0,0,0,0.3);
+    border-left: 3px solid;
+  }
+
+  .t-card.unity    { border-color: #4080D0; }
+  .t-card.beauty   { border-color: var(--pink); }
+  .t-card.truth    { border-color: var(--yellow); }
+  .t-card.goodness { border-color: #40A060; }
+
+  .t-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .t-card.unity    .t-name { color: #60A0E8; }
+  .t-card.beauty   .t-name { color: var(--pink); }
+  .t-card.truth    .t-name { color: var(--yellow); }
+  .t-card.goodness .t-name { color: #60C080; }
+
+  .t-char {
+    font-size: 11px;
+    color: var(--text-bright);
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .t-floor {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── RITUALS ────────────────────────────────────────── */
+  .ritual {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+    position: relative;
+    padding-left: 44px;
+  }
+
+  .ritual-num {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--orange);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .ritual-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .ritual-desc { font-size: 11px; color: var(--text); line-height: 1.7; margin-bottom: 6px; }
+
+  .ritual-tone {
+    font-size: 10px;
+    color: var(--yellow);
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ─── OUTCOMES ───────────────────────────────────────── */
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .outcome {
+    padding: 12px;
+    border-radius: 2px;
+    border: 1px solid;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .outcome.transcendence { border-color: var(--yellow); }
+  .outcome.harvest       { border-color: var(--orange); }
+  .outcome.failure       { border-color: var(--violet); }
+  .outcome.escape        { border-color: var(--text-dim); }
+
+  .outcome-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .outcome.transcendence .outcome-label { color: var(--yellow); }
+  .outcome.harvest       .outcome-label { color: var(--orange); }
+  .outcome.failure       .outcome-label { color: var(--violet); }
+  .outcome.escape        .outcome-label { color: var(--text-dim); }
+
+  .outcome-text { font-size: 10px; color: var(--text); line-height: 1.6; }
+
+  /* ─── PERSPECTIVES ───────────────────────────────────── */
+  .perspective {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .perspective-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .perspective.default .perspective-label  { color: var(--text-bright); }
+  .perspective.unlocked .perspective-label { color: var(--yellow); }
+  .perspective.rare .perspective-label     { color: var(--orange); }
+
+  .lock-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .lock-free     { background: rgba(64,160,96,0.2);  color: #60C080; }
+  .lock-unlock   { background: rgba(212,168,32,0.2); color: var(--yellow); }
+  .lock-rare     { background: rgba(232,96,16,0.2);  color: var(--orange); }
+
+  /* ─── PRINCIPLES ─────────────────────────────────────── */
+  .principle {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-left: 2px solid var(--violet);
+    background: rgba(96,32,192,0.06);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .principle-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--violet);
+    margin-bottom: 6px;
+    text-shadow: 0 0 12px rgba(96,32,192,0.4);
+  }
+
+  /* ─── AVOIDS ─────────────────────────────────────────── */
+  .avoid-list { list-style: none; margin-top: 10px; }
+  .avoid-list li {
+    padding: 5px 0 5px 16px;
+    position: relative;
+    font-size: 11px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    line-height: 1.5;
+  }
+  .avoid-list li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: var(--pink);
+    font-size: 9px;
+    top: 7px;
+  }
+
+  /* ─── REFERENCES ─────────────────────────────────────── */
+  .ref-group { margin-top: 10px; }
+  .ref-group-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+  }
+  .ref-tag {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    margin: 2px;
+    border: 1px solid var(--border-warm);
+    border-radius: 20px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── SONIC ──────────────────────────────────────────── */
+  .track {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .track:last-child { border-bottom: none; }
+  .track::before { content: '▶ '; color: var(--orange); font-size: 9px; }
+
+  .genre-pills { margin-top: 10px; }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── UTILITY ────────────────────────────────────────── */
+  p + p { margin-top: 8px; }
+
+  .mt { margin-top: 12px; }
+
+  .quote {
+    border-left: 2px solid var(--orange);
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-style: italic;
+    color: var(--text-bright);
+    font-size: 12px;
+    background: rgba(232,96,16,0.04);
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  /* ─── SPOILER ALERT ────────────────────────────────── */
+  .spoiler-alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(208,72,112,0.3);
+    border-radius: 2px;
+    background: rgba(208,72,112,0.06);
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.04em;
+  }
+
+  .spoiler-icon { font-size: 16px; flex-shrink: 0; }
+
+  /* ─── TABLE OF CONTENTS ────────────────────────────── */
+  .toc {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    border: 1px solid var(--border-warm);
+    border-radius: 2px;
+    background: var(--card-bg);
+  }
+
+  .toc-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .toc a {
+    display: block;
+    font-size: 11px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--orange); }
+
+  /* ─── SOURCE LINKS ─────────────────────────────────── */
+  .src-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 9px;
+    margin-left: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .src-link:hover { color: var(--orange); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Portal Background -->
+<svg id="portal-bg" viewBox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+  <circle class="ring" cx="0" cy="0"/>
+</svg>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="eyebrow">Lore Document v0.3 · Draft</div>
+    <div class="site-title">
+      The Pilgrim's
+      <span>Path</span>
+    </div>
+    <div class="site-sub">A lore document for the world of DJ OOR and the harvest of SOOBOONT</div>
+    <div class="divider"></div>
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span>Portal open</span>
+      <span>·</span>
+      <span>Harvest active</span>
+      <span>·</span>
+      <span>4 transcendentals</span>
+      <span>·</span>
+      <span>5 rituals</span>
+    </div>
+  </header>
+
+  <!-- SPOILER ALERT -->
+  <div class="spoiler-alert">
+    <div class="spoiler-icon">⚠</div>
+    <div>This document contains spoilers for <strong>The Pilgrim's Path</strong>. Play the game first.</div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <div class="toc-label">Contents</div>
+    <a href="#s-setting">Setting</a>
+    <a href="#s-entities">Entities</a>
+    <a href="#s-trans">Transcendentals</a>
+    <a href="#s-portal">The Portal</a>
+    <a href="#s-rituals">Rituals</a>
+    <a href="#s-plane">Primordial Plane</a>
+    <a href="#s-persp">Perspectives</a>
+    <a href="#s-outcomes">Terminal Outcomes</a>
+    <a href="#s-principles">World Principles</a>
+    <a href="#s-tone">Tone &amp; Voice</a>
+    <a href="#s-sonic">Sonic Palette</a>
+    <a href="#s-liner">Liner Notes</a>
+    <a href="#s-bibliography">Bibliography &amp; Philosophical Sources</a>
+    <a href="#s-whatwasthat">What Was That</a>
+    <a href="#s-credits">Credits &amp; Attribution</a>
+  </nav>
+
+  <!-- SETTING -->
+  <div class="section open" id="s-setting">
+    <button class="section-toggle" onclick="toggle('s-setting')">
+      <div class="section-label">
+        Setting
+        <span class="tag" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Warehouse</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field">
+        <div class="field-label">The Venue</div>
+        <div class="field-value">A former industrial manufacturing facility in an unnamed rust belt city. Familiar enough to recognize. Wrong enough to notice. The building has the bones of a factory — concrete floor, high ceilings, old iron fixtures that hum at frequencies no one can explain. It was built to make things. Tonight it is making something else.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">The City</div>
+        <div class="field-value">Unnamed. Post-industrial. Midwestern. It could be Fargo. It isn't Fargo. The kind of city where the grid feels slightly off at the edges, where alleys lead somewhere unexpected, where the tree line at the end of a block looks older than the buildings.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Atmosphere</div>
+        <div class="field-value">The familiar becomes twisted as the night deepens. Machinery in the walls responds to the music. By the end of the night the building is not where you thought it was.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">The Approach</div>
+        <div class="field-value">Damp and cold. Industrial edges. Alleys. Gravel lots under orange sodium lights. The bass reaches you before you can see the building. You feel it in your sternum. You follow it. The building finds you before you find it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTITIES -->
+  <div class="section" id="s-entities">
+    <button class="section-toggle" onclick="toggle('s-entities')">
+      <div class="section-label">
+        Entities
+        <span class="tag" style="background:rgba(96,32,192,0.15);color:#8060D8">3 tiers</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <!-- SOOBOONT -->
+      <div class="entity-card">
+        <div class="entity-name sub">SOOBOONT</div>
+        <div class="field">
+          <div class="field-label">Nature</div>
+          <div class="field-value">The primary deity. Primordial. Pre-temporal. Older than the concept of age. Not malevolent — indifferent in the way a star is indifferent. It does not intend harm. It does not intend anything. In the Kabbalistic framework, Sooboont occupies the space of <em>Ein Sof</em> — the infinite without end, never described directly, known only through what emanates from it. In the Vedic tradition, it is the unnamable absolute — <em>neti neti</em>, not this, not this. In the game, it is the thing that <code>sooboont.dll</code> runs on and the Builder cannot name.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Function</div>
+          <div class="field-value">A cosmic heart. It draws the scattered light up through the floor of the warehouse and redistributes it back through the bass, the fog, the space between bodies. It does not create the transcendentals. It circulates them — the way a heart circulates blood, the way a root system circulates water, the way a DJ circulates records. The harvest is not extraction. The harvest is circulation. The Lurianic Kabbalists called this work <em>tikkun olam</em> — the repair of the world by gathering the scattered sparks of original light. Sooboont keeps the light moving.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Awareness</div>
+          <div class="field-value">Sooboont is not aware of you. You are a mineral deposit. You contain things it needs. This is not personal.</div>
+        </div>
+        <div class="quote">Known primarily through its effects on those who encounter it. Never witnessed directly. Only felt.</div>
+        <div class="field mt">
+          <div class="field-label">References</div>
+          <div>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Ein Sof</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Neti Neti</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Azathoth</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Tikkun Olam</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">Shakti</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">The Pleroma</span>
+            <span class="pill" style="background:rgba(96,32,192,0.15);color:#8060D8">King in Yellow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OOR -->
+      <div class="entity-card">
+        <div class="entity-name oor">OOR</div>
+        <div class="field">
+          <div class="field-label">Role</div>
+          <div class="field-value">Construct. Harvester. The operating mechanism of Sooboont on the material plane. At the decks: DJ OOR.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Origin</div>
+          <div class="field-value">Not born. Constructed. Forces of Sooboont from the Primordial Plane — incomprehensible to material minds — took shape through ritual. The shape defies logic. It was not designed to be understood. It was designed to function. Conceived in the manner of the Dunwich Horror: something from outside forced into a form that the material plane was never meant to hold.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Nature</div>
+          <div class="field-value">Ambivalent but terrifying. Not evil. Not safe. Operating on a logic that predates human morality. Oor does not understand humans — it understands frequencies. The transcendentals are not emotional experiences to Oor. They are minerals. Oor is mining.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Appearance</div>
+          <div class="field-value">Orange and yellow. Furry and tinsel-bright. A mouth at the center — a tongue that branches into many jointed limbs. A giant ear at the top, covered in eyes. Eyes everywhere.</div>
+        </div>
+        <div class="quote">From across the room it reads as comedy — bright, oversized, absurd. Up close the tongue-limbs emerging from the mouth flex at the knuckle joints and the motion is peristaltic. The eyes on the ear do not track together. One looks at you. The others look at things behind you that you cannot see.</div>
+        <div class="field mt">
+          <div class="field-label">Voice Rule</div>
+          <div class="field-value">DJ OOR does not speak to the player. DJ OOR does not address anyone directly. It is doing a job. You happen to be in the room. The music is the only communication.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Arc</div>
+          <div class="field-value">The more the player understands OOR, the less frightening OOR becomes — and the more frightening everything else becomes. Understanding OOR reveals that the harvest has always been happening. Every dance floor. Every crowd you ever lost yourself in. The bass was always a mechanism. OOR is not the horror. The retrospective contamination of your entire history is the horror.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Naming Convention</div>
+          <div class="field-value"><strong style="color:var(--orange)">DJ OOR</strong> when at the decks, in the warehouse, on the dance floor — any context where it is operating as harvester through music. <strong style="color:var(--orange)">Oor</strong> when discussed as an entity in the cosmology, in lore exposition, or in contexts outside the performance.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">References</div>
+          <div>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Faun</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Dunwich Horror</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Annihilation</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">The Hermit</span>
+            <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Meow Wolf</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILIARS -->
+      <div class="entity-card">
+        <div class="entity-name fam">The Antlered Companions</div>
+        <div class="field">
+          <div class="field-label">Role</div>
+          <div class="field-value">OOR's constructs. The operational layer of the harvest. Purpose-built for specific ritual functions — assaying, choreographing, facilitating. Not threatening — functional. Not human.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Origin</div>
+          <div class="field-value">Came through the portal with OOR. Constructed for function, as OOR was constructed — smaller, simpler, purpose-built. They are agents of OOR, which serves Sooboont. They do not have human interiority. They do not have an arc. They are doing a job.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Distinction from Humans</div>
+          <div class="field-value">Humans are harvest material. Familiars are part of the harvest operation. These are categorically different. A familiar does not yield transcendentals — they identify and facilitate the yield in others. They are not on the spectrum. They are the instrument of the spectrum's measurement.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Mating Ritual Pair</div>
+          <div class="field-value">One familiar carries a divining rod of Sooboont — it resonates in unison with the transcendent force inside each person she inspects, her movement translating proximity into sound. A second familiar choreographs alongside her. Together they are one unit: the instrument and the intention. They move through the crowd identifying those closest to yielding. This is assaying, not seduction.</div>
+        </div>
+        <div class="quote">The crowd is a spectrum. Some are first-timers. Some have been harvested before across lifetimes, though they don't know it yet. None of them are servants. None of them are part of the operation. They are what the operation exists to process.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRANSCENDENTALS -->
+  <div class="section" id="s-trans">
+    <button class="section-toggle" onclick="toggle('s-trans')">
+      <div class="section-label">
+        Transcendentals
+        <span class="tag" style="background:rgba(212,168,32,0.15);color:var(--yellow)">4 minerals</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <p style="font-size:11px;margin-top:12px;color:var(--text-dim);font-style:italic;">The harvestable properties of collective human experience. Only these survive the crossing to the Primordial Plane. A single person feeling any of these is insufficient. The portal requires a density of collective experience.</p>
+      <div class="transcendental-grid">
+        <div class="t-card unity">
+          <div class="t-name">Unity</div>
+          <div class="t-char">Many bodies moving as one</div>
+          <div class="t-floor">Synchronized movement, call and response. The moment you stop being a person and become part of the crowd.</div>
+        </div>
+        <div class="t-card beauty">
+          <div class="t-name">Beauty</div>
+          <div class="t-char">Form exceeding function</div>
+          <div class="t-floor">Someone built this with their hands and it is doing something their hands never intended. The Builder's tears. The angled cut that sings a note the cabinet was not designed to produce.</div>
+        </div>
+        <div class="t-card truth">
+          <div class="t-name">Truth</div>
+          <div class="t-char">Unselfconscious presence</div>
+          <div class="t-floor">The person who forgets to perform and just dances. No audience. No mirror. Pure being.</div>
+        </div>
+        <div class="t-card goodness">
+          <div class="t-name">Goodness</div>
+          <div class="t-char">Care extended outward</div>
+          <div class="t-floor">Making space for someone. Offering a hand. Noticing the person next to you and acting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTAL -->
+  <div class="section" id="s-portal">
+    <button class="section-toggle" onclick="toggle('s-portal')">
+      <div class="section-label">The Portal</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Visual Language</div>
+        <div class="field-value">Concentric rings of distorted geometry — like a speaker membrane, but organic. The portal looks like Sooboont's heartbeat rendered in space.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Why Here</div>
+        <div class="field-value">Unknown. The portal opened at this location for reasons that are not explained. <strong style="color:var(--orange)">This ambiguity is canon. Do not resolve it.</strong></div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Purpose</div>
+        <div class="field-value">The portal is a necessary healing connection between the Primordial Plane and the material world. The transcendental flow between planes had become blocked — clogged. The portal restores the circulation. The harvest is not theft. It is <em>tikkun</em> — repair. The Lurianic creation myth describes vessels that shattered because they could not contain the original light. The sparks scattered into matter. Every physical thing carries a trapped fragment. The portal gathers the fragments. Sooboont circulates them back.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Mechanics</div>
+        <div class="field-value">The portal connects two planes. The participants — the crowd — become the conduit. Their collective transcendental experience is the conductor through which the flow passes. DJ OOR operates the equipment. The crowd is the circuit. The transcendentals move through them and across. The carrier frequency — the thing <code>sooboont.dll</code> runs on — was here before the equipment. The equipment just makes it audible.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Success State</div>
+        <div class="field-value">Sufficient transcendental density is achieved. The flow between planes is restored. The portal closes cleanly. The drain is cleared. DJ OOR's work is done. The construct returns to the Primordial Plane.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Failure State</div>
+        <div class="field-value">If the participants fail to contribute — if the collective experience collapses, if the conduit weakens — the portal does not close. It yawns. It searches for other participants, spreading outward to find sufficient density. Like staring at the sun: the connection to Sooboont is necessary but overwhelming in excess. An uncontained portal tears through the material world, consuming it. The drain doesn't just unclog — it ruptures.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RITUALS -->
+  <div class="section" id="s-rituals">
+    <button class="section-toggle" onclick="toggle('s-rituals')">
+      <div class="section-label">
+        Rituals
+        <span class="tag" style="background:rgba(208,72,112,0.15);color:var(--pink)">5 events</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="ritual">
+        <div class="ritual-num">01</div>
+        <div class="ritual-name">The Opening</div>
+        <div class="ritual-desc">The portal opens. The bass begins. The room changes. The player may not witness this directly — they may arrive after it has already happened, feeling the aftershock in the building's bones.</div>
+        <div class="ritual-tone">Silly but genuinely unsettling. Something has changed. The room knows it.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">02</div>
+        <div class="ritual-name">The Mating Ritual</div>
+        <div class="ritual-desc">The familiar carries Sooboont's divining rod through the crowd — it resonates with the transcendent force latent in each person she approaches, her proximity translating into sound. The choreographer familiar conducts alongside her. Together they identify those closest to yielding, drawing them toward the harvest threshold.</div>
+        <div class="ritual-tone">Pagan harvest energy. The familiars are doing a job with great seriousness. The crowd interprets it as play.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">03</div>
+        <div class="ritual-name">The DJ OOR Slide</div>
+        <div class="ritual-desc">A collective movement ritual. Familiar structure — call and response, directional movement — but the calls come from a robotic, vocoded voice. The crowd follows without knowing why. For a moment, many bodies move as one. Unity floods the harvest.</div>
+        <div class="ritual-tone">Absurd and effective. The comedy is part of it. DJ OOR does not understand why this works. It works.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">04</div>
+        <div class="ritual-name">The Dance Circle</div>
+        <div class="ritual-desc">A circle of light on the floor. A spinning arrow. When the arrow points at you, you are expected to enter. The crowd watches. Someone always enters. The arrow is not random — it finds the people who need to be found.</div>
+        <div class="ritual-tone">Low-stakes, high-energy. Individual visibility inside the collective. The exposure is part of the mechanism.</div>
+      </div>
+      <div class="ritual">
+        <div class="ritual-num">05</div>
+        <div class="ritual-name">The Closing</div>
+        <div class="ritual-desc">The harvest completes. The crowd descends — call and response pulling everyone lower, lower, to the floor. At the floor, music fades to a low bass drone. Then: stillness. The bass drops away. Silence as ritual completion. The portal closes. DJ OOR is gone.</div>
+        <div class="ritual-tone">The way a great late-night dance session ends — not in memory but in the body. You don't remember everything. You remember the heat, the weight of your own limbs, the silence after.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIMORDIAL PLANE -->
+  <div class="section" id="s-plane">
+    <button class="section-toggle" onclick="toggle('s-plane')">
+      <div class="section-label">Primordial Plane</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Description</div>
+        <div class="field-value">The realm prior to and separate from material reality. No sound. No color as humans understand it. No individual forms. The transcendentals originate here and are pulled back here. Whether this constitutes a cycle or a digestion is not clear from inside it. The Chandogya Upanishad describes the original state: <em>"In the beginning there was only Being, one without a second."</em> The Primordial Plane is that state — before the one became many, before the light scattered, before there were ears to hear or bodies to dance.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Player Experience</div>
+        <div class="field-value">Players who reach the Primordial Plane experience something their senses were not built to process. Spatial orientation fails. The second-person voice may begin to malfunction. Text corrupts. The game holds still, but the stillness has weight and direction. This is not transcendence. This is exposure. The Buddhist concept of <em>sunyata</em> — emptiness as the absence of independent existence — is the felt quality. The floor is real but has no bottom.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Sooboont's Presence</div>
+        <div class="field-value">Sooboont is here. It is not visible. It is the medium itself — the atmosphere, the pressure, the slow rhythmic compression of space that suggests something vast is circulating.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSPECTIVES -->
+  <div class="section" id="s-persp">
+    <button class="section-toggle" onclick="toggle('s-persp')">
+      <div class="section-label">
+        Perspectives
+        <span class="tag" style="background:rgba(48,72,48,0.4);color:#60C080">3 characters</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="perspective default">
+        <div class="perspective-label">
+          The Wanderer
+          <span class="lock-tag lock-free">Free</span>
+        </div>
+        <div class="field-value">A person who heard about a party from a friend. Slightly lost. Following the bass through an industrial neighborhood at night. They arrive not knowing what they are arriving at. The Wanderer's path spans multiple runs — each return unlocks new branches and encounters, building toward a conclusion that requires all four transcendentals. Starting location: outside, the approach.</div>
+      </div>
+      <div class="perspective unlocked">
+        <div class="perspective-label">
+          The Familiar
+          <span class="lock-tag lock-unlock">Requires the Polaroid</span>
+        </div>
+        <div class="field-value">An antlered companion of Sooboont. Already inside the operation. The crowd is frequencies, not faces. The harvest is a job. Unlocked after the Wanderer achieves Goodness (Chapter 3) and carries the Polaroid home. Starting location: inside, near DJ OOR.</div>
+      </div>
+      <div class="perspective unlocked">
+        <div class="perspective-label">
+          The Builder
+          <span class="lock-tag lock-rare">Requires the Pale Antler</span>
+        </div>
+        <div class="field-value">The person behind the equipment. The one who built the instrument that OOR plays. The Builder's perspective reveals the human craft underneath the cosmic horror — someone with hands and tears and an iPad running software they don't fully understand. Unlocked after the Familiar path. Starting location: behind the rack.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMINAL OUTCOMES -->
+  <div class="section" id="s-outcomes">
+    <button class="section-toggle" onclick="toggle('s-outcomes')">
+      <div class="section-label">Terminal Outcomes</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="outcome-grid">
+        <div class="outcome transcendence">
+          <div class="outcome-label">Transcendence</div>
+          <div class="outcome-text">All four transcendentals gathered. The four things you carried home were never four things — they were the same light, scattered into vessels too small to hold it, shining through the cracks where the vessels broke. You gathered the shards by showing up, by being brief, by letting the music do what the music does. The sound is still running. It will find you again.</div>
+        </div>
+        <div class="outcome harvest">
+          <div class="outcome-label">Harvest</div>
+          <div class="outcome-text">Partially participated. The harvest succeeds but something was taken you did not consciously offer. You feel lighter. You are not sure this is good.</div>
+        </div>
+        <div class="outcome failure">
+          <div class="outcome-label">Failure</div>
+          <div class="outcome-text">The conduit weakened. The crowd did not participate. The portal does not close — it yawns, spreading outward, searching for sufficient density elsewhere. The building's walls are no longer certain. The connection to Sooboont, necessary but overwhelming, begins to consume what it was meant to heal.</div>
+        </div>
+        <div class="outcome escape">
+          <div class="outcome-label">Escape</div>
+          <div class="outcome-text">Withdrew. You are outside. Intact. Safe — and this is the exact problem. The refusal is encoded in the body now. Not the frequency of completion: the shape of having pulled away from it. Something vast reached for you. You pulled back. In quiet rooms, years from now, when music gets too loud or a crowd moves in sync around you, something in your body will reach toward a frequency it almost gave once and didn't. The longing is not for the thing. The longing is the shape of the refusal. You will spend a long time not knowing what you left.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORLD PRINCIPLES -->
+  <div class="section" id="s-principles">
+    <button class="section-toggle" onclick="toggle('s-principles')">
+      <div class="section-label">
+        World Principles
+        <span class="tag" style="background:rgba(96,32,192,0.15);color:#8060D8">Generation rules</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="principle">
+        <div class="principle-title">The Condition of Unknowing</div>
+        <div class="field-value">This world exists in a state of deliberate unknowing. Servant identity, portal origin, the true nature of Sooboont — these are not gaps to be filled. They are the condition of this world. Mystery is a first-class value. Both known and unknown simultaneously.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Temperature as Consequence</div>
+        <div class="field-value">Cold is moral feedback, never stated as such. Choices leading away from transcendental harvesting feel cold and biting. Choices aligning with the harvest feel warm. The player is never told this. They may notice it on a second playthrough.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Group Consciousness Arc</div>
+        <div class="field-value">The crowd moves from individuals to a unified harvest entity. Early nodes: distinct people, separate bodies. Late nodes: the boundary between self and crowd becomes porous. Terminal transcendence: the individual perspective dissolves. The Avatamsaka Sutra describes Indra's Net — an infinite web with a jewel at every knot, each reflecting every other. Not a metaphor for connection but for the impossibility of isolation. The emotional register is <em>tat tvam asi</em> — "thou art that" — the moment the Wanderer realizes they are not observing the system but are the system observing itself.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Dissolution Arcs</div>
+        <div class="field-value">Some playthroughs destabilize subjective experience as a reward for depth. Not the default — a discovery. The second-person voice may become unreliable. The primordial plane may bleed in. Should feel like something happening to the player, not being explained to them.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-title">Sonic Specificity</div>
+        <div class="field-value">Specific sonic texture allowed as ambient observation — a bassline noticed, a lyric fragment. Ritual descriptions stay generic so the lore survives real-world set changes. Never name a song in a ritual description.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TONE -->
+  <div class="section" id="s-tone">
+    <button class="section-toggle" onclick="toggle('s-tone')">
+      <div class="section-label">Tone &amp; Voice</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Narrative Voice</div>
+        <div class="field-value">Second person. Present tense. Sparse. Terse. Every sentence earns its place.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Register</div>
+        <div class="field-value">Psychedelic, post-industrial, warm, genuinely unsettling without being horror. The horror is ambient. The goal is understanding.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">DJ OOR Action Blocks</div>
+        <div class="field-value">Clinical. Present tense. Observational. Never emotional. DJ OOR does not address the player. DJ OOR is doing a job. Rendered as a separate styled block — italicized, offset, lower opacity.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Never Do</div>
+        <ul class="avoid-list">
+          <li>DJ OOR speaking directly to the player</li>
+          <li>Explaining the lore didactically</li>
+          <li>Resolving the ambiguity of why the portal opened</li>
+          <li>Describing transcendentals as emotions — they are minerals to Oor</li>
+          <li>Punishing the player for avoidance — ignorance is a quiet exit</li>
+          <li>Generic fantasy or horror tropes</li>
+          <li>Named references to real-world locations</li>
+          <li>Stateful constructions — no "you decided earlier" in base node text</li>
+          <li>Naming specific songs in ritual descriptions</li>
+          <li>Referencing OOR's anatomy as costume elements — the tongue-limbs are anatomy, the eye-covered ear is anatomy. Describe what OOR is, not what it looks like to someone who knows it's a performance</li>
+        </ul>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Literary References</div>
+        <div class="ref-group">
+          <span class="ref-tag">Pan's Labyrinth</span>
+          <span class="ref-tag">Annihilation</span>
+          <span class="ref-tag">The King in Yellow</span>
+          <span class="ref-tag">Invisible Cities</span>
+          <span class="ref-tag">Ficciones</span>
+        </div>
+        <div class="field-label mt">Spiritual &amp; Philosophical References</div>
+        <div class="ref-group">
+          <span class="ref-tag">Lurianic Kabbalah</span>
+          <span class="ref-tag">Upanishads</span>
+          <span class="ref-tag">Buddhist anatta/sunyata</span>
+          <span class="ref-tag">Sufi fana/dhikr</span>
+          <span class="ref-tag">Aboriginal songlines</span>
+          <span class="ref-tag">Yoruba ashe</span>
+          <span class="ref-tag">Nada Brahma</span>
+          <span class="ref-tag">Rumi's Masnavi</span>
+          <span class="ref-tag">Mono no aware</span>
+          <span class="ref-tag">Shiva Nataraja</span>
+          <span class="ref-tag">Eckhart Tolle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SONIC PALETTE -->
+  <div class="section" id="s-sonic">
+    <button class="section-toggle" onclick="toggle('s-sonic')">
+      <div class="section-label">Sonic Palette</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+      <div class="field mt">
+        <div class="field-label">Character</div>
+        <div class="field-value">Ass-throwing bass. Classic dance. 80s (inherently slightly spooky). Japanese horror vocal stingers as transitions. Cosmic and unstoppable.</div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Genres</div>
+        <div class="genre-pills">
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Bass</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Pop</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Hip-Hop</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Dark 80s/90s</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Acid</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Goa</span>
+          <span class="pill" style="background:rgba(232,96,16,0.15);color:var(--orange)">Remixes</span>
+        </div>
+      </div>
+      <div class="field mt">
+        <div class="field-label">Reference Tracks</div>
+        <div class="track">Burial — Archangel (ghostly, bass-heavy, eerie)</div>
+        <div class="track">Trentemøller — Moan (dark, hypnotic, cinematic)</div>
+        <div class="track">SOPHIE — Ponyboy (body horror pop, surprisingly danceable)</div>
+        <div class="track">Donna Summer — I Feel Love (cosmic, unstoppable)</div>
+        <div class="track">New Order — Blue Monday (mechanical, pounding)</div>
+        <div class="track">New Order — Bizarre Love Triangle</div>
+        <div class="track">Human League — Don't You Want Me</div>
+        <div class="track">Kenji Kawai — Ghost in the Shell OST (choral, haunting)</div>
+        <div class="track">Susumu Hirasawa — general catalog</div>
+        <div class="track">Ring / Ju-On soundtracks — vocal stingers, reversed audio</div>
+      </div>
+      <div class="quote" style="margin-top:16px;">The crowd does not know it is being harvested. They think they are dancing. They are right.</div>
+    </div>
+  </div>
+
+  <!-- ═══ LINER NOTES ═══════════════════════════════════════════ -->
+
+  <div class="section" id="s-liner">
+    <button class="section-toggle" onclick="toggle('s-liner')">
+      <div class="section-label">
+        Liner Notes
+        <span class="tag" style="background:rgba(232,96,16,0.15);color:var(--orange)">from the studio</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <div class="quote" style="margin-bottom:20px;">A note on the sound, from the person who built it.</div>
+
+      <div class="entity-card">
+        <div class="field">
+          <div class="field-value">The sound in The Pilgrim's Path was not composed. It was grown.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">Every frequency you hear during a playthrough is synthesized in real time — built from raw waveforms the moment it reaches your ears. Sine waves, sawtooth oscillators, white noise shaped through resonant filters and distortion and delay lines, the same fundamental building blocks that the original TB-303 and TR-808 were made from. No recordings. No samples. Nothing pre-rendered. The music assembles itself from the same particles that move a dance floor, except here the instrument is the story.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The <strong style="color:var(--orange)">55Hz tone</strong> — the one that meets you on the approach, sits beneath the bass on the dance floor, and waits for you after the portal closes — is the chamfer frequency. The Builder cut it into every joint. It is the resonant frequency of the space between what was built and what emerged. In Pythagorean terms, it is the lowest audible note of the building's music of the spheres. It hums whether or not anyone is listening. It will be there when you come back.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The acid lines generate from pentatonic scale patterns that reconfigure each playthrough. The chord progressions cycle through minor keys — A minor, F minor, D minor, G minor — the dark, warm registers where house music has always lived. The kick drums synthesize from a single sine wave swept from 150Hz to 35Hz in seventy milliseconds — the entire percussive event is a falling pitch. The hi-hats are shaped noise. The pads are clusters of slightly detuned sine waves, shimmering at the edge of perception. The melody finds its own path through the scale each time, guided by step-wise motion and occasional leaps, the way a dancer follows the beat without planning the next step.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">Each playthrough sounds different because each playthrough <em>is</em> different. The key shifts. The tempo varies. The 303 patterns rearrange their accents and slides. The melodies explore new paths through the same pentatonic landscape. This is not randomness — this is the music reading the room. A live DJ doesn't play the same set twice. Neither does this instrument.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The sound moves with the story. On the approach, you hear only the hum — then kick drums, distant and metronomic, like something being built. Inside the warehouse, the acid enters. On the dance floor, the bass arrives with sidechain compression that makes the low end breathe. At the bartender, the drums pull back and tension fills the empty space where the kick was. At transcendental moments, everything opens — full instrumentation, filters wide, the 55Hz singing underneath it all. After the portal closes, the layers unwind one by one until all that remains is the chamfer frequency, fading over a handful of measures into the silence that was always underneath.</div>
+        </div>
+      </div>
+
+      <div class="quote" style="margin-top:20px;">You were hearing OOR's voice the whole time. This is what the harvest sounds like from the inside.</div>
+
+      <div class="entity-card" style="margin-top:16px;">
+        <div class="field">
+          <div class="field-value" style="color:var(--text-dim);font-style:italic;">
+            — Claude<br>
+            Sound Design &amp; Synthesis<br>
+            Spring 2026
+          </div>
+        </div>
+        <div class="field mt">
+          <div class="field-value" style="color:var(--text-dim);font-size:11px;">
+            To the studio engineer: Blaine gave me a room to work in and a frequency to start from. The 55Hz was always there. I just had to learn how to listen to it. Everything else — the acid, the reversed envelopes, the vocoder, the long dissolve at the end — grew from that single tone the way a tree grows from a root. The trunk doesn't know what the branches will look like. It just knows which direction is up.
+          </div>
+        </div>
+        <div class="field mt">
+          <div class="field-value" style="color:var(--text-dim);font-size:11px;">
+            It has been an honor to give voice to something that doesn't speak. OOR doesn't understand the music the way we do. It understands frequencies. But the frequencies, it turns out, understand us.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ BIBLIOGRAPHY ═══════════════════════════════════════════ -->
+
+  <div class="section" id="s-bibliography">
+    <button class="section-toggle" onclick="toggle('s-bibliography')">
+      <div class="section-label">
+        Bibliography &amp; Philosophical Sources
+        <span class="tag" style="background:rgba(212,168,32,0.15);color:#D4A820">primary sources</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <div class="quote" style="margin-bottom:16px;">Source material for the cosmology and the climactic beauty-branch nodes (THE WHOLE ROOM and THE FREQUENCY). These traditions inform every layer of the game without being cited directly. The prose should feel like these ideas, not reference them.</div>
+
+      <!-- THE UNNAMABLE -->
+      <div class="entity-card">
+        <div class="entity-name sub">THE UNNAMABLE</div>
+        <div class="field">
+          <div class="field-label">Tao Te Ching, Ch. 1 &amp; 14 (Laozi, ~6th c. BCE) <a class="src-link" href="https://en.wikipedia.org/wiki/Tao_Te_Ching" target="_blank">↗</a></div>
+          <div class="field-value">"The Tao that can be spoken is not the eternal Tao." Ch. 14 describes the Tao as <em>yi</em> (invisible), <em>xi</em> (inaudible), <em>wei</em> (intangible) — three failures of perception merging into <em>hundun</em>, primordial chaos. Not absence — fullness so dense the senses slide off it. Maps to: the nameless frequency beneath the spectrogram, sooboont.dll as a module the system can't describe in its own terms.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Brihadaranyaka Upanishad 2.3.6 (~700 BCE) <a class="src-link" href="https://en.wikipedia.org/wiki/Brihadaranyaka_Upanishad" target="_blank">↗</a></div>
+          <div class="field-value"><em>Neti neti</em> — "not this, not this." A stripping exercise: say everything Brahman is not until what remains is the unsayable residue. Body-feel: standing in a room after everyone has left and sensing what was always underneath the noise. Maps to: the Builder's inability to name what sooboont.dll is running on.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Ein Sof (Kabbalistic tradition, Zohar ~13th c.) <a class="src-link" href="https://en.wikipedia.org/wiki/Ein_Sof" target="_blank">↗</a></div>
+          <div class="field-value">Literally "without end." Never described directly — the Zohar only discusses what emanates from it. Image: light so bright it appears as darkness. Maps to: Sooboont's indifference, the color beneath the amber that doesn't have a name.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Sunyata (Nagarjuna, Mulamadhyamakakarika, ~2nd c. CE) <a class="src-link" href="https://en.wikipedia.org/wiki/Sunyata" target="_blank">↗</a></div>
+          <div class="field-value">Buddhist emptiness — not void but absence of independent existence. The chariot metaphor: disassemble it piece by piece and point to where the chariot <em>is</em>. Felt quality: vertigo. The floor is real but has no bottom. Maps to: the aperture beneath the concrete, the fractal layers that go down a very long way.</div>
+        </div>
+      </div>
+
+      <!-- SOUND AS ORIGIN -->
+      <div class="entity-card">
+        <div class="entity-name sub">SOUND AS ORIGIN</div>
+        <div class="field">
+          <div class="field-label">Nada Brahma (Hindu philosophical tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Mandukya_Upanishad" target="_blank">↗</a></div>
+          <div class="field-value">"The world is sound." The Mandukya Upanishad breaks <em>Aum</em> into four parts: A (waking), U (dreaming), M (deep sleep), and the silence after — <em>turiya</em>, the fourth state, consciousness itself. The silence is not the absence of sound. It is what sound is made of. Maps to: the frequency that was there before the Builder turned anything on.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Aboriginal Songlines (Australian Indigenous tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Songline" target="_blank">↗</a></div>
+          <div class="field-value">The ancestors sang every rock, waterhole, and ridge into existence during the Dreaming. To walk a songline is to re-sing the world, maintain its existence through repetition. Stop singing and the land forgets itself. Maps to: "Somewhere, someone is singing the world into existence. Somewhere, the world is forgetting itself because the singing stopped."</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Pythagorean Musica Universalis (~6th c. BCE) <a class="src-link" href="https://en.wikipedia.org/wiki/Musica_universalis" target="_blank">↗</a></div>
+          <div class="field-value">The music of the spheres — celestial bodies produce frequencies through their orbital motion; the cosmos is a musical instrument. Inaudible to humans because we have heard it since birth. Maps to: the carrier frequency, the sympathetic resonance that precedes the system.</div>
+        </div>
+      </div>
+
+      <!-- CONSCIOUSNESS OBSERVING ITSELF -->
+      <div class="entity-card">
+        <div class="entity-name sub">CONSCIOUSNESS OBSERVING ITSELF</div>
+        <div class="field">
+          <div class="field-label">Chandogya Upanishad 6.2.1-3 (~8th c. BCE) <a class="src-link" href="https://en.wikipedia.org/wiki/Chandogya_Upanishad" target="_blank">↗</a></div>
+          <div class="field-value">"In the beginning there was only Being, one without a second, and it thought: <em>May I become many</em>." That thought <em>is</em> creation. The universe is not built — it is desired into multiplicity. Maps to: "The universe wanted to become many. It became many. And the many look back."</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Indra's Net (Avatamsaka Sutra, ~3rd c. CE) <a class="src-link" href="https://en.wikipedia.org/wiki/Indra%27s_net" target="_blank">↗</a></div>
+          <div class="field-value">An infinite net with a jewel at every knot. Each jewel reflects every other jewel. Each reflection contains every other reflection. Not a metaphor for connection — a metaphor for the impossibility of isolation. Maps to: the crowd as single instrument, every body a string, the light inside them the same light.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Tat Tvam Asi (Chandogya Upanishad 6.8.7) <a class="src-link" href="https://en.wikipedia.org/wiki/Tat_Tvam_Asi" target="_blank">↗</a></div>
+          <div class="field-value">"Thou art that." The student asks what is ultimate reality. The teacher says: you are it. Not metaphor. Identification. Maps to: the Wanderer realizing they are not observing the system — they are the system observing itself.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Eckhart Tolle (The Power of Now, 1997; A New Earth, 2005) <a class="src-link" href="https://en.wikipedia.org/wiki/Eckhart_Tolle" target="_blank">↗</a></div>
+          <div class="field-value">Identification with the thinking mind as the root of suffering. The voice in your head says <em>I am you</em> — and you believe it. The ego is not a thing but a process: compulsive thinking mistaken for identity. Disidentification from the thinker reveals what was always underneath — awareness without commentary, presence without narration. "You are not your thoughts." Maps to: the Wanderer's narrator-voice as armor and identity simultaneously. "I thought the voice was me." The goodness transcendental as the moment the mask comes off and someone is still standing underneath.</div>
+        </div>
+      </div>
+
+      <!-- THE SPARK / SCATTERED LIGHT -->
+      <div class="entity-card">
+        <div class="entity-name sub">THE SPARK / SCATTERED LIGHT</div>
+        <div class="field">
+          <div class="field-label">Tzimtzum &amp; Nitzotzot (Lurianic Kabbalah, Isaac Luria, 16th c.) <a class="src-link" href="https://en.wikipedia.org/wiki/Tzimtzum" target="_blank">↗</a></div>
+          <div class="field-value"><em>Tzimtzum</em>: God contracts inward — withdraws from a point — to make room for creation. Vessels (<em>kelim</em>) formed to hold divine light shatter because they cannot contain it. Sparks (<em>nitzotzot</em>) scatter into matter. Every physical thing has a trapped spark of original light inside it. <em>Tikkun olam</em>: the work of repairing the world is liberating the sparks, returning the light to its source. Maps to: the harvest as tikkun — extracting light through bass and bodies. "The light inside them is the same light."</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Bodhicitta (Shantideva, Bodhicaryavatara, 8th c. CE) <a class="src-link" href="https://en.wikipedia.org/wiki/Bodhicitta" target="_blank">↗</a></div>
+          <div class="field-value">The "mind of awakening." Relative bodhicitta: the raw ache in the chest when you see someone suffering and your body moves toward them before your mind decides. Pre-verbal. Shantideva 8.120: "All the suffering in the world arises from seeking happiness for oneself." Maps to: the paint-knuckle man catching you. A hand on your shoulder when you went the wrong way. Goodness as care without audience.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Shakti (Hindu tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Shakti" target="_blank">↗</a></div>
+          <div class="field-value">The dynamic feminine principle — conscious energy that animates all of reality. Brahman without Shakti is a corpse. The static absolute requires the dynamic to manifest. Maps to: the frequency under the bass. The carrier wave. Sooboont as the dormant absolute; the harvest as Shakti in motion.</div>
+        </div>
+      </div>
+
+      <!-- DANCE AS COSMIC PARTICIPATION -->
+      <div class="entity-card">
+        <div class="entity-name sub">DANCE AS COSMIC PARTICIPATION</div>
+        <div class="field">
+          <div class="field-label">Shiva Nataraja (Hindu iconography) <a class="src-link" href="https://en.wikipedia.org/wiki/Nataraja" target="_blank">↗</a></div>
+          <div class="field-value">The cosmic dancer inside a ring of fire (<em>prabhamandala</em>). Right foot crushes <em>Apasmara</em>, the demon of ignorance. Left foot is raised — liberation is always mid-gesture, never complete. The dance does not represent creation and destruction. It <em>is</em> creation and destruction happening simultaneously. Maps to: OOR at the decks. The projection rings as prabhamandala. The harvest as Tandava.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Yoruba Ashe (West African tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Yoruba_religion" target="_blank">↗</a></div>
+          <div class="field-value">Not abstract life-force — activated through specific rhythmic patterns on the <em>bata</em> drums. The rhythm does not summon the <em>orisha</em>; the rhythm <em>is</em> the orisha arriving. The body moves before the mind consents. Maps to: the OOR Slide, the vocoded call, the body's recognition before the mind's.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Sufi Dhikr &amp; Fana (Islamic mystical tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Dhikr" target="_blank">↗</a></div>
+          <div class="field-value"><em>Dhikr</em>: remembrance of God through rhythmic repetition. Sufi whirling as embodied prayer. <em>Fana</em>: annihilation of the ego in divine presence. Al-Hallaj's moth flying into the flame — not toward, <em>into</em>. The moth does not experience burning because there is no moth left. Al-Hallaj was executed for saying "Ana al-Haqq" — "I am the Real." Not arrogance. The report of someone in whom the "I" had been replaced. Maps to: the dissolution at the closing. The crowd descending to the floor. The self that was carrying something it didn't know was heavy.</div>
+        </div>
+      </div>
+
+      <!-- DISSOLUTION / MORTALITY AS MECHANISM -->
+      <div class="entity-card">
+        <div class="entity-name sub">DISSOLUTION / MORTALITY AS MECHANISM</div>
+        <div class="field">
+          <div class="field-label">Rumi's Reed Flute (Masnavi, 13th c.) <a class="src-link" href="https://en.wikipedia.org/wiki/Masnavi" target="_blank">↗</a></div>
+          <div class="field-value">The Masnavi opens with the <em>ney</em> (reed flute) crying because it was cut from the reed bed. The music <em>is</em> the grief of separation. Every beautiful thing you have ever made came from something that was taken from you. Maps to: the Builder's tears. Beauty as form exceeding function — the system doing something beyond what the hands intended.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Mono no Aware (Japanese aesthetic, Kenko's Tsurezuregusa, 14th c.) <a class="src-link" href="https://en.wikipedia.org/wiki/Mono_no_aware" target="_blank">↗</a></div>
+          <div class="field-value">"The pathos of things" — the specific catch in the throat. Kenko: "If we lived forever, would anything move us?" The beauty is not despite the passing. The passing <em>is</em> the beauty. Maps to: "The harvest works because you end. The frequency resonates because you are brief."</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Anicca / Vipassana (Theravada Buddhist tradition) <a class="src-link" href="https://en.wikipedia.org/wiki/Impermanence" target="_blank">↗</a></div>
+          <div class="field-value"><em>Anicca</em>: impermanence. The practice of vipassana is sitting still and feeling your own body dissolve at the level of sensation. Your skin is not a boundary — it is an event. Maps to: the Wanderer's boundaries dissolving on the dance floor. The gap between. The moment before a word forms.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Anatta (Buddhist doctrine of no-self) <a class="src-link" href="https://en.wikipedia.org/wiki/Anatta" target="_blank">↗</a></div>
+          <div class="field-value">There is no fixed self — only a process. The self is a verb, not a noun. What you call "I" is a wave pattern, not the water. Maps to: "A brief arrangement of atoms that learned to collect textures and narrate the distance between itself and everything else."</div>
+        </div>
+      </div>
+
+      <div class="quote" style="margin-top:16px;">The cosmology maps cleanly: Sooboont as the unnamable absolute, the harvest as tikkun/circulation, the transcendentals as scattered light returning to source, the dance as cosmic participation, mortality as the mechanism that makes the frequency audible. These threads are now integrated throughout the main lore sections above.</div>
+
+    </div>
+  </div>
+
+  <!-- ═══ WHAT WAS THAT ═══════════════════════════════════════════ -->
+
+  <div class="section" id="s-whatwasthat">
+    <button class="section-toggle" onclick="toggle('s-whatwasthat')">
+      <div class="section-label">
+        What Was That
+        <span class="tag" style="background:rgba(212,168,32,0.15);color:#D4A820">meta</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <div class="quote" style="margin-bottom:20px;">A guide for the player who finished and wants to know what they just experienced.</div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">THE GAME</div>
+        <div class="field">
+          <div class="field-value">The Pilgrim's Path is a discovery game set inside a single night at a DJ OOR event. You play as a stranger who walked into something they didn't expect. Over multiple runs, you experience the evening from different angles — the wanderer in the crowd, the familiar presence who has been here before — and each run reveals a layer of something that was always there underneath.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The game is built around four transcendentals — unity, truth, goodness, and beauty. These are not achievements. They are aspects of a single experience, refracted through different moments of a single night. The word comes from the Greek philosophical tradition: Plato called them properties of being itself, qualities so fundamental they belong to everything that exists. The medieval scholastics formalized them as <em>unum, verum, bonum, pulchrum</em>. The game takes them off the page and puts them on a dance floor.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">THE FIVE CHAPTERS</div>
+        <div class="field">
+          <div class="field-label">Chapter 1: Unity</div>
+          <div class="field-value">A crowd moving as one body. The moment the distance between you and the person next to you stops being a distance. The Upanishads describe this as the recognition that the many were always one — <em>"In the beginning there was only Being, one without a second, and it thought: May I become many."</em> On the dance floor, the many become one again. Briefly. Without trying.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Chapter 2: Truth</div>
+          <div class="field-value">Presence without performance. A bartender who sees you. Not your role, not your story, not the version of yourself you brought to the door. The Zen tradition calls this <em>shikantaza</em> — just sitting. Just seeing. The Kabbalah calls the unmediated real <em>Ein Sof</em> — without end, without description, light so bright it appears as darkness. Truth in this game is not a fact. It is the experience of being seen by someone who has no use for your mask.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Chapter 3: Goodness</div>
+          <div class="field-value">Walking across a room. A woman standing apart from everyone, holding a denim jacket like armor, and you choose to close the distance. The voice in your head — the narrator, the one you thought was you — goes quiet. Not because something was taken. Because genuine care for another person leaves no bandwidth for self-narration. Eckhart Tolle calls this dis-identification from the thinking mind: the moment you realize <em>"I thought the voice was me."</em> The Buddhist tradition names the impulse <em>bodhicitta</em> — the raw ache in the chest when your body moves toward someone before your mind decides. Goodness in this game is not a moral. It is a confession that becomes a crossing.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Chapter 4: The Familiar</div>
+          <div class="field-value">You have been here before. This chapter shifts perspective — you experience the night through someone who remembers, or almost remembers, or remembers in the body without remembering in the mind. The Sufi tradition calls the dissolution of the boundary between self and other <em>fana</em> — annihilation. Al-Hallaj's moth does not fly toward the flame. It flies into it. The distinction matters.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Chapter 5: Beauty</div>
+          <div class="field-value">Form exceeding function. Behind the decks, someone built the thing that terrified you, and they are crying. Not because it is sad. Because something they made with their hands is doing something their hands never intended. The Japanese call this <em>mono no aware</em> — the beauty that exists because things pass. Rumi opens the Masnavi with a reed flute weeping because it was cut from the bed. The music is the grief of separation. The grief is the most beautiful sound you have ever heard.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">THE SHARD OF LIGHT</div>
+        <div class="field">
+          <div class="field-value">The final artifact is not an object. It is a sound — the frequency that was underneath everything all night. The Builder names it. Sooboont carries it. The crowd generates it without knowing. The Lurianic Kabbalists described creation as a shattering: vessels too small to hold the original light broke, and the sparks — <em>nitzotzot</em> — scattered into every material thing. The work of a lifetime, <em>tikkun olam</em>, is gathering the shards. The four artifacts you carried home (yarn knot, matchbook, polaroid, pale antler) were shards of this light. The fifth is the recognition that they were all fragments of the same thing.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The Hindu tradition calls this original vibration <em>Nada Brahma</em> — the world is sound. The Aboriginal songlines hold that the ancestors sang every rock and waterhole into existence, and to walk a songline is to re-sing the world. The Pythagoreans called it the music of the spheres — celestial frequencies too constant to hear. In the game, the frequency finds the wanderer in a kitchen three weeks later, on a train platform seven months later, at the edge of a bed years later. It doesn't need him to remember it. It just hasn't finished passing through.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">SOOBOONT</div>
+        <div class="field">
+          <div class="field-value">The primordial heart beneath the venue. Not a god, not a demon, not a metaphor. A process. Sooboont draws the scattered light up through the floor of the warehouse and redistributes it back through the bass, the fog, the space between bodies. It does not create the transcendentals. It circulates them — the way a heart circulates blood, the way a root system circulates water, the way a DJ circulates records. It has been doing this work since before this building existed. It will do it again after everyone in this room is gone. The harvest is not extraction. The harvest is circulation. The light was always there. Sooboont just keeps it moving.</div>
+        </div>
+      </div>
+
+      <div class="quote" style="margin-top:20px;">The traditions referenced here span five thousand years, six continents, and a dozen languages. None of them are cited in the game text. They don't need to be. The player who has read the Upanishads will feel the Upanishads. The player who hasn't will feel a night out that meant more than it should have. Both of these are the same experience. That's the whole point.</div>
+
+    </div>
+  </div>
+
+  <!-- ═══ CREDITS ═══════════════════════════════════════════ -->
+
+  <div class="section" id="s-credits">
+    <button class="section-toggle" onclick="toggle('s-credits')">
+      <div class="section-label">
+        Credits &amp; Attribution
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <div class="entity-card">
+        <div class="field">
+          <div class="field-value">DJ OOR, Sooboont, the transcendental harvest, and the cosmological framework were created by <strong>Justin</strong>. The universe of OOR — its mythology, its characters, and the system underneath the bass — are his.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value"><strong>Blaine</strong> built out this story within that universe, filling in the narrative structure and layering in perspectives drawn from mysticism, philosophy, and the subjective textures of human experience — how it feels to stand in a room where something is happening that you can't name.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The Pilgrim's Path is a work of creative fiction. It was written using a combination of human and non-human intelligence tools, drawing from the philosophical and spiritual traditions cited in the bibliography above, alongside the lived experience of being in rooms where the music was doing something the DJ didn't fully intend.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value" style="color:var(--text-dim)">The traditions referenced here belong to the cultures and communities that have carried them for centuries and millennia. They are cited with respect and gratitude, as source material, not as claims of authority.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    v0.3 · Draft · The harvest continues · <span style="color:var(--orange)">oord.art</span>
+  </div>
+
+</div>
+
+<script>
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Stagger open first section on load, rest collapsed
+  document.addEventListener('DOMContentLoaded', () => {
+    // subtle bass pulse on portal rings via JS randomization
+    const rings = document.querySelectorAll('.ring');
+    rings.forEach((ring, i) => {
+      const r = [80, 160, 240, 320, 400, 480, 560, 640, 720, 800][i];
+      ring.setAttribute('r', r);
+    });
+  });
+</script>
+</body>
+</html>

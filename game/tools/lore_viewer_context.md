@@ -336,7 +336,7 @@ Pan's Labyrinth, Annihilation, The King in Yellow, Invisible Cities, Ficciones.
 
 ### Spiritual references
 
-Buddhist non-self, Gnostic cosmology, Kabbalah.
+Lurianic Kabbalah, Upanishads, Buddhist anatta/sunyata, Sufi fana/dhikr, Aboriginal songlines, Yoruba ashe, Nada Brahma, Rumi's Masnavi, Mono no aware, Shiva Nataraja, Eckhart Tolle.
 
 ---
 

@@ -51,6 +51,110 @@
       z-index: 9999;
     }
 
+    /* ─── CHARACTER REGISTER ─────────────────────────── */
+    body.char-familiar {
+      --bg: #06060c;
+      --text: #b0b8c8;
+      --text-dim: #606878;
+      --text-bright: #c8d0e0;
+      --border: #181820;
+      --border-warm: #282838;
+    }
+    body.char-familiar .node-card {
+      border-color: #1a1a28;
+    }
+    body.char-familiar .choice-btn {
+      border-color: #282838;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    body.char-familiar .choice-btn:hover {
+      border-color: #505068;
+      background: rgba(80,80,120,0.08);
+    }
+    body.char-familiar .choice-icon {
+      font-size: 11px;
+    }
+    .rod-readout {
+      font-size: 10px;
+      font-family: 'DM Mono', monospace;
+      color: #484858;
+      letter-spacing: 0.08em;
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(80,80,120,0.1);
+      font-style: italic;
+      transition: opacity 0.6s ease;
+    }
+    .rod-readout::before {
+      content: '◉ ';
+      color: #605830;
+      font-style: normal;
+    }
+    .rod-camera-wrap {
+      margin-top: 20px;
+      opacity: 0;
+      animation: rod-cam-fade 2s ease forwards;
+    }
+    @keyframes rod-cam-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .rod-scan-label {
+      font-size: 9px;
+      font-family: 'DM Mono', monospace;
+      color: #484858;
+      letter-spacing: 0.1em;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .rod-scan-label::before {
+      content: '◉ ';
+      color: #605830;
+      font-style: normal;
+    }
+    .rod-scan-result {
+      margin-top: 10px;
+      margin-bottom: 0;
+      opacity: 0;
+      animation: rod-cam-fade 1.5s ease 3s forwards;
+    }
+    .rod-scan-viewport {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(80,80,120,0.15);
+      margin: 0 auto;
+    }
+    .rod-scan-viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) brightness(0.4) contrast(1.6);
+      transform: scaleX(-1);
+    }
+    .rod-scanline {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(96,88,48,0.6);
+      box-shadow: 0 0 8px rgba(96,88,48,0.3);
+      animation: rod-scan-sweep 2.5s ease-in-out infinite;
+    }
+    @keyframes rod-scan-sweep {
+      0% { top: 0; }
+      50% { top: 100%; }
+      100% { top: 0; }
+    }
+    .rod-camera-denied {
+      border-top: none;
+      margin-top: 4px;
+      padding-top: 0;
+    }
+
     /* ─── TEMPERATURE ─────────────────────────────────── */
     .temp-cold  .node-card  { border-color: #1a2030; }
     .temp-cool  .node-card  { border-color: #1e1e28; }
@@ -491,6 +595,79 @@
       color: var(--text-bright);
     }
 
+    .choice-btn.choice-highlight-unity {
+      border-color: var(--unity);
+      color: var(--bg);
+      background: rgba(64,128,208,0.85);
+      font-weight: 500;
+      animation: gatedGlowUnity 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-highlight-unity:hover {
+      background: rgba(64,128,208,0.95);
+      color: var(--bg);
+    }
+    .choice-btn.choice-highlight-unity .choice-icon {
+      color: var(--bg);
+      opacity: 0.6;
+    }
+
+    .choice-btn.choice-highlight-truth {
+      border-color: var(--truth);
+      color: var(--bg);
+      background: rgba(212,168,32,0.85);
+      font-weight: 500;
+      animation: gatedGlowTruth 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-highlight-truth:hover {
+      background: rgba(212,168,32,0.95);
+      color: var(--bg);
+    }
+    .choice-btn.choice-highlight-truth .choice-icon {
+      color: var(--bg);
+      opacity: 0.6;
+    }
+
+    .choice-btn.choice-highlight-goodness {
+      border-color: var(--goodness);
+      color: var(--bg);
+      background: rgba(64,160,96,0.85);
+      font-weight: 500;
+      animation: gatedGlowGoodness 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-highlight-goodness:hover {
+      background: rgba(64,160,96,0.95);
+      color: var(--bg);
+    }
+    .choice-btn.choice-highlight-goodness .choice-icon {
+      color: var(--bg);
+      opacity: 0.6;
+    }
+
+    .choice-btn.choice-highlight-beauty {
+      border-color: var(--beauty);
+      color: var(--bg);
+      background: rgba(208,72,112,0.85);
+      font-weight: 500;
+      animation: gatedGlowBeauty 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-highlight-beauty:hover {
+      background: rgba(208,72,112,0.95);
+      color: var(--bg);
+    }
+    .choice-btn.choice-highlight-beauty .choice-icon {
+      color: var(--bg);
+      opacity: 0.6;
+    }
+
+    .choice-btn.choice-highlight-exit {
+      border-color: rgba(180, 60, 60, 0.5);
+    }
+    .choice-btn.choice-highlight-exit:hover {
+      border-color: rgba(180, 60, 60, 0.8);
+      background: rgba(180, 60, 60, 0.06);
+      color: var(--text-bright);
+    }
+
     .choice-btn.choice-gated-new {
       border-color: var(--yellow);
       color: var(--bg);
@@ -534,27 +711,34 @@
       50% { box-shadow: 0 0 24px rgba(212,168,32,0.35); }
     }
 
-    .choice-btn.choice-gated-blank-key {
+    .choice-btn.choice-gated-polaroid {
       border-color: var(--goodness);
       background: rgba(64,160,96,0.85);
       animation: gatedGlowGoodness 2.5s ease-in-out infinite;
     }
-    .choice-btn.choice-gated-blank-key:hover { background: rgba(64,160,96,0.95); }
+    .choice-btn.choice-gated-polaroid:hover { background: rgba(64,160,96,0.95); }
     @keyframes gatedGlowGoodness {
       0%, 100% { box-shadow: 0 0 12px rgba(64,160,96,0.15); }
       50% { box-shadow: 0 0 24px rgba(64,160,96,0.35); }
     }
 
-    .choice-btn.choice-gated-business-card {
+    .choice-btn.choice-gated-shard-of-light {
       border-color: var(--beauty);
       background: rgba(208,72,112,0.85);
       animation: gatedGlowBeauty 2.5s ease-in-out infinite;
     }
-    .choice-btn.choice-gated-business-card:hover { background: rgba(208,72,112,0.95); }
+    .choice-btn.choice-gated-shard-of-light:hover { background: rgba(208,72,112,0.95); }
     @keyframes gatedGlowBeauty {
       0%, 100% { box-shadow: 0 0 12px rgba(208,72,112,0.15); }
       50% { box-shadow: 0 0 24px rgba(208,72,112,0.35); }
     }
+
+    .choice-btn.choice-gated-pale-antler {
+      border-color: var(--beauty);
+      background: rgba(208,72,112,0.85);
+      animation: gatedGlowBeauty 2.5s ease-in-out infinite;
+    }
+    .choice-btn.choice-gated-pale-antler:hover { background: rgba(208,72,112,0.95); }
 
     .choice-icon {
       display: inline-block;
@@ -884,6 +1068,90 @@
       margin-bottom: 18px;
       text-transform: uppercase;
       animation: fadeUp 0.5s ease 0.5s both;
+    }
+
+    /* ─── MILESTONE TRACKER ──────────────────────────── */
+    .milestone-tracker {
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.01);
+    }
+    .milestone-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .milestone-bar-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .milestone-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--unity), var(--truth), var(--goodness), var(--beauty));
+      transition: width 0.6s ease;
+    }
+    .milestone-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .milestone-chevron {
+      font-size: 10px;
+      color: var(--text-dim);
+      transition: transform 0.2s;
+    }
+    .milestone-tracker.open .milestone-chevron { transform: rotate(180deg); }
+    .milestone-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin 0.3s ease;
+    }
+    .milestone-tracker.open .milestone-detail {
+      max-height: 400px;
+      margin-top: 16px;
+    }
+    .milestone-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .milestone-item:last-child { border-bottom: none; }
+    .milestone-check {
+      font-size: 11px;
+      width: 16px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .milestone-check.done { color: var(--yellow); }
+    .milestone-check.pending { color: rgba(255,255,255,0.12); }
+    .milestone-name { color: var(--text); }
+    .milestone-name.done { opacity: 0.6; }
+    .milestone-desc {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-left: auto;
+      text-align: right;
+    }
+    .milestone-hint {
+      font-size: 11px;
+      color: var(--orange);
+      font-style: italic;
+      padding: 8px 0 2px 26px;
+      opacity: 0.8;
     }
 
     /* ─── DEV MODE ───────────────────────────────────── */
@@ -1411,6 +1679,30 @@
       margin-bottom: 16px;
       font-style: italic;
     }
+    .transcendence-note {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+    .transcendence-note p { margin: 0 0 12px; }
+    .transcendence-note p:last-of-type { margin-bottom: 0; }
+    .outcome-source-link {
+      margin-top: 16px;
+      font-size: 10px;
+      font-style: normal;
+      letter-spacing: 0.08em;
+    }
+    .outcome-source-link a {
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .outcome-source-link a:hover { color: var(--yellow); }
+    .outcome-card.transcendence {
+      border-left-color: rgba(212,168,32,0.3);
+    }
 
     .outcome-unlock {
       font-size: 10px;
@@ -1559,6 +1851,8 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       animation: fadeUp 0.6s ease;
     }
 
@@ -1835,6 +2129,25 @@
     .load-error button:hover { border-color: var(--orange); color: var(--orange); }
 
     /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 420px) {
+      .wrap { padding: 0 16px 140px; }
+      .node-card { padding: 22px 18px; }
+      .choice-btn { padding: 14px 14px; font-size: 12.5px; }
+      .choice-locked { padding: 14px 16px; }
+      .intro-modal { padding: 16px; align-items: flex-start; padding-top: 40px; }
+      .intro-inner { max-width: 100%; }
+      .intro-title { font-size: 24px; }
+      .intro-body { font-size: 12.5px; }
+      .intro-hints { padding: 14px 14px; }
+      .intro-hint { font-size: 11.5px; }
+      .intro-begin { padding: 14px 20px; }
+      .game-char-name { font-size: 17px; }
+      .node-text p { font-size: 13.5px; }
+      .arrival { font-size: 12.5px; }
+      .conditional { font-size: 12.5px; padding: 10px 12px; }
+      .oor-action { font-size: 12.5px; padding: 10px 12px; }
+    }
+
     @media (min-width: 500px) {
       .char-cards {
         display: grid;
@@ -1865,29 +2178,11 @@
     <div class="intro-inner">
       <div class="intro-title">Before You Go In</div>
       <div class="intro-body">
-        <p>This is a short story you play through by making choices. Your first run takes about 5 minutes. There are no wrong answers.</p>
-        <p>When you finish, you'll unlock new paths and perspectives. The same evening, experienced differently. Some choices only appear after you've carried something home from a previous run.</p>
-      </div>
-      <div class="intro-hints">
-        <div class="intro-hint">
-          <span class="intro-hint-icon">→</span>
-          <span class="intro-hint-text"><strong>Continue</strong> moves the story forward</span>
-        </div>
-        <div class="intro-hint">
-          <span class="intro-hint-icon" style="color:var(--text-dim)">↩</span>
-          <span class="intro-hint-text"><strong>Side details</strong> loop back to the main path</span>
-        </div>
-        <div class="intro-hint">
-          <span class="intro-hint-icon" style="color:var(--orange)">⑂</span>
-          <span class="intro-hint-text"><strong>Branches</strong> change where the story goes</span>
-        </div>
-        <div class="intro-hint">
-          <span class="intro-hint-icon" style="color:var(--yellow)">◈</span>
-          <span class="intro-hint-text"><strong>Gold choices</strong> are new paths unlocked by previous runs</span>
-        </div>
+        <p>This is a short story told across five chapters, each about 15 minutes long. Four chapters follow the Wanderer. A fifth unlocks a new perspective entirely.</p>
+        <p>Read it the way you'd read a short story — one chapter at a time, at your own pace. There are no wrong answers.</p>
       </div>
       <div class="intro-body">
-        <p>After each run, come back and choose the same character again. New options will appear. When you've seen enough of one perspective, try another.</p>
+        <p>When you finish a chapter, come back and choose the same character again. New choices will appear — look for the <span style="color:var(--unity);font-weight:500">glowing options</span> that unlock as you go deeper. Each run through the same evening reveals something different.</p>
       </div>
       <button class="intro-begin" id="intro-begin-btn">Enter the evening</button>
     </div>
@@ -1900,9 +2195,9 @@
       <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle :)</div>
     </header>
     <div class="divider"></div>
+    <div id="progress-section"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
-    <div id="progress-section"></div>
     <div class="legend">
       <span class="legend-item"><span class="legend-icon">→</span> continue</span>
       <span class="legend-item"><span class="legend-icon">↩</span> optional detail</span>
@@ -1912,7 +2207,7 @@
     <div style="margin-top: 24px; text-align: right;">
       <button type="button" class="select-reset" id="reset-btn" onclick="confirmReset()">reset all progress</button>
     </div>
-    <div class="version-tag">v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala</div>
+    <div class="version-tag">v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
   </div>
 
   <!-- ─── GAME SCREEN ─────────────────────────────────── -->
@@ -1968,6 +2263,7 @@
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 
 const STORAGE_KEY = 'pilgrims_path_state';
+const SESSION_START = Date.now();
 
 const NODE_FILES = {
   wanderer: 'story_nodes/wanderer_nodes.json',
@@ -1994,16 +2290,16 @@ const CHAR_DEFS = [
   {
     id:            'wanderer',
     display_name:  'The Wanderer',
-    tagline:       "You weren't going here.",
+    tagline:       "You're lost. It doesn't matter now. You're here instead.",
     locked_msg:    null,
     unlock:        null
   },
   {
     id:            'familiar',
     display_name:  'The Familiar',
-    tagline:       'You have been here before.',
+    tagline:       'They are sick and do not know it.',
     locked_msg:    'This perspective has not opened yet.',
-    unlock:        { has_artifact: 'matchbook' }
+    unlock:        { has_artifact: 'polaroid' }
   },
   {
     id:            'builder',
@@ -2017,18 +2313,16 @@ const CHAR_DEFS = [
 const ARTIFACT_NAMES = {
   yarn_knot:      'Yarn Knot',
   matchbook:      'Matchbook',
-  blank_key: 'Polaroid',
-  business_card:  'Business Card',
-  heat_sink:      'Heat Sink',
+  polaroid: 'Polaroid',
+  shard_of_light: 'Shard of Light',
   pale_antler:    'Pale Antler'
 };
 
 const ARTIFACT_DESCRIPTIONS = {
   yarn_knot:      'A strand of yarn, warm to the touch. Pulled from something larger.',
   matchbook:      'Plain card stock with a message only you can read. Warm.',
-  blank_key: 'A polaroid, still developing. Faces from tonight — the ones who stayed.',
-  business_card:  'Plain card stock, warm. One side reads oord.art in small type. The ink hasn\'t dried — or it did, and then started again.',
-  heat_sink:      'Warm metal of unknown origin. Carries a frequency — the builder\'s signature.',
+  polaroid: 'A polaroid, still developing. Faces from tonight — the ones who stayed.',
+  shard_of_light: 'A shard of the original light. Carried as sound. Held the way you hold a breath — gently, knowing it\'s already leaving.',
   pale_antler:    'What remains of something that dissolved. Still faintly resonant.'
 };
 
@@ -2058,6 +2352,20 @@ function loadPersistent() {
   if (!Array.isArray(persistent.flags))                persistent.flags = [];
   if (!Array.isArray(persistent.transcendentals))      persistent.transcendentals = [];
   if (typeof persistent.runs !== 'number')             persistent.runs = 0;
+  if (typeof persistent.nodes_visited !== 'number')    persistent.nodes_visited = 0;
+  if (!Array.isArray(persistent.completed_chapters)) {
+    persistent.completed_chapters = [];
+    if (persistent.artifacts.includes('yarn_knot'))       persistent.completed_chapters.push('unity');
+    if (persistent.artifacts.includes('matchbook'))       persistent.completed_chapters.push('truth');
+    if (persistent.artifacts.includes('polaroid'))        persistent.completed_chapters.push('goodness');
+    if (persistent.artifacts.includes('shard_of_light'))  persistent.completed_chapters.push('beauty');
+    if (persistent.completed_characters.includes('familiar')) persistent.completed_chapters.push('familiar');
+    savePersistent();
+  }
+  if (!persistent.first_play) {
+    persistent.first_play = new Date().toISOString();
+    savePersistent();
+  }
 }
 
 function savePersistent() {
@@ -2150,6 +2458,7 @@ function esc(str) {
 // ─── CHARACTER SELECT ─────────────────────────────────────────────────────────
 
 function showSelectScreen() {
+  killCamera();
   document.getElementById('select-screen').hidden = false;
   document.getElementById('game-screen').hidden   = true;
   document.getElementById('state-bar').hidden     = true;
@@ -2169,11 +2478,29 @@ function renderCharCards() {
     card.className = 'char-card ' + (unlocked ? 'available' : 'locked');
     if (completed) card.classList.add('completed');
 
+    let statusNote = '';
+    if (completed && def.id === 'wanderer') {
+      const wandererSteps = [
+        { ch: 1, id: 'unity',    hint: 'stay on the dance floor' },
+        { ch: 2, id: 'truth',    hint: 'the bouncer remembers you' },
+        { ch: 3, id: 'goodness', hint: 'someone is by the loading dock' },
+        { ch: 5, id: 'beauty',   hint: 'look behind the speakers' }
+      ];
+      const next = wandererSteps.find(s => !persistent.completed_chapters.includes(s.id));
+      if (!next) {
+        statusNote = '<div class="char-completed-note">all paths walked</div>';
+      } else {
+        statusNote = `<div class="char-completed-note">chapter ${next.ch} · ${next.hint}</div>`;
+      }
+    } else if (completed) {
+      statusNote = '<div class="char-completed-note">completed</div>';
+    }
+
     if (unlocked) {
       card.innerHTML =
         `<div class="char-name">${esc(def.display_name)}</div>` +
         `<div class="char-tagline">"${esc(def.tagline)}"</div>` +
-        (completed ? `<div class="char-completed-note">completed</div>` : '');
+        statusNote;
       card.addEventListener('click', () => loadCharacter(def.id));
     } else {
       card.innerHTML =
@@ -2210,21 +2537,117 @@ function renderArtifacts() {
 
 function renderProgress() {
   const el = document.getElementById('progress-section');
-  const unlocked = CHAR_DEFS.filter(c => isUnlocked(c.id)).length;
-  const total = CHAR_DEFS.length;
-  if (unlocked >= total && persistent.runs === 0) {
-    el.innerHTML = '';
+  if (persistent.runs === 0) {
+    el.innerHTML = '<div class="progress-note">Begin your first evening.</div>';
     return;
   }
-  let msg = '';
-  if (persistent.runs === 0) {
-    msg = 'Begin your first evening.';
-  } else if (unlocked < total) {
-    msg = `${unlocked} of ${total} perspectives unlocked. Keep playing to discover more.`;
-  } else {
-    msg = `All ${total} perspectives unlocked. ${persistent.runs} evening${persistent.runs !== 1 ? 's' : ''} experienced.`;
+
+  const chapters = [
+    {
+      id: 'unity',
+      num: 1,
+      name: 'Unity',
+      desc: 'many bodies, one motion',
+      done: persistent.completed_chapters.includes('unity')
+    },
+    {
+      id: 'truth',
+      num: 2,
+      name: 'Truth',
+      desc: 'presence without performance',
+      done: persistent.completed_chapters.includes('truth')
+    },
+    {
+      id: 'goodness',
+      num: 3,
+      name: 'Goodness',
+      desc: 'care without audience',
+      done: persistent.completed_chapters.includes('goodness')
+    },
+    {
+      id: 'familiar',
+      num: 4,
+      name: 'The Familiar',
+      desc: 'you have been here before',
+      done: persistent.completed_chapters.includes('familiar')
+    },
+    {
+      id: 'beauty',
+      num: 5,
+      name: 'The Conclusion',
+      desc: 'form exceeding function',
+      done: persistent.completed_chapters.includes('beauty')
+    }
+  ];
+
+  const completed = chapters.filter(m => m.done).length;
+  const total = chapters.length;
+  const pct = Math.round((completed / total) * 100);
+
+  // determine hint for next step
+  let hint = '';
+  const hasUnity = persistent.transcendentals.includes('unity');
+  const hasTruth = persistent.transcendentals.includes('truth');
+  const hasGoodness = persistent.transcendentals.includes('goodness');
+  const hasFamiliar = persistent.completed_characters.includes('familiar');
+  const hasBeauty = persistent.transcendentals.includes('beauty');
+
+  if (completed >= total) {
+    hint = '';
+  } else if (!hasUnity) {
+    hint = 'Begin again as the Wanderer. Stay on the dance floor.';
+  } else if (!hasTruth) {
+    hint = 'Begin again as the Wanderer. The bouncer remembers you.';
+  } else if (!hasGoodness) {
+    hint = 'Begin again as the Wanderer. Someone is by the loading dock.';
+  } else if (!hasFamiliar) {
+    hint = 'A new perspective has opened. Try the Familiar.';
+  } else if (!hasBeauty) {
+    hint = 'Return to the DJ booth as the Wanderer. Look behind the speakers.';
   }
-  el.innerHTML = `<div class="progress-note">${esc(msg)}</div>`;
+
+  let html = '<div class="milestone-tracker" id="milestone-tracker">';
+  html += '<div class="milestone-bar-wrap" id="milestone-toggle">';
+  html += `<div class="milestone-label">${completed} of ${total} chapters completed</div>`;
+  html += `<div class="milestone-bar-track"><div class="milestone-bar-fill" style="width:${pct}%"></div></div>`;
+  html += '<span class="milestone-chevron">▾</span>';
+  html += '</div>';
+
+  html += '<div class="milestone-detail">';
+  let nextShown = false;
+  chapters.forEach(m => {
+    if (m.done) {
+      html += '<div class="milestone-item">';
+      html += `<span class="milestone-check done">◆</span>`;
+      html += `<span class="milestone-name done">${esc(m.name)}</span>`;
+      html += `<span class="milestone-desc">${esc(m.desc)}</span>`;
+      html += '</div>';
+    } else if (!nextShown) {
+      nextShown = true;
+      html += '<div class="milestone-item">';
+      html += `<span class="milestone-check pending">◇</span>`;
+      html += `<span class="milestone-name">${esc(m.name)}</span>`;
+      html += `<span class="milestone-desc">${esc(m.desc)}</span>`;
+      html += '</div>';
+    } else {
+      html += '<div class="milestone-item">';
+      html += `<span class="milestone-check pending">◇</span>`;
+      html += `<span class="milestone-name" style="opacity:0.3">???</span>`;
+      html += '</div>';
+    }
+  });
+  if (hint) {
+    html += `<div class="milestone-hint">${esc(hint)}</div>`;
+  }
+  html += '</div></div>';
+
+  el.innerHTML = html;
+
+  const toggle = document.getElementById('milestone-toggle');
+  const tracker = document.getElementById('milestone-tracker');
+  if (toggle && tracker) {
+    toggle.addEventListener('click', () => tracker.classList.toggle('open'));
+  }
 }
 
 // ─── CHOICE CLASSIFICATION ───────────────────────────────────────────────────
@@ -2346,6 +2769,7 @@ function goToSelect() {
 }
 
 function restartCharacter() {
+  killCamera();
   if (!charMeta) { goToSelect(); return; }
   run = {
     character:       charMeta.character,
@@ -2381,11 +2805,170 @@ function confirmReset() {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(INTRO_SEEN_KEY);
   } catch(e) {}
-  persistent = { completed_characters: [], artifacts: [], flags: [], runs: 0 };
+  persistent = { completed_characters: [], artifacts: [], flags: [], transcendentals: [], completed_chapters: [], runs: 0 };
   savePersistent();
   run = null;
   if (btn) { btn.textContent = 'reset all progress'; btn.classList.remove('confirming'); }
   showSelectScreen();
+}
+
+// ─── DYNAMIC ROD READOUTS ────────────────────────────────────────────────────
+
+let _activeCamera = null;
+
+function getObserverOS() {
+  const ua = navigator.userAgent;
+  if (/Mac/i.test(ua)) return 'macOS';
+  if (/Windows/i.test(ua)) return 'Windows';
+  if (/Linux/i.test(ua)) return 'Linux';
+  if (/Android/i.test(ua)) return 'Android';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+  if (/CrOS/i.test(ua)) return 'ChromeOS';
+  return 'unknown platform';
+}
+
+function getSessionMinutes() {
+  return Math.floor((Date.now() - SESSION_START) / 60000);
+}
+
+function getLocalTimeStr() {
+  const d = new Date();
+  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+}
+
+function getDaysSinceFirst() {
+  if (!persistent.first_play) return 0;
+  return Math.floor((Date.now() - new Date(persistent.first_play).getTime()) / 86400000);
+}
+
+function getDynamicRodReadout(nodeId) {
+  try {
+    const mins = getSessionMinutes();
+    const os = getObserverOS();
+    const time = getLocalTimeStr();
+    const days = getDaysSinceFirst();
+    const nv = persistent.nodes_visited || 0;
+    const runs = persistent.runs || 0;
+    const lateNight = new Date().getHours() >= 1 && new Date().getHours() < 5;
+    const res = (screen.width && screen.height) ? `${screen.width}×${screen.height}` : 'unreadable';
+
+    switch (nodeId) {
+      case 'f_001':
+        return `rod: inert. ambient field: sub-threshold. observer detected. ${os}. local time: ${time}.${days > 0 ? ` first contact: ${days} days ago.` : ' initial contact.'}`;
+
+      case 'f_004': {
+        let r = `rod: active. initial resonance detected. observer present: ${mins < 1 ? '<1' : mins} min.`;
+        if (lateNight) r += ' local time anomalous. observer should be dormant.';
+        return r;
+      }
+
+      case 'f_011': {
+        const canCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+        const tail = canCamera ? ' attempting visual assay.' : ' visual assay unavailable.';
+        return `rod: anomalous reading. redirecting scan. observer: ${os}. ${res}. session: ${mins < 1 ? '<1' : mins} min. total traversals: ${nv}. first detected: ${days > 0 ? days + ' days ago' : 'tonight'}.${tail}`;
+      }
+
+      case 'f_014':
+        return `rod: circle active. arrow assaying. observer still present.${nv > 50 ? ' this one keeps coming back.' : ''}`;
+
+      case 'f_018': {
+        let r = `rod: holding final reading. observer: ${nv} nodes traversed`;
+        if (runs > 0) r += ` across ${runs + 1} sessions`;
+        r += `. first contact: ${days > 0 ? days + ' days ago' : 'tonight'}.`;
+        if (days > 7) r += ' still here.';
+        return r;
+      }
+
+      default:
+        return null;
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+function killCamera() {
+  if (_activeCamera) {
+    _activeCamera.getTracks().forEach(t => t.stop());
+    _activeCamera = null;
+  }
+  const el = document.getElementById('rod-camera');
+  if (el) el.remove();
+}
+
+async function initRodCamera() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    const readout = document.querySelector('.rod-readout');
+    if (readout) {
+      const note = document.createElement('div');
+      note.className = 'rod-readout rod-camera-denied';
+      note.textContent = 'rod: visual assay unavailable. instrument limited by observer hardware.';
+      readout.after(note);
+    }
+    return;
+  }
+
+  const nodeAtStart = run && run.node;
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 320 }, height: { ideal: 320 } } });
+
+    if (!run || run.node !== nodeAtStart) {
+      stream.getTracks().forEach(t => t.stop());
+      return;
+    }
+
+    _activeCamera = stream;
+
+    const readout = document.querySelector('.rod-readout');
+    if (!readout) {
+      stream.getTracks().forEach(t => t.stop());
+      _activeCamera = null;
+      return;
+    }
+
+    const wrap = document.createElement('div');
+    wrap.id = 'rod-camera';
+    wrap.className = 'rod-camera-wrap';
+
+    const scanLabel = document.createElement('div');
+    scanLabel.className = 'rod-scan-label';
+    scanLabel.textContent = 'rod: visual assay in progress';
+
+    const vidWrap = document.createElement('div');
+    vidWrap.className = 'rod-scan-viewport';
+
+    const video = document.createElement('video');
+    video.srcObject = stream;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('autoplay', '');
+    video.muted = true;
+
+    const scanline = document.createElement('div');
+    scanline.className = 'rod-scanline';
+
+    vidWrap.appendChild(video);
+    vidWrap.appendChild(scanline);
+    wrap.appendChild(scanLabel);
+    wrap.appendChild(vidWrap);
+
+    const postLabel = document.createElement('div');
+    postLabel.className = 'rod-scan-label rod-scan-result';
+    postLabel.textContent = 'reading: anomalous. unclassified. the rod has no category for this.';
+    wrap.appendChild(postLabel);
+
+    readout.after(wrap);
+    video.play().catch(() => {});
+  } catch (e) {
+    if (!run || run.node !== nodeAtStart) return;
+    const readout = document.querySelector('.rod-readout');
+    if (readout) {
+      const denied = document.createElement('div');
+      denied.className = 'rod-readout rod-camera-denied';
+      denied.textContent = 'observer: declined visual assay. noted.';
+      readout.after(denied);
+    }
+  }
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
@@ -2393,6 +2976,7 @@ function confirmReset() {
 function renderNode() {
   // clear any pending auto-advance timer from the previous node
   if (advanceTimer) { clearTimeout(advanceTimer); advanceTimer = null; }
+  killCamera();
 
   const node = nodeMap[run.node];
   if (devMode && node) devTrack(node.id);
@@ -2433,8 +3017,13 @@ function renderNode() {
     }
   }
 
-  // ── temperature ─────────────────────────────────────────
-  document.body.className = 'temp-' + (node.temperature || 'cold');
+  // ── track node visits ────────────────────────────────────
+  persistent.nodes_visited = (persistent.nodes_visited || 0) + 1;
+  savePersistent();
+
+  // ── temperature + character register ─────────────────────
+  const charClass = run.character !== 'wanderer' ? ` char-${run.character}` : '';
+  document.body.className = 'temp-' + (node.temperature || 'cold') + charClass;
 
   // ── arrival text ────────────────────────────────────────
   const pendingArrivalText = run.pending_arrival || null;
@@ -2580,6 +3169,16 @@ function renderNode() {
     html += `<div class="oor-action">${esc(nodeOorValue)}</div>`;
   }
 
+  // rod readout (familiar only) — dynamic readouts override static on certain nodes
+  if (!devMode && run.character === 'familiar') {
+    killCamera();
+    const dynamicReadout = getDynamicRodReadout(node.id);
+    const readoutText = dynamicReadout || node.rod_readout;
+    if (readoutText) {
+      html += `<div class="rod-readout">${esc(readoutText)}</div>`;
+    }
+  }
+
   // transcendental award flash
   if (awardedTranscendental) {
     const label = TRANSCENDENTAL_LABELS[awardedTranscendental] || awardedTranscendental;
@@ -2598,13 +3197,25 @@ function renderNode() {
       const types = classifyChoices(visibleChoices.map(v => v.choice));
       html += '<div class="choices">';
       visibleChoices.forEach(({ choice }, i) => {
-        const gated = choice.requires && (choice.requires.has_artifact || choice.requires.has_artifacts);
-        const artifactKey = gated && (choice.requires.has_artifact || (choice.requires.has_artifacts && choice.requires.has_artifacts[0]));
+        function findArtifactInCondition(req) {
+          if (!req) return null;
+          if (req.has_artifact) return req.has_artifact;
+          if (req.has_artifacts) return req.has_artifacts[0];
+          if (req.and) { for (const c of req.and) { const a = findArtifactInCondition(c); if (a) return a; } }
+          return null;
+        }
+        const artifactKey = choice.requires ? findArtifactInCondition(choice.requires) : null;
+        const gated = !!artifactKey;
         const artifactClass = artifactKey ? ` choice-gated-${artifactKey.replace(/_/g, '-')}` : '';
         const type = choice.icon_type || types[i];
-        const icon = type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂';
+        const isFamiliar = run.character === 'familiar';
+        const icon = isFamiliar
+          ? (type === 'continue' ? '▸' : type === 'lore' ? '◁' : '◉')
+          : (type === 'continue' ? '→' : type === 'lore' ? '↩' : '⑂');
+        const highlightClass = choice.highlight ? ` choice-highlight-${choice.highlight}` : '';
         const cls = 'choice-btn'
           + (gated ? ' choice-gated-new' + artifactClass : '')
+          + highlightClass
           + (type !== 'continue' ? ' choice-' + type : '');
         html += `<button class="${cls}" data-idx="${i}">${esc(choice.text)} <span class="choice-icon" aria-label="${type}">${icon}</span></button>`;
       });
@@ -2621,7 +3232,7 @@ function renderNode() {
   // terminal outcome card
   if (node.terminal) {
     // transcendence = all 4 Wanderer artifacts collected across runs (persistent)
-    const WANDERER_ARTIFACTS = ['yarn_knot', 'matchbook', 'blank_key', 'business_card'];
+    const WANDERER_ARTIFACTS = ['yarn_knot', 'matchbook', 'polaroid', 'shard_of_light'];
     let outcome = node.outcome;
     if (outcome === 'harvest') {
       const hasAll = WANDERER_ARTIFACTS.every(a => persistent.artifacts.includes(a));
@@ -2635,8 +3246,15 @@ function renderNode() {
     if (!persistent.completed_characters.includes(run.character)) {
       persistent.completed_characters.push(run.character);
       persistent.runs++;
-      savePersistent();
     }
+    if (!persistent.completed_chapters) persistent.completed_chapters = [];
+    run.transcendentals.forEach(t => {
+      if (!persistent.completed_chapters.includes(t)) persistent.completed_chapters.push(t);
+    });
+    if (run.character === 'familiar' && !persistent.completed_chapters.includes('familiar')) {
+      persistent.completed_chapters.push('familiar');
+    }
+    savePersistent();
 
     // show transcendentals earned this run
     let transcendentalHtml = '';
@@ -2660,8 +3278,8 @@ function renderNode() {
     // show artifact earned this run (if any) — may have been awarded at a non-terminal node
     const newArtifact = conditionalArtifacts[0] || node.awards_artifact || run.earnedArtifact || null;
     const artTrans = {
-      yarn_knot: 'unity', matchbook: 'truth', blank_key: 'goodness',
-      business_card: 'beauty', heat_sink: 'beauty', pale_antler: null
+      yarn_knot: 'unity', matchbook: 'truth', polaroid: 'goodness',
+      shard_of_light: 'beauty', pale_antler: null
     };
     let artifactHtml = '';
     if (newArtifact) {
@@ -2692,21 +3310,48 @@ function renderNode() {
       dissolutionHtml = `<div class="outcome-note">The work is complete. The harvest succeeded. This is the intended ending for this arc — the body was always optional.</div>`;
     }
 
-    // wanderer: show artifact progress
+    // transcendence: the opus
+    let transcendenceHtml = '';
+    if (outcome === 'transcendence') {
+      transcendenceHtml = `<div class="outcome-note transcendence-note">` +
+        `<p>The four things you carried home were never four things. Unity, truth, goodness, beauty — a crowd moving as one body, a bartender who saw you without flinching, a crossing you chose before your voice could talk you out of it, a frequency that was there before the building. They were the same light. Scattered into vessels too small to hold it, shining through the cracks where the vessels broke.</p>` +
+        `<p>You gathered the shards the way anyone gathers them — by showing up, by being brief, by letting the music do what the music does. The universe wanted to become many. It became many. And the many walked into a warehouse on a night they didn’t plan and felt the original sound pass through them and carried a piece of it home in their sternum.</p>` +
+        `<p>The sound is still running. It will find you again.</p>` +
+        `<p class="outcome-source-link"><a href="lore-viewer.html" target="_blank">Source material &amp; bibliography →</a></p>` +
+        `</div>`;
+    }
+
+    // chapter hint: what's next after this run
     let progressHtml = '';
-    if (run.character === 'wanderer' && outcome !== 'transcendence' && outcome !== 'escape') {
-      const earned = WANDERER_ARTIFACTS.filter(a => persistent.artifacts.includes(a));
-      if (earned.length > 0) {
-        const remaining = WANDERER_ARTIFACTS.length - earned.length;
-        progressHtml = remaining > 0
-          ? `<div class="outcome-progress">${earned.length} of ${WANDERER_ARTIFACTS.length} artifacts carried — ${remaining} path${remaining !== 1 ? 's' : ''} remain</div>`
-          : `<div class="outcome-progress">All artifacts carried. Something deeper awaits.</div>`;
+    if (outcome !== 'transcendence' && outcome !== 'escape') {
+      const hasUnity = persistent.transcendentals.includes('unity');
+      const hasTruth = persistent.transcendentals.includes('truth');
+      const hasGoodness = persistent.transcendentals.includes('goodness');
+      const hasFamiliar = persistent.completed_characters.includes('familiar');
+      const hasBeauty = persistent.transcendentals.includes('beauty');
+
+      let nextHint = '';
+      if (hasBeauty) {
+        nextHint = '';
+      } else if (hasFamiliar && hasUnity && hasTruth && hasGoodness) {
+        nextHint = 'Chapter 5 · Return to the DJ booth as the Wanderer. Look behind the speakers.';
+      } else if (hasGoodness && !hasFamiliar) {
+        nextHint = 'Chapter 4 · A new perspective has opened. Try the Familiar.';
+      } else if (hasTruth && !hasGoodness) {
+        nextHint = 'Chapter 3 · Begin again as the Wanderer. Someone is by the loading dock.';
+      } else if (hasUnity && !hasTruth) {
+        nextHint = 'Chapter 2 · Begin again as the Wanderer. The bouncer remembers you.';
+      }
+
+      if (nextHint) {
+        progressHtml = `<div class="outcome-progress">${esc(nextHint)}</div>`;
       }
     }
 
-    html += `<div class="outcome-card${outcome === 'dissolution' ? ' dissolution' : ''}">
+    html += `<div class="outcome-card${outcome === 'dissolution' ? ' dissolution' : ''}${outcome === 'transcendence' ? ' transcendence' : ''}">
       <div class="outcome-label">${esc(label.toUpperCase())}</div>
       ${dissolutionHtml}
+      ${transcendenceHtml}
       ${transcendentalHtml}
       ${artifactHtml}
       ${unlockHtml}
@@ -2840,6 +3485,11 @@ function renderNode() {
         renderNode();
       });
     }, 3500);
+  }
+
+  // ── rod camera on f_011 ─────────────────────────────────
+  if (!devMode && run.character === 'familiar' && node.id === 'f_011') {
+    setTimeout(() => initRodCamera(), 1200);
   }
 }
 
@@ -3498,8 +4148,9 @@ function nodeEdges(node) {
   if (!node) return [];
   const edges = [];
   (node.choices || []).forEach((c, idx) => {
+    const gateType = c.requires ? (isShowableGate(c.requires) ? ' (gated)' : ' (conditional)') : '';
     edges.push({
-      label: `choice ${idx + 1}${c.requires ? ' (gated)' : ''}`,
+      label: `choice ${idx + 1}${gateType}`,
       target: c.next || '—',
       visible: !c.requires || evaluate(c.requires)
     });
@@ -3507,11 +4158,14 @@ function nodeEdges(node) {
   if (typeof node.next === 'string') {
     edges.push({ label: 'next', target: node.next, visible: true });
   } else if (Array.isArray(node.next)) {
-    node.next.forEach((nx, idx) => edges.push({
-      label: `next ${idx + 1}${nx && nx.default ? ' (default)' : ''}${nx && nx.requires ? ' (gated)' : ''}`,
-      target: (nx && nx.target) || '—',
-      visible: !(nx && nx.requires) || evaluate(nx && nx.requires)
-    }));
+    node.next.forEach((nx, idx) => {
+      const gateType = (nx && nx.requires) ? (isShowableGate(nx.requires) ? ' (gated)' : ' (conditional)') : '';
+      edges.push({
+        label: `next ${idx + 1}${nx && nx.default ? ' (default)' : ''}${gateType}`,
+        target: (nx && nx.target) || '—',
+        visible: !(nx && nx.requires) || evaluate(nx && nx.requires)
+      });
+    });
   }
   return edges;
 }
@@ -4176,7 +4830,7 @@ async function renderNodeMapModal() {
       (n.choices || []).forEach((c, i) => {
         if (!c.next || !pos[c.next]) return;
         edgeList.push({
-          from, to: c.next, label: `choice ${i + 1}`, gated: !!c.requires, tag: c.tag || null
+          from, to: c.next, label: `choice ${i + 1}`, gated: !!(c.requires && isShowableGate(c.requires)), tag: c.tag || null
         });
       });
       if (typeof n.next === 'string' && n.next && pos[n.next]) {
@@ -4184,8 +4838,10 @@ async function renderNodeMapModal() {
       } else if (Array.isArray(n.next)) {
         n.next.forEach((nx, i) => {
           if (!nx || !nx.target || !pos[nx.target]) return;
+          const isGate = !!(nx.requires && isShowableGate(nx.requires));
+          const condTag = (!isGate && nx.requires) ? 'conditional' : null;
           edgeList.push({
-            from, to: nx.target, label: `next ${i + 1}${nx.default ? ' default' : ''}`, gated: !!nx.requires, tag: null
+            from, to: nx.target, label: `next ${i + 1}${nx.default ? ' default' : ''}`, gated: isGate, tag: condTag
           });
         });
       }
