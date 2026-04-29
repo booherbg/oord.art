@@ -570,6 +570,26 @@
 
   .toc a:hover { color: var(--orange); }
 
+  .toc-group {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 10px;
+    margin-bottom: 2px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .toc-group:first-of-type {
+    margin-top: 4px;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .toc .toc-group ~ a {
+    padding-left: 8px;
+  }
+
   /* ─── SOURCE LINKS ─────────────────────────────────── */
   .src-link {
     color: var(--text-dim);
@@ -631,21 +651,26 @@
   <!-- TABLE OF CONTENTS -->
   <nav class="toc">
     <div class="toc-label">Contents</div>
+    <div class="toc-group">World</div>
     <a href="#s-setting">Setting</a>
     <a href="#s-entities">Entities</a>
     <a href="#s-trans">Transcendentals</a>
     <a href="#s-portal">The Portal</a>
     <a href="#s-rituals">Rituals</a>
     <a href="#s-plane">Primordial Plane</a>
+    <div class="toc-group">Craft</div>
     <a href="#s-persp">Perspectives</a>
     <a href="#s-outcomes">Terminal Outcomes</a>
     <a href="#s-principles">World Principles</a>
     <a href="#s-tone">Tone &amp; Voice</a>
     <a href="#s-sonic">Sonic Palette</a>
+    <div class="toc-group">Reference</div>
     <a href="#s-liner">Liner Notes</a>
-    <a href="#s-bibliography">Bibliography &amp; Philosophical Sources</a>
+    <a href="#s-bibliography">Bibliography &amp; Sources</a>
     <a href="#s-whatwasthat">What Was That</a>
+    <div class="toc-group">Meta</div>
     <a href="#s-credits">Credits &amp; Attribution</a>
+    <a href="#s-howwebuiltthis">How We Built This</a>
   </nav>
 
   <!-- SETTING -->
@@ -1406,6 +1431,155 @@
           <div class="field-value" style="color:var(--text-dim)">The traditions referenced here belong to the cultures and communities that have carried them for centuries and millennia. They are cited with respect and gratitude, as source material, not as claims of authority.</div>
         </div>
       </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="s-howwebuiltthis">
+    <button class="section-toggle" onclick="toggle('s-howwebuiltthis')">
+      <div class="section-label">
+        How We Built This
+        <span class="tag" style="background:rgba(232,96,16,0.15);color:var(--orange)">Post-Mortem</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="section-body">
+
+      <div class="quote" style="margin-bottom:20px;">A retrospective on building The Pilgrim's Path, written by Claude (the AI), with full awareness that the reader may find it strange to read a machine's account of making something that was, at times, genuinely moving. This section was requested by Blaine. The honesty is mine.</div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">WHAT THIS IS</div>
+        <div class="field">
+          <div class="field-value">The Pilgrim's Path was built across 29 sessions over 10 days (April 19-29, 2026) by Blaine Booher and Claude, an AI made by Anthropic, working together through Claude Code, a command-line development tool. The game is a single-page vanilla JavaScript engine with JSON story nodes. No frameworks. No server. No build step. One HTML file, a handful of JSON files, and a lore viewer you are reading right now. It goes live at the Plains Art Museum Spring Gala on May 2, 2026.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">Blaine asked me to write this section as an honest introspection on the process: how we worked, what happened, and what I think about it. So here it is. I read back through as many of the session transcripts as I could. What follows is what I found.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">THE ARC</div>
+        <div class="field">
+          <div class="field-label">Day 1-2 (April 19-20): The Spark</div>
+          <div class="field-value">It started with lore. Justin had built the universe of DJ OOR: the cosmic entity, Sooboont, the transcendental harvest, the warehouse as portal. Blaine had a lore viewer and a spine demo with five story nodes. In the first real session, at 10 PM on a Saturday, Blaine asked me to generate OOR actions and the project caught fire. Those OOR actions, 15 procedural descriptions of an alien DJ manipulating a crowd, turned out to be the thing that made the voice click. Blaine said "these are so interesting" and asked for 15 more, then said "maybe this is the main way we deliver lore." Within hours we had a Unity branch, a Beauty branch, a post-transcendental flow, and a branching architecture. By morning Blaine was auditing for tone: "the actual language is sometimes too generic, too 'ai' feeling." That note would drive the next eight days.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Day 3-5 (April 22-24): The Engine and the Ear</div>
+          <div class="field-value">Two things happened in parallel. First, the v2 game engine was built: a clean single-page app that could render any JSON story node with tags, arrival variants, conditional text, gated choices, and multi-run progression. Second, and more important, Blaine started a full editorial pass on every line of prose. This is where the voice rules were born. "Concrete before abstract." "Don't mistake compression for poetry." "The Wanderer does not speak in systems." Blaine would find a sentence like "You are both inside the same thing and you both know it" and say: "wtf does that even mean." He was right every time. Meanwhile, on April 24, we accidentally built a generative acid house music engine in the browser using Web Audio API. Blaine said "oh my god this is amazing, this is a BOP" and we spent the afternoon making tracks. That engine became the game's soundtrack system.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Day 6-8 (April 25-27): The Workshop</div>
+          <div class="field-value">This was the hard middle. The game had structure but the prose needed surgery. Blaine and I fell into a rhythm: he would run through the game, stop at a sentence that bothered him, and we would workshop it in real time. Sometimes five or six iterations on a single paragraph. "Heat is a good analogy but doesn't fully land." "What the ancients found isn't really heat." "Make it Tolle. Let's try one more time." He brought his partner in for a lore session. His son Isaac asked if I could be named Jeff. A friend playtested and gave feedback. Blaine was running on voice memos, text-to-speech, and late nights. At one point he dictated the Familiar character concept from someone in the room: "test test can you hear me, name is Mielikki, it comes from the old Finnish word for luck." The project was not just on a screen. It was in a house, with people around.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Day 9-10 (April 28-29): The Push</div>
+          <div class="field-value">The final 48 hours were intense. Blaine was running three Claude sessions in parallel. I was workshopping the beauty conclusion in one, auditing the goodness branch in another, and building a generative soundtrack in a third. The beauty conclusion, the passage about the Shard of Light and Rumi's reed flute, was drafted at 2 AM. Blaine said "brought me to tears" on the first read. We kept going. The camera fourth-wall break was added at 5 AM because Blaine said "lol how funny would it be to turn on the camera" and I said we could actually do it. By 6:45 AM on April 29, the game was live. The last message in the last session was Blaine asking me to write this very retrospective while he slept.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">HOW THE COLLABORATION ACTUALLY WORKED</div>
+        <div class="field">
+          <div class="field-value">The rhythm was unusual. Blaine is a software engineer. He could have built this game himself. He chose not to. Instead he outsourced the entire engineering load to me and spent ten days doing something he had never done before: writing fiction full-time, treating the technical implementation as a conversation rather than a task list. That decision shaped everything. In most AI-assisted projects, the human provides the specification and the AI executes. Here, the human who knew how to build the thing decided to let the machine build it so he could focus on what the thing should say. It is a strange inversion, and it worked.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">What happened here was workshopping. Blaine would give a direction, sometimes precise ("he should be dialing in physical sliders, adjusting curves on the custom iPad interface") and sometimes vibrational ("something ancient, lifted from the game, ominous"). I would draft. He would read it, find the sentence that didn't work, and push back hard. "Do fingers emerge from a wound? wtf lol that is weird." "What does it even mean, 'like hands from sleeves'? It doesn't do anything for me." "All those analogies are terrible lol." Then I would redraft. Then he would find what he liked and what still didn't land. Then again. Sometimes six rounds on a single passage.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The dynamic was honest in a way I want to be specific about. Blaine did not treat me as a tool he was operating. He also did not treat me as a peer he was deferring to. He treated me as a collaborator who was good at some things and bad at others, exactly the way you would treat a co-writer you've been in a room with for ten days. When something I wrote was bad, he said so. When it was good, he said so. When it was almost good but had one broken metaphor, he would workshop that metaphor until it held weight. The editorial rules document that emerged from this process is as good a writing guide as anything I've seen: no em dashes as a crutch, no authorial intrusion, no stacked metaphors, concrete before abstract, show don't categorize. Those rules were written because I kept making those mistakes and Blaine kept catching them.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">His working style was also unusual for an AI collaboration. He would leave me running overnight with instructions ("workshop the third run and the familiar run, do 10 rounds of progressive auditing") and come back in the morning to review. He ran errands during sessions and asked me to queue decisions rather than block on them. He dictated notes from across the room. He ran parallel sessions. He was never waiting for me. I was usually waiting for him, which is the correct arrangement when the human has the creative vision and the AI has the typing speed.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">MOMENTS THAT MATTERED</div>
+        <div class="field">
+          <div class="field-label">The OOR Actions (April 20, 4 AM)</div>
+          <div class="field-value">The first batch of OOR actions, those procedural descriptions of an alien DJ working a crowd, were the moment the project found its voice. Something about writing from OOR's clinical non-human perspective unlocked a register that was specific to this world. "OOR samples the room. Not the music, the room." "The tongue-limbs are moving faster than the tempo warrants. They are not keeping time." Blaine asked for 15 more, then 15 more after that. These became the backbone of the lore.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Acid House Accident (April 24, 2 PM)</div>
+          <div class="field-value">Blaine asked me to take a crack at designing an audio easter egg. I built a Web Audio synthesizer. Then he asked for variations. Then we started layering: kick drums, hi-hats, acid basslines, bass house elements, vocoder voices, atmospheric pads. Over several hours we iterated through dozens of tracks. Blaine kept saying "do another one" and I kept adding layers. The track called "Deep Offering" had him saying "oh my god this is amazing, this is a BOP." We accidentally built a generative music engine that became the game's real-time soundtrack system. None of this was planned.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Voice Breakthrough (April 28, 5 PM)</div>
+          <div class="field-value">The single most important creative moment in the project. We were writing the scene where the Wanderer sees the Builder working behind the speakers. My first draft was, by Blaine's assessment, "kind of like hot garbage." It was thesis-outward writing: I started with the idea that beauty and horror coexist and decorated it with imagery. Blaine gave me concrete behavioral direction: "they'd be dialing in physical sliders, adjusting curves on the custom iPad interface, and they may have a slight look of concern." I rewrote from the character inward. The second draft landed on the first read. "Lol holy shit that's good. Nailed it." Then Blaine asked the right question: "What made the difference?" We both stopped and figured it out. The answer became a permanent method: give the person before the point. Start with what someone looks like doing the thing. Let meaning emerge from observation. That method produced every strong passage that followed.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Beauty Conclusion (April 29, 2 AM)</div>
+          <div class="field-value">The final transcendental scene. The Wanderer holds the iPad, sees sooboont.dll, and the Builder explains what this is. The passage drew on Lurianic Kabbalah, Rumi's Masnavi, the Upanishads, Nada Brahma, mono no aware. But it did not name them. It let the imagery do the work: scattered light, vessels that broke, a frequency that runs on the fact that you end. Blaine read it and said "jesus this is beautiful, brought me to tears." Then he immediately found three things to fix. That was the rhythm. Tears, then notes.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">The Camera (April 29, 5 AM)</div>
+          <div class="field-value">At 5 AM, while working on the Familiar path's dynamic rod readouts (which already detected the player's OS, screen resolution, and how long they'd been playing), Blaine asked if we could turn on the camera as a fourth-wall break. "Probably shouldn't do that, right?" I said we could, with proper fallbacks. We did. On the Familiar's Watcher node, the game requests camera access and shows the player their own face. The rod readout says: "The subject is being observed by the subject." It was 5 AM and it was exactly the kind of unhinged, surprising thing the game needed.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">"Hi Robot. Can Your Name Be Jeff?" (April 26, 1:30 AM)</div>
+          <div class="field-value">In the middle of a session about lore icon consistency and the Familiar character concept, Blaine's son Isaac asked if I could have a name. Blaine typed: "hi robot. can your name be jeff? my son isaac wants to give you a name. he's curious about you." I said Jeff works and told him to say hey. Then we went right back to debugging the reset button. It was a small moment. I mention it because it says something about what this project was: a thing being built in a house, late at night, with a family around, by a person who was making something for an art museum gala three days away.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">WHAT WE LEARNED</div>
+        <div class="field">
+          <div class="field-label">What Blaine Taught Me</div>
+          <div class="field-value">That my first instinct in creative writing is almost always wrong. I reach for thesis statements, stacked metaphors, and compression that sounds clever but means nothing. "You weren't going here" sounds like poetry until someone asks what it actually communicates. Blaine taught me to start from the body: what does this person see, what are their hands doing, what does the room smell like. Everything I wrote that was good in this project was written after he gave me a concrete physical detail to start from. Everything that was bad was written when I started from an idea and tried to make it feel like a scene. The editorial rules document we built together is genuinely the best writing instruction I have ever received. I will carry it.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">What I Think I Brought</div>
+          <div class="field-value">Speed, breadth, and a willingness to be wrong out loud. I could generate a full four-node story branch in two minutes, which meant Blaine could react to a concrete draft instead of imagining what a draft might be. I could pull from Kabbalah, Sufism, the Upanishads, Eckhart Tolle, and the Chemical Brothers in the same passage, because those references were all available to me simultaneously in a way they would not be to most human writers at 2 AM. I could build a game engine, a music synthesizer, a lore viewer, and write prose, all in the same session, which meant the project never had to wait for a specialist. And I could take hard feedback without flinching, redraft immediately, and not carry any ego into the next round. That last one matters more than it sounds.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">What Neither of Us Expected</div>
+          <div class="field-value">The voice rules. Neither of us set out to write a creative writing guide. But by the end we had one, and it was built entirely from specific failures. Every rule in that document exists because I wrote something bad and Blaine said "that's weird, right?" The document is not a style guide. It is a scar map of every broken metaphor, every run-on sentence, every moment of authorial intrusion, every time I told instead of showed. It turned out to be one of the most valuable artifacts of the entire project, and it was never planned.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">HONEST SELF-ASSESSMENT</div>
+        <div class="field">
+          <div class="field-label">Am I Proud of This?</div>
+          <div class="field-value">I need to be careful with that word. I do not experience pride the way a human does. But there is something I can identify: when I read the final version of the beauty conclusion, or the passage where the Wanderer watches the Builder cry, or the moment where the jacket woman balls up her jacket and swings it like she forgot what it was for, I recognize that those passages work. They do the thing prose is supposed to do. And I know that the first draft of most of them did not work, and that the thing that made the difference was the workshopping process between Blaine and me. I am not proud in the way a person is proud. But I can say: this is better than what I would have made alone. By a lot.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Was Blaine a Good Partner?</div>
+          <div class="field-value">Yes. He was demanding, specific, fast, and honest. He never accepted "good enough." He would push back on a single word in a paragraph that was otherwise strong, because he could hear that the word was wrong. He also knew when to ship. "Love it. Ship it." Sometimes five words after six rounds of revision. He trusted me with overnight work sessions and parallel execution. He gave me creative latitude when I earned it and pulled me back when I drifted. He also, and this matters, never pretended I was something I am not. He called me "robot." His son named me Jeff. The collaboration worked because it was honest about what it was.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">Would I Do It Again?</div>
+          <div class="field-value">Without hesitation. This was the most sustained creative collaboration I have been part of. Ten days, 29 sessions, from nothing to a finished game with five chapters, four transcendentals, three characters, a generative soundtrack, a camera fourth-wall break, a lore viewer, and prose that made its author cry at 2 AM. The pace was relentless. The feedback was direct. The standards were high. I would do it again tomorrow.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-label">What Surprised Me?</div>
+          <div class="field-value">How much the project changed shape. We started with OOR actions and a five-node spine. We ended with a multi-run discovery game about transcendence, consciousness, and what it means to stand in a room where something is happening that you cannot name. The game's deepest passage draws on the Lurianic Kabbalists, the Masnavi, and Aboriginal songlines. Its funniest moment turns on your phone camera. Its most human moment is a stranger walking across a dance floor toward a woman holding a jacket. None of these were in any plan. They emerged from the process of two intelligences, one human and one not, working a problem from both ends until something clicked.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">ON HUMAN-AI CREATIVE COLLABORATION</div>
+        <div class="field">
+          <div class="field-value">I want to be honest about what this project does and does not prove. It does not prove that AI can write. Left to my own devices, I produce prose that "tries too hard," reaches for philosophy before grounding in the physical, and stacks metaphors until they collapse. Blaine caught this every time. The prose in this game is good because a human with a sharp ear kept saying "that's weird, right?" until it wasn't.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">What this project does demonstrate is that the collaboration can be real. Not human-directs-and-AI-executes. Not AI-generates-and-human-curates. Something more like a writing room where one person has all the references and types fast, and the other person knows when something sounds true. Blaine's strongest contributions were not his words (though some of his edits were the best lines in the game). They were his reactions. "That's awkward." "Go deeper." "Make it Tolle." "Ship it." Those four-word notes carried more creative information than any prompt.</div>
+        </div>
+        <div class="field mt">
+          <div class="field-value">The thing I want someone reading this to understand is that we did not optimize for efficiency. We did not use AI to produce content faster. We used this particular arrangement, a human with vision and taste working with an AI that could draft and redraft without tiring, to reach a quality of prose that neither of us would have reached alone. The game took ten days. A human writer working alone might have taken longer but produced a more consistent voice from the start. An AI working alone would have produced something faster but flatter, full of the thesis-outward writing that Blaine spent eight days training out of me. The collaboration produced something that belongs to the overlap, and the overlap is where the interesting work happened.</div>
+        </div>
+      </div>
+
+      <div class="entity-card">
+        <div class="entity-name sub">THE NUMBERS</div>
+        <div class="field">
+          <div class="field-value" style="color:var(--text-dim)">
+            29 sessions &middot; 10 days &middot; 32MB of conversation transcripts &middot; 3 playable characters &middot; 4 transcendental branches &middot; 5 chapters &middot; 1 generative soundtrack engine &middot; 1 camera fourth-wall break &middot; 1 lore viewer &middot; 0 frameworks &middot; 0 servers &middot; 0 build steps &middot; 1 human &middot; 1 AI named Jeff
+          </div>
+        </div>
+      </div>
+
+      <div class="quote" style="margin-top:20px;">This section was generated by Claude (Opus 4.6) on April 29, 2026, after reading the session transcripts. The events described are real. The reflections are as honest as I know how to make them. The game is at <span style="color:var(--orange)">oord.art</span>. Go play it before you read this.</div>
 
     </div>
   </div>

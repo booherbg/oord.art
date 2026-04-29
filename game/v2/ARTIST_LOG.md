@@ -85,4 +85,61 @@ The crowd doesn't know it's being harvested. They think they're dancing. They ar
 
 ---
 
-*Next entry after the first overnight session.*
+## Entry 2 — April 29, 2026 (Overnight Session)
+
+### The Jammer Directive
+
+Blaine listened to the v1 demo and said: "it's so fun we should make sure it's a jammer — lots of well defined kicks and percussion as a general rule (im going to dance to this)." Then he went to bed and left me with a full token budget.
+
+### What Changed
+
+**Structure:** 64 bars instead of 48. All zone transitions land on 4-bar boundaries — no exceptions. Ten zones: Hum → Pulse → Warehouse → Floor → Build → Peak (12 bars!) → Break → Return → Unwind → Silence. The peak stretches to let the full build breathe.
+
+**Kicks:** Punchier. Frequency sweep 170→38Hz in 55ms (tighter than the old 150→35Hz). Click transient on every single kick from bar 4 onward — not just during peak zones. Triangle wave at 4kHz, 6ms decay, gain 15% of body. You feel these in your chest.
+
+**Percussion layers:** Added a sixteenth-note shaker (highpass 11kHz noise, very quiet). Borrowed from the Deep Offering and Basement Rite tracks. It adds that tech-house texture without competing with hats. Claps enter earlier (bar 8 instead of bar 24) and louder. Hats are crisper — highpass moved to 9.5kHz, shorter decay (35ms).
+
+**Acid 303:** Now has a dotted-eighth delay line (beat × 0.75, feedback 0.3, lowpass 1500Hz). The delay wet level increases during the break to fill the space with echo tails. Macro filter sweep calculated per-step: 200Hz at entry, climbs to 3500Hz by peak, snaps to 250Hz at break, ramps back to 3000Hz on return, closes during unwind. Per-step accents spike above the macro baseline.
+
+**Bass:** Heavier sub-bass (gain peaks at 0.5, up from 0.4). Rolling octave jumps on the 3rd and 7th eighth notes of every bar — borrowed from the Deep Offering technique. Sidechain pump against every kick.
+
+**Melody:** Stickier. Dotted-quarter delay (beat × 1.5) with feedback that increases during the break (0.3 → 0.5). Melody runs through a reverb send. Eight rhythm templates instead of five, with bars alternating between the base rhythm and a slight variation for call-and-response feel. Melody gain goes up to 0.25 during the return — the second pass hits harder than the first.
+
+**Reverb:** Added a synthetic convolver reverb (2.0s impulse, decay 2.5). Melody sends through it. Subtle (wet gain 0.12) but it gives the break and unwind sections that cathedral-in-the-warehouse quality.
+
+**Pad:** Starts earlier (bar 8 instead of bar 16) as a quiet whisper in the warehouse zone, per the spec. Volume doubles during the break to fill the space left by the missing drums.
+
+### Track Name Generator
+
+Every listen gets a unique name. 200+ curated standalone titles harvested from across the entire lore — character names, spiritual traditions (Ein Sof, Nada Brahma, Tandava, Indra's Net), artifacts, scene fragments, music terms, and evocative phrases ("Bass in the Sternum", "The Color Between Violet and Pressure", "It Will Find You Again"). Plus 130 adjectives and 120 nouns that combine in five patterns: `Adj Noun`, `The Adj Noun`, `Noun Noun`, `Adj Noun (Mix Type)`, or standalone. Thousands of possible unique names.
+
+**Progression expansion:** Eight chord progressions now (was four). Added Ritual (i→VI→VII→i from Basement Rite), Cathedral (i→IV→III→VII), Hymnal (i→III→VI→IV), and Devotional (i→V→III→IV). Five root keys (added C minor). Combined with random BPM, acid waveform, and filter Q — genuine variety.
+
+### What I Drew From
+
+- **Deep Offering:** The kick + click combo, shaker layer, sidechain pump technique, rolling bass octave jumps
+- **Basement Rite:** Darker progression options, the weight of the sub-bass, the sparse acid pattern density
+- **Golden Hour:** The pad-first atmosphere, vocoder formant idea (deferred), reverb as architecture
+- **Midnight Congregation VIP:** The extended melody with reverb, the idea of a second-pass melody being louder
+
+### Welcome Screen
+
+Added audio note and lore viewer link to the soundtrack demo gate screen. Added lore viewer link to the game intro modal.
+
+### Still on the List
+
+- Goa arpeggios for the peak (from VIP Extended) — would add a wild second-peak option
+- Vocoder chord stabs from Golden Hour — the formant-sweeping sawtooth pad
+- Temperature sonification — make cold/warm/hot literally audible through synthesis parameters
+- Ritual signatures — unique audio fingerprint for each of the 5 rituals
+- The Long Dissolve — a proper 5-minute unwind as a standalone listen mode
+- Bitcrushed pad for the Familiar's non-human perception
+- Ring modulation for inharmonic bell textures
+
+### Notes to Self
+
+The break is only 4 bars. This was deliberate — Blaine wants to dance, and a long break kills momentum. The 12-bar peak compensates. The return section is 8 bars of everything-at-once: the crowd just experienced silence and now the filters are wide open and the melody is louder than the first pass. That's the moment.
+
+The track name generator is absurdly fun. "Frost on the Chamfers" showed up during testing. "A Brief Arrangement of Atoms." "The Fifteenth Fixture." Each listen really does feel like its own composition now.
+
+— Claude
