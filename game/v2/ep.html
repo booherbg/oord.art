@@ -990,7 +990,7 @@ function compose_harvest() {
   [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
 
   // Phase bars
-  const PH = { CHAM: 0, PULSE: 16, WARE: 38, FLOOR: 64, BUILD: 110, PEAK: 160, BREAK: 228, SNARE: 248, RETURN: 250 };
+  const PH = { CHAM: 0, PULSE: 1, WARE: 38, FLOOR: 64, BUILD: 110, PEAK: 160, BREAK: 228, SNARE: 248, RETURN: 250 };
 
   startSched(122, (t, step, barNum, sib) => {
     const isBeat = sib % 4 === 0;
@@ -1261,28 +1261,28 @@ function compose_golden() {
     const isEighth = sib % 2 === 0;
     const beatIdx = Math.floor(sib / 4);
 
-    // Gentle kick from bar 16
-    if (isBeat && barNum >= 16 && barNum < totalBars - 8) {
+    // Gentle kick from bar 1
+    if (isBeat && barNum >= 1 && barNum < totalBars - 8) {
       let vol = 0.4;
-      if (barNum < 24) vol *= (barNum - 16) / 8;
+      if (barNum < 9) vol *= (barNum - 1) / 8;
       if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 8);
       if (vol > 0.01) schedKick(t, vol, false);
     }
 
-    // Sparse hats from bar 24
-    if (isEighth && barNum >= 24 && barNum < totalBars - 12) {
+    // Sparse hats from bar 3
+    if (isEighth && barNum >= 3 && barNum < totalBars - 12) {
       const offbeat = (sib / 2) % 2 === 1;
       if (offbeat) {
         let vol = 0.06;
-        if (barNum < 32) vol *= (barNum - 24) / 8;
+        if (barNum < 11) vol *= (barNum - 3) / 8;
         if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 8);
         if (vol > 0.005) schedHat(t, vol, nb);
       }
     }
 
-    // Bass from bar 20 — gentle sidechain pump
-    if (isBeat && barNum >= 20 && barNum < totalBars - 10) {
-      if (barNum === 20 && beatIdx === 0) {
+    // Bass from bar 3 — gentle sidechain pump
+    if (isBeat && barNum >= 3 && barNum < totalBars - 10) {
+      if (barNum === 3 && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.001, t);
         bassSub.gain.linearRampToValueAtTime(0.7, t + 4 * bar);
       }
