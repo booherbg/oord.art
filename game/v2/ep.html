@@ -619,12 +619,14 @@ function schedKick(t, vol, click) {
   kg.gain.setValueAtTime(vol, t);
   kg.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
   k.connect(kg); kg.connect(master); k.start(t); k.stop(t + 0.25);
+  autoClean(k, k, kg);
   if (click) {
     const cl = ctx.createOscillator(); cl.type = 'triangle'; cl.frequency.value = 3500;
     const cg = ctx.createGain();
     cg.gain.setValueAtTime(vol * 0.15, t);
     cg.gain.exponentialRampToValueAtTime(0.001, t + 0.007);
     cl.connect(cg); cg.connect(master); cl.start(t); cl.stop(t + 0.015);
+    autoClean(cl, cl, cg);
   }
 }
 
@@ -635,6 +637,7 @@ function schedHat(t, vol, nb) {
   g.gain.setValueAtTime(vol, t);
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
   src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t + 0.045);
+  autoClean(src, src, hp, g);
 }
 
 function schedClap(t, vol, nb) {
@@ -646,6 +649,7 @@ function schedClap(t, vol, nb) {
     g.gain.setValueAtTime(vol, t + off);
     g.gain.exponentialRampToValueAtTime(0.001, t + off + 0.11);
     src.connect(bp); bp.connect(g); g.connect(master); src.start(t + off); src.stop(t + off + 0.15);
+    autoClean(src, src, bp, g);
   }
 }
 
@@ -656,6 +660,7 @@ function schedSnare(t, vol, nb) {
   bodyG.gain.setValueAtTime(vol * 0.7, t);
   bodyG.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
   body.connect(bodyBp); bodyBp.connect(bodyG); bodyG.connect(master); body.start(t); body.stop(t + 0.25);
+  autoClean(body, body, bodyBp, bodyG);
   for (let l = 0; l < 4; l++) {
     const off = l * 0.005;
     const src = ctx.createBufferSource(); src.buffer = nb;
@@ -664,12 +669,14 @@ function schedSnare(t, vol, nb) {
     g.gain.setValueAtTime(vol, t + off);
     g.gain.exponentialRampToValueAtTime(0.001, t + off + 0.16);
     src.connect(bp); bp.connect(g); g.connect(master); src.start(t + off); src.stop(t + off + 0.2);
+    autoClean(src, src, bp, g);
   }
   const click = ctx.createOscillator(); click.type = 'square'; click.frequency.value = 1800;
   const clickG = ctx.createGain();
   clickG.gain.setValueAtTime(vol * 0.4, t);
   clickG.gain.exponentialRampToValueAtTime(0.001, t + 0.008);
   click.connect(clickG); clickG.connect(master); click.start(t); click.stop(t + 0.01);
+  autoClean(click, click, clickG);
 }
 
 function schedShaker(t, vol, nb) {
@@ -679,6 +686,11 @@ function schedShaker(t, vol, nb) {
   g.gain.setValueAtTime(vol, t);
   g.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
   src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t + 0.035);
+  autoClean(src, src, hp, g);
+}
+
+function autoClean(source, ...nodes) {
+  source.onended = () => { for (const n of nodes) try { n.disconnect(); } catch(e) {} };
 }
 
 // ── Scheduler ──────────────────────────────────────────
@@ -832,6 +844,7 @@ function compose_shuffle() {
       hg.gain.setValueAtTime(0.001, t + eighth * 0.78);
       src.connect(hpf); hpf.connect(hg); hg.connect(sub);
       src.start(t); src.stop(t + eighth);
+      autoClean(src, src, hpf, hg);
     }
   }, totalBars);
 
@@ -1139,6 +1152,7 @@ function compose_harvest() {
           g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.5);
           g.gain.setValueAtTime(vol, t + padDur - 0.5); g.gain.linearRampToValueAtTime(0, t + padDur);
           o.connect(g); g.connect(master); o.start(t); o.stop(t + padDur + 0.5);
+          autoClean(o, o, g);
         }
       }
     }
@@ -1309,6 +1323,7 @@ function compose_harvest() {
         g.gain.exponentialRampToValueAtTime(0.001, t + beat * 0.9);
         o.connect(lp); lp.connect(g); g.connect(melSub);
         o.start(t); o.stop(t + beat);
+        autoClean(o, o, lp, g);
       }
     }
   }, totalBars);
@@ -1420,6 +1435,7 @@ function compose_golden() {
           g.gain.setValueAtTime(vol, t + padDur - 0.8); g.gain.linearRampToValueAtTime(0, t + padDur);
           o.connect(g); g.connect(master); g.connect(rvbSend); g.connect(delSend);
           o.start(t); o.stop(t + padDur + 0.5);
+          autoClean(o, o, g);
         }
       }
     }
@@ -1635,6 +1651,7 @@ function compose_tikkun() {
         g.gain.exponentialRampToValueAtTime(0.001, t + beat * 0.9);
         o.connect(lp); lp.connect(g); g.connect(melSub);
         o.start(t); o.stop(t + beat);
+        autoClean(o, o, lp, g);
       }
     }
 
@@ -1653,6 +1670,7 @@ function compose_tikkun() {
           g.gain.setValueAtTime(vol, t + padDur - 0.5); g.gain.linearRampToValueAtTime(0, t + padDur);
           o.connect(g); g.connect(master);
           o.start(t); o.stop(t + padDur + 0.5);
+          autoClean(o, o, g);
         }
       }
     }
@@ -1783,6 +1801,7 @@ window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = 50;
 });
+
 </script>
 </body>
 </html>
