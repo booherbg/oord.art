@@ -482,6 +482,20 @@
     .game-back:hover { color: var(--orange); }
     .game-back:disabled { color: var(--text-dim); cursor: default; }
 
+    .game-bookmark-btn {
+      margin-left: auto;
+      color: var(--orange) !important;
+      border: 1px solid rgba(232,96,16,0.3) !important;
+      border-radius: 2px;
+      padding: 4px 10px !important;
+      font-size: 10px !important;
+      background: rgba(232,96,16,0.04);
+    }
+    .game-bookmark-btn:hover {
+      border-color: var(--orange) !important;
+      background: rgba(232,96,16,0.1);
+    }
+
     .game-char-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
@@ -1074,6 +1088,16 @@
       background: rgba(212, 168, 32, 0.04);
       color: var(--text-bright);
     }
+    .outcome-btn-lore {
+      display: block;
+      border-color: var(--orange);
+      color: var(--text-dim);
+      text-decoration: none;
+    }
+    .outcome-btn-lore:hover {
+      border-color: var(--yellow);
+      color: var(--text-bright);
+    }
 
     .outcome-transcendental {
       font-size: 11px;
@@ -1136,6 +1160,82 @@
       border-bottom: 1px solid rgba(232,96,16,0.3);
     }
     .outcome-artifact-link a:hover { border-bottom-color: var(--orange); }
+
+    .outcome-section-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      animation: fadeUp 0.5s ease 0.15s both;
+    }
+    .outcome-section-note {
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      color: var(--text-dim);
+      opacity: 0.6;
+      margin-top: -4px;
+      margin-bottom: 12px;
+      animation: fadeUp 0.5s ease 0.35s both;
+    }
+
+    .bookmark-banner {
+      border: 1px solid rgba(232,96,16,0.25);
+      border-radius: 2px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      background: rgba(232,96,16,0.04);
+      animation: fadeUp 0.4s ease both;
+    }
+    .bookmark-banner-label {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .bookmark-banner-char {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .bookmark-banner-node {
+      font-size: 10px;
+      color: var(--text-dim);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+    .bookmark-banner-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .bookmark-banner-actions button {
+      background: none;
+      border: 1px solid var(--border-warm);
+      border-radius: 2px;
+      padding: 8px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .bookmark-resume {
+      color: var(--orange);
+      border-color: rgba(232,96,16,0.4) !important;
+    }
+    .bookmark-resume:hover {
+      border-color: var(--orange) !important;
+      background: rgba(232,96,16,0.06);
+    }
+    .bookmark-dismiss {
+      color: var(--text-dim);
+    }
+    .bookmark-dismiss:hover {
+      color: var(--text);
+      border-color: var(--text-dim) !important;
+    }
 
     .outcome-unlock {
       font-size: 12px;
@@ -2523,10 +2623,11 @@
   <div id="select-screen" class="wrap">
     <header class="site-header">
       <div class="site-title">The Call of<span>Sooboont</span></div>
-      <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle :)</div>
+      <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle. Each chapter takes about 5 minutes — use <span style="color:var(--orange)">save &amp; exit ◈</span> to bookmark your place and come back later.</div>
     </header>
     <div class="source-lore-link"><a href="lore-viewer.html" target="_blank">Lore Document &amp; References →</a></div>
     <div class="divider"></div>
+    <div id="bookmark-section"></div>
 <div id="progress-section"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
@@ -2551,6 +2652,7 @@
       <button class="game-back" onclick="goToSelect()">← perspectives</button>
       <button class="game-back" id="player-back-btn" onclick="goBack()" disabled>↩ back</button>
       <div class="game-char-name" id="game-char-name"></div>
+      <button class="game-back game-bookmark-btn" onclick="saveAndExit()">save &amp; exit ◈</button>
     </header>
     <div id="game"></div>
     <div id="dev-panel" hidden></div>
@@ -2774,6 +2876,110 @@ function savePersistent() {
   } catch(e) { /* storage full or private mode */ }
 }
 
+// ─── BOOKMARK (PAUSE / RESUME) ───────────────────────────────────────────────
+
+function saveBookmark() {
+  if (!run || !run.node) return;
+  persistent.bookmark = {
+    character:       run.character,
+    node:            run.node,
+    tags:            [...run.tags],
+    transcendentals: [...run.transcendentals],
+    pending_arrival: run.pending_arrival,
+    earnedArtifacts: [...run.earnedArtifacts],
+    history:         run.history.map(h => ({ nodeId: h.nodeId, tagSnapshot: [...h.tagSnapshot] })),
+    saved_at:        new Date().toISOString()
+  };
+  savePersistent();
+}
+
+function clearBookmark() {
+  delete persistent.bookmark;
+  savePersistent();
+  const el = document.getElementById('bookmark-section');
+  if (el) el.innerHTML = '';
+}
+
+function renderBookmark() {
+  const el = document.getElementById('bookmark-section');
+  if (!el) return;
+  if (!persistent.bookmark) { el.innerHTML = ''; return; }
+  const bk = persistent.bookmark;
+  const def = CHAR_DEFS.find(c => c.id === bk.character);
+  const charName = def ? def.display_name : bk.character;
+  const nodeLabel = bk.node.replace(/_/g, ' ');
+  el.innerHTML =
+    `<div class="bookmark-banner">` +
+    `<div class="bookmark-banner-label">Saved place</div>` +
+    `<div class="bookmark-banner-char">${esc(charName)}</div>` +
+    `<div class="bookmark-banner-node">${esc(nodeLabel)}</div>` +
+    `<div class="bookmark-banner-actions">` +
+    `<button class="bookmark-resume" onclick="resumeBookmark()">Resume</button>` +
+    `<button class="bookmark-dismiss" onclick="clearBookmark()">Discard</button>` +
+    `</div>` +
+    `</div>`;
+}
+
+async function resumeBookmark() {
+  const bk = persistent.bookmark;
+  if (!bk) return;
+  const charId = bk.character;
+  const def = CHAR_DEFS.find(c => c.id === charId);
+  if (!def) { clearBookmark(); return; }
+
+  if (!soundtrack) { soundtrack = new SoundtrackEngine(); soundtrack.init(); }
+  await soundtrack.resume();
+
+  document.getElementById('select-screen').hidden = true;
+  document.getElementById('game-screen').hidden   = false;
+  document.getElementById('state-bar').hidden     = false;
+  stShowWelcome();
+  document.getElementById('game-char-name').textContent = def.display_name.toUpperCase();
+  document.getElementById('game').innerHTML = '<div class="loading">—</div>';
+
+  try {
+    const resp = await fetch(NODE_FILES[charId]);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    charMeta = data;
+    nodeMap  = {};
+    (data.nodes || []).forEach(n => { nodeMap[n.id] = n; });
+    buildDevFlowIndex();
+
+    if (!nodeMap[bk.node]) {
+      clearBookmark();
+      loadCharacterDirect(charId);
+      return;
+    }
+
+    run = {
+      character:       bk.character,
+      node:            bk.node,
+      tags:            [...bk.tags],
+      transcendentals: [...(bk.transcendentals || [])],
+      pending_arrival: bk.pending_arrival || null,
+      earnedArtifacts: [...(bk.earnedArtifacts || [])],
+      history:         (bk.history || []).map(h => ({ nodeId: h.nodeId, tagSnapshot: [...h.tagSnapshot] }))
+    };
+
+    if (soundtrack) soundtrack.startRun();
+    renderNode();
+  } catch(err) {
+    document.getElementById('game').innerHTML =
+      `<div class="load-error">` +
+      `<div>Could not resume — starting fresh.</div>` +
+      `<code>${esc(err.message)}</code><br><br>` +
+      `<button onclick="clearBookmark();goToSelect()">← Back</button>` +
+      `</div>`;
+  }
+}
+
+function saveAndExit() {
+  saveBookmark();
+  if (soundtrack) soundtrack.stopRun();
+  showSelectScreen();
+}
+
 // ─── CONDITION EVALUATION ─────────────────────────────────────────────────────
 
 function evaluate(condition) {
@@ -2864,6 +3070,7 @@ function showSelectScreen() {
   const hasProgress = persistent.runs > 0 || persistent.artifacts.length > 0;
   document.getElementById('state-bar').hidden     = !hasProgress;
   document.body.className = 'temp-cold';
+  renderBookmark();
   renderCharCards();
   renderArtifacts();
   renderProgress();
@@ -3189,6 +3396,7 @@ async function loadCharacterDirect(charId) {
       history:         []
     };
 
+    clearBookmark();
     if(_listenTimer){clearTimeout(_listenTimer);_listenTimer=null;}
     const lb=document.getElementById('st-listen-btn');if(lb)lb.textContent='play a track';
     if (soundtrack) { await soundtrack.resume(); soundtrack.startRun(); }
@@ -3217,6 +3425,7 @@ function confirmRestart() {
 
 function restartCharacter() {
   killCamera();
+  clearBookmark();
   if (!charMeta) { goToSelect(); return; }
   run = {
     character:       charMeta.character,
@@ -3467,6 +3676,7 @@ function renderNode() {
 
   // ── track node visits ────────────────────────────────────
   persistent.nodes_visited = (persistent.nodes_visited || 0) + 1;
+  if (node.terminal) clearBookmark();
   savePersistent();
 
   // ── temperature + character register ─────────────────────
@@ -3728,6 +3938,7 @@ function renderNode() {
         truth:    'presence without performance',
         goodness: 'care without audience'
       };
+      transcendentalHtml += `<div class="outcome-section-label">Yield</div>`;
       run.transcendentals.forEach((t, i) => {
         const name = t.charAt(0).toUpperCase() + t.slice(1);
         const desc = TRANS_DESCS[t] || '';
@@ -3745,6 +3956,11 @@ function renderNode() {
       shard_of_light: 'beauty', pale_antler: null, chamfer_055: null
     };
     let artifactHtml = '';
+    if (allEarned.length > 0) {
+      const carriedLabel = outcome === 'dissolution' ? 'Left in the Form' : 'Carried Home';
+      artifactHtml += `<div class="outcome-section-label">${carriedLabel}</div>`;
+      artifactHtml += `<div class="outcome-section-note">Find these in your Carried collection.</div>`;
+    }
     allEarned.forEach(newArtifact => {
       const aName = ARTIFACT_NAMES[newArtifact] || newArtifact;
       const aDesc = ARTIFACT_DESCRIPTIONS[newArtifact] || '';
@@ -3788,8 +4004,6 @@ function renderNode() {
         `<p>The four things you carried home were never four things. Unity, truth, goodness, beauty — a crowd moving as one body, a bartender who saw you without flinching, a crossing you chose before your voice could talk you out of it, a frequency that was there before the building. They were the same light. Scattered into vessels too small to hold it, shining through the cracks where the vessels broke.</p>` +
         `<p>You gathered the shards the way anyone gathers them — by showing up, by being brief, by letting the music do what the music does. The universe wanted to become many. It became many. And the many walked into a warehouse on a night they didn’t plan and felt the original sound pass through them and carried a piece of it home in their sternum.</p>` +
         `<p>The sound is still running. It will find you again.</p>` +
-        `<p class="outcome-source-link"><a href="lore-viewer.html#s-whatwasthat" target="_blank">What Was That →</a></p>` +
-        `<p class="outcome-source-link"><a href="lore-viewer.html#s-bibliography" target="_blank">Primary Sources →</a></p>` +
         `</div>`;
     }
 
@@ -3853,6 +4067,8 @@ function renderNode() {
       <div class="outcome-buttons">
         <button class="outcome-btn" onclick="restartCharacter()">Begin again</button>
         <button class="outcome-btn" onclick="goToSelect()">Choose another perspective</button>
+        ${outcome === 'transcendence' ? `<a class="outcome-btn outcome-btn-lore" href="lore-viewer.html#s-whatwasthat" target="_blank">What Was That →</a>
+        <a class="outcome-btn outcome-btn-lore" href="lore-viewer.html#s-bibliography" target="_blank">Primary Sources →</a>` : ''}
       </div>
     </div>`;
   }
