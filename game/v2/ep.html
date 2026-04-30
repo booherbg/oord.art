@@ -461,7 +461,7 @@
     <p>If you play the record past the final groove of Tikkun, there are fifty-five seconds before the needle lifts. They are not silent.</p>
   </div>
 
-  <div class="footer">CHFR-055 &middot; Single pressing &middot; No reissue planned</div>
+  <div class="footer">CHFR-055 &middot; Single pressing &middot; No reissue planned &middot; v2.1</div>
 
 </div>
 
@@ -697,7 +697,7 @@ function autoClean(source, ...nodes) {
 
 function startSched(bpm, onStep, totalBars) {
   const sixteenth = 60 / bpm / 4;
-  const lookahead = 0.15;
+  const lookahead = 1.5;
   let nextTime = ctx.currentTime + 0.3;
   let step = 0;
   trackStartTime = nextTime;
@@ -1047,7 +1047,7 @@ function compose_harvest() {
   [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
 
   const PH = {
-    CHAM: 0, PULSE: 1, BASS: 8,
+    CHAM: 0, PULSE: 1, BASS: 9,
     SHAKER: 20, WARE: 24, CLAP: 28,
     SQUELCH: 40, PAD: 56, ACID: 72,
     MELODY: 96, PEAK: 128,
@@ -1062,10 +1062,11 @@ function compose_harvest() {
     const inBreak = barNum >= PH.BREAK && barNum < PH.RETURN;
     const isReturn = barNum >= PH.RETURN;
 
-    // ── Chamfer — fades to noise floor as layers enter
+    // ── Chamfer — breathes for 1 bar, fades as bass enters
     if (barNum === 0 && sib === 0) {
       chamEnv.gain.setValueAtTime(0.10, t);
-      chamEnv.gain.linearRampToValueAtTime(0.02, t + 56 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0.06, t + PH.BASS * bar);
+      chamEnv.gain.linearRampToValueAtTime(0.005, t + (PH.BASS + 4) * bar);
     }
     if (barNum === PH.BREAK && sib === 0) {
       chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
