@@ -649,6 +649,29 @@ function schedClap(t, vol, nb) {
   }
 }
 
+function schedSnare(t, vol, nb) {
+  const body = ctx.createBufferSource(); body.buffer = nb;
+  const bodyBp = ctx.createBiquadFilter(); bodyBp.type = 'bandpass'; bodyBp.frequency.value = 500; bodyBp.Q.value = 0.8;
+  const bodyG = ctx.createGain();
+  bodyG.gain.setValueAtTime(vol * 0.7, t);
+  bodyG.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+  body.connect(bodyBp); bodyBp.connect(bodyG); bodyG.connect(master); body.start(t); body.stop(t + 0.25);
+  for (let l = 0; l < 4; l++) {
+    const off = l * 0.005;
+    const src = ctx.createBufferSource(); src.buffer = nb;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900 + l * 500; bp.Q.value = 2;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(vol, t + off);
+    g.gain.exponentialRampToValueAtTime(0.001, t + off + 0.16);
+    src.connect(bp); bp.connect(g); g.connect(master); src.start(t + off); src.stop(t + off + 0.2);
+  }
+  const click = ctx.createOscillator(); click.type = 'square'; click.frequency.value = 1800;
+  const clickG = ctx.createGain();
+  clickG.gain.setValueAtTime(vol * 0.4, t);
+  clickG.gain.exponentialRampToValueAtTime(0.001, t + 0.008);
+  click.connect(clickG); clickG.connect(master); click.start(t); click.stop(t + 0.01);
+}
+
 function schedShaker(t, vol, nb) {
   const src = ctx.createBufferSource(); src.buffer = nb;
   const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 11000;
@@ -936,6 +959,27 @@ function compose_harvest() {
   const totalBars = 366;
   const nb = createNoise(0.5);
 
+  // Harvest acid pattern — sparser, slidier, wider intervals than genAcid
+  const harvestAcid = (() => {
+    const notes = p.acidNotes;
+    const pat = [];
+    let prev = pick(notes.slice(2, 8));
+    for (let i = 0; i < 16; i++) {
+      if (Math.random() < 0.3 || ((i === 7 || i === 15) && Math.random() < 0.5)) {
+        pat.push({ note: 0, accent: false, slide: false }); continue;
+      }
+      const nearby = notes.filter(n => Math.abs(n - prev) <= 7);
+      const note = pick(nearby.length ? nearby : notes);
+      prev = note;
+      pat.push({ note, accent: i % 4 === 0, slide: Math.random() < 0.55 });
+    }
+    [0, 4, 8, 12].forEach(idx => { if (pat[idx].note) pat[idx].accent = true; });
+    let active = pat.filter(s => s.note).length;
+    while (active < 7) { const idx = Math.floor(Math.random() * 16); if (!pat[idx].note) { pat[idx].note = pick(notes.slice(2,8)); active++; } }
+    while (active > 9) { const idx = 1 + Math.floor(Math.random() * 14); if (pat[idx].note && !pat[idx].accent) { pat[idx].note = 0; active--; } }
+    return pat;
+  })();
+
   // Reverb
   const reverb = ctx.createConvolver(); reverb.buffer = createImpulse(2.0, 2.5);
   const rvbWet = ctx.createGain(); rvbWet.gain.value = 0.12;
@@ -954,15 +998,15 @@ function compose_harvest() {
 
   // Acid
   const acidOsc = ctx.createOscillator(); acidOsc.type = p.acidWave;
-  acidOsc.frequency.value = mtf(p.acidPattern[0].note || p.root);
-  const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 200; acidFilt.Q.value = p.acidQ;
+  acidOsc.frequency.value = mtf(harvestAcid[0].note || p.root);
+  const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 120; acidFilt.Q.value = p.acidQ;
   const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
   const acidSub = ctx.createGain(); acidSub.gain.value = 0;
   acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
   const acidDel = ctx.createDelay(1); acidDel.delayTime.value = beat * 0.75;
   const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.3;
   const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
-  const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0.18;
+  const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0;
   acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
   acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
 
@@ -989,8 +1033,14 @@ function compose_harvest() {
   const t0 = ctx.currentTime + 0.3;
   [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
 
-  // Phase bars
-  const PH = { CHAM: 0, PULSE: 1, WARE: 38, FLOOR: 64, BUILD: 110, PEAK: 160, BREAK: 228, SNARE: 248, RETURN: 250 };
+  const PH = {
+    CHAM: 0, PULSE: 1, BASS: 8,
+    SHAKER: 20, WARE: 24, CLAP: 28,
+    SQUELCH: 40, PAD: 56, ACID: 72,
+    MELODY: 96, PEAK: 128,
+    BREAK: 224, SNARE: 240, RETURN: 248,
+    DESCENT: 328
+  };
 
   startSched(122, (t, step, barNum, sib) => {
     const isBeat = sib % 4 === 0;
@@ -999,80 +1049,91 @@ function compose_harvest() {
     const inBreak = barNum >= PH.BREAK && barNum < PH.RETURN;
     const isReturn = barNum >= PH.RETURN;
 
-    // ── Chamfer envelope
+    // ── Chamfer — fades to noise floor as layers enter
     if (barNum === 0 && sib === 0) {
       chamEnv.gain.setValueAtTime(0.10, t);
-    }
-    if (barNum === PH.WARE && sib === 0) {
-      chamEnv.gain.setValueAtTime(0.10, t);
-      chamEnv.gain.linearRampToValueAtTime(0.03, t + 8 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0.02, t + 56 * bar);
     }
     if (barNum === PH.BREAK && sib === 0) {
       chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
       chamEnv.gain.linearRampToValueAtTime(0.06, t + 2 * bar);
     }
-    if (barNum === totalBars - 16 && sib === 0) {
+    if (barNum === PH.DESCENT && sib === 0) {
       chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
-      chamEnv.gain.linearRampToValueAtTime(0.10, t + 8 * bar);
-      chamEnv.gain.linearRampToValueAtTime(0, t + 16 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0.08, t + 16 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0, t + 38 * bar);
     }
 
     // ── Kicks
     if (isBeat && barNum >= PH.PULSE && !inBreak) {
       let vol = 0.75;
-      if (barNum < PH.WARE) vol *= (barNum - PH.PULSE) / (PH.WARE - PH.PULSE);
+      if (barNum < PH.PULSE + 4) vol *= (barNum - PH.PULSE) / 4;
       if (isReturn) vol = 0.82;
-      if (barNum >= totalBars - 4) vol *= Math.max(0, 1 - (barNum - (totalBars - 4)) / 4);
+      if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 20);
       if (vol > 0.01) schedKick(t, vol, barNum >= PH.WARE);
     }
 
-    // ── Shaker (gated to eighths, fades in over 8 bars)
-    if (isEighth && barNum >= PH.PULSE && !inBreak && barNum < totalBars - 4) {
+    // ── Shaker
+    if (isEighth && barNum >= PH.SHAKER && !inBreak && barNum < totalBars - 8) {
       let vol = (sib % 4 === 0) ? 0.025 : 0.01;
-      if (barNum < PH.PULSE + 8) vol *= (barNum - PH.PULSE) / 8;
+      if (barNum < PH.SHAKER + 4) vol *= (barNum - PH.SHAKER) / 4;
       if (barNum < PH.WARE) vol *= 0.4;
       schedShaker(t, vol, nb);
     }
 
-    // ── Hats (8-bar fade in from WARE)
+    // ── Hats
     if (isEighth && barNum >= PH.WARE && !inBreak) {
       const off = (sib / 2) % 2 === 1;
       let vol = off ? 0.12 : 0.05;
-      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
+      if (barNum < PH.WARE + 4) vol *= (barNum - PH.WARE) / 4;
       if (isReturn) vol = off ? 0.14 : 0.07;
-      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 20);
       if (vol > 0.005) schedHat(t, vol, nb);
     }
 
-    // ── Claps (8-bar fade in from WARE)
-    if (isBeat && (beatIdx === 1 || beatIdx === 3) && barNum >= PH.WARE && !inBreak) {
+    // ── Claps
+    if (isBeat && (beatIdx === 1 || beatIdx === 3) && barNum >= PH.CLAP && !inBreak) {
       let vol = isReturn ? 0.20 : 0.16;
-      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
-      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (barNum < PH.CLAP + 4) vol *= (barNum - PH.CLAP) / 4;
+      if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 20);
       if (vol > 0.005) schedClap(t, vol, nb);
     }
 
-    // ── Snare roll (bars 248-250)
+    // ── Snare fills (1-bar builds on last bar of every 16-bar phrase)
+    if (barNum >= PH.ACID && barNum < PH.BREAK && barNum % 16 === 15) {
+      const trackProg = (barNum - PH.ACID) / (PH.BREAK - PH.ACID);
+      const fillVol = 0.12 + trackProg * 0.22;
+      const stepVol = fillVol * (sib / 16);
+      if (stepVol > 0.005) schedSnare(t, stepVol, nb);
+      if (sib >= 12) schedSnare(t + sixteenth * 0.5, stepVol * 0.5, nb);
+    }
+
+    // ── Snare roll (8 bars, escalating with ghost notes)
     if (barNum >= PH.SNARE && barNum < PH.RETURN) {
+      const rollBars = PH.RETURN - PH.SNARE;
       const rollStep = (barNum - PH.SNARE) * 16 + sib;
-      const vol = 0.04 + (rollStep / 32) * 0.14;
-      schedClap(t, vol, nb);
-      if (rollStep >= 28) {
-        schedClap(t + sixteenth * 0.5, vol * 0.6, nb);
+      const totalSteps = rollBars * 16;
+      const vol = 0.10 + (rollStep / totalSteps) * 0.38;
+      schedSnare(t, vol, nb);
+      if (rollStep >= totalSteps - 32) {
+        schedSnare(t + sixteenth * 0.5, vol * 0.6, nb);
+      }
+      if (rollStep >= totalSteps - 8) {
+        schedSnare(t + sixteenth * 0.25, vol * 0.4, nb);
       }
     }
 
-    // ── Pad (every 2 bars on downbeat, 8-bar fade in)
-    if (sib === 0 && barNum % 2 === 0 && barNum >= PH.WARE) {
+    // ── Pad
+    if (sib === 0 && barNum % 2 === 0 && barNum >= PH.PAD) {
       const ci = Math.floor((barNum % 8) / 2) % 4;
-      let vol = 0.015;
-      if (barNum < PH.WARE + 8) vol *= (barNum - PH.WARE) / 8;
-      if (inBreak) vol = 0.04;
-      if (barNum >= totalBars - 8) vol *= Math.max(0, 1 - (barNum - (totalBars - 8)) / 8);
+      let vol = 0.04;
+      if (barNum < PH.PAD + 4) vol *= (barNum - PH.PAD) / 4;
+      if (inBreak) vol = 0.06;
+      if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 16);
       const voices = p.chordVoices[ci];
       const padDur = Math.min(2 * bar, 4);
       for (const midi of voices) {
-        for (const det of [-5, 0, 5]) {
+        for (const det of [-7, 0, 7]) {
           const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtf(midi); o.detune.value = det;
           const g = ctx.createGain();
           g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.5);
@@ -1082,12 +1143,28 @@ function compose_harvest() {
       }
     }
 
-    // ── Acid (from FLOOR)
-    if (barNum >= PH.FLOOR && barNum < totalBars - 4) {
-      // Submix envelope (8-bar fade in)
-      if (barNum === PH.FLOOR && sib === 0) {
+    // ── Acid (from SQUELCH — builds from gated squelch to full pattern)
+    if (barNum >= PH.SQUELCH && barNum < totalBars - 8) {
+      // Submix envelope
+      if (barNum === PH.SQUELCH && sib === 0) {
         acidSub.gain.setValueAtTime(0.001, t);
-        acidSub.gain.linearRampToValueAtTime(0.35, t + 8 * bar);
+        acidSub.gain.linearRampToValueAtTime(0.20, t + 16 * bar);
+      }
+      if (barNum === PH.ACID && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.45, t + 8 * bar);
+        acidDelWet.gain.setValueAtTime(0.001, t);
+        acidDelWet.gain.linearRampToValueAtTime(0.15, t + 8 * bar);
+      }
+      if (barNum === PH.MELODY && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.25, t + 2 * bar);
+      }
+      if (barNum === PH.PEAK && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
+        acidSub.gain.linearRampToValueAtTime(0.55, t + 8 * bar);
+        acidDelWet.gain.setValueAtTime(acidDelWet.gain.value, t);
+        acidDelWet.gain.linearRampToValueAtTime(0.25, t + 8 * bar);
       }
       if (barNum === PH.BREAK && sib === 0) {
         acidSub.gain.setValueAtTime(acidSub.gain.value, t);
@@ -1096,47 +1173,76 @@ function compose_harvest() {
       }
       if (barNum === PH.RETURN && sib === 0) {
         acidSub.gain.setValueAtTime(0.06, t);
-        acidSub.gain.linearRampToValueAtTime(0.40, t + 4 * bar);
-        acidDelWet.gain.setValueAtTime(0.18, t + 2 * bar);
+        acidSub.gain.linearRampToValueAtTime(0.55, t + 8 * bar);
+        acidDelWet.gain.setValueAtTime(0.25, t + 2 * bar);
       }
-      if (barNum === totalBars - 8 && sib === 0) {
+      if (barNum === PH.DESCENT && sib === 0) {
         acidSub.gain.setValueAtTime(acidSub.gain.value, t);
-        acidSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+        acidSub.gain.linearRampToValueAtTime(0.001, t + 24 * bar);
       }
 
-      const pat = p.acidPattern[sib];
-      if (!pat.note) { acidNoteG.gain.setValueAtTime(0.001, t); }
-      else {
+      const pat = harvestAcid[sib];
+
+      // Step gating: squelch → eighths → full → melody interaction → full
+      let shouldPlay = false;
+      if (barNum < PH.ACID) {
+        shouldPlay = pat.note && (sib % 4 === 0);
+      } else if (barNum < PH.MELODY) {
+        const prog = (barNum - PH.ACID) / (PH.MELODY - PH.ACID);
+        shouldPlay = pat.note && (prog < 0.4 ? (sib % 2 === 0) : true);
+      } else if (barNum < PH.PEAK) {
+        shouldPlay = pat.note && (pat.accent || sib % 4 === 0);
+      } else if (inBreak) {
+        shouldPlay = pat.note && pat.accent;
+      } else if (isReturn && barNum < PH.RETURN + 8) {
+        const rp = (barNum - PH.RETURN) / 8;
+        shouldPlay = pat.note && (rp < 0.3 ? (sib % 4 === 0) : rp < 0.6 ? (sib % 2 === 0) : true);
+      } else {
+        shouldPlay = !!pat.note;
+      }
+
+      if (!shouldPlay) {
+        acidNoteG.gain.setValueAtTime(0.001, t);
+      } else {
         const freq = mtf(pat.note);
         if (pat.slide) acidOsc.frequency.linearRampToValueAtTime(freq, t + sixteenth * 0.8);
         else acidOsc.frequency.setValueAtTime(freq, t);
-        const progress = (barNum - PH.FLOOR) / (totalBars - PH.FLOOR);
-        const fBase = 200 + progress * 2800;
-        const fPeak = pat.accent ? fBase + 2500 : fBase + 800;
-        acidFilt.frequency.setValueAtTime(Math.min(fPeak, 5500), t);
+
+        let fBase;
+        if (barNum < PH.ACID) fBase = 120;
+        else if (barNum < PH.MELODY) { fBase = 120 + ((barNum - PH.ACID) / (PH.MELODY - PH.ACID)) * 280; }
+        else if (barNum < PH.PEAK) fBase = 300;
+        else if (barNum < PH.BREAK) { fBase = 400 + ((barNum - PH.PEAK) / (PH.BREAK - PH.PEAK)) * 600; }
+        else if (inBreak) fBase = 180;
+        else if (barNum < PH.DESCENT) { fBase = 200 + ((barNum - PH.RETURN) / (PH.DESCENT - PH.RETURN)) * 1000; }
+        else fBase = 400;
+
+        const fPeak = pat.accent ? fBase + 2000 : fBase + 600;
+        acidFilt.frequency.setValueAtTime(Math.min(fPeak, 5000), t);
         acidFilt.frequency.exponentialRampToValueAtTime(Math.max(40, fBase), t + sixteenth * 2.5);
-        const aPeak = inBreak ? 0.15 : pat.accent ? 0.7 : 0.4;
+
+        const aPeak = inBreak ? 0.15 : pat.accent ? 0.6 : 0.3;
         acidNoteG.gain.setValueAtTime(aPeak, t);
         if (!pat.slide) {
-          acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.75);
-          acidNoteG.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.95);
+          acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.65);
+          acidNoteG.gain.linearRampToValueAtTime(0.01, t + sixteenth * 0.85);
         }
       }
     }
 
-    // ── Bass (from BUILD, 8-bar fade in)
-    if (isBeat && barNum >= PH.BUILD && !inBreak && barNum < totalBars - 4) {
-      if (barNum === PH.BUILD && beatIdx === 0) {
+    // ── Bass
+    if (isBeat && barNum >= PH.BASS && !inBreak && barNum < totalBars - 8) {
+      if (barNum === PH.BASS && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.001, t);
-        bassSub.gain.linearRampToValueAtTime(1, t + 8 * bar);
+        bassSub.gain.linearRampToValueAtTime(0.65, t + 8 * bar);
       }
       if (barNum === PH.RETURN && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.001, t);
-        bassSub.gain.linearRampToValueAtTime(1, t + 3 * bar);
+        bassSub.gain.linearRampToValueAtTime(0.65, t + 8 * bar);
       }
-      if (barNum === totalBars - 6 && beatIdx === 0) {
+      if (barNum === PH.DESCENT && beatIdx === 0) {
         bassSub.gain.setValueAtTime(bassSub.gain.value, t);
-        bassSub.gain.linearRampToValueAtTime(0.001, t + 6 * bar);
+        bassSub.gain.linearRampToValueAtTime(0.001, t + 24 * bar);
       }
 
       const ci = Math.floor((barNum % 8) / 2) % 4;
@@ -1147,16 +1253,16 @@ function compose_harvest() {
         subOsc.frequency.setValueAtTime(rootFreq / 2, t);
       }
       bassG.gain.setValueAtTime(0.03, t);
-      bassG.gain.exponentialRampToValueAtTime(0.75, t + beat * 0.325);
+      bassG.gain.exponentialRampToValueAtTime(0.60, t + beat * 0.325);
       subG.gain.setValueAtTime(0.02, t);
-      subG.gain.exponentialRampToValueAtTime(0.5, t + beat * 0.325);
+      subG.gain.exponentialRampToValueAtTime(0.35, t + beat * 0.325);
       const fOpen = beatIdx % 2 === 1 ? 1400 : 600;
       bassFilt.frequency.setValueAtTime(fOpen, t);
       bassFilt.frequency.exponentialRampToValueAtTime(400, t + beat * 0.9);
     }
 
-    // Rolling octave jumps on the 3rd and 7th eighth notes
-    if (isEighth && barNum >= PH.BUILD && !inBreak && barNum < totalBars - 4) {
+    // Rolling octave jumps
+    if (isEighth && barNum >= PH.BASS && !inBreak && barNum < totalBars - 8) {
       const eighthInBar = Math.floor(sib / 2);
       if (eighthInBar === 2 || eighthInBar === 6) {
         const ci = Math.floor((barNum % 8) / 2) % 4;
@@ -1166,29 +1272,29 @@ function compose_harvest() {
       }
     }
 
-    // ── Melody (from BUILD, 4-bar fade in)
-    if (isEighth && barNum >= PH.BUILD && barNum < totalBars - 4) {
-      if (barNum === PH.BUILD && sib === 0) {
+    // ── Melody
+    if (isEighth && barNum >= PH.MELODY && barNum < totalBars - 8) {
+      if (barNum === PH.MELODY && sib === 0) {
         melSub.gain.setValueAtTime(0.001, t);
-        melSub.gain.linearRampToValueAtTime(0.22, t + 4 * bar);
+        melSub.gain.linearRampToValueAtTime(0.30, t + 8 * bar);
       }
       if (barNum === PH.PEAK && sib === 0) {
-        melSub.gain.setValueAtTime(0.22, t);
-        melSub.gain.linearRampToValueAtTime(0.30, t + 2 * bar);
+        melSub.gain.setValueAtTime(0.30, t);
+        melSub.gain.linearRampToValueAtTime(0.40, t + 8 * bar);
       }
       if (barNum === PH.BREAK && sib === 0) {
         melSub.gain.setValueAtTime(melSub.gain.value, t);
-        melSub.gain.linearRampToValueAtTime(0.10, t + bar);
+        melSub.gain.linearRampToValueAtTime(0.15, t + bar);
         melFb.gain.setValueAtTime(0.5, t);
       }
       if (barNum === PH.RETURN && sib === 0) {
-        melSub.gain.setValueAtTime(0.10, t);
-        melSub.gain.linearRampToValueAtTime(0.32, t + 3 * bar);
+        melSub.gain.setValueAtTime(0.15, t);
+        melSub.gain.linearRampToValueAtTime(0.42, t + 8 * bar);
         melFb.gain.setValueAtTime(0.3, t + bar);
       }
-      if (barNum === totalBars - 8 && sib === 0) {
+      if (barNum === PH.DESCENT && sib === 0) {
         melSub.gain.setValueAtTime(melSub.gain.value, t);
-        melSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+        melSub.gain.linearRampToValueAtTime(0.001, t + 24 * bar);
       }
 
       const ci = Math.floor((barNum % 8) / 2) % 4;
@@ -1219,6 +1325,7 @@ function compose_golden() {
   const totalBars = 196;
   const nb = createNoise(0.5);
 
+  // Reverb — longer, warmer
   const reverb = ctx.createConvolver(); reverb.buffer = createImpulse(3.0, 2.0);
   const rvbWet = ctx.createGain(); rvbWet.gain.value = 0.22;
   reverb.connect(rvbWet); rvbWet.connect(master);
@@ -1233,14 +1340,7 @@ function compose_golden() {
   delLpf.connect(delWet); delWet.connect(master);
   const delSend = ctx.createGain(); delSend.gain.value = 1; delSend.connect(del);
 
-  const chamOsc = ctx.createOscillator(); chamOsc.type = 'sine'; chamOsc.frequency.value = CHAMFER_HZ;
-  const chamEnv = ctx.createGain(); chamEnv.gain.value = 0;
-  const chamLfo = ctx.createOscillator(); chamLfo.frequency.value = 0.2;
-  const chamLfoG = ctx.createGain(); chamLfoG.gain.value = 0.006;
-  chamLfo.connect(chamLfoG); chamLfoG.connect(chamEnv.gain);
-  chamOsc.connect(chamEnv); chamEnv.connect(master);
-
-  // Bass — gentle sawtooth + sub, following chord roots
+  // Bass — gentle sawtooth + sub
   const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth';
   const bassFilt = ctx.createBiquadFilter(); bassFilt.type = 'lowpass'; bassFilt.frequency.value = 400; bassFilt.Q.value = 2;
   const bassG = ctx.createGain(); bassG.gain.value = 0;
@@ -1251,44 +1351,46 @@ function compose_golden() {
   subOsc.connect(subG); subG.connect(bassSub); bassSub.connect(master);
 
   const t0 = ctx.currentTime + 0.3;
-  chamEnv.gain.setValueAtTime(0, t0);
-  chamEnv.gain.linearRampToValueAtTime(0.06, t0 + 8 * bar);
+  [bassOsc, subOsc].forEach(o => o.start(t0));
 
-  [chamOsc, chamLfo, bassOsc, subOsc].forEach(o => o.start(t0));
+  const PH = {
+    PAD: 0, KICK: 4, HAT: 8, BASS: 12,
+    CLOSE: 176
+  };
 
   startSched(118, (t, step, barNum, sib) => {
     const isBeat = sib % 4 === 0;
     const isEighth = sib % 2 === 0;
     const beatIdx = Math.floor(sib / 4);
 
-    // Gentle kick from bar 1
-    if (isBeat && barNum >= 1 && barNum < totalBars - 8) {
+    // ── Kick
+    if (isBeat && barNum >= PH.KICK && barNum < totalBars - 8) {
       let vol = 0.4;
-      if (barNum < 9) vol *= (barNum - 1) / 8;
+      if (barNum < PH.KICK + 4) vol *= (barNum - PH.KICK) / 4;
       if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 8);
       if (vol > 0.01) schedKick(t, vol, false);
     }
 
-    // Sparse hats from bar 3
-    if (isEighth && barNum >= 3 && barNum < totalBars - 12) {
+    // ── Hats
+    if (isEighth && barNum >= PH.HAT && barNum < totalBars - 16) {
       const offbeat = (sib / 2) % 2 === 1;
       if (offbeat) {
         let vol = 0.06;
-        if (barNum < 11) vol *= (barNum - 3) / 8;
-        if (barNum >= totalBars - 20) vol *= Math.max(0, 1 - (barNum - (totalBars - 20)) / 8);
+        if (barNum < PH.HAT + 4) vol *= (barNum - PH.HAT) / 4;
+        if (barNum >= totalBars - 24) vol *= Math.max(0, 1 - (barNum - (totalBars - 24)) / 8);
         if (vol > 0.005) schedHat(t, vol, nb);
       }
     }
 
-    // Bass from bar 3 — gentle sidechain pump
-    if (isBeat && barNum >= 3 && barNum < totalBars - 10) {
-      if (barNum === 3 && beatIdx === 0) {
+    // ── Bass
+    if (isBeat && barNum >= PH.BASS && barNum < totalBars - 8) {
+      if (barNum === PH.BASS && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.001, t);
         bassSub.gain.linearRampToValueAtTime(0.7, t + 4 * bar);
       }
-      if (barNum === totalBars - 14 && beatIdx === 0) {
+      if (barNum === PH.CLOSE && beatIdx === 0) {
         bassSub.gain.setValueAtTime(bassSub.gain.value, t);
-        bassSub.gain.linearRampToValueAtTime(0.001, t + 4 * bar);
+        bassSub.gain.linearRampToValueAtTime(0.001, t + 16 * bar);
       }
       const ci = Math.floor((barNum % 8) / 2) % 4;
       const rootFreq = mtf(p.chordRoots[ci]);
@@ -1302,12 +1404,12 @@ function compose_golden() {
       subG.gain.exponentialRampToValueAtTime(0.3, t + beat * 0.5);
     }
 
-    // Pad from bar 0 (pad-first) — sent to reverb + delay
+    // ── Pad
     if (sib === 0 && barNum % 2 === 0) {
       const ci = Math.floor((barNum % 8) / 2) % 4;
       let vol = 0.025;
-      if (barNum < 8) vol *= barNum / 8;
-      if (barNum >= totalBars - 12) vol *= Math.max(0, 1 - (barNum - (totalBars - 12)) / 12);
+      if (barNum < 4) vol *= barNum / 4;
+      if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 16);
       const voices = p.chordVoices[ci];
       const padDur = Math.min(2 * bar, 4.5);
       for (const midi of voices) {
@@ -1322,14 +1424,9 @@ function compose_golden() {
       }
     }
 
-    // Chamfer fade at end
-    if (barNum === totalBars - 12 && sib === 0) {
-      chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
-      chamEnv.gain.linearRampToValueAtTime(0, t + 12 * bar);
-    }
   }, totalBars);
 
-  return () => { [chamOsc, chamLfo, bassOsc, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
+  return () => { [bassOsc, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
 }
 
 // ── B3: TIKKUN ─────────────────────────────────────────

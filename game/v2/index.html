@@ -2563,9 +2563,9 @@
       <div class="temp-dot" id="temp-dot"></div>
       <div class="trans-pips">
         <span class="t-pip unity" id="t-unity">Unity<span class="t-pip-desc"><div class="t-pip-title">Unum · Unity</div>Many bodies, one motion. The boundary between self and crowd became optional.<div class="t-pip-origin">Chapter 1 · The dance floor</div></span></span>
-        <span class="t-pip beauty" id="t-beauty">Beauty<span class="t-pip-desc"><div class="t-pip-title">Pulchrum · Beauty</div>Form exceeding function. The system did something impossible and beautiful.<div class="t-pip-origin">Chapter 5 · Behind the speakers</div></span></span>
         <span class="t-pip truth" id="t-truth">Truth<span class="t-pip-desc"><div class="t-pip-title">Verum · Truth</div>Presence without performance. What you showed was what you were.<div class="t-pip-origin">Chapter 2 · The bouncer</div></span></span>
         <span class="t-pip goodness" id="t-goodness">Goodness<span class="t-pip-desc"><div class="t-pip-title">Bonum · Goodness</div>Care without audience. Something given with no one watching.<div class="t-pip-origin">Chapter 3 · The loading dock</div></span></span>
+        <span class="t-pip beauty" id="t-beauty">Beauty<span class="t-pip-desc"><div class="t-pip-title">Pulchrum · Beauty</div>Form exceeding function. The system did something impossible and beautiful.<div class="t-pip-origin">Chapter 5 · Behind the speakers</div></span></span>
       </div>
     </div>
     <div class="state-right">
@@ -6389,13 +6389,14 @@ function getSoundtrackZone(node,runState){
   const num=parseInt(node.id.split('_')[1]);
   if(runState.tags.includes('approached_bartender')&&node.temperature==='warm') return 'breakdown';
   if(isNaN(num)){
+    if(node.id && node.id.includes('bouncer')) return 'pulse';
     if(node.temperature==='cold') return 'warehouse';
     if(node.temperature==='warm') return 'floor';
     return 'floor';
   }
   if(char==='wanderer'){
     if(num<=1) return 'hum';
-    if(num<=2) return 'pulse';
+    if(num<=3 && (node.temperature==='cool'||node.temperature==='cold')) return 'pulse';
     if(num<=5) return 'warehouse';
     if(node.temperature==='cold') return 'warehouse';
     return 'floor';
@@ -6488,16 +6489,17 @@ async function stToggleListen(){
   soundtrack.startRun();
   btn.textContent='stop';
   stUpdateIcon();stUpdateModal();
-  const bar=soundtrack.params.bar;
-  const zones=['hum','pulse','warehouse','floor','transcendent','floor','breakdown','floor','transcendent','closing','silence'];
-  const durations=[8,8,12,12,16,8,6,8,16,8,8];
+  const zones=['pulse','warehouse','floor','transcendent','floor','breakdown','floor','transcendent','closing','silence'];
+  const durations=[8,12,12,16,8,6,8,16,8,8];
   let i=0;
   function nextZone(){
     if(!soundtrack||!soundtrack.running){_listenTimer=null;return;}
     if(i>=zones.length){
-      soundtrack.stopRun();btn.textContent='play a track';
-      stUpdateIcon();_listenTimer=null;return;
+      soundtrack.startRun();
+      stUpdateModal();
+      i=0;
     }
+    const bar=soundtrack.params.bar;
     soundtrack.setZone(zones[i]);
     _listenTimer=setTimeout(nextZone,durations[i]*bar*1000);
     i++;
