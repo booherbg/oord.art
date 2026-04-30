@@ -286,11 +286,17 @@
   canvas#wv.visible { opacity: 0.3; }
 
   @media (max-width: 480px) {
-    .wrap { padding: 0 16px 100px; }
+    .wrap { padding: 0 16px 120px; }
     .track-bpm { display: none; }
     .track-note p, .liner-preamble { font-size: 12px; }
-    #transport { gap: 6px; padding: 0 8px; }
-    #transport .now { max-width: 90px; }
+    #transport {
+      height: auto; padding: 8px 12px;
+      flex-wrap: wrap; gap: 6px;
+      justify-content: center;
+    }
+    #transport .now { max-width: 120px; order: -1; width: 100%; text-align: center; }
+    #transport .time { order: -1; width: 100%; text-align: center; margin-bottom: 2px; }
+    canvas#wv { bottom: 80px; }
   }
 </style>
 </head>
@@ -478,6 +484,7 @@
   <button class="on" onclick="setVol(0.5,this)">med</button>
   <button onclick="setVol(0.8,this)">loud</button>
   <button class="stop-btn" onclick="stopTrack()">stop</button>
+  <button onclick="skipAhead()" title="Skip 1 min ahead">+1m</button>
   <button class="wake-toggle" id="wake-btn" onclick="toggleWakeLock()" title="Keep screen on while playing">screen on</button>
 </div>
 
@@ -701,6 +708,8 @@ function autoClean(source, ...nodes) {
 
 // ── Scheduler ──────────────────────────────────────────
 
+let _schedState = null;
+
 function startSched(bpm, onStep, totalBars) {
   const sixteenth = 60 / bpm / 4;
   const lookahead = 1.5;
@@ -709,6 +718,7 @@ function startSched(bpm, onStep, totalBars) {
   trackStartTime = nextTime;
   trackTotalBars = totalBars;
   trackBar = 0;
+  _schedState = { sixteenth, step: () => step, set(s, t) { step = s; nextTime = t; } };
   schedTimer = setInterval(() => {
     while (nextTime < ctx.currentTime + lookahead) {
       const bar = Math.floor(step / 16);
@@ -1053,7 +1063,7 @@ function compose_harvest() {
   [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
 
   const PH = {
-    CHAM: 0, PULSE: 1, BASS: 9,
+    CHAM: 0, PULSE: 1, BASS: 13,
     SHAKER: 20, WARE: 24, CLAP: 28,
     SQUELCH: 40, PAD: 56, ACID: 72,
     MELODY: 96, PEAK: 128,
@@ -1066,6 +1076,8 @@ function compose_harvest() {
     const isEighth = sib % 2 === 0;
     const beatIdx = Math.floor(sib / 4);
     const inBreak = barNum >= PH.BREAK && barNum < PH.RETURN;
+    const inRoll = barNum >= PH.SNARE && barNum < PH.RETURN;
+    const rollProg = inRoll ? (barNum - PH.SNARE + sib / 16) / (PH.RETURN - PH.SNARE) : 0;
     const isReturn = barNum >= PH.RETURN;
 
     // ── Chamfer — breathes for 1 bar, fades as bass enters
@@ -1148,17 +1160,21 @@ function compose_harvest() {
       const ci = Math.floor((barNum % 8) / 2) % 4;
       let vol = 0.04;
       if (barNum < PH.PAD + 4) vol *= (barNum - PH.PAD) / 4;
-      if (inBreak) vol = 0.06;
+      if (inBreak && !inRoll) vol = 0.12;
+      if (inRoll) vol = 0.10 + rollProg * 0.04;
+      if (isReturn) vol = 0.07;
       if (barNum >= totalBars - 16) vol *= Math.max(0, 1 - (barNum - (totalBars - 16)) / 16);
       const voices = p.chordVoices[ci];
       const padDur = Math.min(2 * bar, 4);
+      const padDet = inBreak && !inRoll ? 12 : inRoll ? 12 + rollProg * 30 : 7;
       for (const midi of voices) {
-        for (const det of [-7, 0, 7]) {
+        for (const det of [-padDet, 0, padDet]) {
           const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtf(midi); o.detune.value = det;
           const g = ctx.createGain();
           g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.5);
           g.gain.setValueAtTime(vol, t + padDur - 0.5); g.gain.linearRampToValueAtTime(0, t + padDur);
-          o.connect(g); g.connect(master); o.start(t); o.stop(t + padDur + 0.5);
+          o.connect(g); g.connect(master); if (inBreak || isReturn) g.connect(rvbSend);
+          o.start(t); o.stop(t + padDur + 0.5);
           autoClean(o, o, g);
         }
       }
@@ -1192,8 +1208,12 @@ function compose_harvest() {
         acidSub.gain.linearRampToValueAtTime(0.06, t + 0.1);
         acidDelWet.gain.setValueAtTime(0.35, t);
       }
-      if (barNum === PH.RETURN && sib === 0) {
+      if (barNum === PH.SNARE && sib === 0) {
         acidSub.gain.setValueAtTime(0.06, t);
+        acidSub.gain.linearRampToValueAtTime(0.45, t + (PH.RETURN - PH.SNARE) * bar);
+      }
+      if (barNum === PH.RETURN && sib === 0) {
+        acidSub.gain.setValueAtTime(acidSub.gain.value, t);
         acidSub.gain.linearRampToValueAtTime(0.55, t + 8 * bar);
         acidDelWet.gain.setValueAtTime(0.25, t + 2 * bar);
       }
@@ -1213,6 +1233,8 @@ function compose_harvest() {
         shouldPlay = pat.note && (prog < 0.4 ? (sib % 2 === 0) : true);
       } else if (barNum < PH.PEAK) {
         shouldPlay = pat.note && (pat.accent || sib % 4 === 0);
+      } else if (inRoll) {
+        shouldPlay = pat.note && (rollProg < 0.4 ? (sib % 4 === 0) : rollProg < 0.7 ? (sib % 2 === 0) : true);
       } else if (inBreak) {
         shouldPlay = pat.note && pat.accent;
       } else if (isReturn && barNum < PH.RETURN + 8) {
@@ -1234,6 +1256,7 @@ function compose_harvest() {
         else if (barNum < PH.MELODY) { fBase = 120 + ((barNum - PH.ACID) / (PH.MELODY - PH.ACID)) * 280; }
         else if (barNum < PH.PEAK) fBase = 300;
         else if (barNum < PH.BREAK) { fBase = 400 + ((barNum - PH.PEAK) / (PH.BREAK - PH.PEAK)) * 600; }
+        else if (inRoll) fBase = 180 + rollProg * 3800;
         else if (inBreak) fBase = 180;
         else if (barNum < PH.DESCENT) { fBase = 200 + ((barNum - PH.RETURN) / (PH.DESCENT - PH.RETURN)) * 1000; }
         else fBase = 400;
@@ -1242,7 +1265,7 @@ function compose_harvest() {
         acidFilt.frequency.setValueAtTime(Math.min(fPeak, 5000), t);
         acidFilt.frequency.exponentialRampToValueAtTime(Math.max(40, fBase), t + sixteenth * 2.5);
 
-        const aPeak = inBreak ? 0.15 : pat.accent ? 0.6 : 0.3;
+        const aPeak = inRoll ? 0.15 + rollProg * 0.45 : inBreak ? 0.15 : pat.accent ? 0.6 : 0.3;
         acidNoteG.gain.setValueAtTime(aPeak, t);
         if (!pat.slide) {
           acidNoteG.gain.setValueAtTime(aPeak, t + sixteenth * 0.65);
@@ -1711,6 +1734,14 @@ async function toggleTrack(id) {
   updateTrackUI();
   drawWave();
   startProgress(track.dur);
+}
+
+function skipAhead() {
+  if (!ctx || !activeId || !_schedState) return;
+  const skipSteps = Math.round(60 / _schedState.sixteenth);
+  const newStep = _schedState.step() + skipSteps;
+  _schedState.set(newStep, ctx.currentTime + 0.1);
+  trackStartTime -= 60;
 }
 
 function stopTrack() {
