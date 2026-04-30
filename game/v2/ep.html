@@ -267,6 +267,11 @@
   #transport button:hover { border-color: var(--orange); color: var(--text-bright); }
   #transport button.on { border-color: var(--orange); color: var(--orange); }
   #transport .stop-btn:hover { border-color: #c04040; color: #e06060; }
+  #transport .wake-toggle {
+    font-size: 8px; letter-spacing: 0.06em; padding: 4px 8px;
+    border-style: dashed;
+  }
+  #transport .wake-toggle.on { border-style: solid; }
 
   /* ─── WAVEFORM ──────────────────────────────────────── */
   canvas#wv {
@@ -473,6 +478,7 @@
   <button class="on" onclick="setVol(0.5,this)">med</button>
   <button onclick="setVol(0.8,this)">loud</button>
   <button class="stop-btn" onclick="stopTrack()">stop</button>
+  <button class="wake-toggle" id="wake-btn" onclick="toggleWakeLock()" title="Keep screen on while playing">screen on</button>
 </div>
 
 <script>
@@ -1801,6 +1807,40 @@ window.addEventListener('resize', () => {
   const canvas = document.getElementById('wv');
   canvas.width = window.innerWidth;
   canvas.height = 50;
+});
+
+let wakeLock = null;
+const wakeBtn = document.getElementById('wake-btn');
+
+async function toggleWakeLock() {
+  if (wakeLock) {
+    wakeLock.release();
+    wakeLock = null;
+    wakeBtn.classList.remove('on');
+    return;
+  }
+  if (!('wakeLock' in navigator)) {
+    wakeBtn.textContent = 'n/a';
+    wakeBtn.disabled = true;
+    return;
+  }
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeBtn.classList.add('on');
+    wakeLock.addEventListener('release', () => {
+      wakeLock = null;
+      wakeBtn.classList.remove('on');
+    });
+  } catch(e) {}
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && wakeBtn.classList.contains('on') && !wakeLock) {
+    navigator.wakeLock.request('screen').then(wl => {
+      wakeLock = wl;
+      wl.addEventListener('release', () => { wakeLock = null; wakeBtn.classList.remove('on'); });
+    }).catch(() => {});
+  }
 });
 
 </script>
