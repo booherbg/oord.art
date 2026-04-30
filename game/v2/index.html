@@ -3144,7 +3144,7 @@ async function loadCharacter(charId) {
   if (!def || !isUnlocked(charId)) return;
 
   if (!soundtrack) { soundtrack = new SoundtrackEngine(); soundtrack.init(); }
-  soundtrack.resume();
+  await soundtrack.resume();
 
   if (charId === 'wanderer' || (persistent.runs === 0 && shouldShowIntro())) {
     showIntro(charId);
@@ -6473,7 +6473,7 @@ function stShowWelcome(){
 }
 
 let _listenTimer=null;
-function stToggleListen(){
+async function stToggleListen(){
   const btn=document.getElementById('st-listen-btn');
   if(!btn) return;
   if(_listenTimer||soundtrack&&soundtrack.running){
@@ -6484,26 +6484,25 @@ function stToggleListen(){
     return;
   }
   if(!soundtrack){soundtrack=new SoundtrackEngine();soundtrack.init();}
-  soundtrack.resume().then(()=>{
-    soundtrack.startRun();
-    btn.textContent='stop';
-    stUpdateIcon();stUpdateModal();
-    const bar=soundtrack.params.bar;
-    const zones=['hum','pulse','warehouse','floor','transcendent','floor','breakdown','floor','transcendent','closing','silence'];
-    const durations=[8,8,12,12,16,8,6,8,16,8,8];
-    let i=0;
-    function nextZone(){
-      if(!soundtrack||!soundtrack.running){_listenTimer=null;return;}
-      if(i>=zones.length){
-        soundtrack.stopRun();btn.textContent='play a track';
-        stUpdateIcon();_listenTimer=null;return;
-      }
-      soundtrack.setZone(zones[i]);
-      _listenTimer=setTimeout(nextZone,durations[i]*bar*1000);
-      i++;
+  await soundtrack.resume();
+  soundtrack.startRun();
+  btn.textContent='stop';
+  stUpdateIcon();stUpdateModal();
+  const bar=soundtrack.params.bar;
+  const zones=['hum','pulse','warehouse','floor','transcendent','floor','breakdown','floor','transcendent','closing','silence'];
+  const durations=[8,8,12,12,16,8,6,8,16,8,8];
+  let i=0;
+  function nextZone(){
+    if(!soundtrack||!soundtrack.running){_listenTimer=null;return;}
+    if(i>=zones.length){
+      soundtrack.stopRun();btn.textContent='play a track';
+      stUpdateIcon();_listenTimer=null;return;
     }
-    nextZone();
-  });
+    soundtrack.setZone(zones[i]);
+    _listenTimer=setTimeout(nextZone,durations[i]*bar*1000);
+    i++;
+  }
+  nextZone();
 }
 
 function stToggleTagsModal(){

@@ -1577,19 +1577,18 @@ const TRACKS = {
   tikkun:  { name: 'Tikkun', dur: 1125, compose: compose_tikkun },
 };
 
-function toggleTrack(id) {
+async function toggleTrack(id) {
   if (activeId === id) { stopTrack(); return; }
   stopTrack();
   if (ctx) { try { ctx.close(); } catch(e){} ctx = null; }
   initAudio();
-  ctx.resume().then(() => {
-    const track = TRACKS[id];
-    cleanupFn = track.compose();
-    activeId = id;
-    updateTrackUI();
-    drawWave();
-    startProgress(track.dur);
-  });
+  await ctx.resume();
+  const track = TRACKS[id];
+  cleanupFn = track.compose();
+  activeId = id;
+  updateTrackUI();
+  drawWave();
+  startProgress(track.dur);
 }
 
 function stopTrack() {
