@@ -484,8 +484,7 @@
   <button class="on" onclick="setVol(0.5,this)">med</button>
   <button onclick="setVol(0.8,this)">loud</button>
   <button class="stop-btn" onclick="stopTrack()">stop</button>
-  <button onclick="skipAhead()" title="Skip 1 min ahead">+1m</button>
-  <button class="wake-toggle" id="wake-btn" onclick="toggleWakeLock()" title="Keep screen on while playing">screen on</button>
+<button class="wake-toggle" id="wake-btn" onclick="toggleWakeLock()" title="Keep screen on while playing">screen on</button>
 </div>
 
 <script>
@@ -708,8 +707,6 @@ function autoClean(source, ...nodes) {
 
 // ── Scheduler ──────────────────────────────────────────
 
-let _schedState = null;
-
 function startSched(bpm, onStep, totalBars) {
   const sixteenth = 60 / bpm / 4;
   const lookahead = 1.5;
@@ -718,7 +715,6 @@ function startSched(bpm, onStep, totalBars) {
   trackStartTime = nextTime;
   trackTotalBars = totalBars;
   trackBar = 0;
-  _schedState = { sixteenth, step: () => step, set(s, t) { step = s; nextTime = t; } };
   schedTimer = setInterval(() => {
     while (nextTime < ctx.currentTime + lookahead) {
       const bar = Math.floor(step / 16);
@@ -1067,7 +1063,7 @@ function compose_harvest() {
     SHAKER: 20, WARE: 24, CLAP: 28,
     SQUELCH: 40, PAD: 56, ACID: 72,
     MELODY: 96, PEAK: 128,
-    BREAK: 224, SNARE: 240, RETURN: 248,
+    BREAK: 225, SNARE: 241, RETURN: 249,
     DESCENT: 328
   };
 
@@ -1709,6 +1705,7 @@ function compose_tikkun() {
   return () => { [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
 }
 
+
 // ═══════════════════════════════════════════════════════
 // PLAYBACK CONTROL
 // ═══════════════════════════════════════════════════════
@@ -1734,14 +1731,6 @@ async function toggleTrack(id) {
   updateTrackUI();
   drawWave();
   startProgress(track.dur);
-}
-
-function skipAhead() {
-  if (!ctx || !activeId || !_schedState) return;
-  const skipSteps = Math.round(60 / _schedState.sixteenth);
-  const newStep = _schedState.step() + skipSteps;
-  _schedState.set(newStep, ctx.currentTime + 0.1);
-  trackStartTime -= 60;
 }
 
 function stopTrack() {
