@@ -2956,7 +2956,8 @@ async function resumeBookmark() {
       transcendentals: [...(bk.transcendentals || [])],
       pending_arrival: bk.pending_arrival || null,
       earnedArtifacts: [...(bk.earnedArtifacts || [])],
-      history:         (bk.history || []).map(h => ({ nodeId: h.nodeId, tagSnapshot: [...h.tagSnapshot] }))
+      history:         (bk.history || []).map(h => ({ nodeId: h.nodeId, tagSnapshot: [...h.tagSnapshot] })),
+      preRunTranscendentals: (persistent.transcendentals || []).filter(t => !(bk.transcendentals || []).includes(t))
     };
 
     if (soundtrack) soundtrack.startRun();
@@ -3117,6 +3118,8 @@ function renderCharCards() {
       }
     } else if (completed) {
       statusNote = '<div class="char-completed-note">completed</div>';
+    } else if (unlocked && def.id === 'familiar' && !completed) {
+      statusNote = '<div class="char-completed-note">chapter 4</div>';
     }
 
     if (wandererNextClass) card.classList.add(wandererNextClass);
@@ -3393,7 +3396,8 @@ async function loadCharacterDirect(charId) {
       transcendentals: [],
       pending_arrival: null,
       earnedArtifacts: [],
-      history:         []
+      history:         [],
+      preRunTranscendentals: [...(persistent.transcendentals || [])]
     };
 
     clearBookmark();
@@ -3434,7 +3438,8 @@ function restartCharacter() {
     transcendentals: [],
     pending_arrival: null,
     earnedArtifacts: [],
-    history:         []
+    history:         [],
+    preRunTranscendentals: [...(persistent.transcendentals || [])]
   };
   if (soundtrack) soundtrack.startRun();
   document.body.className = 'temp-cold';
@@ -3879,7 +3884,7 @@ function renderNode() {
         const BEAUTY_TRAIL = { w_002: 'w_002b', w_002b: 'w_003b', w_003b: 'w_003', w_003: 'w_004', w_003_rings: 'w_004', w_004: 'w_004b' };
         const beautyBreadcrumb = beautyReady && !choice.highlight && BEAUTY_TRAIL[node.id] === choice.next;
         const cls = 'choice-btn'
-          + (gated ? ' choice-gated-new' + artifactClass : '')
+          + (gated && !highlightClass ? ' choice-gated-new' + artifactClass : '')
           + highlightClass
           + (beautyBreadcrumb ? ' choice-beauty-crumb' : '')
           + (type !== 'continue' ? ' choice-' + type : '');
@@ -3901,7 +3906,7 @@ function renderNode() {
     // transcendence = all 4 Wanderer artifacts collected across runs (persistent)
     const WANDERER_ARTIFACTS = ['yarn_knot', 'matchbook', 'polaroid', 'shard_of_light'];
     let outcome = node.outcome;
-    if (outcome === 'harvest') {
+    if (outcome === 'harvest' || outcome === 'recognition') {
       const hasAll = WANDERER_ARTIFACTS.every(a => persistent.artifacts.includes(a));
       if (hasAll) {
         outcome = 'transcendence';
@@ -3987,7 +3992,8 @@ function renderNode() {
     newlyUnlocked.forEach(id => {
       const def = CHAR_DEFS.find(c => c.id === id);
       if (def) {
-        unlockHtml += `<div class="outcome-unlock">◈ New perspective unlocked: ${esc(def.display_name)}</div>`;
+        const chapterTag = id === 'familiar' ? 'Chapter 4 · ' : '';
+        unlockHtml += `<div class="outcome-unlock">◈ ${chapterTag}New perspective unlocked: ${esc(def.display_name)}</div>`;
       }
     });
 
@@ -4261,11 +4267,15 @@ function updateStateBar(node) {
     dot.style.background = tempMap[node.temperature] || tempMap.cold;
   }
 
-  // transcendental pips — persistent across runs
+  // transcendental pips — only reveal this-run awards at the epilogue (terminal node)
   ['unity', 'beauty', 'truth', 'goodness'].forEach(t => {
     const pip = document.getElementById('t-' + t);
-    if (pip) pip.classList.toggle('earned',
-      (run && run.transcendentals.includes(t)) || (persistent.transcendentals || []).includes(t));
+    if (!pip) return;
+    const preRun = run ? (run.preRunTranscendentals || []) : (persistent.transcendentals || []);
+    const earned = (node && node.terminal)
+      ? ((run && run.transcendentals.includes(t)) || (persistent.transcendentals || []).includes(t))
+      : preRun.includes(t);
+    pip.classList.toggle('earned', earned);
   });
 
   // artifacts — carried modal + toggle button
