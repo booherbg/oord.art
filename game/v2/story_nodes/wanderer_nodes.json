@@ -466,7 +466,7 @@
     },
     {
       "id": "w_008e",
-      "text": "The antlered woman has moved into the dance floor. A second antlered companion has appeared - moving differently, more structured, choreographic. Together they are a singular unit. The first holds the rod and it is resonating now - not humming but a sound that sits between the notes of the music, filling the spaces the melody leaves empty.\n\nYou watch her approach the sneaker-star woman. The rod sings - louder than before, a sound you can feel in the back of your throat. She takes her hand and guides her toward a dancer standing with their eyes half-closed, moving with their whole body, unselfconscious. The antlered woman positions them like someone tuning an instrument, adjusting the distance between them until the rod goes quiet. When it goes quiet, they look at each other and begin to move together without discussion. Neither of them seems surprised by this.\n\nThis is happening everywhere. Pairs forming across the floor. Specific and deliberate. It looks like the party getting looser. It looks like people finding their groove. It looks like something that was here long before we crawled out of the dark and started moving together. Something ancient and patient. We just happen to be what it works with.",
+      "text": "The antlered woman has moved into the dance floor. A second antlered companion has appeared - moving differently, more structured, choreographic. Together they are a singular unit. The first holds the rod and it is resonating now - not humming but a sound that sits between the notes of the music, filling the spaces the melody leaves empty.\n\nYou watch her approach the sneaker-star woman. The rod sings - louder than before, a sound you can feel in the back of your throat. She takes her hand and guides her toward two dancers standing close, eyes half-closed, moving with their whole bodies, unselfconscious. The antlered woman positions the three of them like someone tuning an instrument, adjusting the distance between them until the rod goes quiet. When it goes quiet, they begin to move together without discussion. None of them seems surprised by this.\n\nThis is happening everywhere. Groups forming across the floor. Specific and deliberate. Two here, three there, four near the speakers standing in a loose constellation. It looks like the party getting looser. It looks like people finding their groove. It looks like something that was here long before we crawled out of the dark and started moving together. Something ancient and patient. We just happen to be what it works with.",
       "arrival_variants": [
         {
           "default": true,
@@ -507,7 +507,7 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE MATING RITUAL"
+      "subtitle": "THE PAIRING RITUAL"
     },
     {
       "id": "w_009",
@@ -585,7 +585,10 @@
       "text": "The music is winding down. Everything else is cresting - the heat, the pressure, the thing between all these bodies that has no name.\n\nThe green tentacles have stopped adjusting. For the first time all night, the hands are completely still - resting on the mixer the way you rest your hands on something that is finally doing what you built it to do. The machine doesn't need tuning anymore. \n\nThe fog around the DJ booth is doing something. You can see shapes in it - geometric, repeating, like something is being projected from inside the construct itself. Below your feet the projection rings are pulsing faster than they have all night, contracting toward the center, and through the gaps in the concrete you swear you can see light coming from somewhere deep below.\n\nThe vocoded voice calls the crowd down. Lower. A little bit softer now. The bass descends and bodies descend with it - bending, folding, sinking. You go with them. The person next to you grabs your hand. You let them.\n\nAt the floor, face-level with the concrete, the music fades to a drone. So low you stop hearing it and start feeling it. Vibration from underneath. Vibration from above. You are between them. You are the conduit. Something passing through - not pain, not pleasure. A flow. A restoration.\n\nStillness. The bass drops out. Silence. Earned presence.\n\nThe portal closes. The rings flash out of existence. You feel the pressure change in your ears, a sealing, as if something beneath the floor has been shut. Fog clears. Lights come up warm. The room is a warehouse.\n\nYou stand. Knees ache. Shirt damp. Smiling. The crowd disperses slowly. Reluctantly. The way your hands come apart after holding someone you're not sure you'll see again.",
       "arrival_variants": [
         {
-          "text": "Behind the rack, the Builder's hands are still. You watched those hands tune the sound that carried you into the circle. The closing finds you holding both.",
+          "requires": {
+            "has_tag": "saw_builder"
+          },
+          "text": "Behind the rack, the Builder's hands are still. You watched those hands tune the sound that carried you into the circle. The closing finds you still feeling it.",
           "default": false
         },
         {
@@ -1217,12 +1220,49 @@
       "choices": [
         {
           "text": "The closing is starting. You can feel it.",
-          "next": "w_011"
+          "next": "w_011_beauty"
         }
       ],
       "next": null,
       "terminal": false,
       "outcome": null
+    },
+    {
+      "id": "w_011_beauty",
+      "subtitle": "THE CLOSING RITUAL",
+      "text": "The closing starts and you feel it from behind the rack. Not in front, in the crowd, the way you felt it the first three times. Behind. Where the Builder stands. Where the sound is made.\n\nThe vocoded voice calls the crowd down and you watch it happen from the other side. Two hundred bodies descending. From here they don't look like a crowd. They look like a field. A harvest. You understand the word now. You understand what's being gathered and you understand that understanding doesn't stop it from gathering you too.\n\nThe Builder is watching the meters. Hands still. The system is doing what it was built to do. You are standing next to the person who built it and you are standing inside the thing that was built and these are not contradictory positions.\n\nThe bass descends. The portal contracts. Through the gaps in the concrete the light is brighter than you've ever seen it. Not amber anymore. White. The color before color, the frequency before frequency. The Builder's chamfer sings one last note. The heat sinks ring with it. Everything the Builder touched tonight is resonating at once and the sound is specific and impossible and it is already fading.\n\nStillness. The bass drops out. The silence is different from this side. From the floor it felt like an ending. From behind the rack it feels like a door closing gently. The room sealed. The work done. The light returned to wherever light goes.\n\nFog clears. Lights come up. The construct behind the decks looks small in the overhead light. Handmade. The Builder is already packing cables.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [
+        {
+          "text": "You start packing too.",
+          "next": "w_012_beauty"
+        }
+      ],
+      "next": null,
+      "terminal": false,
+      "outcome": null
+    },
+    {
+      "id": "w_012_beauty",
+      "subtitle": "THE DEPARTURE",
+      "text": "You help the Builder carry a speaker to the van. It's heavier than it looks. The parking lot is dark and cold and the sodium lights make everything orange.\n\nNeither of you says much. There isn't much to say. You hand the speaker up into the van and the Builder nods the way people nod when they've shared something that doesn't fit into language.\n\nYou walk to your car. The frequency is in your sternum. It has been there all night but it's different now. Not louder. Closer. Like it moved from the room into you and settled.\n\nYou sit in the driver's seat. Engine off. Hands on the wheel. The warehouse is dark behind you. The lot is empty except for the van and the amber glow leaking from the loading dock.\n\nYou will come back. Not because you need to. Because the sound is still running and you are one of the things it runs through and showing up is how you hold your end of it.\n\nYou start the car.",
+      "arrival_variants": [],
+      "conditional_text": [],
+      "oor_action": null,
+      "temperature": "hot",
+      "awards_transcendental": null,
+      "awards_artifact": null,
+      "awards_tags": [],
+      "choices": [],
+      "next": null,
+      "terminal": true,
+      "outcome": "harvest"
     }
   ]
 }

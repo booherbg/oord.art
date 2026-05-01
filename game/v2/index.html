@@ -2606,8 +2606,8 @@
     <div class="intro-inner">
       <div class="intro-title">Before You Go In</div>
       <div class="intro-body">
-        <p>This is a short story told across five chapters, each about 15 minutes long. Four chapters follow the Wanderer. A fifth unlocks a new perspective entirely.</p>
-        <p>Read it the way you'd read a short story — one chapter at a time, at your own pace. There are no wrong answers.</p>
+        <p>Something is happening tonight at a warehouse across town. You weren't planning to go. Each chapter takes about 15 minutes. You don't need to finish it all at once.</p>
+        <p>You'll make choices along the way. There are no wrong answers.</p>
       </div>
       <div class="intro-body">
         <p>When you finish a chapter, come back and choose the same character again. New choices will appear — look for the <span style="color:var(--unity);font-weight:500">glowing options</span> that unlock as you go deeper. Each run through the same evening reveals something different.</p>
@@ -2623,7 +2623,7 @@
   <div id="select-screen" class="wrap">
     <header class="site-header">
       <div class="site-title">The Call of<span>Sooboont</span></div>
-      <div class="site-sub">This is a discovery game set in the universe of DJ OOR. Play once as a stranger in the crowd. Unlock new storylines and perspectives to experience the evening from a different angle. Each chapter takes about 5 minutes — use <span style="color:var(--orange)">save &amp; exit ◈</span> to bookmark your place and come back later.</div>
+      <div class="site-sub">A discovery game set in the universe of DJ OOR about ritual, perception, and ancient things wearing familiar shapes. Each chapter reveals a new perspective.</div>
     </header>
     <div class="source-lore-link"><a href="lore-viewer.html" target="_blank">Lore Document &amp; References →</a></div>
     <div class="divider"></div>
@@ -2637,10 +2637,7 @@
       <span class="legend-item"><span class="legend-icon">⑂</span> story branch</span>
       <span class="legend-item"><span class="legend-icon" style="color:var(--yellow)">◈</span> unlocked path</span>
     </div>
-    <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center;">
-      <div class="st-icon" id="st-icon-select" onclick="stToggleModal()" style="opacity:0.5">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
-      </div>
+    <div style="margin-top: 24px; text-align: right;">
       <button type="button" class="select-reset" id="reset-btn" onclick="confirmReset()">reset all progress</button>
     </div>
     <div class="version-tag">v1.2 · 2026-04-29 · emergent soundtrack engine, ux polish, lore doc update, easter eggs<br>v1.1 · 2026-04-29 · 5 chapters, familiar rework, mobile polish, ux audit, lore viewer overhaul<br>v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
@@ -3085,6 +3082,9 @@ function renderCharCards() {
   const el = document.getElementById('char-cards');
   el.innerHTML = '';
   CHAR_DEFS.forEach(def => {
+    // hide Builder entirely until Wanderer is completed
+    if (def.id === 'builder' && !persistent.completed_characters.includes('wanderer')) return;
+
     const unlocked  = isUnlocked(def.id);
     const completed = persistent.completed_characters.includes(def.id);
     const card = document.createElement('div');

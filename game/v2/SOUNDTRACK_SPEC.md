@@ -427,4 +427,35 @@ When ready to showcase in the lore viewer as album liner notes:
 
 ---
 
+## Implementation Notes (learned the hard way)
+
+### Structural Alignment
+
+All phase transitions (breakdown, snare roll, return, layer entries) must land on 8-bar phrase boundaries **relative to the kick entry bar**, not bar 0. If kick enters at bar N, valid transition points are N, N+8, N+16, etc.
+
+Example: if PULSE (kick) enters at bar 1, then BREAK must be 225 (not 224), because (225-1) % 8 = 0. One bar off and the listener feels it even if they can't name it.
+
+Bass entry is especially sensitive. Three 4-bar phrases of kick before bass drops = classic house structure.
+
+### Node Lifecycle
+
+Every transient audio node (kick, hat, clap, snare, shaker, melody note, pad voice) must be disconnected after it stops. Use `source.onended` to trigger `disconnect()` on the full chain:
+
+```javascript
+function autoClean(source, ...nodes) {
+  source.onended = () => { for (const n of nodes) try { n.disconnect(); } catch(e) {} };
+}
+```
+
+Without this, stopped-but-connected nodes accumulate (thousands per minute at tempo), GC stalls cause audio glitches, and the tab eventually crashes.
+
+### Mobile Scheduling
+
+- `setInterval` is throttled to ~1000ms when the screen is off (Chrome) or the tab is backgrounded
+- Scheduler lookahead must be at least 1.5s to cover this gap without audio dropout
+- Wake Lock API (`navigator.wakeLock.request('screen')`) lets users opt into keeping the screen on for phone-as-music-player use
+- iOS Safari suspends AudioContext entirely on screen off; no workaround exists
+
+---
+
 *Build in a separate branch. Merge when stable.*
