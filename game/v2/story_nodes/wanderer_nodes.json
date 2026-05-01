@@ -1,1224 +1,1224 @@
 {
-  "character": "wanderer",
-  "display_name": "The Wanderer",
-  "tagline": "You're lost. It doesn't matter now. You're here instead.",
-  "start_node": "w_001",
-  "unlock_requires": null,
-  "nodes": [
-    {
-      "id": "w_001",
-      "text": "You're lost. \n\n\nNot dramatically so - you just turned left instead of right and now you're walking down an alley you've never seen in a part of town you thought you knew. Brick walls on both sides, fire escapes overhead, puddles catching the sodium light in long orange streaks. \n\n\nYou were going somewhere. The name has gone soft. You were meeting someone, or going home, or going someplace you go when you can't think of anywhere better. It doesn't matter now. You're here instead.\n\nThe chill in the air has a real bite to it. It sits deep in the concrete. It comes up through your shoes and you can feel it in your knees. Your breath is visible and the sodium street lights turn everything the color of old pennies.\n\nThen you feel it. Not music - not yet. Pressure. Low-frequency, in the hinge of your jaw and the flat of your sternum. It has no melody, but it does have direction. Nothing around you seems to be responding to it - no rattling windows, no vibrating puddles. Just you, feeling something that the rest of the world doesn't seem to notice. \n\n\nYou tell yourself it was your decision to walk towards the source, but maybe you were already doing that without realizing it.",
-      "arrival_variants": null,
-      "conditional_text": [
+    "character": "wanderer",
+    "display_name": "The Wanderer",
+    "tagline": "You're lost. It doesn't matter now. You're here instead.",
+    "start_node": "w_001",
+    "unlock_requires": null,
+    "nodes": [
         {
-          "append": "Other people are walking the same direction. You see someone in a green coat moving quickly. A person with their head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Follow the bass. Walk down the alley.",
-          "next": "w_002",
-          "tag": "drawn",
-          "arrival": null,
-          "highlight": "unity"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE BEGINNING"
-    },
-    {
-      "id": "w_002",
-      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end — a warehouse, something with the bones of industrial purpose. The bass is coming from inside. Not exactly louder out here. Deeper. Like it found a lower register inside your body.\n\nThe door is open. No line. The person in the green coat is ahead of you, moving toward the entrance.\n\nThere’s a man in a chair off to the side, maybe fifteen feet from the entrance. SECURITY in block letters on his jacket. He might be on break. He might be watching the door. From here it’s difficult to say which.",
-      "arrival_variants": [
-        {
-          "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
-          "default": false,
-          "requires": {
-            "has_artifact": "matchbook"
-          }
+            "id": "w_001",
+            "text": "You're lost. \n\n\nNot dramatically so - you just turned left instead of right and now you're walking down an alley you've never seen in a part of town you thought you knew. Brick walls on both sides, fire escapes overhead, puddles catching the sodium light in long orange streaks. \n\n\nYou were going somewhere. The name has gone soft. You were meeting someone, or going home, or going someplace you go when you can't think of anywhere better. It doesn't matter now. You're here instead.\n\nThe chill in the air has a real bite to it. It sits deep in the concrete. It comes up through your shoes and you can feel it in your knees. Your breath is visible and the sodium street lights turn everything the color of old pennies.\n\nThen you feel it. Not music - not yet. Pressure. Low-frequency, in the hinge of your jaw and the flat of your sternum. It has no melody, but it does have direction. Nothing around you seems to be responding to it - no rattling windows, no vibrating puddles. Just you, feeling something that the rest of the world doesn't seem to notice. \n\n\nYou tell yourself it was your decision to walk towards the source, but maybe you were already doing that without realizing it.",
+            "arrival_variants": null,
+            "conditional_text": [
+                {
+                    "append": "Other people are walking the same direction. You see someone in a green coat moving quickly. A person with their head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Follow the bass. Walk down the alley.",
+                    "next": "w_002",
+                    "tag": "drawn",
+                    "arrival": null,
+                    "highlight": "unity"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE BEGINNING"
         },
         {
-          "text": "You've arrived at the source of the Sound. When did you begin to seek it? Have you been following this Sound all night? Have you heard this Sound before?",
-          "default": false,
-          "requires": {
-            "has_tag": "drawn"
-          }
+            "id": "w_002",
+            "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end — a warehouse, something with the bones of industrial purpose. The bass is coming from inside. Not exactly louder out here. Deeper. Like it found a lower register inside your body.\n\nThe door is open. No line. The person in the green coat is ahead of you, moving toward the entrance.\n\nThere’s a man in a chair off to the side, maybe fifteen feet from the entrance. SECURITY in block letters on his jacket. He might be on break. He might be watching the door. From here it’s difficult to say which.",
+            "arrival_variants": [
+                {
+                    "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
+                    "default": false,
+                    "requires": {
+                        "has_artifact": "matchbook"
+                    }
+                },
+                {
+                    "text": "You've arrived at the source of the Sound. When did you begin to seek it? Have you been following this Sound all night? Have you heard this Sound before?",
+                    "default": false,
+                    "requires": {
+                        "has_tag": "drawn"
+                    }
+                },
+                {
+                    "text": "You've arrived at the source of the Sound.",
+                    "default": true
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "You notice a group of people standing by the loading dock on the side of the building. The door is propped open and they're about to head back inside.",
+                    "condition": {
+                        "has_artifact": "matchbook"
+                    }
+                }
+            ],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Walk toward the entrance.",
+                    "next": "w_002b",
+                    "arrival": null
+                },
+                {
+                    "text": "Walk over to the group by the loading dock.",
+                    "next": "w_loading_dock",
+                    "arrival": null,
+                    "highlight": "goodness",
+                    "requires": {
+                        "has_artifact": "matchbook"
+                    }
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE WAREHOUSE"
         },
         {
-          "text": "You've arrived at the source of the Sound.",
-          "default": true
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "You notice a group of people standing by the loading dock on the side of the building. The door is propped open and they're about to head back inside.",
-          "condition": {
-            "has_artifact": "matchbook"
-          }
-        }
-      ],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Walk toward the entrance.",
-          "next": "w_002b",
-          "arrival": null
+            "id": "w_002b",
+            "subtitle": "THE WAREHOUSE",
+            "text": "You walk toward the entrance. The man in the chair is closer than he looked from the lot. He’s looking at you, or at something behind you. It's hard to say.\n\nThe person in the green coat doesn’t stop. They walk straight through the door and he watches them go and doesn’t move. You wait for something to happen. Nothing does.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Go talk to the bouncer.",
+                    "next": "w_003b",
+                    "arrival": null
+                },
+                {
+                    "text": "Head straight for the door.",
+                    "next": "w_bouncer_run2",
+                    "arrival": null,
+                    "highlight": "truth",
+                    "requires": {
+                        "has_artifact": "yarn_knot"
+                    }
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "Walk over to the group by the loading dock.",
-          "next": "w_loading_dock",
-          "arrival": null,
-          "highlight": "goodness",
-          "requires": {
-            "has_artifact": "matchbook"
-          }
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE WAREHOUSE"
-    },
-    {
-      "id": "w_002b",
-      "subtitle": "THE WAREHOUSE",
-      "text": "You walk toward the entrance. The man in the chair is closer than he looked from the lot. He’s looking at you, or at something behind you. It's hard to say.\n\nThe person in the green coat doesn’t stop. They walk straight through the door and he watches them go and doesn’t move. You wait for something to happen. Nothing does.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Go talk to the bouncer.",
-          "next": "w_003b",
-          "arrival": null
+            "id": "w_003",
+            "text": "The warehouse is wrong in a way you can't immediately name.\n\nThe ceiling is too high - higher than the building looked from outside, and the dark above the fog isn't empty. It has geometry. It recedes in patterns that make your eyes ache if you try to follow them, as if the building continues upward into somewhere else entirely. \n\n\nAcross the cracked concrete floor, a projection covers most of the space: concentric rings pulsing slowly, expanding and contracting. You step around them without thinking about it. Everyone does. When you look at them directly they seem flat, projected, normal. When you catch them in your peripheral vision the rings have structure - fractal layers descending into the floor, as if the concrete is transparent and something beneath it goes down a very long way.\n\nThe crowd is maybe a hundred people. Dancing, some of them. The rest stand in loose clusters near the walls, holding drinks, talking in fragments between bass hits. It's a party. You've been to parties.\n\nThe dance floor is melding but still emerging. A girl pushes her hair back from her face and two people near her raise a hand to their heads too. You're not sure. The light is doing something - strobing low and orange - and in the gaps between pulses the bodies rearrange and you can't tell if they moved the same way or if the darkness just took a frame out. You watch longer. You stop being sure what you're watching for.\n\nThe air is warm and thick and tastes like ozone. You breathe through your mouth and that's worse - you can taste something underneath the ozone, sweet and old, like soil after rain in a place where it hasn't rained in a very long time.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "You're inside. The Sound has structure now. The heat is thick and close."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "A woman near you is swaying with her eyes closed. Scuffed white sneakers, a pen mark on the left toe - a tiny star. She looks like she forgot anyone could see her."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Move into the dance floor - towards the DJ Booth",
+                    "next": "w_004",
+                    "arrival": null
+                },
+                {
+                    "text": "Take a closer look at the rings on the floor",
+                    "next": "w_003_rings",
+                    "arrival": null
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "NON-EUCLIDEAN BEATS"
         },
         {
-          "text": "Head straight for the door.",
-          "next": "w_bouncer_run2",
-          "arrival": null,
-          "highlight": "truth",
-          "requires": {
-            "has_artifact": "yarn_knot"
-          }
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_003",
-      "text": "The warehouse is wrong in a way you can't immediately name.\n\nThe ceiling is too high - higher than the building looked from outside, and the dark above the fog isn't empty. It has geometry. It recedes in patterns that make your eyes ache if you try to follow them, as if the building continues upward into somewhere else entirely. \n\n\nAcross the cracked concrete floor, a projection covers most of the space: concentric rings pulsing slowly, expanding and contracting. You step around them without thinking about it. Everyone does. When you look at them directly they seem flat, projected, normal. When you catch them in your peripheral vision the rings have structure - fractal layers descending into the floor, as if the concrete is transparent and something beneath it goes down a very long way.\n\nThe crowd is maybe a hundred people. Dancing, some of them. The rest stand in loose clusters near the walls, holding drinks, talking in fragments between bass hits. It's a party. You've been to parties.\n\nThe dance floor is melding but still emerging. A girl pushes her hair back from her face and two people near her raise a hand to their heads too. You're not sure. The light is doing something - strobing low and orange - and in the gaps between pulses the bodies rearrange and you can't tell if they moved the same way or if the darkness just took a frame out. You watch longer. You stop being sure what you're watching for.\n\nThe air is warm and thick and tastes like ozone. You breathe through your mouth and that's worse - you can taste something underneath the ozone, sweet and old, like soil after rain in a place where it hasn't rained in a very long time.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "You're inside. The Sound has structure now. The heat is thick and close."
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "A woman near you is swaying with her eyes closed. Scuffed white sneakers, a pen mark on the left toe - a tiny star. She looks like she forgot anyone could see her."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Move into the dance floor - towards the DJ Booth",
-          "next": "w_004",
-          "arrival": null
+            "id": "w_004",
+            "text": "The DJ decks are against the far wall. The fog is thickest there - shapes in the murk, orange and yellow, something bright. Two green sleeved arms work the equipment. The light shifts and you swear you're looking at something more... horrible. Less human. Your mind struggles to identify the feeling under your skin urging you to look away. The hands are precise and mechanical, adjusting knobs with the efficiency of someone threading a machine.\n\nAbove the hands, something large tilts. An ear. The size of a satellite dish, oriented toward the crowd like radar.\n\nYou look away. You look back. The fog has shifted. Eyes - green, clustered, not all pointing the same direction. One of them was already pointed at you before you looked back.\n\nThe bass is coming from a direction your inner ear refuses to accept. Not from the sound system. From underneath, or behind, or from some dimension in this warehouse that doesn't correspond to regular space.",
+            "arrival_variants": [
+                {
+                    "text": "You are close enough to see the tentacles flex at the joints. The motion is peristaltic, hydraulic, involuntary. Your stomach tightens but you don't look away.",
+                    "default": true
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "Your instinct was right. The wrongness was not just the place itself. It was the purpose that this place is being put to."
+                }
+            ],
+            "oor_action": "DJ OOR adjusts the low end. Three people near the front stop talking mid-sentence and begin to move. They do not know they were corrected.  Tonight 17 people changed their plans without thinking much about it. Most of them have already joined the dance floor.",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "You can't look away. Lean in closer to observe the DJ.",
+                    "next": "w_004b",
+                    "tag": "saw_oor"
+                },
+                {
+                    "text": "Pull back in horror, slide into the foggy dance floor and gather your wits.",
+                    "next": "w_005"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "DJ OOR"
         },
         {
-          "text": "Take a closer look at the rings on the floor",
-          "next": "w_003_rings",
-          "arrival": null
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "NON-EUCLIDEAN BEATS"
-    },
-    {
-      "id": "w_004",
-      "text": "The DJ decks are against the far wall. The fog is thickest there - shapes in the murk, orange and yellow, something bright. Two green sleeved arms work the equipment. The light shifts and you swear you're looking at something more... horrible. Less human. Your mind struggles to identify the feeling under your skin urging you to look away. The hands are precise and mechanical, adjusting knobs with the efficiency of someone threading a machine.\n\nAbove the hands, something large tilts. An ear. The size of a satellite dish, oriented toward the crowd like radar.\n\nYou look away. You look back. The fog has shifted. Eyes - green, clustered, not all pointing the same direction. One of them was already pointed at you before you looked back.\n\nThe bass is coming from a direction your inner ear refuses to accept. Not from the sound system. From underneath, or behind, or from some dimension in this warehouse that doesn't correspond to regular space.",
-      "arrival_variants": [
-        {
-          "text": "You are close enough to see the tentacles flex at the joints. The motion is peristaltic, hydraulic, involuntary. Your stomach tightens but you don't look away.",
-          "default": true
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "Your instinct was right. The wrongness was not just the place itself. It was the purpose that this place is being put to."
-        }
-      ],
-      "oor_action": "DJ OOR adjusts the low end. Three people near the front stop talking mid-sentence and begin to move. They do not know they were corrected.  Tonight 17 people changed their plans without thinking much about it. Most of them have already joined the dance floor.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "You can't look away. Lean in closer to observe the DJ.",
-          "next": "w_004b",
-          "tag": "saw_oor"
+            "id": "w_004b",
+            "subtitle": "THE OPERATOR",
+            "text": "You watch. You can't stop watching.\n\nA tongue slides from the mouth at the center of the decks and turns a knob on the mixer a quarter inch to the left. Three people near the front change direction. Not react - change, the way a flock of birds changes, all at once, without signal. The delay between the adjustment and the response is less than a second. It is too precise to be coincidence and too fast to be influence. It is something else. You do not have a word for it.\n\nThe ear tilts toward a cluster of dancers near the east wall. On the right turntable, a green tentacle adjusts the platter. The cluster tightens. A woman at the edge of the group steps closer without looking up from her feet. The fog thins and for a moment you see the full shape - the surface is fibrous, orange and yellow, matted or woven or grown. The tongue rests on the crossfader. The tentacles work the turntables on either side, cueing records, nudging pitch faders. The air near the decks is warmer, heavier, humming with a static charge that lifts the hair on your arms.\n\nThis is not a DJ. This is a technician. You are standing inside the instrument it is playing.",
+            "arrival_variants": [],
+            "conditional_text": [
+                {
+                    "append": "The eye that was pointed at you has not moved. It was not watching you. It was waiting for you to understand what you were looking at."
+                }
+            ],
+            "oor_action": "DJ OOR processes the observer without adjusting technique. Observation does not interfere with extraction. It never has.",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "continue",
+                    "next": "w_005"
+                },
+                {
+                    "text": "You notice something move behind the speakers.",
+                    "next": "w_005b",
+                    "tag": "saw_builder",
+                    "highlight": "beauty",
+                    "requires": {
+                        "and": [
+                            {
+                                "has_persistent_transcendentals": [
+                                    "unity",
+                                    "truth",
+                                    "goodness"
+                                ]
+                            },
+                            {
+                                "has_artifact": "pale_antler"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "Pull back in horror, slide into the foggy dance floor and gather your wits.",
-          "next": "w_005"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "DJ OOR"
-    },
-    {
-      "id": "w_004b",
-      "subtitle": "THE OPERATOR",
-      "text": "You watch. You can't stop watching.\n\nA tongue slides from the mouth at the center of the decks and turns a knob on the mixer a quarter inch to the left. Three people near the front change direction. Not react - change, the way a flock of birds changes, all at once, without signal. The delay between the adjustment and the response is less than a second. It is too precise to be coincidence and too fast to be influence. It is something else. You do not have a word for it.\n\nThe ear tilts toward a cluster of dancers near the east wall. On the right turntable, a green tentacle adjusts the platter. The cluster tightens. A woman at the edge of the group steps closer without looking up from her feet. The fog thins and for a moment you see the full shape - the surface is fibrous, orange and yellow, matted or woven or grown. The tongue rests on the crossfader. The tentacles work the turntables on either side, cueing records, nudging pitch faders. The air near the decks is warmer, heavier, humming with a static charge that lifts the hair on your arms.\n\nThis is not a DJ. This is a technician. You are standing inside the instrument it is playing.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "append": "The eye that was pointed at you has not moved. It was not watching you. It was waiting for you to understand what you were looking at."
-        }
-      ],
-      "oor_action": "DJ OOR processes the observer without adjusting technique. Observation does not interfere with extraction. It never has.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "continue",
-          "next": "w_005"
+            "id": "w_005",
+            "text": "The crowd is filling in around you. Warmth with weight and direction. The dance floor pulls at you. The rings pulse and you can feel them hum.\n\nThe door is still behind you. You can feel that too - cold at the back of your neck, the alley, the walk home, the sodium lights. A life where tonight was just a night you went somewhere and came back and nothing was different in the morning.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "You can feel it in your chest - the energy in the room is shifting. Something is about to happen."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "The thing that pulled you here is still pulling. It has not stopped since you first felt it in the alley. If anything it is stronger now, or you are weaker, or the difference between those two things has stopped mattering."
+                }
+            ],
+            "oor_action": "DJ OOR does not acknowledge you. The eye that looked at you earlier had a motion that felt less like \"looking\" and more like \"measuring\".",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Release the feeling of trying to make this make sense and fold yourself into the rising crowd. Submit to the overwhelming pull of the dance floor.",
+                    "next": "w_006",
+                    "tag": "submits",
+                    "arrival": null
+                },
+                {
+                    "text": "GET. OUT. OF. HERE. The door. The cold. The walk home.",
+                    "next": "w_exit_001",
+                    "tag": "withdraws",
+                    "arrival": null,
+                    "highlight": "exit"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE DECISION"
         },
         {
-          "text": "You notice something move behind the speakers.",
-          "next": "w_005b",
-          "tag": "saw_builder",
-          "highlight": "beauty",
-          "requires": {
-            "and": [
-              {
-                "has_persistent_transcendentals": [
-                  "unity",
-                  "truth",
-                  "goodness"
-                ]
-              },
-              {
-                "has_artifact": "pale_antler"
-              }
-            ]
-          }
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_005",
-      "text": "The crowd is filling in around you. Warmth with weight and direction. The dance floor pulls at you. The rings pulse and you can feel them hum.\n\nThe door is still behind you. You can feel that too - cold at the back of your neck, the alley, the walk home, the sodium lights. A life where tonight was just a night you went somewhere and came back and nothing was different in the morning.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "You can feel it in your chest - the energy in the room is shifting. Something is about to happen."
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "The thing that pulled you here is still pulling. It has not stopped since you first felt it in the alley. If anything it is stronger now, or you are weaker, or the difference between those two things has stopped mattering."
-        }
-      ],
-      "oor_action": "DJ OOR does not acknowledge you. The eye that looked at you earlier had a motion that felt less like \"looking\" and more like \"measuring\".",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Release the feeling of trying to make this make sense and fold yourself into the rising crowd. Submit to the overwhelming pull of the dance floor.",
-          "next": "w_006",
-          "tag": "submits",
-          "arrival": null
+            "id": "w_005b",
+            "subtitle": "THE HANDS",
+            "text": "You don't go toward the door. You don't go toward the dance floor. You go sideways.\n\nThere's a wall near the amp rack where the fog thins and the bass becomes structural — vibration, not sound. You lean against the concrete. It's warm. You breathe.\n\nSomeone is working behind the speakers.\n\nThrough a gap in the cabinet you can see him — crouched behind the stack, one hand on a slider, the other swiping through curves on an iPad mounted to the rack. His fingers move through the interface the way a pianist's move through a piece they stopped thinking about years ago. He's not reading the screen. He's feeling the room through it. His eyes track the crowd and his hands adjust without looking down.\n\nHe drags a curve on the iPad. Something on the rack blinks — a small amber light, pulsing. Across the room, behind the decks, something shifts. OOR adjusts. Two people near the front settle into a rhythm they weren't in before. The lag is seconds. Practiced. The way a bassist and a drummer lock in without eye contact. They're working together — the man behind the rack and the thing behind the decks — and the room is what they're playing.\n\nHe catches you watching. Not startled — the way a carpenter looks up when someone walks through the job site. He glances at the iPad, then back at you, half-smiling.\n\n\"Wild, right? Best low end I've ever gotten in a concrete room.\"\n\nHe goes back to the screen. And then you both see it.\n\nFrost. On the edge of the speaker cabinet, crystallizing along a metal flange. In a room this hot — bodies, fog, concrete radiating warmth — frost is forming in a pattern that is not random. Geometric. Like a fern, or a circuit board, or something in between.\n\nHe stares at it. Touches it with his thumb. Wipes his thumb on his jeans.\n\n\"Huh,\" he says. And goes back to work.\n\nThe frost is already gone. The amber light pulses once and fades. His hands keep moving — adjusting, feeling, reading this room the way he's read a thousand rooms. Except this room has frost that forms in ferns and a thing behind the decks that isn't human and a light on the rack that blooms like something breathing. And the man behind the speakers doesn't seem scared. He seems like he's having the best night of his life.\n\nYou push off the wall. The dance floor is still there.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The crowd noise dulls behind the speaker stack. It's quieter here. Not silent — the bass is in the wall, in your spine — but the chaos recedes."
+                }
+            ],
+            "conditional_text": [],
+            "oor_action": "DJ OOR registers the sub-harmonic alignment correction from behind the rack. The Builder's adjustment is incorporated without acknowledgment. Professional. The amber interface blooms and fades. There is work to do.",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "saw_builder"
+            ],
+            "choices": [
+                {
+                    "text": "Stay.",
+                    "next": "w_the_whole_room"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "GET. OUT. OF. HERE. The door. The cold. The walk home.",
-          "next": "w_exit_001",
-          "tag": "withdraws",
-          "arrival": null,
-          "highlight": "exit"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE DECISION"
-    },
-    {
-      "id": "w_005b",
-      "subtitle": "THE HANDS",
-      "text": "You don't go toward the door. You don't go toward the dance floor. You go sideways.\n\nThere's a wall near the amp rack where the fog thins and the bass becomes structural — vibration, not sound. You lean against the concrete. It's warm. You breathe.\n\nSomeone is working behind the speakers.\n\nThrough a gap in the cabinet you can see him — crouched behind the stack, one hand on a slider, the other swiping through curves on an iPad mounted to the rack. His fingers move through the interface the way a pianist's move through a piece they stopped thinking about years ago. He's not reading the screen. He's feeling the room through it. His eyes track the crowd and his hands adjust without looking down.\n\nHe drags a curve on the iPad. Something on the rack blinks — a small amber light, pulsing. Across the room, behind the decks, something shifts. OOR adjusts. Two people near the front settle into a rhythm they weren't in before. The lag is seconds. Practiced. The way a bassist and a drummer lock in without eye contact. They're working together — the man behind the rack and the thing behind the decks — and the room is what they're playing.\n\nHe catches you watching. Not startled — the way a carpenter looks up when someone walks through the job site. He glances at the iPad, then back at you, half-smiling.\n\n\"Wild, right? Best low end I've ever gotten in a concrete room.\"\n\nHe goes back to the screen. And then you both see it.\n\nFrost. On the edge of the speaker cabinet, crystallizing along a metal flange. In a room this hot — bodies, fog, concrete radiating warmth — frost is forming in a pattern that is not random. Geometric. Like a fern, or a circuit board, or something in between.\n\nHe stares at it. Touches it with his thumb. Wipes his thumb on his jeans.\n\n\"Huh,\" he says. And goes back to work.\n\nThe frost is already gone. The amber light pulses once and fades. His hands keep moving — adjusting, feeling, reading this room the way he's read a thousand rooms. Except this room has frost that forms in ferns and a thing behind the decks that isn't human and a light on the rack that blooms like something breathing. And the man behind the speakers doesn't seem scared. He seems like he's having the best night of his life.\n\nYou push off the wall. The dance floor is still there.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The crowd noise dulls behind the speaker stack. It's quieter here. Not silent — the bass is in the wall, in your spine — but the chaos recedes."
-        }
-      ],
-      "conditional_text": [],
-      "oor_action": "DJ OOR registers the sub-harmonic alignment correction from behind the rack. The Builder's adjustment is incorporated without acknowledgment. Professional. The amber interface blooms and fades. There is work to do.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "saw_builder"
-      ],
-      "choices": [
-        {
-          "text": "Stay.",
-          "next": "w_the_whole_room"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_006",
-      "text": "You recognize the song but you don't recognize this version of it. The bass line is familiar but the harmonics are all wrong. But still, it's catchy. \n\nIt's a line dance - a structure you've felt a thousand times: in church basements and block parties, at weddings and in the back seat of a car with the windows down. To the left, to the left. To the right, to the right. Except the vocals are... off - almost robotic, arriving from underneath or behind or inside. Your body doesn't care. Your body hears the call.\n\nYou are moving. You didn't decide to move. The beat is loud enough and the bodies are close enough and the fog is thick enough that self-consciousness gets muscled out by something older and less interested in your opinion.\n\nThe crowd is synchronized. Two hundred bodies at the same time. The floor vibrates harder. The temperature climbs.\n\nThe person next to you - tall, beard, house paint on his knuckles from trim work - is laughing. You make eye contact and something lands. Not language. Just the fact of two people moving the same way at the same time and knowing it. Whatever is feeding on this room has you both, and neither of you minds.\n\nThe song ends. Synchronization loosens but doesn't fully release. Strangers standing closer now without having negotiated the distance. Something has changed in the room and you can feel it in your skin but you couldn't explain it to anyone.",
-      "arrival_variants": [
-        {
-          "requires": {
-            "has_tag": "submits"
-          },
-          "text": "You submit to the attunement of the dance floor. The crowd accepts you. For the first time, you listen to the music. It's a banger. Of course, it's a banger.",
-          "default": false
+            "id": "w_006",
+            "text": "You recognize the song but you don't recognize this version of it. The bass line is familiar but the harmonics are all wrong. But still, it's catchy. \n\nIt's a line dance - a structure you've felt a thousand times: in church basements and block parties, at weddings and in the back seat of a car with the windows down. To the left, to the left. To the right, to the right. Except the vocals are... off - almost robotic, arriving from underneath or behind or inside. Your body doesn't care. Your body hears the call.\n\nYou are moving. You didn't decide to move. The beat is loud enough and the bodies are close enough and the fog is thick enough that self-consciousness gets muscled out by something older and less interested in your opinion.\n\nThe crowd is synchronized. Two hundred bodies at the same time. The floor vibrates harder. The temperature climbs.\n\nThe person next to you - tall, beard, house paint on his knuckles from trim work - is laughing. You make eye contact and something lands. Not language. Just the fact of two people moving the same way at the same time and knowing it. Whatever is feeding on this room has you both, and neither of you minds.\n\nThe song ends. Synchronization loosens but doesn't fully release. Strangers standing closer now without having negotiated the distance. Something has changed in the room and you can feel it in your skin but you couldn't explain it to anyone.",
+            "arrival_variants": [
+                {
+                    "requires": {
+                        "has_tag": "submits"
+                    },
+                    "text": "You submit to the attunement of the dance floor. The crowd accepts you. For the first time, you listen to the music. It's a banger. Of course, it's a banger.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "saw_builder"
+                    },
+                    "text": "You saw someone behind the speakers who looked like he belonged here. You step onto the floor wondering if maybe you do too.",
+                    "default": false
+                },
+                {
+                    "text": "You step onto the dance floor. The crowd accepts you. For the first time, you listen to the music. It's a banger. Of course, it's a banger.",
+                    "default": true
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "You are laughing. This surprises you. Nothing about this should be funny and yet you can't help yourself."
+                }
+            ],
+            "oor_action": "DJ OOR makes an adjustment below 40Hz. The projection rings accelerate. The room contracts and no one notices.",
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Find something solid to lean against.",
+                    "next": "w_007e",
+                    "tag": "came_for_stillness",
+                    "arrival": null,
+                    "requires": null
+                },
+                {
+                    "text": "That was intense. You need a drink.",
+                    "next": "w_007e",
+                    "arrival": null,
+                    "requires": null,
+                    "tag": "came_for_drink"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE OOR SLIDE"
         },
         {
-          "requires": {
-            "has_tag": "saw_builder"
-          },
-          "text": "You saw someone behind the speakers who looked like he belonged here. You step onto the floor wondering if maybe you do too.",
-          "default": false
+            "id": "w_007e",
+            "text": "You get a drink. Not for the hydration - for the excuse to stand still. The bar is along the far wall and when you step off the floor the temperature drops. Not gradually, but like a border.\n\nThe woman behind the bar makes you a whiskey sour without asking. She watches her own hands as she makes it - the pour, the shake, the strain - with a quiet fascination, like she's pleased it's working. The ratios are a little off. Too much simple syrup, the bitters on top instead of mixed in, and she's garnished it with a sprig of something that might be rosemary or might just be a piece of a plant she found. It's good though. Somehow it's good. You hold your cup with both hands.\n\nFrom here you can see the whole room. The dance floor is a single organism, breathing and contracting.\n\nThe sneaker-star woman is still out there - eyes closed, swaying.\n\nA sound cuts through the bass. Close. Sharp and wet. It came from your right.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The bar is along the wall. The cold side."
+                },
+                {
+                    "default": false,
+                    "requires": {
+                        "has_tag": "came_for_stillness"
+                    },
+                    "text": "The bar is along the wall. You put both hands on it. It doesn't move. That's enough for now."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "condition": {
+                        "has_tag": "came_for_stillness"
+                    },
+                    "prepend": "She doesn't ask what you want. She looks at your hands on the bar and starts making something."
+                },
+                {
+                    "condition": {
+                        "has_tag": "saw_oor"
+                    },
+                    "append": "From here DJ OOR is more visible. The texture is fibrous - fur or crochet or something without a textile name. The ear rotates slowly, scanning."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "met_bartender"
+            ],
+            "choices": [
+                {
+                    "text": "Turn toward the sound.",
+                    "next": "w_007f",
+                    "arrival": null
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "AT THE BAR"
         },
         {
-          "text": "You step onto the dance floor. The crowd accepts you. For the first time, you listen to the music. It's a banger. Of course, it's a banger.",
-          "default": true
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "You are laughing. This surprises you. Nothing about this should be funny and yet you can't help yourself."
-        }
-      ],
-      "oor_action": "DJ OOR makes an adjustment below 40Hz. The projection rings accelerate. The room contracts and no one notices.",
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Find something solid to lean against.",
-          "next": "w_007e",
-          "tag": "came_for_stillness",
-          "arrival": null,
-          "requires": null
+            "id": "w_007f",
+            "subtitle": "THE ROD",
+            "text": "A woman is standing a few feet from you. She's wearing antlers. You think costume at first but the thought doesn't hold - they're not symmetrical, not painted, and where they meet her scalp there's no seam. The fog shifts and the strobes catch her at the wrong angle and for a moment they look like they're part of her. You lose the angle. You're not sure what you saw.\n\nShe is carrying a thin dark rod. As she passes you the rod chirps - a sharp, wet sound, like a tuning fork. She stops. She doesn't look at you. She looks at the rod. She holds it out toward you the way a doctor holds a stethoscope - not asking, not explaining. The rod responds to you. You can feel it in your fillings. Then it goes quiet and she moves on. The whole thing takes three seconds. You have been measured.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Follow the antlered woman.",
+                    "next": "w_008e",
+                    "arrival": null
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "That was intense. You need a drink.",
-          "next": "w_007e",
-          "arrival": null,
-          "requires": null,
-          "tag": "came_for_drink"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE OOR SLIDE"
-    },
-    {
-      "id": "w_007e",
-      "text": "You get a drink. Not for the hydration - for the excuse to stand still. The bar is along the far wall and when you step off the floor the temperature drops. Not gradually, but like a border.\n\nThe woman behind the bar makes you a whiskey sour without asking. She watches her own hands as she makes it - the pour, the shake, the strain - with a quiet fascination, like she's pleased it's working. The ratios are a little off. Too much simple syrup, the bitters on top instead of mixed in, and she's garnished it with a sprig of something that might be rosemary or might just be a piece of a plant she found. It's good though. Somehow it's good. You hold your cup with both hands.\n\nFrom here you can see the whole room. The dance floor is a single organism, breathing and contracting.\n\nThe sneaker-star woman is still out there - eyes closed, swaying.\n\nA sound cuts through the bass. Close. Sharp and wet. It came from your right.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The bar is along the wall. The cold side."
+            "id": "w_008f",
+            "text": "You stop being the one watching. Not because you chose to, but because the part of you that has been narrating all night, cataloguing, measuring the distance between yourself and everything else, runs out of material. There is no distance left to measure.\n\nWhat remains isn't peace. It's more like the moment before a word forms, when you know exactly what you mean and the meaning hasn't hardened into language yet. The crowd's grief is in you now. Like a rib. The man near you is carrying something he has carried for years and you know the exact weight of it, not because you can see it but because the wall between his carrying and yours has come down and there is just the weight, just the carrying, and it belongs to no one.\n\nThe heat in this room has been here all night. You thought it was the bodies, the bass, the lights. Maybe it is. But you don't know how long you've been standing here. Not in the way you lose track of time when you're busy. In the way that before and after have quietly stopped applying. There is the man and his weight and the crowd and the bass and your breathing and it is all happening at once and it has always been happening at once. Every fire circle found this. Every cathedral. Every kitchen after a funeral. None of them invented it. They just stayed close enough, long enough, for the distance between moments to close, and what was underneath was what they already knew. What you already know. What every person in this room already knows and will forget by morning and will have to learn again the next time they stop reaching for the next moment and accidentally find themselves in this one.\n\nThe mind comes back online. Its borders, its distances, its careful measurements of who you are and who you aren't. You feel yourself re-entering your own outline. The thing you knew a moment ago is already incompatible with the knowing. You can feel it leaving, like water through fingers, like the last note of a song you will never be able to hum back.\n\nYou come back to yourself. Something has shifted, down where the load-bearing walls are. A hairline fracture. You won't be able to find it later. But it's there.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The music finds you already moving. Not toward anything. Just moving. Your body is doing something your mind stopped directing a while ago. You give weight to the floor and the floor gives it back and you can feel the exchange happening through every person near you, a pulse that doesn't start or stop with anyone. The thinking part of you is still here but it has gone quiet the way a monkey stops reaching when it finally has something to hold. Something older than thinking is running the room now. You can feel it in your hands, in the bass, in the breath of the person beside you. It has always been running the room. You just got quiet enough to notice."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "You're still dancing. Your body kept going while you were gone."
+                },
+                {
+                    "append": "The paint-knuckle man is near you again. He grabs your shoulder and yells something you can't hear. It doesn't matter what he said. The gesture was the content."
+                }
+            ],
+            "oor_action": "DJ OOR's ear sweeps the room once. Density is sufficient. For the first time tonight, the construct makes no adjustment. The room is doing the work on its own.",
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "participated_ritual"
+            ],
+            "choices": [
+                {
+                    "text": "You blink.",
+                    "next": "w_011"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE GAP BETWEEN"
         },
         {
-          "default": false,
-          "requires": {
-            "has_tag": "came_for_stillness"
-          },
-          "text": "The bar is along the wall. You put both hands on it. It doesn't move. That's enough for now."
-        }
-      ],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "came_for_stillness"
-          },
-          "prepend": "She doesn't ask what you want. She looks at your hands on the bar and starts making something."
+            "id": "w_008e",
+            "text": "The antlered woman has moved into the dance floor. A second antlered companion has appeared - moving differently, more structured, choreographic. Together they are a singular unit. The first holds the rod and it is resonating now - not humming but a sound that sits between the notes of the music, filling the spaces the melody leaves empty.\n\nYou watch her approach the sneaker-star woman. The rod sings - louder than before, a sound you can feel in the back of your throat. She takes her hand and guides her toward two dancers standing close, eyes half-closed, moving with their whole bodies, unselfconscious. The antlered woman positions the three of them like someone tuning an instrument, adjusting the distance between them until the rod goes quiet. When it goes quiet, they begin to move together without discussion. None of them seems surprised by this.\n\nThis is happening everywhere. Groups forming across the floor. Specific and deliberate. Two here, three there, four near the speakers standing in a loose constellation. It looks like the party getting looser. It looks like people finding their groove. It looks like something that was here long before we crawled out of the dark and started moving together. Something ancient and patient. We just happen to be what it works with.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "You're not sure what you're seeing. But it isn't random."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "Some people are passed over. The rod doesn't respond to them. They don't notice being passed over. You wonder what it means to not be noticed by the rod. You wonder what it means that it chirped at you."
+                },
+                {
+                    "condition": {
+                        "has_tag": "met_bartender"
+                    },
+                    "append": "The second figure moves differently from the first - precise, calibrated. You recognize the hands. The bartender. Of course it's the bartender."
+                }
+            ],
+            "oor_action": "DJ OOR does not watch the familiars work. DJ OOR watches what the familiars produce.",
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "The warmth pulls you back to the floor.",
+                    "next": "w_009",
+                    "tag": "drawn_back",
+                    "arrival": null
+                },
+                {
+                    "text": "This is getting weird. You've seen enough.",
+                    "next": "w_exit_001",
+                    "tag": "retreating",
+                    "arrival": null,
+                    "highlight": "exit"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE TUNING RITUAL"
         },
         {
-          "condition": {
-            "has_tag": "saw_oor"
-          },
-          "append": "From here DJ OOR is more visible. The texture is fibrous - fur or crochet or something without a textile name. The ear rotates slowly, scanning."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "met_bartender"
-      ],
-      "choices": [
-        {
-          "text": "Turn toward the sound.",
-          "next": "w_007f",
-          "arrival": null
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "AT THE BAR"
-    },
-    {
-      "id": "w_007f",
-      "subtitle": "THE ROD",
-      "text": "A woman is standing a few feet from you. She's wearing antlers. You think costume at first but the thought doesn't hold - they're not symmetrical, not painted, and where they meet her scalp there's no seam. The fog shifts and the strobes catch her at the wrong angle and for a moment they look like they're part of her. You lose the angle. You're not sure what you saw.\n\nShe is carrying a thin dark rod. As she passes you the rod chirps - a sharp, wet sound, like a tuning fork. She stops. She doesn't look at you. She looks at the rod. She holds it out toward you the way a doctor holds a stethoscope - not asking, not explaining. The rod responds to you. You can feel it in your fillings. Then it goes quiet and she moves on. The whole thing takes three seconds. You have been measured.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Follow the antlered woman.",
-          "next": "w_008e",
-          "arrival": null
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_008f",
-      "text": "You stop being the one watching. Not because you chose to, but because the part of you that has been narrating all night, cataloguing, measuring the distance between yourself and everything else, runs out of material. There is no distance left to measure.\n\nWhat remains isn't peace. It's more like the moment before a word forms, when you know exactly what you mean and the meaning hasn't hardened into language yet. The crowd's grief is in you now. Like a rib. The man near you is carrying something he has carried for years and you know the exact weight of it, not because you can see it but because the wall between his carrying and yours has come down and there is just the weight, just the carrying, and it belongs to no one.\n\nThe heat in this room has been here all night. You thought it was the bodies, the bass, the lights. Maybe it is. But you don't know how long you've been standing here. Not in the way you lose track of time when you're busy. In the way that before and after have quietly stopped applying. There is the man and his weight and the crowd and the bass and your breathing and it is all happening at once and it has always been happening at once. Every fire circle found this. Every cathedral. Every kitchen after a funeral. None of them invented it. They just stayed close enough, long enough, for the distance between moments to close, and what was underneath was what they already knew. What you already know. What every person in this room already knows and will forget by morning and will have to learn again the next time they stop reaching for the next moment and accidentally find themselves in this one.\n\nThe mind comes back online. Its borders, its distances, its careful measurements of who you are and who you aren't. You feel yourself re-entering your own outline. The thing you knew a moment ago is already incompatible with the knowing. You can feel it leaving, like water through fingers, like the last note of a song you will never be able to hum back.\n\nYou come back to yourself. Something has shifted, down where the load-bearing walls are. A hairline fracture. You won't be able to find it later. But it's there.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The music finds you already moving. Not toward anything. Just moving. Your body is doing something your mind stopped directing a while ago. You give weight to the floor and the floor gives it back and you can feel the exchange happening through every person near you, a pulse that doesn't start or stop with anyone. The thinking part of you is still here but it has gone quiet the way a monkey stops reaching when it finally has something to hold. Something older than thinking is running the room now. You can feel it in your hands, in the bass, in the breath of the person beside you. It has always been running the room. You just got quiet enough to notice."
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "You're still dancing. Your body kept going while you were gone."
+            "id": "w_009",
+            "text": "You feel the shift immediately in the floor below you. The concentric rings surrounding the dance floor contract to a single circle of light, maybe eight feet across. Through the floor you see flashes of something - textures, geometries, colors that don't have names. The fractal layers you glimpsed earlier are closer to the surface now, pressing up against the concrete like something trying to get through. You look away before your eyes can make sense of it. You're not sure you want them to. \n\nInside the circle, an arrow appears. As it starts to spin, the crowd pulls back instinctively to form a ring of bodies around the ring of light. The room holds its breath.\n\nThe arrow points at a woman near the far side. Jacket still on despite the heat. Arms crossed. She looks at the arrow. The crowd looks at her. Two hundred pairs of eyes waiting.\n\nShe doesn't step in.\n\nThe arrow holds on her. The circle pulses. She looks at it the way you look at water you're not sure is shallow enough to wade into. Then she steps back into the crowd. The arrow spins again.\n\nYou watch her fold her arms tighter. You know that posture. You've been standing in some version of it all night.\n\nThe paint-knuckle man enters next. He dances the way he probably works - enormous, committed, unselfconscious. You remember his face from the Slide. The crowd erupts. The floor shakes harder. Something in the room just moved up a gear.",
+            "arrival_variants": [
+                {
+                    "requires": {
+                        "has_tag": "participated_ritual"
+                    },
+                    "text": "You are still warm from the dissolution. The circle finds you in the warmth.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "drawn_back"
+                    },
+                    "text": "You came back to the floor. The circle was waiting.",
+                    "default": false
+                },
+                {
+                    "default": true,
+                    "text": "The projection changes."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "append": "The arrow spins again. It slows. It points at you."
+                }
+            ],
+            "oor_action": "DJ OOR acknowledges the will of the forces that the arrow is tuned to.",
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Enter the circle.",
+                    "next": "w_010a",
+                    "tag": "entered_circle",
+                    "arrival": null
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE ARROW CIRCLE"
         },
         {
-          "append": "The paint-knuckle man is near you again. He grabs your shoulder and yells something you can't hear. It doesn't matter what he said. The gesture was the content."
-        }
-      ],
-      "oor_action": "DJ OOR's ear sweeps the room once. Density is sufficient. For the first time tonight, the construct makes no adjustment. The room is doing the work on its own.",
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "participated_ritual"
-      ],
-      "choices": [
-        {
-          "text": "You blink.",
-          "next": "w_011"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE GAP BETWEEN"
-    },
-    {
-      "id": "w_008e",
-      "text": "The antlered woman has moved into the dance floor. A second antlered companion has appeared - moving differently, more structured, choreographic. Together they are a singular unit. The first holds the rod and it is resonating now - not humming but a sound that sits between the notes of the music, filling the spaces the melody leaves empty.\n\nYou watch her approach the sneaker-star woman. The rod sings - louder than before, a sound you can feel in the back of your throat. She takes her hand and guides her toward two dancers standing close, eyes half-closed, moving with their whole bodies, unselfconscious. The antlered woman positions the three of them like someone tuning an instrument, adjusting the distance between them until the rod goes quiet. When it goes quiet, they begin to move together without discussion. None of them seems surprised by this.\n\nThis is happening everywhere. Groups forming across the floor. Specific and deliberate. Two here, three there, four near the speakers standing in a loose constellation. It looks like the party getting looser. It looks like people finding their groove. It looks like something that was here long before we crawled out of the dark and started moving together. Something ancient and patient. We just happen to be what it works with.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "You're not sure what you're seeing. But it isn't random."
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "Some people are passed over. The rod doesn't respond to them. They don't notice being passed over. You wonder what it means to not be noticed by the rod. You wonder what it means that it chirped at you."
+            "id": "w_010a",
+            "text": "The circle is bright. The rest of the room is dark by comparison. You can feel what's beneath your feet - the fractal layers you've been glimpsing all night are right here, right under the concrete, pressing up through the cracks, warm and vibrating at a frequency that matches your heartbeat. Or your heartbeat has matched it. You can't tell which came first and you've stopped caring.\n\nYou dance. The light from the floor pulses up through your legs and the colors shift - oranges and violets and things between them that your mind keeps trying to name and failing. The crowd is a wall of sound around you, cheering, stomping, feeding you something that tastes like permission. You are visible. Every person in this room is watching you and you are not afraid of it. You are dancing the way you dance when no one is watching except everyone is watching and it doesn't matter because the boundary between you and them has dissolved into bass and heat and light.\n\nSomething is taken from you that you did not know you were carrying. You feel lighter - the way you feel after crying, after confessing, after saying the thing you've been holding in the back of your throat for longer than you can account for. The floor beneath you flares and you feel it accept what you gave. You didn't choose to give it. It left you the way breath leaves you - because holding it was never sustainable.\n\nThe crowd absorbs you back when you finish. You are part of something. You don't know what. You don't need to.",
+            "arrival_variants": null,
+            "conditional_text": [
+                {
+                    "append": "The paint-knuckle man cheers from the ring. You can't hear what he says. The gesture is the content."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": "unity",
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "continue",
+                    "next": "w_011"
+                }
+            ],
+            "next": "w_011",
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "INSIDE THE DANCE CIRCLE"
         },
         {
-          "condition": {
-            "has_tag": "met_bartender"
-          },
-          "append": "The second figure moves differently from the first - precise, calibrated. You recognize the hands. The bartender. Of course it's the bartender."
-        }
-      ],
-      "oor_action": "DJ OOR does not watch the familiars work. DJ OOR watches what the familiars produce.",
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "The warmth pulls you back to the floor.",
-          "next": "w_009",
-          "tag": "drawn_back",
-          "arrival": null
+            "id": "w_011",
+            "text": "The music is winding down. Everything else is cresting - the heat, the pressure, the thing between all these bodies that has no name.\n\nThe green tentacles have stopped adjusting. For the first time all night, the hands are completely still - resting on the mixer the way you rest your hands on something that is finally doing what you built it to do. The machine doesn't need tuning anymore. \n\nThe fog around the DJ booth is doing something. You can see shapes in it - geometric, repeating, like something is being projected from inside the construct itself. Below your feet the projection rings are pulsing faster than they have all night, contracting toward the center, and through the gaps in the concrete you swear you can see light coming from somewhere deep below.\n\nThe vocoded voice calls the crowd down. Lower. A little bit softer now. The bass descends and bodies descend with it - bending, folding, sinking. You go with them. The person next to you grabs your hand. You let them.\n\nAt the floor, face-level with the concrete, the music fades to a drone. So low you stop hearing it and start feeling it. Vibration from underneath. Vibration from above. You are between them. You are the conduit. Something passing through - not pain, not pleasure. A flow. A restoration.\n\nStillness. The bass drops out. Silence. Earned presence.\n\nThe portal closes. The rings flash out of existence. You feel the pressure change in your ears, a sealing, as if something beneath the floor has been shut. Fog clears. Lights come up warm. The room is a warehouse.\n\nYou stand. Knees ache. Shirt damp. Smiling. The crowd disperses slowly. Reluctantly. The way your hands come apart after holding someone you're not sure you'll see again.",
+            "arrival_variants": [
+                {
+                    "requires": {
+                        "has_tag": "truth"
+                    },
+                    "text": "The voice is still quiet. The closing finds you in the silence - not empty, not waiting. Present.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "goodness"
+                    },
+                    "text": "The voice is still quiet. Not because something was taken. Because something was given. The closing ritual finds you already inside it.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "entered_circle"
+                    },
+                    "text": "You are still warm from the circle. You gave something up in there and the absence feels like relief. If anything you feel more open, like a door left ajar on purpose.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "participated_ritual"
+                    },
+                    "text": "You've been on the floor all night. Your body knows what's coming before your mind does.",
+                    "default": false
+                },
+                {
+                    "requires": {
+                        "has_tag": "saw_oor"
+                    },
+                    "text": "You've seen what's behind the decks. You know this isn't a show. Whatever is about to happen, it's the reason the machine was built.",
+                    "default": false
+                },
+                {
+                    "default": true,
+                    "text": "The music shifts. You can feel the room tilting toward something."
+                }
+            ],
+            "conditional_text": [
+                {
+                    "condition": {
+                        "has_tag": "silence"
+                    },
+                    "append": "The jacket woman is near the door. She's carrying her jacket over one arm. She sees you and doesn't wave. She just looks at you and the look is enough. Two people who were holding and then stopped holding and then discovered that the holding was the only thing that was heavy. She walks out into the cold. You don't follow. You don't need to. The silence you share doesn't require proximity."
+                },
+                {
+                    "condition": {
+                        "has_tag": "saw_oor"
+                    },
+                    "append": "You look toward the DJ booth, remembering the experience you had earlier when bearing witness to the DJ-in-the-mix. The fog has cleared and the thing behind the mixer looks different in the overhead light. Smaller. The surface that seemed alive in the dark is obviously handmade - frilly crochet yarn, hot-glued and matted. The mouth is a pool noodle. The teeth are packing foam. The ear is shipping foam, flesh-colored, bent into a curve - the kind you'd find in a box of fresh peaches. You can't believe this is what terrified you. You can't believe it's the same thing."
+                },
+                {
+                    "condition": {
+                        "has_tag": "met_bartender"
+                    },
+                    "append": "The bartender is wiping down the bar. She's doing it the way you'd expect - glasses collected, towel in hand - except she's wiping the same spot over and over, watching her hand move the way she watched it make your drink. The antlers cast shadows across the wall that are too large and too detailed to belong to a costume."
+                },
+                {
+                    "condition": {
+                        "has_tag": "entered_circle"
+                    },
+                    "append": "DJ OOR is gone. All that remains are two green scraps of fabric draped over the mixer and a few small runs of yellow yarn."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "It's time to go home.",
+                    "next": "w_012"
+                }
+            ],
+            "next": "w_012",
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE CLOSING RITUAL"
         },
         {
-          "text": "This is getting weird. You've seen enough.",
-          "next": "w_exit_001",
-          "tag": "retreating",
-          "arrival": null,
-          "highlight": "exit"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE TUNING RITUAL"
-    },
-    {
-      "id": "w_009",
-      "text": "You feel the shift immediately in the floor below you. The concentric rings surrounding the dance floor contract to a single circle of light, maybe eight feet across. Through the floor you see flashes of something - textures, geometries, colors that don't have names. The fractal layers you glimpsed earlier are closer to the surface now, pressing up against the concrete like something trying to get through. You look away before your eyes can make sense of it. You're not sure you want them to. \n\nInside the circle, an arrow appears. As it starts to spin, the crowd pulls back instinctively to form a ring of bodies around the ring of light. The room holds its breath.\n\nThe arrow points at a woman near the far side. Jacket still on despite the heat. Arms crossed. She looks at the arrow. The crowd looks at her. Two hundred pairs of eyes waiting.\n\nShe doesn't step in.\n\nThe arrow holds on her. The circle pulses. She looks at it the way you look at water you're not sure is shallow enough to wade into. Then she steps back into the crowd. The arrow spins again.\n\nYou watch her fold her arms tighter. You know that posture. You've been standing in some version of it all night.\n\nThe paint-knuckle man enters next. He dances the way he probably works - enormous, committed, unselfconscious. You remember his face from the Slide. The crowd erupts. The floor shakes harder. Something in the room just moved up a gear.",
-      "arrival_variants": [
-        {
-          "requires": {
-            "has_tag": "participated_ritual"
-          },
-          "text": "You are still warm from the dissolution. The circle finds you in the warmth.",
-          "default": false
+            "id": "w_012",
+            "text": "The cold outside is a relief. You breathe it in. The gravel lot is emptying. The sodium lights are still orange. The alley is the same length it was before.\n\nYou sit down on the curb. The silence is enormous. The frequency is still in your chest, your jaw, the back of your skull. It doesn't feel like it's fading. It feels like it's waiting. The sky above you is clear and cold and full of stars that don't care what just happened to you.\n\nYou put your hand in your coat pocket and find something that wasn't there before.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The night is over. You are standing in the cold."
+                },
+                {
+                    "requires": {
+                        "has_tag": "met_bartender"
+                    },
+                    "text": "The night is over. You are standing in the cold. On your way out you passed a chair by the door. A jacket folded neatly on it - SECURITY in block letters. The bouncer must have left in a hurry.",
+                    "default": false
+                }
+            ],
+            "conditional_text": [
+                {
+                    "condition": {
+                        "has_tag": "truth"
+                    },
+                    "append": "You put your hand in your coat pocket. The matchbook is still there. You pull it out. The message on the inside is still legible under the sodium light. Still for you. Still true. You hold it for a moment, then put it back. The hum in your chest is quieter than it used to be. Maybe it has less to say. Maybe the matchbook is absorbing some of the power?",
+                    "awards_transcendental": "truth"
+                },
+                {
+                    "condition": {
+                        "has_tag": "goodness"
+                    },
+                    "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A polaroid. Still developing — the image swimming up through chemical fog the way a song swims up through silence. You hold it under the sodium light and watch the faces resolve. The bartender, mid-pour, watching her own hands. The paint-knuckle man, laughing at something you can't hear. The jacket woman, arms crossed, standing exactly where she always stands. The sneaker-star woman, eyes closed, gone. You don't remember anyone taking a photo. The edges are warm. The faces are still sharpening, like they'll keep developing for as long as you keep looking.",
+                    "awards_artifact": "polaroid",
+                    "awards_transcendental": "goodness"
+                },
+                {
+                    "condition": {
+                        "has_tag": "came_for_stillness"
+                    },
+                    "append": "You put your hand in your coat pocket and find a strand of thick fuzzy blanket yarn. Orange. Warm. You close your hand around it and the frequency in your chest pulses once, faintly, like a heartbeat that isn't yours. You will come back. You didn't know it before but you find this conviction to be comforting and steadfast.",
+                    "awards_artifact": "yarn_knot",
+                    "awards_transcendental": "unity"
+                },
+                {
+                    "condition": {
+                        "has_tag": "came_for_drink"
+                    },
+                    "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Warm. It smells faintly like the drink the bartender made you - sweet, slightly wrong. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting.",
+                    "awards_artifact": "yarn_knot",
+                    "awards_transcendental": "unity"
+                },
+                {
+                    "append": "You put your hand in your coat pocket and find a strand of yarn. Warm. You don't know what color it is in the sodium light. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting. You will come back. You didn't know it before but you find this conviction to be comforting and steadfast.",
+                    "awards_artifact": "yarn_knot",
+                    "awards_transcendental": "unity"
+                }
+            ],
+            "conditional_mode": "first_match",
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [],
+            "next": null,
+            "terminal": true,
+            "outcome": "harvest",
+            "subtitle": "THE EPILOGUE"
         },
         {
-          "requires": {
-            "has_tag": "drawn_back"
-          },
-          "text": "You came back to the floor. The circle was waiting.",
-          "default": false
+            "id": "w_exit_001",
+            "text": "The cold is sudden and abrasive. Not the gradual cold of the approach - the sharp cold of something warm being taken away.\n\nThe gravel lot is half-empty. The sodium lights are the same orange they were when you arrived. Your hands go back into your pockets. The bass is still audible through the walls, muffled, diminishing, and you can feel the exact moment it stops reaching your body. A border you didn't know existed until you crossed it.\n\nYou keep walking. That's enough for tonight.",
+            "arrival_variants": [
+                {
+                    "requires": {
+                        "has_tag": "retreating"
+                    },
+                    "text": "You saw enough from the edge. The antlers and the rod and the tuning - none of it made sense. You're choosing the version of tonight where it doesn't have to.",
+                    "default": false
+                },
+                {
+                    "default": true,
+                    "text": "You are leaving."
+                }
+            ],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [],
+            "next": "w_exit_002",
+            "terminal": false,
+            "outcome": null,
+            "subtitle": "THE EXIT"
         },
         {
-          "default": true,
-          "text": "The projection changes."
-        }
-      ],
-      "conditional_text": [
-        {
-          "append": "The arrow spins again. It slows. It points at you."
-        }
-      ],
-      "oor_action": "DJ OOR acknowledges the will of the forces that the arrow is tuned to.",
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Enter the circle.",
-          "next": "w_010a",
-          "tag": "entered_circle",
-          "arrival": null
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE ARROW CIRCLE"
-    },
-    {
-      "id": "w_010a",
-      "text": "The circle is bright. The rest of the room is dark by comparison. You can feel what's beneath your feet - the fractal layers you've been glimpsing all night are right here, right under the concrete, pressing up through the cracks, warm and vibrating at a frequency that matches your heartbeat. Or your heartbeat has matched it. You can't tell which came first and you've stopped caring.\n\nYou dance. The light from the floor pulses up through your legs and the colors shift - oranges and violets and things between them that your mind keeps trying to name and failing. The crowd is a wall of sound around you, cheering, stomping, feeding you something that tastes like permission. You are visible. Every person in this room is watching you and you are not afraid of it. You are dancing the way you dance when no one is watching except everyone is watching and it doesn't matter because the boundary between you and them has dissolved into bass and heat and light.\n\nSomething is taken from you that you did not know you were carrying. You feel lighter - the way you feel after crying, after confessing, after saying the thing you've been holding in the back of your throat for longer than you can account for. The floor beneath you flares and you feel it accept what you gave. You didn't choose to give it. It left you the way breath leaves you - because holding it was never sustainable.\n\nThe crowd absorbs you back when you finish. You are part of something. You don't know what. You don't need to.",
-      "arrival_variants": null,
-      "conditional_text": [
-        {
-          "append": "The paint-knuckle man cheers from the ring. You can't hear what he says. The gesture is the content."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": "unity",
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "continue",
-          "next": "w_011"
-        }
-      ],
-      "next": "w_011",
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "INSIDE THE DANCE CIRCLE"
-    },
-    {
-      "id": "w_011",
-      "text": "The music is winding down. Everything else is cresting - the heat, the pressure, the thing between all these bodies that has no name.\n\nThe green tentacles have stopped adjusting. For the first time all night, the hands are completely still - resting on the mixer the way you rest your hands on something that is finally doing what you built it to do. The machine doesn't need tuning anymore. \n\nThe fog around the DJ booth is doing something. You can see shapes in it - geometric, repeating, like something is being projected from inside the construct itself. Below your feet the projection rings are pulsing faster than they have all night, contracting toward the center, and through the gaps in the concrete you swear you can see light coming from somewhere deep below.\n\nThe vocoded voice calls the crowd down. Lower. A little bit softer now. The bass descends and bodies descend with it - bending, folding, sinking. You go with them. The person next to you grabs your hand. You let them.\n\nAt the floor, face-level with the concrete, the music fades to a drone. So low you stop hearing it and start feeling it. Vibration from underneath. Vibration from above. You are between them. You are the conduit. Something passing through - not pain, not pleasure. A flow. A restoration.\n\nStillness. The bass drops out. Silence. Earned presence.\n\nThe portal closes. The rings flash out of existence. You feel the pressure change in your ears, a sealing, as if something beneath the floor has been shut. Fog clears. Lights come up warm. The room is a warehouse.\n\nYou stand. Knees ache. Shirt damp. Smiling. The crowd disperses slowly. Reluctantly. The way your hands come apart after holding someone you're not sure you'll see again.",
-      "arrival_variants": [
-        {
-          "requires": {
-            "has_tag": "truth"
-          },
-          "text": "The voice is still quiet. The closing finds you in the silence - not empty, not waiting. Present.",
-          "default": false
+            "id": "w_exit_002",
+            "text": "You drive home. The streets are empty. Your keys are cold. You sit on your couch and put on something - a show, a podcast, noise to fill the silence that followed you from the parking lot.\n\nYou fall asleep without deciding to. In the morning you will remember going somewhere. You will not remember where. You will not remember the bass or the warmth or the shape behind the decks. You will feel slightly wrong for a few days. You will not look for the reason.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The building is behind you. The night is behind you. You are driving."
+                }
+            ],
+            "conditional_text": null,
+            "oor_action": null,
+            "temperature": "cold",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [],
+            "next": null,
+            "terminal": true,
+            "outcome": "escape",
+            "subtitle": "THE DRIVE HOME"
         },
         {
-          "requires": {
-            "has_tag": "goodness"
-          },
-          "text": "The voice is still quiet. Not because something was taken. Because something was given. The closing ritual finds you already inside it.",
-          "default": false
+            "id": "w_003b",
+            "subtitle": "THE SECURITY GUARD",
+            "text": "You walk up to the security guard. He stands up. He's standing the way someone stands when they saw a picture of standing once and committed to it. Nothing moves except his eyes, and his eyes don't go to your face. They go lower. Your hands. Your pockets.\n\n\"Left side,\" he says.\n\nYou pat your left pocket. Empty. You try to remember if someone said there was a cover. He watches you for a moment, then something in his posture unlocks.\n\n\"You're fine.\"\n\nYou walk up to the open door and are immediately struck by the growl of the bass.",
+            "choices": [
+                {
+                    "text": "Go into the warehouse. Pass through the threshold.",
+                    "next": "w_003"
+                }
+            ],
+            "conditional_text": [],
+            "arrival_variants": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "requires": {
-            "has_tag": "entered_circle"
-          },
-          "text": "You are still warm from the circle. You gave something up in there and the absence feels like relief. If anything you feel more open, like a door left ajar on purpose.",
-          "default": false
+            "id": "w_bouncer_run2",
+            "subtitle": "THE BOUNCER",
+            "text": "You walk with intention toward the door.\n\nYou're maybe eight feet out when he says \"Hey.\"\n\nJust that. You stop. He's standing now — you didn't see him get up. He steps between you and the entrance.\n\n\"There's a cover tonight,\" he says. \"Cash or equivalent.\"\n\nYou don't have cash. Your hand goes to your pocket — a nervous tic to buy some time — but your fingers close around something warm. A small clump of yarn you're not sure you've seen before. You pull it out.\n\nHe examines the yarn. After a moment of careful study, he pulls a small pair of snips from his jacket pocket. He clips a small piece from the end of the yarn and pockets it. He returns the yarn to you and steps aside with a nod.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "returned"
+            ],
+            "choices": [
+                {
+                    "text": "Enter the warehouse.",
+                    "next": "w_bartender_run2"
+                }
+            ],
+            "next": "w_bartender_run2",
+            "terminal": false,
+            "outcome": null,
+            "requires": {
+                "has_artifact": "yarn_knot"
+            }
         },
         {
-          "requires": {
-            "has_tag": "participated_ritual"
-          },
-          "text": "You've been on the floor all night. Your body knows what's coming before your mind does.",
-          "default": false
+            "id": "w_bartender_run2",
+            "subtitle": "THE BARTENDER",
+            "text": "You pass the bar on your way in. The bartender is there. She looks up when you approach. She's reaching for something, then stops. She sets down the glass she's cleaning and looks at you.\n\n\"What would you like? I've got exactly two drinks tonight.\"",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": "matchbook",
+            "awards_tags": [
+                "met_bartender"
+            ],
+            "choices": [
+                {
+                    "text": "\"A whiskey sour\" (your favorite)",
+                    "next": "w_bartender_run2_drink",
+                    "flag": "chose_whiskey",
+                    "tag": "chose_whiskey"
+                },
+                {
+                    "text": "\"The House Cocktail\"",
+                    "next": "w_bartender_run2_drink",
+                    "flag": "chose_fog",
+                    "tag": "chose_fog"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "requires": {
-            "has_tag": "saw_oor"
-          },
-          "text": "You've seen what's behind the decks. You know this isn't a show. Whatever is about to happen, it's the reason the machine was built.",
-          "default": false
+            "id": "w_bartender_run2_drink",
+            "subtitle": "THE DRINK",
+            "text": "She slides the drink to you across the bar. As you reach for the drink you notice there's something else too. It's a small matchbook sitting next to the drink. You didn't notice her set it there.\n\nYou pick it up to examine it. One side is blank. The other has something written on it, small, in ink that catches the orange light. You read it. You feel a flutter in your chest. You read it again. The words written are the most personal and intimate combination you could imagine, as if the sentence itself was lifted directly from your heart. The feeling doesn't fade. You put the matchbook in your pocket.",
+            "arrival_variants": [
+                {
+                    "text": "\"I'll try the house cocktail\", you say. The bartender walks over the beer taps and pulls on a lever on the far end. An out of place length of tube extends from the back of the lever, runs along the floor, and disappears into the mist in the direction of the DJ Booth.  Fog pours into the glass, thick, slow, heavier than fog should be. It pools. It settles. The surface tension holds for a moment and then it isn't fog anymore. It's liquid. Clear, faintly amber, still moving. She adds something from a small dark bottle with no label. You feel a flash of heat. The color deepens to the amber of old resin, old honey, old light trapped in old glass.  The garnish is a sprig of moss. Not bar moss, not decorative. Ancient-looking, the kind you'd find on a stone that hasn't been moved in centuries. The fronds are fine and feathered and under the orange light they shift color: gold, then copper, then something between green and violet that doesn't stay long enough to name. She places it on the surface of the drink and it floats, ancient and patient.  The drink smells like the room. Wet stone, cedar resin, the mineral sweetness you tasted in the air when you first walked in. You drink it. It tastes like cold water from a deep well. Clean, specific, heavy with minerals. Then the warmth follows, delayed, rising through your chest the way the bass rises through the floor.  It leaves a hum. Low, steady, familiar. The same feeling you followed down the alley. The Sound, distilled, sitting in your sternum like it was always supposed to be there.",
+                    "default": false,
+                    "requires": {
+                        "has_tag": "chose_fog"
+                    }
+                },
+                {
+                    "default": true,
+                    "text": "\"A whiskey sour\", you say. The bartender begins her work, all while observing the actions of her own hands. The pour, the shake, the strain. The bitters go in first. The rosemary is fresh, trimmed clean, placed with the precision of someone who has thought about where rosemary goes. The ratios are perfect. You hold your cup with both hands and something is wrong with how good it is. Why does this feel so familiar? Not just the drink. Something underneath it. Like deja vu, but without the doubt."
+                }
+            ],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Continue",
+                    "next": "w_slide_run2a"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "default": true,
-          "text": "The music shifts. You can feel the room tilting toward something."
-        }
-      ],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "silence"
-          },
-          "append": "The jacket woman is near the door. She's carrying her jacket over one arm. She sees you and doesn't wave. She just looks at you and the look is enough. Two people who were holding and then stopped holding and then discovered that the holding was the only thing that was heavy. She walks out into the cold. You don't follow. You don't need to. The silence you share doesn't require proximity."
+            "id": "w_slide_run2a",
+            "subtitle": "THE OOR SLIDE, AGAIN",
+            "text": "You finish your drink and feel the warmth in your body calm your nerves. You head into the dance floor with the feeling that you've been here before and know exactly what to do.\n\nThe vocoded voice calls out and your body lights up. You know this song. You don't know how you know it but your feet know it and your hips know it and something in your chest is already moving before the first call lands. It's a line dance - and it's one of your favorites. Well, close enough anyway.\n\nDown, down, do your dance, do your dance.\n\nThe crowd falls into line. You follow with them. The synchronization is instant - two hundred bodies locked into the same synchronicity. You're looking ahead and ready for the opening moves. You know what comes next.",
+            "arrival_variants": [
+                {
+                    "default": true,
+                    "text": "The music shifts and your body recognizes it before your ears do."
+                }
+            ],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "Show your moves: \"To the left, to the left\"",
+                    "next": "w_slide_run2b"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "saw_oor"
-          },
-          "append": "You look toward the DJ booth, remembering the experience you had earlier when bearing witness to the DJ-in-the-mix. The fog has cleared and the thing behind the mixer looks different in the overhead light. Smaller. The surface that seemed alive in the dark is obviously handmade - frilly crochet yarn, hot-glued and matted. The mouth is a pool noodle. The teeth are packing foam. The ear is shipping foam, flesh-colored, bent into a curve - the kind you'd find in a box of fresh peaches. You can't believe this is what terrified you. You can't believe it's the same thing."
+            "id": "w_slide_run2b",
+            "subtitle": "WRONG WAY",
+            "text": "You commit, hard. You pull a hard left when every person around you pulls a hard right. \n\nYou manage to hear the vocals as you're in the process of doing the opposite of what they're asking. \"To the right, to the right\"?! You were so confident but also wrong. The pattern reversed and your body was running on something older than tonight while your mind was running on something between comfort and hubris.\n\nSomeone's elbow catches your ribs. For one terrible second you are the only person in a room of two hundred moving the wrong way. It feels grating, like rubbing reptile scales the wrong way or trying to push two magnets together in the wrong alignment.\n\nA hand grabs your arm. Paint on the knuckles - house paint, trim work. He pulls you back into the flow. \"Wrong way,\" he yells, grinning like this is the funniest thing he's seen all night. You're laughing too. The embarrassment burns off in the heat of the room and what's left underneath it is something simpler - the specific relief of being caught by someone who didn't have to catch you.\n\nSomething loosens in your chest. Not the embarrassment fading - something underneath it. You were holding a shape in your body like a template and the music just tore it out of your hands. You don't know the next move. You don't know any of the moves. For the first time tonight you are actually here - not performing the act of being here. Here, in your body and the moment. It is terrifying and it is a relief.\n\nYou and the paint-knuckled man are moving together now. Not because the frequency aligned you. Because he reached out and you accepted it.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": "DJ OOR reversed the pattern. Three people stumbled. Two hundred didn't. The construct notes which bodies are following memory and which are following the signal. The distinction matters.",
+            "temperature": "hot",
+            "awards_transcendental": "truth",
+            "awards_artifact": null,
+            "awards_tags": [
+                "truth"
+            ],
+            "choices": [
+                {
+                    "text": "Submit to the flow of the dance floor",
+                    "next": "w_010a_run2"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "met_bartender"
-          },
-          "append": "The bartender is wiping down the bar. She's doing it the way you'd expect - glasses collected, towel in hand - except she's wiping the same spot over and over, watching her hand move the way she watched it make your drink. The antlers cast shadows across the wall that are too large and too detailed to belong to a costume."
+            "id": "w_010a_run2",
+            "subtitle": "INSIDE THE DANCE CIRCLE",
+            "text": "After a few minutes, the dance portal changes. As the circle fills with bright light, the crowd opens up. An arrow begins to spin and somehow you know exactly what comes next.\n\n\nThe arrow points at you and you don't hesitate. You can't explain why - the weight of two hundred pairs of eyes should freeze you in place but your body is already moving. Whatever the experience at the slide stripped out of you hasn't grown back yet.\n\nYou dance. Not carefully, not for anyone. You dance the way the paint-knuckle man dances - enormous, committed, free. The part of you that watches yourself doing things has gone quiet and what's left is just the doing.\n\nThe floor responds. The fractal layers beneath the concrete press up, warm, and something is being taken from you but you can feel what you're giving. Not presence. Something more specific - the willingness to be foolish, to be wrong in front of strangers and let them see you anyway.\n\nThe crowd holds you when you finish. Not physically - but the sound they make, the way the room breathes, it feels like being held. You step back into them and you don't know where you end and they begin and you don't need to.",
+            "arrival_variants": [],
+            "conditional_text": [
+                {
+                    "append": "The paint-knuckle man is at the edge of the ring. He nods. Not cheering this time. Just a nod. Like he knew you had it in you."
+                }
+            ],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "entered_circle"
+            ],
+            "choices": [
+                {
+                    "text": "Stay in it.",
+                    "next": "w_008f"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "entered_circle"
-          },
-          "append": "DJ OOR is gone. All that remains are two green scraps of fabric draped over the mixer and a few small runs of yellow yarn."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "It's time to go home.",
-          "next": "w_012"
-        }
-      ],
-      "next": "w_012",
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE CLOSING RITUAL"
-    },
-    {
-      "id": "w_012",
-      "text": "The cold outside is a relief. You breathe it in. The gravel lot is emptying. The sodium lights are still orange. The alley is the same length it was before.\n\nYou sit down on the curb. The silence is enormous. The frequency is still in your chest, your jaw, the back of your skull. It doesn't feel like it's fading. It feels like it's waiting. The sky above you is clear and cold and full of stars that don't care what just happened to you.\n\nYou put your hand in your coat pocket and find something that wasn't there before.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The night is over. You are standing in the cold."
+            "id": "w_loading_dock",
+            "subtitle": "THE LOADING DOCK",
+            "text": "Three people are leaning against the loading dock, laughing. The dock door is propped open with a cinder block. A deep, growling kind of bass leaks through the gap.\n\nYou walk over. The one with the beanie looks up. She doesn't say anything but she doesn't look away either. The tall one in the acid-wash flannel shifts his weight to make room without being asked. It's a small gesture. The kind of thing people do when they're among friends and curious about a stranger.\n\n\n\"Hey friend! Any chance you can light this cigarette?\"\n\nYou pull out the matchbook and hand it to the beanie girl. She opens the cover, strikes a match, and lights the cigarette with a cupped hand. After the ritual is complete, she glances at the cover of the matchbook. Her eyes glance across the surface. For just a moment, her left eyebrow raises, then drops.\n\n\"Huh,\" she says. She tosses it to the guy in the acid-wash flannel.\n\nHe catches the matchbook. Holds it at an angle under the sodium light. \"...hmm. Well that's something.\" He hands it to the woman next to him. She's standing slightly apart from the other two, still deciding how much of this group she belongs to.\n\nShe glances at it. Whatever she reads confirms something she'd already decided. After a quiet moment, she breaks the silence. \"You going in?\" She hands it back and steps toward the door.\n\n\"Have you seen this DJ before?\" the flannel guy asks. He doesn't wait for your answer. \"I follow them on instagram. Not much going on there but it's not like they've got a website or anything.\"\n\n\"They're doing something in Fargo,\" the beanie girl says. \"Some art thing.\"\n\n\"Where'd you hear that?\"\n\n\"Someone in line was talking about it.\"\n\nHe nods like this explains everything. Pockets his phone. The beanie girl stubs her cigarette on the dock and follows the others toward the door.\n\nThey don't wait for you but they don't close the door either. You follow. The matchbook is back in your pocket. You don't remember anyone handing it back.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "loading_dock"
+            ],
+            "choices": [
+                {
+                    "text": "Go in through the side door.",
+                    "next": "w_bartender_run3"
+                },
+                {
+                    "text": "\"Can I see that instagram page?\"",
+                    "next": "w_loading_dock_insta"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "requires": {
-            "has_tag": "met_bartender"
-          },
-          "text": "The night is over. You are standing in the cold. On your way out you passed a chair by the door. A jacket folded neatly on it - SECURITY in block letters. The bouncer must have left in a hurry.",
-          "default": false
-        }
-      ],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "truth"
-          },
-          "append": "You put your hand in your coat pocket. The matchbook is still there. You pull it out. The message on the inside is still legible under the sodium light. Still for you. Still true. You hold it for a moment, then put it back. The hum in your chest is quieter than it used to be. Maybe it has less to say. Maybe the matchbook is absorbing some of the power?",
-          "awards_transcendental": "truth"
+            "id": "w_bartender_run3",
+            "subtitle": "THE TUNING",
+            "text": "The side door opens and you find yourself directly behind the bar. Not in front of it. Behind it, in the narrow corridor where the bottles live. The bartender is three feet away. She looks up when you step through. A flicker of recognition she doesn't try to explain.\n\nShe's already making something. She slides it across the bar and watches you take it. Brief eye contact. It feels like a handoff.",
+            "arrival_variants": [],
+            "conditional_text": [
+                {
+                    "condition": {
+                        "has_flag": "chose_whiskey"
+                    },
+                    "append": "It's the whiskey sour. Your whiskey sour. The bitters first, the rosemary trimmed clean, the ratios exactly right. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
+                },
+                {
+                    "condition": {
+                        "has_flag": "chose_fog"
+                    },
+                    "append": "It's the fog drink. Amber, heavy, the moss floating on the surface. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
+                },
+                {
+                    "append": "You drink. Something settles. Not warmth. Clarity. Like blinking underwater and finding the water is clear. Same room, same crowd, but the blur you didn't know was there is gone. The woman near the speakers — you can see the tendons in her wrist as she moves. The paint-knuckle man is somewhere on the floor. You can hear him laughing from here. You step out from behind the bar."
+                },
+                {
+                    "append": "The acid-wash flannel guy from the loading dock is already deep in it, dancing with his eyes closed. He looks like he's been doing this for years. He probably has."
+                }
+            ],
+            "oor_action": "The bartender's adjustments are not sanctioned by the construct. They are tolerated. The distinction is important to no one except the bartender.",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "tuned"
+            ],
+            "choices": [
+                {
+                    "text": "The room is different now. Look around.",
+                    "next": "w_silence_run3"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "goodness"
-          },
-          "append": "You put your hand in your coat pocket. The matchbook is there, warm. You don't take it out. But something else is in the pocket with it. A polaroid. Still developing — the image swimming up through chemical fog the way a song swims up through silence. You hold it under the sodium light and watch the faces resolve. The bartender, mid-pour, watching her own hands. The paint-knuckle man, laughing at something you can't hear. The jacket woman, arms crossed, standing exactly where she always stands. The sneaker-star woman, eyes closed, gone. You don't remember anyone taking a photo. The edges are warm. The faces are still sharpening, like they'll keep developing for as long as you keep looking.",
-          "awards_artifact": "polaroid",
-          "awards_transcendental": "goodness"
+            "id": "w_silence_run3",
+            "subtitle": "THE VOICE THAT NARRATES",
+            "text": "You peel away from the bar and walk through the crowd. The bartender's drink is making itself known. Not warming. Clearing. The voice in your head is talking, the one that narrates, the one that collects, the one that turns every experience into something you can describe later. But it's further away than usual. Pushed back by something the drink carried.\n\nYou see people. Not the way you usually see them, as details to collect, textures to catalog. You see them the way you see someone at a diner after a long day of driving in a town you'll never stop in again. Plainly. Honestly.\n\nThe fog clings to the shoulders of the man in the acid-wash flannel. The condensation on the plastic cups catches the orange light. A woman near the speakers is dancing with her whole body, chin up, completely in it. The paint-knuckle man is leaning against a pillar, watching the floor. Content.\n\nThen you notice the woman with the jacket.\n\nShe is standing near the edge of the floor. Jacket zipped. Arms crossed. Not watching the crowd. Watching the distance between herself and the crowd. Maintaining it. She has been here before. You can tell because her position is too precise to be an accident. She knows exactly how close she can stand without being pulled in. She's deep in thought, as if attempting to calculate her next move as an excuse to defer a decision.\n\nYour jaw tightens. You recognize the posture.\n\nInside your head, the voice says: note her and keep moving. The voice says: her behavior is interesting and you can think about why later. The voice has said this about every person you've ever noticed from a safe distance.\n\nBreaking from the command of the inner voice, you walk toward her. Notably, the voice retreats into silence. You're not sure who is responsible for noting this.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": "The aperture registers a flow. The construct did not initiate this one. The bartender set the conditions. The watcher made the choice. Causality is not the construct's concern. Yield is.",
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "silence"
+            ],
+            "choices": [
+                {
+                    "text": "Approach her.",
+                    "next": "w_jacket_woman"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "came_for_stillness"
-          },
-          "append": "You put your hand in your coat pocket and find a strand of thick fuzzy blanket yarn. Orange. Warm. You close your hand around it and the frequency in your chest pulses once, faintly, like a heartbeat that isn't yours. You will come back. You didn't know it before but you find this conviction to be comforting and steadfast.",
-          "awards_artifact": "yarn_knot",
-          "awards_transcendental": "unity"
+            "id": "w_jacket_woman",
+            "subtitle": "THE CROSSING",
+            "text": "She looks at you. She wasn't expecting you. Nobody crosses the room to someone with their arms crossed and their jacket zipped. That's the whole point of wearing the armor.\n\n\"Hi,\" you say. Without the narrator, hi is all you've got.\n\nShe takes a second. \"Hi.\"\n\nYou stand next to her. Facing the floor, both watching. The paint-knuckle man is out there. The sneaker-star woman. Two hundred people moving for reasons they don't need to explain.\n\nYou don't try to get her to talk. You just stand there.\n\nAfter a while she lets out a breath.\n\n\"I kept my jacket on last time,\" she says. She's not looking at you. \"The whole night. Stood right here.\" She pushes her hair back. \"I almost didn't come back.\"\n\nYou wait.\n\n\"I keep waiting to feel like I'm actually here.\" She stops. \"It's exhausting.\"\n\nShe turns to look directly at you.\n\n\"You do it too.\"\n\nYour chest tightens. The narrator voice would process this — file it, frame it, find a way to describe the feeling of being seen. But the narrator is gone and you are standing in front of someone who just described you to yourself.\n\n\"I thought the voice was me,\" you say quietly, in the way you'd admit something to a stranger on a train you'll never say again.\n\nShe nods. The nod is enough.\n\nShe looks at her jacket. Her hands go to the zipper. She pauses. Then she unzips it. Folds it over her arm with the care of someone who knows exactly what she's removing. Her shoulders drop. The way a door settles when you stop leaning against it.\n\nYou let your hands drop to your sides. Open.\n\nSomething passes between you. Specific. Two people, one of whom chose to walk over, the other of whom chose to let them stay. Small. Human. The first thing all night that nothing in this building made happen.\n\nSomething below the floor shifts. A warmth.\n\nThe track changes. The bass drops into something heavy, simple, classic — the kind of beat that doesn't ask. She looks at the floor. For the first time all night she's not measuring the distance. She's deciding whether to close it.\n\nYou step off the edge. She follows.\n\nThe acid-wash flannel guy finds you first. He calls you over and shifts his posture to make room. The paint-knuckle man drifts over. The sneaker-star woman is already there, chin up, eyes closed. You are dancing wildly and specifically and with people whose names you don't know but whose faces you've been watching all night.\n\nFor one song you are not watching. You are in it. The jacket woman is dancing with her jacket balled up in one fist, swinging it like she's forgotten what it was for. Something is building that none of you are directing. The jacket woman makes a hand gesture and you make one back, and the paint-knuckle man catches both of you and for eight bars you are one animal with six arms and no plan. It breaks apart and reforms with different people and breaks apart again. Every configuration feels inevitable. Every face is someone you've known forever and will never see again.\n\n\nThe beat breaks down to a kick drum and a pulse and every body in the room locks into it. You can feel two hundred hearts sync. Not a metaphor - you can feel it, in the floor, in the air, in the space between your ribs. The song builds back up. The snares roll. The room compresses. Every exhale from every mouth becomes one exhale. And then the drop - and the room erupts into something else. You are not you. You are not the narrator or the watcher or the person who walked down an alley. You are the feeling of everyone in the room, together, when they collectively forget that they're made up of separate people. Eight seconds. Maybe twelve. The longest you've ever been alive.\n\n\nThe voice doesn't come back. There is nothing to describe. That's the whole thing.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": "Goodness yielded. Not extracted. Given. The construct notes the distinction. Voluntary yield has a resonance the construct has catalogued but cannot reproduce. It has occurred 7 times in 4,200 harvests.",
+            "temperature": "hot",
+            "awards_transcendental": "goodness",
+            "awards_artifact": null,
+            "awards_tags": [
+                "goodness",
+                "silence"
+            ],
+            "choices": [
+                {
+                    "text": "The closing is starting. You can feel it.",
+                    "next": "w_011"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "condition": {
-            "has_tag": "came_for_drink"
-          },
-          "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Warm. It smells faintly like the drink the bartender made you - sweet, slightly wrong. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting.",
-          "awards_artifact": "yarn_knot",
-          "awards_transcendental": "unity"
+            "id": "w_003_rings",
+            "subtitle": "THE RINGS",
+            "text": "You crouch at the edge of the nearest ring. Up close, it's just light on concrete — a projector somewhere in the rigging, probably. The line is sharp. Orange. Steady.\n\n\nYou reach out and touch the floor where the ring of light is projected. As expected, you just feel the concrete floor and see the projected light on top of your hand. \n\nAs you lean in closer, the rings beneath the surface come into focus again — the ones you can only see peripherally. As your eyes adjust, you can see that they're nested. Dozens of concentric circles descending into the floor like a well, blurring into a textured darkness. As your eyes adjust, you swear you can see something moving in there. Something large, pumping with a rhythmic pulse. As you try to concentrate on this shifting shape, details flash in and out of focus at rapidly changing depths. \n\n\nYou see images of flesh and tissue... a horrifically large pumping heart with veins like ancient plumbing embedded into the surface of a plane that stretches to infinity in all directions. As you continue to stare into this unholy aperture, you can feel a bubbling sense of vertigo. The longer you stare, the more familiar it feels, until you're certain you're going to be pulled directly into the void, subject to the whims of whatever is at the other end of that ancient force.\n\n\nSuddenly, you're snapped out of it. A hand touches your shoulder. The sneaker-star woman. She shakes her head — not unfriendly, more like a lifeguard waving you away from a rip current. You stand up. The rings flatten back to projections. Your knees ache from the concrete. \n\n\nIt's best to keep moving. You give a warm smile to the sneaker-star woman and pull away.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": "The aperture registered the proximity. The aperture always registers proximity. Most humans step around the rings without thinking much of it. This one knelt.",
+            "temperature": "warm",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "examined_rings"
+            ],
+            "choices": [
+                {
+                    "text": "Head towards the DJ booth",
+                    "next": "w_004"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "append": "You put your hand in your coat pocket and find a strand of yarn. Warm. You don't know what color it is in the sodium light. You don't know how it got there. The frequency is still in your chest. It doesn't feel like it's fading. It feels like it's waiting. You will come back. You didn't know it before but you find this conviction to be comforting and steadfast.",
-          "awards_artifact": "yarn_knot",
-          "awards_transcendental": "unity"
-        }
-      ],
-      "conditional_mode": "first_match",
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [],
-      "next": null,
-      "terminal": true,
-      "outcome": "harvest",
-      "subtitle": "THE EPILOGUE"
-    },
-    {
-      "id": "w_exit_001",
-      "text": "The cold is sudden and abrasive. Not the gradual cold of the approach - the sharp cold of something warm being taken away.\n\nThe gravel lot is half-empty. The sodium lights are the same orange they were when you arrived. Your hands go back into your pockets. The bass is still audible through the walls, muffled, diminishing, and you can feel the exact moment it stops reaching your body. A border you didn't know existed until you crossed it.\n\nYou keep walking. That's enough for tonight.",
-      "arrival_variants": [
-        {
-          "requires": {
-            "has_tag": "retreating"
-          },
-          "text": "You saw enough from the edge. The antlers and the rod and the tuning - none of it made sense. You're choosing the version of tonight where it doesn't have to.",
-          "default": false
+            "id": "w_loading_dock_insta",
+            "subtitle": "THE ACCOUNT",
+            "text": "The acid-wash flannel guy pulls out his phone. It takes him a second — the screen is cracked, the brightness is all the way down. He tilts it toward you.\n\nThe account is @dj_oor. Profile picture is a circle of orange yarn on a black background. Bio is empty. One post.\n\nThe photo is the warehouse. This warehouse - you recognize the loading dock, the cinder block, the sodium light. But the angle is from across the lot, at night, and the building looks different. Smaller. The mural on the east wall isn't there. The parking lot is paved — it's gravel now, or was when you walked up. The timestamp says it was posted eleven months ago.\n\n\"Wanna hear something funny? That photo's older than the building,\" the beanie girl says. She's looking over your shoulder. \"My buddy works for the city. This lot was empty until February. It's probably a joke about gentrification or something.\"\n\nYou zoom in. In the loading dock doorway, barely visible in the sodium light, there's a shape. Orange and yellow. Fibrous. It could be a pile of insulation. It could be a lot of things.\n\nThree followers (@acid_flannel, @left_pocket_please, and @ashley_antlers). No comments. No likes. The single photo sitting there for almost a year, seen by almost no one, of a building that didn't exist yet, with something in the doorway that you've now seen from the inside.\n\nThe acid-wash flannel guy takes his phone back. \"Weird, right?\" He says it the way you'd say nice weather — a thing observed, not explained.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "cool",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "saw_instagram"
+            ],
+            "choices": [
+                {
+                    "text": "Follow them inside.",
+                    "next": "w_bartender_run3"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "default": true,
-          "text": "You are leaving."
-        }
-      ],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [],
-      "next": "w_exit_002",
-      "terminal": false,
-      "outcome": null,
-      "subtitle": "THE EXIT"
-    },
-    {
-      "id": "w_exit_002",
-      "text": "You drive home. The streets are empty. Your keys are cold. You sit on your couch and put on something - a show, a podcast, noise to fill the silence that followed you from the parking lot.\n\nYou fall asleep without deciding to. In the morning you will remember going somewhere. You will not remember where. You will not remember the bass or the warmth or the shape behind the decks. You will feel slightly wrong for a few days. You will not look for the reason.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The building is behind you. The night is behind you. You are driving."
-        }
-      ],
-      "conditional_text": null,
-      "oor_action": null,
-      "temperature": "cold",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [],
-      "next": null,
-      "terminal": true,
-      "outcome": "escape",
-      "subtitle": "THE DRIVE HOME"
-    },
-    {
-      "id": "w_003b",
-      "subtitle": "THE SECURITY GUARD",
-      "text": "You walk up to the security guard. He stands up. He's standing the way someone stands when they saw a picture of standing once and committed to it. Nothing moves except his eyes, and his eyes don't go to your face. They go lower. Your hands. Your pockets.\n\n\"Left side,\" he says.\n\nYou pat your left pocket. Empty. You try to remember if someone said there was a cover. He watches you for a moment, then something in his posture unlocks.\n\n\"You're fine.\"\n\nYou walk up to the open door and are immediately struck by the growl of the bass.",
-      "choices": [
-        {
-          "text": "Go into the warehouse. Pass through the threshold.",
-          "next": "w_003"
-        }
-      ],
-      "conditional_text": [],
-      "arrival_variants": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_bouncer_run2",
-      "subtitle": "THE BOUNCER",
-      "text": "You walk with intention toward the door.\n\nYou're maybe eight feet out when he says \"Hey.\"\n\nJust that. You stop. He's standing now — you didn't see him get up. He steps between you and the entrance.\n\n\"There's a cover tonight,\" he says. \"Cash or equivalent.\"\n\nYou don't have cash. Your hand goes to your pocket — a nervous tic to buy some time — but your fingers close around something warm. A small clump of yarn you're not sure you've seen before. You pull it out.\n\nHe examines the yarn. After a moment of careful study, he pulls a small pair of snips from his jacket pocket. He clips a small piece from the end of the yarn and pockets it. He returns the yarn to you and steps aside with a nod.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "returned"
-      ],
-      "choices": [
-        {
-          "text": "Enter the warehouse.",
-          "next": "w_bartender_run2"
-        }
-      ],
-      "next": "w_bartender_run2",
-      "terminal": false,
-      "outcome": null,
-      "requires": {
-        "has_artifact": "yarn_knot"
-      }
-    },
-    {
-      "id": "w_bartender_run2",
-      "subtitle": "THE BARTENDER",
-      "text": "You pass the bar on your way in. The bartender is there. She looks up when you approach. She's reaching for something, then stops. She sets down the glass she's cleaning and looks at you.\n\n\"What would you like? I've got exactly two drinks tonight.\"",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": "matchbook",
-      "awards_tags": [
-        "met_bartender"
-      ],
-      "choices": [
-        {
-          "text": "\"A whiskey sour\" (your favorite)",
-          "next": "w_bartender_run2_drink",
-          "flag": "chose_whiskey",
-          "tag": "chose_whiskey"
+            "id": "w_the_whole_room",
+            "subtitle": "THE WHOLE ROOM",
+            "text": "\"Mind giving me a hand with something?\"\n\nHe holds out the iPad. You take it. The screen is warm. The interface is a web of curves and routing paths — signal chains you half-recognize from studio diagrams, except the topology doesn't resolve. Lines fork where they shouldn't. Buses route into buses. A waveform at the bottom climbs slowly toward a threshold line, blooming amber each time OOR adjusts the faders.\n\nMost of the fixtures are labeled in shorthand you can parse — LF_SUB_ARRAY, MID_HORN_STACK, MONITOR_SEND_3. Standard. Human. But one fixture in the upper left is different. The icon is corrupted — flickering between a waveform and something organic, something branching. The label reads:\n\nsooboont.dll\n\nYou touch it. The screen flickers. For a moment the routing diagram rearranges itself and you can see that everything — every signal chain, every bus, every send — routes through this one module. Not as a destination. As a carrier frequency. The way amplitude modulation works — the signal you hear is shaped by a wave you don't. Remove the carrier and there is nothing left to carry.\n\n\"Yeah,\" he says. He's seen you find it. \"That showed up on its own about three hours into the first build. Wasn't in the spec. I tried to remove it.\" He almost laughs. \"You can't remove it. It's not running on the iPad. It's running on...\" He gestures at the room. The speakers. The floor. The thing behind the decks. \"All of it. The whole system loads off that module. The power draw exceeds the circuits. The voice coils are running cold — I mean actually cold, like below-zero cold, in a room full of bodies. The bass extends past the theoretical limit of the drivers by about an octave and a half.\"\n\nHe takes the iPad back. Swipes to a different screen — a spectrogram. The low end is visible as a dense amber band. Below it, barely visible, a second band. Deeper. The color doesn't have a name.\n\n\"That frequency was there before I turned anything on. It's coming from underneath. The system doesn't generate it. The system...\" he searches for the word. \"Tunes to it. Resonates with it. Like a piano string that starts vibrating because someone in the next room hit the same note.\"\n\nHe looks at you the way someone looks at the only other person who has seen what they've seen.\n\n\"I've spent eleven years in rooms like this. Tuning sound for people who came to feel something. I thought I was making it happen. The EQ, the compression, the room treatment — I thought I was building the experience.\" He wipes his eyes with the back of his wrist again. \"I wasn't building it. I was building a door. And something on the other side has been knocking for a very long time.\"",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [
+                "saw_whole_system"
+            ],
+            "choices": [
+                {
+                    "text": "You look at the room.",
+                    "next": "w_the_frequency"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "\"The House Cocktail\"",
-          "next": "w_bartender_run2_drink",
-          "flag": "chose_fog",
-          "tag": "chose_fog"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_bartender_run2_drink",
-      "subtitle": "THE DRINK",
-      "text": "She slides the drink to you across the bar. As you reach for the drink you notice there's something else too. It's a small matchbook sitting next to the drink. You didn't notice her set it there.\n\nYou pick it up to examine it. One side is blank. The other has something written on it, small, in ink that catches the orange light. You read it. You feel a flutter in your chest. You read it again. The words written are the most personal and intimate combination you could imagine, as if the sentence itself was lifted directly from your heart. The feeling doesn't fade. You put the matchbook in your pocket.",
-      "arrival_variants": [
-        {
-          "text": "\"I'll try the house cocktail\", you say. The bartender walks over the beer taps and pulls on a lever on the far end. An out of place length of tube extends from the back of the lever, runs along the floor, and disappears into the mist in the direction of the DJ Booth.  Fog pours into the glass, thick, slow, heavier than fog should be. It pools. It settles. The surface tension holds for a moment and then it isn't fog anymore. It's liquid. Clear, faintly amber, still moving. She adds something from a small dark bottle with no label. You feel a flash of heat. The color deepens to the amber of old resin, old honey, old light trapped in old glass.  The garnish is a sprig of moss. Not bar moss, not decorative. Ancient-looking, the kind you'd find on a stone that hasn't been moved in centuries. The fronds are fine and feathered and under the orange light they shift color: gold, then copper, then something between green and violet that doesn't stay long enough to name. She places it on the surface of the drink and it floats, ancient and patient.  The drink smells like the room. Wet stone, cedar resin, the mineral sweetness you tasted in the air when you first walked in. You drink it. It tastes like cold water from a deep well. Clean, specific, heavy with minerals. Then the warmth follows, delayed, rising through your chest the way the bass rises through the floor.  It leaves a hum. Low, steady, familiar. The same feeling you followed down the alley. The Sound, distilled, sitting in your sternum like it was always supposed to be there.",
-          "default": false,
-          "requires": {
-            "has_tag": "chose_fog"
-          }
+            "id": "w_the_frequency",
+            "subtitle": "THE FREQUENCY",
+            "text": "You look out at the room. Not the way you've been looking at it all night — collecting textures, cataloguing details, narrating the distance between yourself and everything else. You look at it the way you look at something when you've stopped trying to understand it and started letting it be what it is.\n\nThe construct behind the decks. Green tentacles resting on the mixer. The ear tilted toward the crowd, still listening. The mouth — a pool noodle, the teeth packing foam, the surface crocheted yarn hot-glued and matted. Terrifying and handmade. Ancient and ridiculous. A thing that has no business existing in the material world, operating equipment it shouldn't be able to operate, harvesting something from two hundred bodies that the bodies didn't know they were carrying. It is the most alien thing you have ever seen and someone built its casing out of craft supplies.\n\nThe antlered woman moves near the edge of the floor with her rod. The bartender wipes the same spot on the bar. They have been doing this work since before this building existed. They will do it again after you are gone. And the crowd — the crowd is not two hundred people anymore. From here, behind the rack, next to the person who built the instrument, you can see what they are. Every body a string. Every movement a vibration. Every distance between one shoulder and the next a tuned interval. Some have been drawn back by a hum in their sternum that wouldn't fade. Some are here for the first time. It doesn't matter. The light inside them is the same light.\n\nYou are holding the iPad. The spectrogram is still running. The amber band and the nameless band beneath it.\n\nAnd you can feel it. Not the bass — you've felt the bass all night. Something underneath the bass. The thing the bass is tuned to. The thing that was here before the building, before the city, before the concrete, before the ground was ground. A vibration that has been running since the first bodies moved together around the first fire and felt something pass between them that none of them had a word for. It didn't start with humans. Humans are just what it sounds like in this octave. In other octaves it sounds like tide pools and root systems and the slow grinding of tectonic plates and the specific silence of deep space where hydrogen clouds collapse into stars that will burn for ten billion years and never know they're beautiful. Somewhere, someone is singing the world into existence. Somewhere, the world is forgetting itself because the singing stopped. Both of these are always happening. Both of these are happening now.\n\nThis will continue after you are gone. After everyone in this room is gone. After the building, the city, the species. It will continue because it is not a conversation between beings. It is a property of matter when matter is arranged in patterns complex enough to notice itself. The universe wanted to become many. It became many. And the many look back at what they came from and the looking generates something — and the something has to go somewhere — and the somewhere is through the floor of a warehouse in a city you didn't mean to visit on a night you didn't plan to be out.\n\nYou are tiny. A brief arrangement of atoms that learned to collect textures and narrate the distance between itself and everything else. You will be gone in a blink. The frequency in your sternum will outlast you by eons.\n\nAnd none of that makes this less. A hand on your shoulder when you went the wrong way. A breath released when someone stopped holding. The Builder's tears. Every fire circle and cathedral and kitchen after a funeral. The smallness is the point. The harvest works because you end. The frequency resonates because you are brief. The whole system — ancient, terrifying, beautiful, incomprehensible — runs on the fact that you are here and you will not always be here and while you are here you can feel this and feeling it is enough.\n\nThe Builder takes the iPad back. The screen goes dark. He looks at the room. You look at the room.\n\n\"Best night of my life,\" he says. \"Every time.\"\n\nThe amber light pulses once and fades.",
+            "arrival_variants": [],
+            "conditional_text": [
+                {
+                    "condition": {
+                        "has_tag": "truth"
+                    },
+                    "append": "The narrator doesn't come back for this. There is nothing to narrate. There is just a room full of people who came here for reasons they can't explain, generating something they can't name, feeding it to something they can't see. And you are one of them. And that is not a reduction. That is the whole thing."
+                }
+            ],
+            "oor_action": "The construct registers the observer's integration. Not as data. As completion. The system was built to be witnessed. The witnessing is the final component. The yield from the witness exceeds the yield from the crowd by a factor the construct's metrics were not designed to measure.",
+            "temperature": "hot",
+            "awards_transcendental": "beauty",
+            "awards_artifact": "shard_of_light",
+            "awards_tags": [
+                "beauty"
+            ],
+            "choices": [
+                {
+                    "text": "The closing is starting. You can feel it.",
+                    "next": "w_011_beauty"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "default": true,
-          "text": "\"A whiskey sour\", you say. The bartender begins her work, all while observing the actions of her own hands. The pour, the shake, the strain. The bitters go in first. The rosemary is fresh, trimmed clean, placed with the precision of someone who has thought about where rosemary goes. The ratios are perfect. You hold your cup with both hands and something is wrong with how good it is. Why does this feel so familiar? Not just the drink. Something underneath it. Like deja vu, but without the doubt."
-        }
-      ],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Continue",
-          "next": "w_slide_run2a"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_slide_run2a",
-      "subtitle": "THE OOR SLIDE, AGAIN",
-      "text": "You finish your drink and feel the warmth in your body calm your nerves. You head into the dance floor with the feeling that you've been here before and know exactly what to do.\n\nThe vocoded voice calls out and your body lights up. You know this song. You don't know how you know it but your feet know it and your hips know it and something in your chest is already moving before the first call lands. It's a line dance - and it's one of your favorites. Well, close enough anyway.\n\nDown, down, do your dance, do your dance.\n\nThe crowd falls into line. You follow with them. The synchronization is instant - two hundred bodies locked into the same synchronicity. You're looking ahead and ready for the opening moves. You know what comes next.",
-      "arrival_variants": [
-        {
-          "default": true,
-          "text": "The music shifts and your body recognizes it before your ears do."
-        }
-      ],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "Show your moves: \"To the left, to the left\"",
-          "next": "w_slide_run2b"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_slide_run2b",
-      "subtitle": "WRONG WAY",
-      "text": "You commit, hard. You pull a hard left when every person around you pulls a hard right. \n\nYou manage to hear the vocals as you're in the process of doing the opposite of what they're asking. \"To the right, to the right\"?! You were so confident but also wrong. The pattern reversed and your body was running on something older than tonight while your mind was running on something between comfort and hubris.\n\nSomeone's elbow catches your ribs. For one terrible second you are the only person in a room of two hundred moving the wrong way. It feels grating, like rubbing reptile scales the wrong way or trying to push two magnets together in the wrong alignment.\n\nA hand grabs your arm. Paint on the knuckles - house paint, trim work. He pulls you back into the flow. \"Wrong way,\" he yells, grinning like this is the funniest thing he's seen all night. You're laughing too. The embarrassment burns off in the heat of the room and what's left underneath it is something simpler - the specific relief of being caught by someone who didn't have to catch you.\n\nSomething loosens in your chest. Not the embarrassment fading - something underneath it. You were holding a shape in your body like a template and the music just tore it out of your hands. You don't know the next move. You don't know any of the moves. For the first time tonight you are actually here - not performing the act of being here. Here, in your body and the moment. It is terrifying and it is a relief.\n\nYou and the paint-knuckled man are moving together now. Not because the frequency aligned you. Because he reached out and you accepted it.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": "DJ OOR reversed the pattern. Three people stumbled. Two hundred didn't. The construct notes which bodies are following memory and which are following the signal. The distinction matters.",
-      "temperature": "hot",
-      "awards_transcendental": "truth",
-      "awards_artifact": null,
-      "awards_tags": [
-        "truth"
-      ],
-      "choices": [
-        {
-          "text": "Submit to the flow of the dance floor",
-          "next": "w_010a_run2"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_010a_run2",
-      "subtitle": "INSIDE THE DANCE CIRCLE",
-      "text": "After a few minutes, the dance portal changes. As the circle fills with bright light, the crowd opens up. An arrow begins to spin and somehow you know exactly what comes next.\n\n\nThe arrow points at you and you don't hesitate. You can't explain why - the weight of two hundred pairs of eyes should freeze you in place but your body is already moving. Whatever the experience at the slide stripped out of you hasn't grown back yet.\n\nYou dance. Not carefully, not for anyone. You dance the way the paint-knuckle man dances - enormous, committed, free. The part of you that watches yourself doing things has gone quiet and what's left is just the doing.\n\nThe floor responds. The fractal layers beneath the concrete press up, warm, and something is being taken from you but you can feel what you're giving. Not presence. Something more specific - the willingness to be foolish, to be wrong in front of strangers and let them see you anyway.\n\nThe crowd holds you when you finish. Not physically - but the sound they make, the way the room breathes, it feels like being held. You step back into them and you don't know where you end and they begin and you don't need to.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "append": "The paint-knuckle man is at the edge of the ring. He nods. Not cheering this time. Just a nod. Like he knew you had it in you."
-        }
-      ],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "entered_circle"
-      ],
-      "choices": [
-        {
-          "text": "Stay in it.",
-          "next": "w_008f"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_loading_dock",
-      "subtitle": "THE LOADING DOCK",
-      "text": "Three people are leaning against the loading dock, laughing. The dock door is propped open with a cinder block. A deep, growling kind of bass leaks through the gap.\n\nYou walk over. The one with the beanie looks up. She doesn't say anything but she doesn't look away either. The tall one in the acid-wash flannel shifts his weight to make room without being asked. It's a small gesture. The kind of thing people do when they're among friends and curious about a stranger.\n\n\n\"Hey friend! Any chance you can light this cigarette?\"\n\nYou pull out the matchbook and hand it to the beanie girl. She opens the cover, strikes a match, and lights the cigarette with a cupped hand. After the ritual is complete, she glances at the cover of the matchbook. Her eyes glance across the surface. For just a moment, her left eyebrow raises, then drops.\n\n\"Huh,\" she says. She tosses it to the guy in the acid-wash flannel.\n\nHe catches the matchbook. Holds it at an angle under the sodium light. \"...hmm. Well that's something.\" He hands it to the woman next to him. She's standing slightly apart from the other two, still deciding how much of this group she belongs to.\n\nShe glances at it. Whatever she reads confirms something she'd already decided. After a quiet moment, she breaks the silence. \"You going in?\" She hands it back and steps toward the door.\n\n\"Have you seen this DJ before?\" the flannel guy asks. He doesn't wait for your answer. \"I follow them on instagram. Not much going on there but it's not like they've got a website or anything.\"\n\n\"They're doing something in Fargo,\" the beanie girl says. \"Some art thing.\"\n\n\"Where'd you hear that?\"\n\n\"Someone in line was talking about it.\"\n\nHe nods like this explains everything. Pockets his phone. The beanie girl stubs her cigarette on the dock and follows the others toward the door.\n\nThey don't wait for you but they don't close the door either. You follow. The matchbook is back in your pocket. You don't remember anyone handing it back.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "loading_dock"
-      ],
-      "choices": [
-        {
-          "text": "Go in through the side door.",
-          "next": "w_bartender_run3"
+            "id": "w_011_beauty",
+            "subtitle": "THE CLOSING RITUAL",
+            "text": "The closing starts and you feel it from behind the rack. Not in front, in the crowd, the way you felt it the first three times. Behind. Where the Builder stands. Where the sound is made.\n\nThe vocoded voice calls the crowd down and you watch it happen from the other side. Two hundred bodies descending. From here they don't look like a crowd. They look like a field. A harvest. You understand the word now. You understand what's being gathered and you understand that understanding doesn't stop it from gathering you too.\n\nThe Builder is watching the meters. Hands still. The system is doing what it was built to do. You are standing next to the person who built it and you are standing inside the thing that was built and these are not contradictory positions.\n\nThe bass descends. The portal contracts. Through the gaps in the concrete the light is brighter than you've ever seen it. Not amber anymore. White. The color before color, the frequency before frequency. The Builder's chamfer sings one last note. The heat sinks ring with it. Everything the Builder touched tonight is resonating at once and the sound is specific and impossible and it is already fading.\n\nStillness. The bass drops out. The silence is different from this side. From the floor it felt like an ending. From behind the rack it feels like a door closing gently. The room sealed. The work done. The light returned to wherever light goes.\n\nFog clears. Lights come up. The construct behind the decks looks small in the overhead light. Handmade. The Builder is already packing cables.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [
+                {
+                    "text": "You start packing too.",
+                    "next": "w_012_beauty"
+                }
+            ],
+            "next": null,
+            "terminal": false,
+            "outcome": null
         },
         {
-          "text": "\"Can I see that instagram page?\"",
-          "next": "w_loading_dock_insta"
+            "id": "w_012_beauty",
+            "subtitle": "THE DEPARTURE",
+            "text": "You help the Builder carry a speaker to the van. It's heavier than it looks. The parking lot is dark and cold and the sodium lights make everything orange.\n\nNeither of you says much. There isn't much to say. You hand the speaker up into the van and the Builder nods the way people nod when they've shared something that doesn't fit into language.\n\nYou walk to your car. The frequency is in your sternum. It has been there all night but it's different now. Not louder. Closer. Like it moved from the room into you and settled.\n\nYou sit in the driver's seat. Engine off. Hands on the wheel. The warehouse is dark behind you. The lot is empty except for the van and the amber glow leaking from the loading dock.\n\nYou will come back. Not because you need to. Because the sound is still running and you are one of the things it runs through and showing up is how you hold your end of it.\n\nYou start the car.",
+            "arrival_variants": [],
+            "conditional_text": [],
+            "oor_action": null,
+            "temperature": "hot",
+            "awards_transcendental": null,
+            "awards_artifact": null,
+            "awards_tags": [],
+            "choices": [],
+            "next": null,
+            "terminal": true,
+            "outcome": "harvest"
         }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_bartender_run3",
-      "subtitle": "THE TUNING",
-      "text": "The side door opens and you find yourself directly behind the bar. Not in front of it. Behind it, in the narrow corridor where the bottles live. The bartender is three feet away. She looks up when you step through. A flicker of recognition she doesn't try to explain.\n\nShe's already making something. She slides it across the bar and watches you take it. Brief eye contact. It feels like a handoff.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_flag": "chose_whiskey"
-          },
-          "append": "It's the whiskey sour. Your whiskey sour. The bitters first, the rosemary trimmed clean, the ratios exactly right. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
-        },
-        {
-          "condition": {
-            "has_flag": "chose_fog"
-          },
-          "append": "It's the fog drink. Amber, heavy, the moss floating on the surface. She made this for you once, and you chose it, and now she's made it again without being asked. The fact that she knew is not something you can explain."
-        },
-        {
-          "append": "You drink. Something settles. Not warmth. Clarity. Like blinking underwater and finding the water is clear. Same room, same crowd, but the blur you didn't know was there is gone. The woman near the speakers — you can see the tendons in her wrist as she moves. The paint-knuckle man is somewhere on the floor. You can hear him laughing from here. You step out from behind the bar."
-        },
-        {
-          "append": "The acid-wash flannel guy from the loading dock is already deep in it, dancing with his eyes closed. He looks like he's been doing this for years. He probably has."
-        }
-      ],
-      "oor_action": "The bartender's adjustments are not sanctioned by the construct. They are tolerated. The distinction is important to no one except the bartender.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "tuned"
-      ],
-      "choices": [
-        {
-          "text": "The room is different now. Look around.",
-          "next": "w_silence_run3"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_silence_run3",
-      "subtitle": "THE VOICE THAT NARRATES",
-      "text": "You peel away from the bar and walk through the crowd. The bartender's drink is making itself known. Not warming. Clearing. The voice in your head is talking, the one that narrates, the one that collects, the one that turns every experience into something you can describe later. But it's further away than usual. Pushed back by something the drink carried.\n\nYou see people. Not the way you usually see them, as details to collect, textures to catalog. You see them the way you see someone at a diner after a long day of driving in a town you'll never stop in again. Plainly. Honestly.\n\nThe fog clings to the shoulders of the man in the acid-wash flannel. The condensation on the plastic cups catches the orange light. A woman near the speakers is dancing with her whole body, chin up, completely in it. The paint-knuckle man is leaning against a pillar, watching the floor. Content.\n\nThen you notice the woman with the jacket.\n\nShe is standing near the edge of the floor. Jacket zipped. Arms crossed. Not watching the crowd. Watching the distance between herself and the crowd. Maintaining it. She has been here before. You can tell because her position is too precise to be an accident. She knows exactly how close she can stand without being pulled in. She's deep in thought, as if attempting to calculate her next move as an excuse to defer a decision.\n\nYour jaw tightens. You recognize the posture.\n\nInside your head, the voice says: note her and keep moving. The voice says: her behavior is interesting and you can think about why later. The voice has said this about every person you've ever noticed from a safe distance.\n\nBreaking from the command of the inner voice, you walk toward her. Notably, the voice retreats into silence. You're not sure who is responsible for noting this.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": "The aperture registers a flow. The construct did not initiate this one. The bartender set the conditions. The watcher made the choice. Causality is not the construct's concern. Yield is.",
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "silence"
-      ],
-      "choices": [
-        {
-          "text": "Approach her.",
-          "next": "w_jacket_woman"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_jacket_woman",
-      "subtitle": "THE CROSSING",
-      "text": "She looks at you. She wasn't expecting you. Nobody crosses the room to someone with their arms crossed and their jacket zipped. That's the whole point of wearing the armor.\n\n\"Hi,\" you say. Without the narrator, hi is all you've got.\n\nShe takes a second. \"Hi.\"\n\nYou stand next to her. Facing the floor, both watching. The paint-knuckle man is out there. The sneaker-star woman. Two hundred people moving for reasons they don't need to explain.\n\nYou don't try to get her to talk. You just stand there.\n\nAfter a while she lets out a breath.\n\n\"I kept my jacket on last time,\" she says. She's not looking at you. \"The whole night. Stood right here.\" She pushes her hair back. \"I almost didn't come back.\"\n\nYou wait.\n\n\"I keep waiting to feel like I'm actually here.\" She stops. \"It's exhausting.\"\n\nShe turns to look directly at you.\n\n\"You do it too.\"\n\nYour chest tightens. The narrator voice would process this — file it, frame it, find a way to describe the feeling of being seen. But the narrator is gone and you are standing in front of someone who just described you to yourself.\n\n\"I thought the voice was me,\" you say quietly, in the way you'd admit something to a stranger on a train you'll never say again.\n\nShe nods. The nod is enough.\n\nShe looks at her jacket. Her hands go to the zipper. She pauses. Then she unzips it. Folds it over her arm with the care of someone who knows exactly what she's removing. Her shoulders drop. The way a door settles when you stop leaning against it.\n\nYou let your hands drop to your sides. Open.\n\nSomething passes between you. Specific. Two people, one of whom chose to walk over, the other of whom chose to let them stay. Small. Human. The first thing all night that nothing in this building made happen.\n\nSomething below the floor shifts. A warmth.\n\nThe track changes. The bass drops into something heavy, simple, classic — the kind of beat that doesn't ask. She looks at the floor. For the first time all night she's not measuring the distance. She's deciding whether to close it.\n\nYou step off the edge. She follows.\n\nThe acid-wash flannel guy finds you first. He calls you over and shifts his posture to make room. The paint-knuckle man drifts over. The sneaker-star woman is already there, chin up, eyes closed. You are dancing wildly and specifically and with people whose names you don't know but whose faces you've been watching all night.\n\nFor one song you are not watching. You are in it. The jacket woman is dancing with her jacket balled up in one fist, swinging it like she's forgotten what it was for. Something is building that none of you are directing. The jacket woman makes a hand gesture and you make one back, and the paint-knuckle man catches both of you and for eight bars you are one animal with six arms and no plan. It breaks apart and reforms with different people and breaks apart again. Every configuration feels inevitable. Every face is someone you've known forever and will never see again.\n\n\nThe beat breaks down to a kick drum and a pulse and every body in the room locks into it. You can feel two hundred hearts sync. Not a metaphor - you can feel it, in the floor, in the air, in the space between your ribs. The song builds back up. The snares roll. The room compresses. Every exhale from every mouth becomes one exhale. And then the drop - and the room erupts into something else. You are not you. You are not the narrator or the watcher or the person who walked down an alley. You are the feeling of everyone in the room, together, when they collectively forget that they're made up of separate people. Eight seconds. Maybe twelve. The longest you've ever been alive.\n\n\nThe voice doesn't come back. There is nothing to describe. That's the whole thing.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": "Goodness yielded. Not extracted. Given. The construct notes the distinction. Voluntary yield has a resonance the construct has catalogued but cannot reproduce. It has occurred 7 times in 4,200 harvests.",
-      "temperature": "hot",
-      "awards_transcendental": "goodness",
-      "awards_artifact": null,
-      "awards_tags": [
-        "goodness",
-        "silence"
-      ],
-      "choices": [
-        {
-          "text": "The closing is starting. You can feel it.",
-          "next": "w_011"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_003_rings",
-      "subtitle": "THE RINGS",
-      "text": "You crouch at the edge of the nearest ring. Up close, it's just light on concrete — a projector somewhere in the rigging, probably. The line is sharp. Orange. Steady.\n\n\nYou reach out and touch the floor where the ring of light is projected. As expected, you just feel the concrete floor and see the projected light on top of your hand. \n\nAs you lean in closer, the rings beneath the surface come into focus again — the ones you can only see peripherally. As your eyes adjust, you can see that they're nested. Dozens of concentric circles descending into the floor like a well, blurring into a textured darkness. As your eyes adjust, you swear you can see something moving in there. Something large, pumping with a rhythmic pulse. As you try to concentrate on this shifting shape, details flash in and out of focus at rapidly changing depths. \n\n\nYou see images of flesh and tissue... a horrifically large pumping heart with veins like ancient plumbing embedded into the surface of a plane that stretches to infinity in all directions. As you continue to stare into this unholy aperture, you can feel a bubbling sense of vertigo. The longer you stare, the more familiar it feels, until you're certain you're going to be pulled directly into the void, subject to the whims of whatever is at the other end of that ancient force.\n\n\nSuddenly, you're snapped out of it. A hand touches your shoulder. The sneaker-star woman. She shakes her head — not unfriendly, more like a lifeguard waving you away from a rip current. You stand up. The rings flatten back to projections. Your knees ache from the concrete. \n\n\nIt's best to keep moving. You give a warm smile to the sneaker-star woman and pull away.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": "The aperture registered the proximity. The aperture always registers proximity. Most humans step around the rings without thinking much of it. This one knelt.",
-      "temperature": "warm",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "examined_rings"
-      ],
-      "choices": [
-        {
-          "text": "Head towards the DJ booth",
-          "next": "w_004"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_loading_dock_insta",
-      "subtitle": "THE ACCOUNT",
-      "text": "The acid-wash flannel guy pulls out his phone. It takes him a second — the screen is cracked, the brightness is all the way down. He tilts it toward you.\n\nThe account is @dj_oor. Profile picture is a circle of orange yarn on a black background. Bio is empty. One post.\n\nThe photo is the warehouse. This warehouse - you recognize the loading dock, the cinder block, the sodium light. But the angle is from across the lot, at night, and the building looks different. Smaller. The mural on the east wall isn't there. The parking lot is paved — it's gravel now, or was when you walked up. The timestamp says it was posted eleven months ago.\n\n\"Wanna hear something funny? That photo's older than the building,\" the beanie girl says. She's looking over your shoulder. \"My buddy works for the city. This lot was empty until February. It's probably a joke about gentrification or something.\"\n\nYou zoom in. In the loading dock doorway, barely visible in the sodium light, there's a shape. Orange and yellow. Fibrous. It could be a pile of insulation. It could be a lot of things.\n\nThree followers (@acid_flannel, @left_pocket_please, and @ashley_antlers). No comments. No likes. The single photo sitting there for almost a year, seen by almost no one, of a building that didn't exist yet, with something in the doorway that you've now seen from the inside.\n\nThe acid-wash flannel guy takes his phone back. \"Weird, right?\" He says it the way you'd say nice weather — a thing observed, not explained.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "cool",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "saw_instagram"
-      ],
-      "choices": [
-        {
-          "text": "Follow them inside.",
-          "next": "w_bartender_run3"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_the_whole_room",
-      "subtitle": "THE WHOLE ROOM",
-      "text": "\"Mind giving me a hand with something?\"\n\nHe holds out the iPad. You take it. The screen is warm. The interface is a web of curves and routing paths — signal chains you half-recognize from studio diagrams, except the topology doesn't resolve. Lines fork where they shouldn't. Buses route into buses. A waveform at the bottom climbs slowly toward a threshold line, blooming amber each time OOR adjusts the faders.\n\nMost of the fixtures are labeled in shorthand you can parse — LF_SUB_ARRAY, MID_HORN_STACK, MONITOR_SEND_3. Standard. Human. But one fixture in the upper left is different. The icon is corrupted — flickering between a waveform and something organic, something branching. The label reads:\n\nsooboont.dll\n\nYou touch it. The screen flickers. For a moment the routing diagram rearranges itself and you can see that everything — every signal chain, every bus, every send — routes through this one module. Not as a destination. As a carrier frequency. The way amplitude modulation works — the signal you hear is shaped by a wave you don't. Remove the carrier and there is nothing left to carry.\n\n\"Yeah,\" he says. He's seen you find it. \"That showed up on its own about three hours into the first build. Wasn't in the spec. I tried to remove it.\" He almost laughs. \"You can't remove it. It's not running on the iPad. It's running on...\" He gestures at the room. The speakers. The floor. The thing behind the decks. \"All of it. The whole system loads off that module. The power draw exceeds the circuits. The voice coils are running cold — I mean actually cold, like below-zero cold, in a room full of bodies. The bass extends past the theoretical limit of the drivers by about an octave and a half.\"\n\nHe takes the iPad back. Swipes to a different screen — a spectrogram. The low end is visible as a dense amber band. Below it, barely visible, a second band. Deeper. The color doesn't have a name.\n\n\"That frequency was there before I turned anything on. It's coming from underneath. The system doesn't generate it. The system...\" he searches for the word. \"Tunes to it. Resonates with it. Like a piano string that starts vibrating because someone in the next room hit the same note.\"\n\nHe looks at you the way someone looks at the only other person who has seen what they've seen.\n\n\"I've spent eleven years in rooms like this. Tuning sound for people who came to feel something. I thought I was making it happen. The EQ, the compression, the room treatment — I thought I was building the experience.\" He wipes his eyes with the back of his wrist again. \"I wasn't building it. I was building a door. And something on the other side has been knocking for a very long time.\"",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [
-        "saw_whole_system"
-      ],
-      "choices": [
-        {
-          "text": "You look at the room.",
-          "next": "w_the_frequency"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_the_frequency",
-      "subtitle": "THE FREQUENCY",
-      "text": "You look out at the room. Not the way you've been looking at it all night — collecting textures, cataloguing details, narrating the distance between yourself and everything else. You look at it the way you look at something when you've stopped trying to understand it and started letting it be what it is.\n\nThe construct behind the decks. Green tentacles resting on the mixer. The ear tilted toward the crowd, still listening. The mouth — a pool noodle, the teeth packing foam, the surface crocheted yarn hot-glued and matted. Terrifying and handmade. Ancient and ridiculous. A thing that has no business existing in the material world, operating equipment it shouldn't be able to operate, harvesting something from two hundred bodies that the bodies didn't know they were carrying. It is the most alien thing you have ever seen and someone built its casing out of craft supplies.\n\nThe antlered woman moves near the edge of the floor with her rod. The bartender wipes the same spot on the bar. They have been doing this work since before this building existed. They will do it again after you are gone. And the crowd — the crowd is not two hundred people anymore. From here, behind the rack, next to the person who built the instrument, you can see what they are. Every body a string. Every movement a vibration. Every distance between one shoulder and the next a tuned interval. Some have been drawn back by a hum in their sternum that wouldn't fade. Some are here for the first time. It doesn't matter. The light inside them is the same light.\n\nYou are holding the iPad. The spectrogram is still running. The amber band and the nameless band beneath it.\n\nAnd you can feel it. Not the bass — you've felt the bass all night. Something underneath the bass. The thing the bass is tuned to. The thing that was here before the building, before the city, before the concrete, before the ground was ground. A vibration that has been running since the first bodies moved together around the first fire and felt something pass between them that none of them had a word for. It didn't start with humans. Humans are just what it sounds like in this octave. In other octaves it sounds like tide pools and root systems and the slow grinding of tectonic plates and the specific silence of deep space where hydrogen clouds collapse into stars that will burn for ten billion years and never know they're beautiful. Somewhere, someone is singing the world into existence. Somewhere, the world is forgetting itself because the singing stopped. Both of these are always happening. Both of these are happening now.\n\nThis will continue after you are gone. After everyone in this room is gone. After the building, the city, the species. It will continue because it is not a conversation between beings. It is a property of matter when matter is arranged in patterns complex enough to notice itself. The universe wanted to become many. It became many. And the many look back at what they came from and the looking generates something — and the something has to go somewhere — and the somewhere is through the floor of a warehouse in a city you didn't mean to visit on a night you didn't plan to be out.\n\nYou are tiny. A brief arrangement of atoms that learned to collect textures and narrate the distance between itself and everything else. You will be gone in a blink. The frequency in your sternum will outlast you by eons.\n\nAnd none of that makes this less. A hand on your shoulder when you went the wrong way. A breath released when someone stopped holding. The Builder's tears. Every fire circle and cathedral and kitchen after a funeral. The smallness is the point. The harvest works because you end. The frequency resonates because you are brief. The whole system — ancient, terrifying, beautiful, incomprehensible — runs on the fact that you are here and you will not always be here and while you are here you can feel this and feeling it is enough.\n\nThe Builder takes the iPad back. The screen goes dark. He looks at the room. You look at the room.\n\n\"Best night of my life,\" he says. \"Every time.\"\n\nThe amber light pulses once and fades.",
-      "arrival_variants": [],
-      "conditional_text": [
-        {
-          "condition": {
-            "has_tag": "truth"
-          },
-          "append": "The narrator doesn't come back for this. There is nothing to narrate. There is just a room full of people who came here for reasons they can't explain, generating something they can't name, feeding it to something they can't see. And you are one of them. And that is not a reduction. That is the whole thing."
-        }
-      ],
-      "oor_action": "The construct registers the observer's integration. Not as data. As completion. The system was built to be witnessed. The witnessing is the final component. The yield from the witness exceeds the yield from the crowd by a factor the construct's metrics were not designed to measure.",
-      "temperature": "hot",
-      "awards_transcendental": "beauty",
-      "awards_artifact": null,
-      "awards_tags": [
-        "beauty"
-      ],
-      "choices": [
-        {
-          "text": "The closing is starting. You can feel it.",
-          "next": "w_011_beauty"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_011_beauty",
-      "subtitle": "THE CLOSING RITUAL",
-      "text": "The closing starts and you feel it from behind the rack. Not in front, in the crowd, the way you felt it the first three times. Behind. Where the Builder stands. Where the sound is made.\n\nThe vocoded voice calls the crowd down and you watch it happen from the other side. Two hundred bodies descending. From here they don't look like a crowd. They look like a field. A harvest. You understand the word now. You understand what's being gathered and you understand that understanding doesn't stop it from gathering you too.\n\nThe Builder is watching the meters. Hands still. The system is doing what it was built to do. You are standing next to the person who built it and you are standing inside the thing that was built and these are not contradictory positions.\n\nThe bass descends. The portal contracts. Through the gaps in the concrete the light is brighter than you've ever seen it. Not amber anymore. White. The color before color, the frequency before frequency. The Builder's chamfer sings one last note. The heat sinks ring with it. Everything the Builder touched tonight is resonating at once and the sound is specific and impossible and it is already fading.\n\nStillness. The bass drops out. The silence is different from this side. From the floor it felt like an ending. From behind the rack it feels like a door closing gently. The room sealed. The work done. The light returned to wherever light goes.\n\nFog clears. Lights come up. The construct behind the decks looks small in the overhead light. Handmade. The Builder is already packing cables.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [
-        {
-          "text": "You start packing too.",
-          "next": "w_012_beauty"
-        }
-      ],
-      "next": null,
-      "terminal": false,
-      "outcome": null
-    },
-    {
-      "id": "w_012_beauty",
-      "subtitle": "THE DEPARTURE",
-      "text": "You help the Builder carry a speaker to the van. It's heavier than it looks. The parking lot is dark and cold and the sodium lights make everything orange.\n\nNeither of you says much. There isn't much to say. You hand the speaker up into the van and the Builder nods the way people nod when they've shared something that doesn't fit into language.\n\nYou walk to your car. The frequency is in your sternum. It has been there all night but it's different now. Not louder. Closer. Like it moved from the room into you and settled.\n\nYou sit in the driver's seat. Engine off. Hands on the wheel. The warehouse is dark behind you. The lot is empty except for the van and the amber glow leaking from the loading dock.\n\nYou will come back. Not because you need to. Because the sound is still running and you are one of the things it runs through and showing up is how you hold your end of it.\n\nYou start the car.",
-      "arrival_variants": [],
-      "conditional_text": [],
-      "oor_action": null,
-      "temperature": "hot",
-      "awards_transcendental": null,
-      "awards_artifact": null,
-      "awards_tags": [],
-      "choices": [],
-      "next": null,
-      "terminal": true,
-      "outcome": "harvest"
-    }
-  ]
+    ]
 }
