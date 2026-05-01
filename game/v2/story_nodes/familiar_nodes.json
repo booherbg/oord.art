@@ -340,7 +340,7 @@
       "next": "f_011",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE PAIRING",
+      "subtitle": "THE TUNING RITUAL",
       "rod_readout": "rod: harmonic lock. truth-unity arrangement: self-sustaining. instrument withdrawn."
     },
     {
@@ -364,7 +364,7 @@
       "next": "f_011",
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE PAIRINGS",
+      "subtitle": "THE TUNING RITUAL",
       "rod_readout": "rod: sweep complete. multiple arrangements registered. yield curve nominal."
     },
     {
@@ -408,7 +408,7 @@
     },
     {
       "id": "f_012",
-      "text": "The ritual completes the way a chemical reaction completes, not with a signal but with a settling.\n\nThe pairs have merged into clusters. The clusters have merged into the field. The room is no longer a collection of individuals. The transcendentals are dissolved into the space between them, available, flowing.\n\nYou fold your antlers down. You put the rod back in your coat. It is still vibrating faintly. It will not fully stop until the portal closes.\n\nYou step back. Your partner returns to the bar. She begins pouring drinks again. The humans accept them. The seam holds.",
+      "text": "The ritual completes the way a chemical reaction completes, not with a signal but with a settling.\n\nThe small groups have merged into clusters. The clusters have merged into the field. The room is no longer a collection of individuals. The transcendentals are dissolved into the space between them, available, flowing.\n\nYou fold your antlers down. You put the rod back in your coat. It is still vibrating faintly. It will not fully stop until the portal closes.\n\nYou step back. Your partner returns to the bar. She begins pouring drinks again. The humans accept them. The seam holds.",
       "arrival_variants": [
         {
           "requires": {
@@ -473,7 +473,7 @@
           "condition": {
             "has_tag": "lingers_on_watcher"
           },
-          "append": "You watch the watcher more closely than you watched the others. If they enter: the flow through them is something the rod cannot categorize, not quite Truth, not quite Unity, something made of attention itself, and the aperture accepts it anyway. If they stay in the ring: the rod notes a deposit that chose to remain unmined. You are not sure why noting this feels different from noting the others."
+          "append": "You watch the watcher more closely than you watched the others. If they enter: the flow through them is something the rod cannot categorize, not quite Truth, not quite Unity, something made of attention itself, and the aperture accepts it anyway. If they stay in the circle: the rod notes a deposit that chose to remain unmined. You are not sure why noting this feels different from noting the others."
         }
       ],
       "oor_action": null,
@@ -670,7 +670,7 @@
           "condition": {
             "has_tag": "watches_person"
           },
-          "append": "Something in the - is it the rod? Is the rod still — something responds. Not a deposit. A residue. The watcher. The person. The hand that held another hand. You noted them. The note persists. The note will not - the body is folding and the note is still —"
+          "append": "Something in the - is it the rod? Is the rod still — something responds. Not a deposit. A residue. The watcher. The person. The face that kept returning. You noted them. The note persists. The note will not - the body is folding and the note is still —"
         },
         {
           "condition": {

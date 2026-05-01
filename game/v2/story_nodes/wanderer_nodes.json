@@ -11,7 +11,7 @@
       "arrival_variants": null,
       "conditional_text": [
         {
-          "append": "Other people are walking the same direction. You see a woman in a green coat moving quickly. A man with his head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
+          "append": "Other people are walking the same direction. You see someone in a green coat moving quickly. A person with their head tilted, tracking the same pressure as you. Several people have a curious look on their face and you get the impression that, like you, this wasn't their original destination."
         }
       ],
       "oor_action": null,
@@ -35,7 +35,7 @@
     },
     {
       "id": "w_002",
-      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end — a warehouse, something with the bones of industrial purpose. The bass is coming from inside. Not exactly louder out here. Deeper. Like it found a lower register inside your body.\n\nThe door is open. No line. The woman in the green coat is ahead of you, moving toward the entrance.\n\nThere’s a man in a chair off to the side, maybe fifteen feet from the entrance. SECURITY in block letters on his jacket. He might be on break. He might be watching the door. From here it’s difficult to say which.",
+      "text": "The alley opens onto a gravel lot. Orange light bleeds from the seams of a building at the far end — a warehouse, something with the bones of industrial purpose. The bass is coming from inside. Not exactly louder out here. Deeper. Like it found a lower register inside your body.\n\nThe door is open. No line. The person in the green coat is ahead of you, moving toward the entrance.\n\nThere’s a man in a chair off to the side, maybe fifteen feet from the entrance. SECURITY in block letters on his jacket. He might be on break. He might be watching the door. From here it’s difficult to say which.",
       "arrival_variants": [
         {
           "text": "You've arrived at the source of the Sound. When did you start seeking it? Have you been following this Sound for your entire life? You can't help but feel like you've been here before.",
@@ -93,7 +93,7 @@
     {
       "id": "w_002b",
       "subtitle": "THE WAREHOUSE",
-      "text": "You walk toward the entrance. The man in the chair is closer than he looked from the lot. He’s looking at you, or at something behind you. It's hard to say.\n\nThe woman in the green coat doesn’t stop. She walks straight through the door and he watches her go and doesn’t move. You wait for something to happen. Nothing does.",
+      "text": "You walk toward the entrance. The man in the chair is closer than he looked from the lot. He’s looking at you, or at something behind you. It's hard to say.\n\nThe person in the green coat doesn’t stop. They walk straight through the door and he watches them go and doesn’t move. You wait for something to happen. Nothing does.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
@@ -507,7 +507,7 @@
       "next": null,
       "terminal": false,
       "outcome": null,
-      "subtitle": "THE PAIRING RITUAL"
+      "subtitle": "THE TUNING RITUAL"
     },
     {
       "id": "w_009",
@@ -586,20 +586,6 @@
       "arrival_variants": [
         {
           "requires": {
-            "has_tag": "saw_builder"
-          },
-          "text": "Behind the rack, the Builder's hands are still. You watched those hands tune the sound that carried you into the circle. The closing finds you still feeling it.",
-          "default": false
-        },
-        {
-          "requires": {
-            "has_tag": "beauty"
-          },
-          "text": "Behind the rack, the Builder is watching their system close the way a surgeon watches the last suture. You know the sound you're hearing. You know someone made it.",
-          "default": false
-        },
-        {
-          "requires": {
             "has_tag": "truth"
           },
           "text": "The voice is still quiet. The closing finds you in the silence - not empty, not waiting. Present.",
@@ -649,7 +635,7 @@
           "condition": {
             "has_tag": "saw_oor"
           },
-          "append": "You look toward the DJ booth, remembering the experience you had earlier when bearing witness on the DJ-in-the-mix. The fog has cleared and the thing behind the mixer looks different in the overhead light. Smaller. The surface that seemed alive in the dark is obviously handmade - frilly crochet yarn, hot-glued and matted. The mouth is a pool noodle. The teeth are packing foam. The ear is shipping foam, flesh-colored, bent into a curve - the kind you'd find in a box of fresh peaches. You can't believe this is what terrified you. You can't believe it's the same thing."
+          "append": "You look toward the DJ booth, remembering the experience you had earlier when bearing witness to the DJ-in-the-mix. The fog has cleared and the thing behind the mixer looks different in the overhead light. Smaller. The surface that seemed alive in the dark is obviously handmade - frilly crochet yarn, hot-glued and matted. The mouth is a pool noodle. The teeth are packing foam. The ear is shipping foam, flesh-colored, bent into a curve - the kind you'd find in a box of fresh peaches. You can't believe this is what terrified you. You can't believe it's the same thing."
         },
         {
           "condition": {
@@ -697,36 +683,6 @@
         }
       ],
       "conditional_text": [
-        {
-          "condition": {
-            "has_all_tags": [
-              "beauty",
-              "came_for_stillness"
-            ]
-          },
-          "append": "You put your hand in your coat pocket and find a strand of yarn. Orange. Stiff — holding its shape in the cold, frozen in the configuration of the last hand that held it. You close your fist. The yarn softens. Warm. The frequency in your chest pulses once. You open your hand and the yarn stiffens instantly, locking into the shape of your grip. Frost traces the fibers — geometric, fern-like, the same pattern you saw crystallize on the speaker cabinet. The hands behind the rack. The room they built. You close your hand again. Warm. You will come back.",
-          "awards_artifact": "yarn_knot",
-          "awards_transcendental": "unity"
-        },
-        {
-          "condition": {
-            "has_all_tags": [
-              "beauty",
-              "came_for_drink"
-            ]
-          },
-          "append": "You put your hand in your coat pocket and find a strand of yarn. Yellow. Stiff — holding its shape in the cold, frozen in the configuration of the last hand that held it. You close your fist. The yarn softens. Warm. It smells faintly like the drink — sweet, slightly wrong. You open your hand and the yarn stiffens instantly, locking into the shape of your grip. Frost traces the fibers — geometric, fern-like, the same pattern you saw crystallize on the speaker cabinet. The hands behind the rack. The room they built. You close your hand again. Warm. The frequency is still in your chest. It feels like it's waiting.",
-          "awards_artifact": "yarn_knot",
-          "awards_transcendental": "unity"
-        },
-        {
-          "condition": {
-            "has_tag": "beauty"
-          },
-          "append": "You put your hand in your coat pocket. The matchbook. The polaroid. The yarn. Your fingers. Nothing else.\n\nBut there's a sound. Not from the street — from your sternum. The hum. Still running. Quieter now, barely there, but there the way your pulse is there. You heard it in the room. You heard it underneath the bass and beneath the flickering amber and behind their tears. You thought it came from the speakers. It didn't. It was in you before you walked in. The room just got loud enough to hear it.\n\nIt was under the yarn when you pulled it from the knot. Under the matchbook when the bartender slid it across the bar. Under the polaroid as the faces developed. Under the antler when it was still warm. Every object you carried tonight was vibrating with it. You couldn't hear it because you were listening too hard.\n\nThree weeks from now you'll be washing dishes and the water will hit the pan at a certain angle and the kitchen will go quiet — not silent, quiet, the way the Upanishads describe the fourth state, the silence after the syllable, the consciousness underneath waking and dreaming and sleep — and there it is. The hum. You'll stand there with your hands in the water until it passes.\n\nSeven months. A train platform. Someone's headphones bleeding a bassline two octaves too low and your sternum answers before your mind does. Two seconds of it. The original sound. The one the mystics called the word that spoke the world into being, the one the ancestors sang into the ground so the land would remember itself. It finds you and leaves before you can name it. It has always worked this way.\n\nYears. You won't remember the name of the venue. You won't remember the city. But you'll be sitting somewhere — a porch, a waiting room, the edge of a bed at 3 AM — and the thoughts will thin out the way they sometimes do, and in the gap between one thought and the next, underneath, the hum. Still running. Still not yours. A vibration that was there before there were ears to hear it, running through hydrogen clouds and root systems and the slow grinding of tectonic plates and two people sitting in a room with nothing left to say and no need to leave. The light was whole once. It broke so it could fit inside things — inside calcium, inside water, inside the specific arrangement of matter that calls itself you. You are one of the pieces. You have always been one of the pieces.\n\nYou won't be able to hold it. You were never able to hold it. That's the mechanism — a bell rings because it's hollow. Fill it with anything solid and it deadens. The emptiness is not a flaw in the bell. The emptiness is where the sound lives. You are hollow in the same way — shaped by everything that passed through you tonight, and the shape that's left is the exact shape this sound needs to resonate. It runs on the fact that you end. It resonates because you are brief. And in those moments — the kitchen, the platform, the 3 AM dark — when the noise drops and the hum finds you again, you'll know what you are. Not the name, not the story, not the person washing dishes or waiting for a train. The other thing. The brief, warm, listening thing that the sound hasn't finished passing through.\n\nA shard of the original light. Carried as sound. Held the way you hold a breath — gently, knowing it's already leaving.",
-          "awards_artifact": "shard_of_light",
-          "awards_transcendental": "beauty"
-        },
         {
           "condition": {
             "has_tag": "truth"
@@ -784,7 +740,7 @@
           "requires": {
             "has_tag": "retreating"
           },
-          "text": "You saw enough from the edge. The antlers and the rod and the pairing - none of it made sense. You're choosing the version of tonight where it doesn't have to.",
+          "text": "You saw enough from the edge. The antlers and the rod and the tuning - none of it made sense. You're choosing the version of tonight where it doesn't have to.",
           "default": false
         },
         {
@@ -849,7 +805,7 @@
     {
       "id": "w_bouncer_run2",
       "subtitle": "THE BOUNCER",
-      "text": "You walk with intention toward the door.\n\nYou're maybe eight feet out when he says \"Hey.\"\n\nJust that. You stop. He's standing now — you didn't see him get up. He steps between you and the entrance.\n\n\"There's a cover tonight,\" he says. \"Cash or equivalent.\"\n\nYou don't have cash. Your hand goes to your pocket — a nervous tick to buy some time — but your fingers close around something warm. A small clump of yarn you're not sure you've seen before. You pull it out.\n\nHe examines the yarn. After a moment of careful study, he pulls a small pair of snips from his jacket pocket. He clips a small piece from the end of the yarn and pockets it. He returns the yarn to you and steps aside with a nod.",
+      "text": "You walk with intention toward the door.\n\nYou're maybe eight feet out when he says \"Hey.\"\n\nJust that. You stop. He's standing now — you didn't see him get up. He steps between you and the entrance.\n\n\"There's a cover tonight,\" he says. \"Cash or equivalent.\"\n\nYou don't have cash. Your hand goes to your pocket — a nervous tic to buy some time — but your fingers close around something warm. A small clump of yarn you're not sure you've seen before. You pull it out.\n\nHe examines the yarn. After a moment of careful study, he pulls a small pair of snips from his jacket pocket. He clips a small piece from the end of the yarn and pockets it. He returns the yarn to you and steps aside with a nod.",
       "arrival_variants": [],
       "conditional_text": [],
       "oor_action": null,
