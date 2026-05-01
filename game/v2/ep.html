@@ -741,17 +741,22 @@ function compose_church() {
   const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 200; acidFilt.Q.value = p.acidQ;
   const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
   const acidSub = ctx.createGain(); acidSub.gain.value = 0;
-  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+  const acidPan = ctx.createStereoPanner();
+  const acidPanLfo = ctx.createOscillator(); acidPanLfo.type = 'sine'; acidPanLfo.frequency.value = 0.04;
+  const acidPanDepth = ctx.createGain(); acidPanDepth.gain.value = 0.6;
+  acidPanLfo.connect(acidPanDepth); acidPanDepth.connect(acidPan.pan);
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidPan); acidPan.connect(acidSub); acidSub.connect(master);
 
   // Acid delay
   const acidDel = ctx.createDelay(1); acidDel.delayTime.value = beat * 0.75;
   const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.3;
   const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
   const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0;
-  acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
+  acidPan.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
   acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
 
   acidOsc.start(ctx.currentTime + 0.3);
+  acidPanLfo.start(ctx.currentTime + 0.3);
 
   // Mutation: 1 note drifts every 24 bars — pattern changes without you catching it
   let currentPat = p.acidPattern.map(s => ({...s}));
@@ -771,11 +776,11 @@ function compose_church() {
       }
     }
 
-    // Acid submix fade in (starts bar 12, ramps over 8 bars)
+    // Acid submix fade in (starts bar 8, ramps over 8 bars)
     if (barNum === 0 && stepInBar === 0) {
       acidSub.gain.setValueAtTime(0, t);
     }
-    if (barNum === 12 && stepInBar === 0) {
+    if (barNum === 9 && stepInBar === 0) {
       acidSub.gain.setValueAtTime(0.001, t);
       acidSub.gain.linearRampToValueAtTime(0.4, t + 8 * bar);
       acidDelWet.gain.setValueAtTime(0.001, t);
@@ -799,8 +804,8 @@ function compose_church() {
       if (vol > 0.005) schedHat(t, vol, nb);
     }
 
-    // Acid from bar 12
-    if (barNum >= 12) {
+    // Acid from bar 9
+    if (barNum >= 9) {
       const pat = currentPat[stepInBar];
       const progress = barNum / totalBars;
 
@@ -834,7 +839,7 @@ function compose_church() {
       }
 
       // Pattern mutation: 1 note drifts every 24 bars
-      if (stepInBar === 0 && barNum > 12 && barNum % 24 === 0) {
+      if (stepInBar === 0 && barNum > 9 && barNum % 24 === 0) {
         const idx = Math.floor(Math.random() * 16);
         if (currentPat[idx].note) {
           const nearby = p.acidNotes.filter(n => Math.abs(n - currentPat[idx].note) <= 5);
@@ -859,7 +864,7 @@ function compose_church() {
     }
   }, totalBars);
 
-  return () => { try { acidOsc.stop(); } catch(e){} };
+  return () => { [acidOsc, acidPanLfo].forEach(o => { try { o.stop(); } catch(e){} }); };
 }
 
 // ── A2: THE HARVEST (Deep Offering) ────────────────────
@@ -914,13 +919,21 @@ function compose_harvest() {
   const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 120; acidFilt.Q.value = p.acidQ;
   const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
   const acidSub = ctx.createGain(); acidSub.gain.value = 0;
-  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+  const acidPan = ctx.createStereoPanner();
+  const acidPanLfo = ctx.createOscillator(); acidPanLfo.type = 'sine'; acidPanLfo.frequency.value = 0.033;
+  const acidPanDepth = ctx.createGain(); acidPanDepth.gain.value = 0.5;
+  acidPanLfo.connect(acidPanDepth); acidPanDepth.connect(acidPan.pan);
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidPan); acidPan.connect(acidSub); acidSub.connect(master);
   const acidDel = ctx.createDelay(1); acidDel.delayTime.value = beat * 0.75;
   const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.3;
   const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
   const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0;
-  acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
+  acidPan.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
   acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
+
+  // Melody stereo — dry signal slightly right, delay tails drift left
+  const melPan = ctx.createStereoPanner(); melPan.pan.value = 0.15;
+  const melDelPan = ctx.createStereoPanner(); melDelPan.pan.value = -0.2;
 
   // Bass
   const bassOsc = ctx.createOscillator(); bassOsc.type = 'sawtooth';
@@ -938,12 +951,12 @@ function compose_harvest() {
   const melDel = ctx.createDelay(2); melDel.delayTime.value = beat * 1.5;
   const melFb = ctx.createGain(); melFb.gain.value = 0.3;
   const melDelFilt = ctx.createBiquadFilter(); melDelFilt.type = 'lowpass'; melDelFilt.frequency.value = 2000;
-  melDel.connect(melDelFilt); melDelFilt.connect(melFb); melFb.connect(melDel); melDel.connect(master);
+  melDel.connect(melDelFilt); melDelFilt.connect(melFb); melFb.connect(melDel); melDel.connect(melDelPan); melDelPan.connect(master);
   const melSub = ctx.createGain(); melSub.gain.value = 0;
-  melSub.connect(master); melSub.connect(melDel); melSub.connect(rvbSend);
+  melSub.connect(melPan); melPan.connect(master); melSub.connect(melDel); melSub.connect(rvbSend);
 
   const t0 = ctx.currentTime + 0.3;
-  [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
+  [chamOsc, chamOsc2, chamLfo, acidOsc, acidPanLfo, bassOsc, bassOct, subOsc].forEach(o => o.start(t0));
 
   const PH = {
     CHAM: 0, PULSE: 1, BASS: 17,
@@ -1256,7 +1269,7 @@ function compose_harvest() {
     }
   }, totalBars);
 
-  return () => { [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
+  return () => { [chamOsc, chamOsc2, chamLfo, acidOsc, acidPanLfo, bassOsc, bassOct, subOsc].forEach(o => { try { o.stop(); } catch(e){} }); };
 }
 
 // ── A3: GOLDEN HOUR ────────────────────────────────────
@@ -1403,6 +1416,8 @@ function compose_golden() {
           const noteDur = beat * (1.0 + arpProg * 1.2);
           const freq = mtf(baseMidi);
 
+          const panVal = rand(-0.55, 0.55);
+          const ap = ctx.createStereoPanner(); ap.pan.value = panVal;
           const o = ctx.createOscillator(); o.type = 'sine';
           o.frequency.value = freq; o.detune.value = rand(-5, 5);
           const g = ctx.createGain();
@@ -1410,11 +1425,12 @@ function compose_golden() {
           g.gain.linearRampToValueAtTime(arpVol, t + 0.04);
           g.gain.setValueAtTime(arpVol * 0.6, t + noteDur * 0.5);
           g.gain.exponentialRampToValueAtTime(0.001, t + noteDur);
-          o.connect(g); g.connect(rvbSend); g.connect(delSend);
+          o.connect(g); g.connect(ap); ap.connect(rvbSend); ap.connect(delSend);
           o.start(t); o.stop(t + noteDur + 0.1);
-          autoClean(o, o, g);
+          autoClean(o, o, g, ap);
 
           if (arpProg > 0.4 && Math.random() < (arpProg - 0.4) * 0.85) {
+            const ap2 = ctx.createStereoPanner(); ap2.pan.value = -panVal;
             const o2 = ctx.createOscillator(); o2.type = 'sine';
             o2.frequency.value = freq * 2; o2.detune.value = rand(-8, 8);
             const g2 = ctx.createGain();
@@ -1423,9 +1439,9 @@ function compose_golden() {
             g2.gain.setValueAtTime(0, t + stagger);
             g2.gain.linearRampToValueAtTime(v2, t + stagger + 0.04);
             g2.gain.exponentialRampToValueAtTime(0.001, t + noteDur);
-            o2.connect(g2); g2.connect(rvbSend);
+            o2.connect(g2); g2.connect(ap2); ap2.connect(rvbSend);
             o2.start(t); o2.stop(t + noteDur + 0.1);
-            autoClean(o2, o2, g2);
+            autoClean(o2, o2, g2, ap2);
           }
         }
       }
@@ -1485,12 +1501,16 @@ function compose_tikkun() {
   const acidFilt = ctx.createBiquadFilter(); acidFilt.type = 'lowpass'; acidFilt.frequency.value = 600; acidFilt.Q.value = p.acidQ;
   const acidNoteG = ctx.createGain(); acidNoteG.gain.value = 0;
   const acidSub = ctx.createGain(); acidSub.gain.value = 0;
-  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidSub); acidSub.connect(master);
+  const acidPan = ctx.createStereoPanner();
+  const acidPanLfo = ctx.createOscillator(); acidPanLfo.type = 'sine'; acidPanLfo.frequency.value = 0.05;
+  const acidPanDepth = ctx.createGain(); acidPanDepth.gain.value = 0.5;
+  acidPanLfo.connect(acidPanDepth); acidPanDepth.connect(acidPan.pan);
+  acidOsc.connect(acidFilt); acidFilt.connect(acidNoteG); acidNoteG.connect(acidPan); acidPan.connect(acidSub); acidSub.connect(master);
   const acidDel = ctx.createDelay(2); acidDel.delayTime.value = beat * 0.75;
   const acidDelFb = ctx.createGain(); acidDelFb.gain.value = 0.32;
   const acidDelLpf = ctx.createBiquadFilter(); acidDelLpf.type = 'lowpass'; acidDelLpf.frequency.value = 1500;
   const acidDelWet = ctx.createGain(); acidDelWet.gain.value = 0;
-  acidNoteG.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
+  acidPan.connect(acidDel); acidDel.connect(acidDelLpf); acidDelLpf.connect(acidDelFb); acidDelFb.connect(acidDel);
   acidDelLpf.connect(acidDelWet); acidDelWet.connect(master);
 
   // ── Bass ─────────────────────────────────────────
@@ -1533,7 +1553,7 @@ function compose_tikkun() {
   }
 
   const t0 = ctx.currentTime + 0.3;
-  [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc, ...resOscs].forEach(o => o.start(t0));
+  [chamOsc, chamOsc2, chamLfo, acidOsc, acidPanLfo, bassOsc, bassOct, subOsc, ...resOscs].forEach(o => o.start(t0));
 
   // ── Phase boundaries ─────────────────────────────
   const PH = {
@@ -1627,10 +1647,11 @@ function compose_tikkun() {
     g.gain.exponentialRampToValueAtTime(vol * 0.3, t + 0.12);
     g.gain.setValueAtTime(vol * 0.25, t + Math.max(0.13, dur - 0.06));
     g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    carrier.connect(g); g.connect(pluckSub);
+    const pp = ctx.createStereoPanner(); pp.pan.value = rand(-0.35, 0.35);
+    carrier.connect(g); g.connect(pp); pp.connect(pluckSub);
     mod.start(t); carrier.start(t);
     mod.stop(t + dur + 0.05); carrier.stop(t + dur + 0.05);
-    autoClean(carrier, carrier, mod, modG, g);
+    autoClean(carrier, carrier, mod, modG, g, pp);
   }
 
   // Shared Goa acid step scheduler
@@ -2252,7 +2273,7 @@ function compose_tikkun() {
   }, totalBars);
 
   return () => {
-    [chamOsc, chamOsc2, chamLfo, acidOsc, bassOsc, bassOct, subOsc, ...resOscs].forEach(o => {
+    [chamOsc, chamOsc2, chamLfo, acidOsc, acidPanLfo, bassOsc, bassOct, subOsc, ...resOscs].forEach(o => {
       try { o.stop(); } catch(e){}
     });
   };
@@ -2499,9 +2520,10 @@ function compose_drift() {
         const g = ctx.createGain();
         g.gain.setValueAtTime(vol, hitT);
         g.gain.exponentialRampToValueAtTime(0.001, hitT + 0.035);
-        src.connect(bp); bp.connect(g); g.connect(master); g.connect(rimDel);
+        const rp = ctx.createStereoPanner(); rp.pan.value = rand(-0.45, 0.45);
+        src.connect(bp); bp.connect(g); g.connect(rp); rp.connect(master); rp.connect(rimDel);
         src.start(hitT); src.stop(hitT + 0.05);
-        autoClean(src, src, bp, g);
+        autoClean(src, src, bp, g, rp);
       }
     }
 
@@ -2515,15 +2537,17 @@ function compose_drift() {
           if (chordVoicing >= 1) notes.push(chordRoot + 10);
           if (chordVoicing >= 2 && Math.random() < 0.35) notes.push(chordRoot + 14);
           const vol = (isPeak ? 0.08 : hasShapes ? 0.075 : 0.06) * fade;
+          const panVal = rand(-0.35, 0.35);
           for (const midi of notes) {
             const o = ctx.createOscillator(); o.type = 'sine';
             o.frequency.value = mtf(midi); o.detune.value = rand(-8, 8);
+            const sp = ctx.createStereoPanner(); sp.pan.value = panVal;
             const g = ctx.createGain();
             g.gain.setValueAtTime(vol, stabT);
             g.gain.exponentialRampToValueAtTime(0.001, stabT + 0.12);
-            o.connect(g); g.connect(master); g.connect(dubSend); g.connect(rvbSend);
+            o.connect(g); g.connect(sp); sp.connect(master); sp.connect(dubSend); sp.connect(rvbSend);
             o.start(stabT); o.stop(stabT + 0.18);
-            autoClean(o, o, g);
+            autoClean(o, o, g, sp);
           }
           if (Math.random() < 0.25) chordRoot = root + 12 + pick([0, 3, 5, 7, 10]);
         }
