@@ -1549,7 +1549,8 @@ function compose_tikkun() {
   const pluckDelFilt = ctx.createBiquadFilter(); pluckDelFilt.type = 'lowpass'; pluckDelFilt.frequency.value = 1800;
   pluckDel.connect(pluckDelFilt); pluckDelFilt.connect(pluckDelFb); pluckDelFb.connect(pluckDel); pluckDel.connect(master);
   const pluckSub = ctx.createGain(); pluckSub.gain.value = 0;
-  pluckSub.connect(master); pluckSub.connect(pluckDel); pluckSub.connect(rvbSend);
+  const pluckRvbSend = ctx.createGain(); pluckRvbSend.gain.value = 0.15;
+  pluckSub.connect(master); pluckSub.connect(pluckDel); pluckSub.connect(pluckRvbSend); pluckRvbSend.connect(rvbSend);
 
   // ── Resonator bank (the singing room) ────────────
   const resHarmonics = [CHAMFER_HZ, CHAMFER_HZ * 2, CHAMFER_HZ * 3, CHAMFER_HZ * 4, CHAMFER_HZ * 5];
@@ -1797,6 +1798,21 @@ function compose_tikkun() {
           if (midi) schedPluck(t, midi, beat * 0.85, 0.45);
         }
       }
+      // Acid tease — sparse gated squelch (bar 24+, one note every 4 bars)
+      if (vb >= 16) {
+        if (vb === 16 && sib === 0) {
+          acidSub.gain.cancelScheduledValues(t);
+          acidSub.gain.setValueAtTime(0.001, t);
+          acidSub.gain.linearRampToValueAtTime(0.18, t + 4 * bar);
+          acidDelWet.gain.setValueAtTime(0.001, t);
+          acidDelWet.gain.linearRampToValueAtTime(0.20, t + 4 * bar);
+        }
+        if (isBeat && beatIdx === 0 && (vb - 16) % 4 === 0) {
+          playGoaStep(t, sib, barNum, PH.VESSEL, 350, 0.40);
+        } else {
+          acidNoteG.gain.setValueAtTime(0.001, t);
+        }
+      }
       // Snare fill before SHATTER
       if (barNum === PH.SHATTER - 1) {
         if (sib >= 8) schedSnare(t, 0.10 + (sib - 8) * 0.025, nb);
@@ -1838,10 +1854,11 @@ function compose_tikkun() {
         acidDelWet.gain.setValueAtTime(0.001, t);
         acidDelWet.gain.linearRampToValueAtTime(0.16, t + 16 * bar);
       }
-      // Goa acid — filter opens slowly
+      // Goa acid — filter opens slowly, breathing in and out
       const gatherProg = (barNum - PH.GATHER) / (PH.MEND - PH.GATHER);
-      const fBase = 400 + gatherProg * 1400;
-      playGoaStep(t, sib, barNum, PH.GATHER, fBase, 0.40);
+      const breathe = 0.5 + 0.5 * Math.sin((barNum - PH.GATHER) * Math.PI / 8);
+      const fBase = 400 + gatherProg * 1400 * breathe;
+      playGoaStep(t, sib, barNum, PH.GATHER, fBase, 0.20 + 0.20 * breathe);
 
       // Hats enter at bar 61
       if (isEighth && barNum >= PH.GATHER + 4) {
@@ -1853,24 +1870,27 @@ function compose_tikkun() {
       if (isEighth && barNum >= PH.GATHER + 12) {
         schedShaker(t, (sib % 4 === 0 ? 0.018 : 0.008), nb);
       }
-      // Snare fill last 2 bars before MEND
-      if (barNum >= PH.MEND - 2) {
-        const fillProg = (barNum - (PH.MEND - 2)) / 2 + sib / 32;
-        const fillVol = 0.08 + fillProg * 0.22;
-        if (sib % 2 === 0) schedSnare(t, fillVol, nb);
-        if (barNum === PH.MEND - 1 && sib >= 12) {
-          schedSnare(t + sixteenth * 0.5, fillVol * 0.6, nb);
+      // Bass enters bar 81 — first phrase of the rebuild
+      if (barNum >= PH.GATHER + 24) {
+        if (barNum === PH.GATHER + 24 && sib === 0) {
+          bassSub.gain.cancelScheduledValues(t);
+          bassSub.gain.setValueAtTime(0.001, t);
+          bassSub.gain.linearRampToValueAtTime(0.85, t + 4 * bar);
+        }
+        if (isBeat) {
+          const gb = barNum - (PH.GATHER + 24);
+          let bassPeak = gb < 4 ? 0.35 + gb * 0.05 : 0.50;
+          pumpBass(t, rootMidi, beatIdx, bassPeak);
         }
       }
     }
 
     // ─────────────────────────────────────────────
-    // MEND — slow 80-bar build (bars 89–168)
-    //   89–104:  bass returns
-    //   105–120: kick + hats enter
-    //   121–136: clap, full rhythm
-    //   137–152: pluck melody (sparse)
-    //   153–168: pluck fills out, acid wide
+    // MEND — build (bars 89–168), 3 phrases of 8 bars
+    //   Bass already running from GATHER bar 81
+    //   89–96:   + kick + hats + octave jumps (phrase 2)
+    //   97–104:  + clap + melody (phrase 3)
+    //   105+:    full drive, acid settles
     // ─────────────────────────────────────────────
     if (phase === 'MEND') {
       const mb = barNum - PH.MEND;
@@ -1878,31 +1898,34 @@ function compose_tikkun() {
 
       if (barNum === PH.MEND && sib === 0) {
         bassSub.gain.cancelScheduledValues(t);
-        bassSub.gain.setValueAtTime(0.55, t);
-        bassSub.gain.linearRampToValueAtTime(0.90, t + 2 * bar);
+        bassSub.gain.setValueAtTime(bassSub.gain.value, t);
+        bassSub.gain.linearRampToValueAtTime(0.90, t + 4 * bar);
         acidSub.gain.cancelScheduledValues(t);
         acidSub.gain.setValueAtTime(acidSub.gain.value, t);
         acidSub.gain.linearRampToValueAtTime(0.35, t + 16 * bar);
       }
-      if (mb === 48 && sib === 0) {
+      if (mb === 8 && sib === 0) {
         pluckSub.gain.cancelScheduledValues(t);
         pluckSub.gain.setValueAtTime(0.001, t);
-        pluckSub.gain.linearRampToValueAtTime(0.55, t + 6 * bar);
+        pluckSub.gain.linearRampToValueAtTime(0.25, t + 8 * bar);
+        pluckSub.gain.linearRampToValueAtTime(0.60, t + 64 * bar);
+        pluckRvbSend.gain.setValueAtTime(0.12, t);
+        pluckRvbSend.gain.linearRampToValueAtTime(0.45, t + 64 * bar);
       }
 
-      // Goa acid — filter continues opening
-      const fBase = 800 + mendProg * 1600;
-      playGoaStep(t, sib, barNum, PH.GATHER, fBase, 0.40);
+      // Goa acid — breathing: swells and retreats
+      const breathe = 0.5 + 0.5 * Math.sin(mb * Math.PI / 8);
+      const breatheFade = mb < 48 ? 1.0 : 1.0 - (mb - 48) * 0.012;
+      const fBase = 800 + mendProg * 1600 * breathe;
+      playGoaStep(t, sib, barNum, PH.GATHER, fBase, (0.20 + 0.20 * breathe) * breatheFade);
 
-      // Sidechain bass — enters immediately, builds
+      // Sidechain bass — continues from GATHER, builds to full
       if (isBeat) {
-        let bassPeak = 0.65;
-        if (mb < 4) bassPeak = 0.35 + mb * 0.07;
-        else if (mb < 16) bassPeak = 0.55;
+        let bassPeak = mb < 4 ? 0.55 + mb * 0.025 : 0.65;
         pumpBass(t, rootMidi, beatIdx, bassPeak);
       }
-      // Octave jumps from bar 32
-      if (isEighth && mb >= 32) {
+      // Octave jumps — immediate
+      if (isEighth) {
         const eb = Math.floor(sib / 2);
         if (eb === 2 || eb === 6) {
           const rootFreq = mtf(rootMidi);
@@ -1911,41 +1934,42 @@ function compose_tikkun() {
         }
       }
 
-      // Kick — enters at bar 105 (mb=16)
-      if (isBeat && mb >= 16) {
+      // Kick — enters immediately (phrase 2)
+      if (isBeat) {
         let kVol;
-        if (mb < 20) kVol = 0.50 + (mb - 16) * 0.05;
-        else if (mb < 48) kVol = 0.72;
+        if (mb < 4) kVol = 0.50 + mb * 0.05;
+        else if (mb < 16) kVol = 0.72;
         else kVol = 0.78;
         schedKick(t, kVol, true);
       }
-      // Hat — enters at bar 105
-      if (isEighth && mb >= 16) {
+      // Hat — enters immediately
+      if (isEighth) {
         const off = (sib / 2) % 2 === 1;
-        let mul = mb < 20 ? (mb - 16) / 4 + 0.001 : mb < 48 ? 0.85 : 1;
+        let mul = mb < 4 ? mb / 4 + 0.001 : mb < 16 ? 0.85 : 1;
         schedHat(t, (off ? 0.13 : 0.065) * mul, nb);
       }
-      // Shaker — enters with hats
-      if (isEighth && mb >= 16) {
-        let mul = mb < 20 ? (mb - 16) / 4 + 0.001 : 1;
+      // Shaker — enters immediately
+      if (isEighth) {
+        let mul = mb < 4 ? mb / 4 + 0.001 : 1;
         schedShaker(t, (sib % 4 === 0 ? 0.022 : 0.009) * mul, nb);
       }
-      // Clap — enters at bar 121 (mb=32)
-      if (isBeat && (beatIdx === 1 || beatIdx === 3) && mb >= 32) {
-        let cVol = mb < 36 ? 0.18 * ((mb - 32) / 4 + 0.001) : 0.18;
+      // Clap — enters at bar 97 (mb=8, phrase 3)
+      if (isBeat && (beatIdx === 1 || beatIdx === 3) && mb >= 8) {
+        let cVol = mb < 12 ? 0.18 * ((mb - 8) / 4 + 0.001) : 0.18;
         schedClap(t, cVol, nb);
       }
-      // Pluck — enters at bar 137 (mb=48), head notes first, fills out
-      if (isEighth && mb >= 48) {
+      // Pluck — enters at bar 97 (mb=8, phrase 3), head notes first, fills out
+      if (isEighth && mb >= 8) {
         const eb = Math.floor(sib / 2);
         let playIt;
-        if (mb < 56) playIt = (eb === 0 || eb === 4);
-        else if (mb < 64) playIt = (eb === 0 || eb === 2 || eb === 4 || eb === 6);
+        if (mb < 16) playIt = (eb === 0 || eb === 4);
+        else if (mb < 24) playIt = (eb === 0 || eb === 2 || eb === 4 || eb === 6);
         else playIt = true;
         if (playIt) {
           const midi = p.melody[ci][eb];
           if (midi) {
-            const vel = (eb === 0 || eb === 4) ? 0.62 : 0.42;
+            let vel = (eb === 0 || eb === 4) ? 0.62 : 0.42;
+            if (midi > 72) vel *= Math.max(0.5, 1.0 - (midi - 72) * 0.06);
             schedPluck(t, midi, beat * 0.85, vel);
           }
         }
@@ -1964,7 +1988,9 @@ function compose_tikkun() {
         acidSub.gain.linearRampToValueAtTime(0.38, t + 4 * bar);
         pluckSub.gain.cancelScheduledValues(t);
         pluckSub.gain.setValueAtTime(pluckSub.gain.value, t);
-        pluckSub.gain.linearRampToValueAtTime(0.54, t + 2 * bar);
+        pluckSub.gain.linearRampToValueAtTime(0.58, t + 8 * bar);
+        pluckRvbSend.gain.setValueAtTime(pluckRvbSend.gain.value, t);
+        pluckRvbSend.gain.linearRampToValueAtTime(0.55, t + 8 * bar);
       }
 
       // Goa acid — wide open, subtle modulation
@@ -1999,7 +2025,8 @@ function compose_tikkun() {
         const eb = Math.floor(sib / 2);
         const midi = p.melody[ci][eb];
         if (midi) {
-          const vel = (eb === 0 || eb === 4) ? 0.62 : 0.42;
+          let vel = (eb === 0 || eb === 4) ? 0.62 : 0.42;
+          if (midi > 72) vel *= Math.max(0.5, 1.0 - (midi - 72) * 0.06);
           schedPluck(t, midi, beat * 0.85, vel);
         }
       }
