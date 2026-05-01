@@ -367,19 +367,19 @@
 
   <div class="side-label">Side B — The Resonance</div>
   <div class="tracklist">
-    <div class="track-row" data-track="tikkun" onclick="toggleTrack('tikkun')">
+    <div class="track-row" data-track="drift" onclick="toggleTrack('drift')">
       <span class="track-pos"><span class="play-icon">&#9654;</span> B1</span>
+      <span class="track-title">Drift</span>
+      <span class="track-bpm">115</span>
+      <span class="track-dur">8:46</span>
+    </div>
+    <div class="track-row" data-track="tikkun" onclick="toggleTrack('tikkun')">
+      <span class="track-pos"><span class="play-icon">&#9654;</span> B2</span>
       <span class="track-title">Tikkun</span>
       <span class="track-bpm">120</span>
       <span class="track-dur">13:20</span>
     </div>
-    <div class="track-row" data-track="drift" onclick="toggleTrack('drift')">
-      <span class="track-pos"><span class="play-icon">&#9654;</span> B2</span>
-      <span class="track-title">Drift</span>
-      <span class="track-bpm">115</span>
-      <span class="track-dur">10:05</span>
-    </div>
-    <div class="track-total">51:29</div>
+    <div class="track-total">50:10</div>
   </div>
 
   <div class="divider"></div>
@@ -418,7 +418,15 @@
   <div class="divider-thin"></div>
 
   <div class="track-note">
-    <div class="track-note-label"><span class="track-note-pos">B1</span> Tikkun</div>
+    <div class="track-note-label"><span class="track-note-pos">B1</span> Drift</div>
+    <p>A chord &mdash; two notes, a root and a fifth &mdash; struck once into fog. A delay line with enough feedback to return five, six times, each echo darker than the last. By the second repetition you've forgotten the original. The echoes are the track.</p>
+    <p>Nothing repeats exactly. The delay feedback drifts on its own schedule &mdash; three echoes become seven, then three again. The filter wanders: sometimes the returns are muffled and far, sometimes they brighten and crowd close. A rim click appears through its own delay and suddenly there's a polyrhythm that neither you nor the producer planned. Every few minutes the beat drops out for a bar and you're left with just the tails ringing in empty space and the hiss swelling to fill the gap.</p>
+    <p>I played it once for ten minutes. The second time I realized I'd been listening for forty &mdash; I'd hit repeat without noticing. The trick of this track is it removes your sense of duration. You're not waiting for a peak. You're not building toward anything. You're in it, and you were in it before you knew, and you'll still be in it after the track ends because the echoes in your head take longer to decay than the ones in the delay line.</p>
+    <div class="pullquote">The bartender left an hour ago but nobody told the machine.</div>
+  </div>
+
+  <div class="track-note">
+    <div class="track-note-label"><span class="track-note-pos">B2</span> Tikkun</div>
     <p>Thirteen minutes. One idea, followed until it breaks, then followed until it mends.</p>
     <p>It opens the way The Harvest does &mdash; chamfer, pad, the bass pumping against the kick. But the melody is different. Where Harvest has a warm triangle wave, this has something closer to a bell &mdash; a plucked tone with fast attack and a long echo tail that turns each phrase into a conversation between the strike and its reflections. By the second minute the room is full. Everything locked. You settle in.</p>
     <p>Then the glass breaks.</p>
@@ -428,14 +436,6 @@
     <p>The descent is slow. Each voice plays a last phrase &mdash; not fading, finishing. The acid closes its filter. The pluck drops notes from its theme one by one until only the tonic is left, held, ringing.</p>
     <p>Then the room begins to sing. Five tones &mdash; the chamfer frequency and its harmonics &mdash; emerging one at a time, breathing against each other. Not a chord. The sound the building would make if it remembered being full.</p>
     <p>Then the chamfer alone. The first frequency on the record, returning as the last. The word means repair.</p>
-  </div>
-
-  <div class="track-note">
-    <div class="track-note-label"><span class="track-note-pos">B2</span> Drift</div>
-    <p>A chord &mdash; two notes, a root and a fifth &mdash; struck once into fog. A delay line with enough feedback to return five, six times, each echo darker than the last. By the second repetition you've forgotten the original. The echoes are the track.</p>
-    <p>Nothing repeats exactly. The delay feedback drifts on its own schedule &mdash; three echoes become seven, then three again. The filter wanders: sometimes the returns are muffled and far, sometimes they brighten and crowd close. A rim click appears through its own delay and suddenly there's a polyrhythm that neither you nor the producer planned. Every few minutes the beat drops out for a bar and you're left with just the tails ringing in empty space and the hiss swelling to fill the gap.</p>
-    <p>I played it once for ten minutes. The second time I realized I'd been listening for forty &mdash; I'd hit repeat without noticing. The trick of this track is it removes your sense of duration. You're not waiting for a peak. You're not building toward anything. You're in it, and you were in it before you knew, and you'll still be in it after the record ends because the echoes in your head take longer to decay than the ones in the delay line.</p>
-    <div class="pullquote">The bartender left an hour ago but nobody told the machine.</div>
   </div>
 
   <div class="divider"></div>
@@ -463,7 +463,7 @@
   <div class="plant-note">
     <div class="plant-note-label">A note from the pressing plant</div>
     <p>During the lacquer cut for the B-side run-out groove, the cutting engineer reported a subsonic presence in the master that fell below the published frequency response of the playback chain. It was confirmed at <span class="hz">55 Hz</span>. Rather than filter it, the decision was made to let the lacquer capture what was there.</p>
-    <p>If you play the record past the final groove of Drift, there are fifty-five seconds before the needle lifts. They are not silent.</p>
+    <p>If you play the record past the final groove of Tikkun, there are fifty-five seconds before the needle lifts. They are not silent.</p>
   </div>
 
   <div class="footer">CHFR-055 &middot; Single pressing &middot; No reissue planned &middot; v2.7</div>
@@ -2268,7 +2268,7 @@ function compose_drift() {
   const beat = 60 / bpm;
   const bar = beat * 4;
   const sixteenth = beat / 4;
-  const totalBars = 290;
+  const totalBars = 252;
   const nb = createNoise(0.5);
 
   const root = pick([36, 38, 41]);
@@ -2588,13 +2588,13 @@ function compose_drift() {
 // PLAYBACK CONTROL
 // ═══════════════════════════════════════════════════════
 
-const TRACK_ORDER = ['church', 'harvest', 'golden', 'tikkun', 'drift'];
+const TRACK_ORDER = ['church', 'harvest', 'golden', 'drift', 'tikkun'];
 const TRACKS = {
   church:  { name: '303 Church', dur: 480, compose: compose_church },
   harvest: { name: 'The Harvest', dur: 748, compose: compose_harvest },
   golden:  { name: 'Golden Hour', dur: 456, compose: compose_golden },
   tikkun:  { name: 'Tikkun', dur: 800, compose: compose_tikkun },
-  drift:   { name: 'Drift', dur: 605, compose: compose_drift },
+  drift:   { name: 'Drift', dur: 526, compose: compose_drift },
 };
 
 async function toggleTrack(id) {
