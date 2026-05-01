@@ -787,20 +787,20 @@ function compose_church() {
       acidDelWet.gain.linearRampToValueAtTime(0.15, t + 12 * bar);
     }
 
-    // Kick from bar 0
-    if (isBeat && barNum >= 0) {
+    // Kick from bar 0 (fades 228-244)
+    if (isBeat && barNum >= 0 && barNum < 244) {
       let vol = 0.75;
       if (barNum < 4) vol *= barNum / 4;
-      if (barNum >= totalBars - 4) vol *= Math.max(0, 1 - (barNum - (totalBars - 4)) / 4);
+      if (barNum >= 228) vol *= Math.max(0, 1 - (barNum - 228) / 16);
       if (vol > 0.01) schedKick(t, vol, barNum >= 4);
     }
 
-    // Hats from bar 4
-    if (isEighth && barNum >= 4) {
+    // Hats from bar 4 (first to go, fades 216-232)
+    if (isEighth && barNum >= 4 && barNum < 232) {
       const offbeat = (stepInBar / 2) % 2 === 1;
       let vol = offbeat ? 0.10 : 0.04;
       if (barNum < 8) vol *= (barNum - 4) / 4;
-      if (barNum >= totalBars - 4) vol *= Math.max(0.1, 1 - (barNum - (totalBars - 4)) / 4);
+      if (barNum >= 216) vol *= Math.max(0, 1 - (barNum - 216) / 16);
       if (vol > 0.005) schedHat(t, vol, nb);
     }
 
@@ -857,10 +857,13 @@ function compose_church() {
       acidDelWet.gain.linearRampToValueAtTime(wetTarget, t + 8 * bar);
     }
 
-    // Fade acid out at end
-    if (barNum === totalBars - 8 && stepInBar === 0) {
+    // Fade acid out (bar 224-248, filter closes as it goes)
+    if (barNum === 224 && stepInBar === 0) {
       acidSub.gain.setValueAtTime(acidSub.gain.value, t);
-      acidSub.gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+      acidSub.gain.linearRampToValueAtTime(0.001, t + 24 * bar);
+      acidFilt.Q.cancelScheduledValues(t);
+      acidFilt.Q.setValueAtTime(acidFilt.Q.value, t);
+      acidFilt.Q.linearRampToValueAtTime(2, t + 24 * bar);
     }
   }, totalBars);
 
@@ -992,7 +995,7 @@ function compose_harvest() {
     }
     if (barNum === PH.BREAK && sib === 0) {
       chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
-      chamEnv.gain.linearRampToValueAtTime(0.06, t + 2 * bar);
+      chamEnv.gain.linearRampToValueAtTime(0.03, t + 2 * bar);
     }
     if (barNum === PH.DESCENT && sib === 0) {
       chamEnv.gain.setValueAtTime(chamEnv.gain.value, t);
@@ -1184,11 +1187,15 @@ function compose_harvest() {
       }
     }
 
-    // ── Bass
-    if (isBeat && barNum >= PH.BASS && !inBreak && barNum < totalBars - 8) {
+    // ── Bass (continues through break as the drive)
+    if (isBeat && barNum >= PH.BASS && barNum < totalBars - 8) {
       if (barNum === PH.BASS && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.001, t);
         bassSub.gain.linearRampToValueAtTime(0.65, t + 8 * bar);
+      }
+      if (barNum === PH.BREAK && beatIdx === 0) {
+        bassSub.gain.setValueAtTime(bassSub.gain.value, t);
+        bassSub.gain.linearRampToValueAtTime(0.35, t + 2 * bar);
       }
       if (barNum === PH.RETURN && beatIdx === 0) {
         bassSub.gain.setValueAtTime(0.45, t);
@@ -1206,10 +1213,12 @@ function compose_harvest() {
         bassOct.frequency.setValueAtTime(rootFreq * 2, t);
         subOsc.frequency.setValueAtTime(rootFreq / 2, t);
       }
+      const bassPeak = inBreak && !inRoll ? 0.35 : 0.60;
+      const subPeak = inBreak && !inRoll ? 0.18 : 0.35;
       bassG.gain.setValueAtTime(0.03, t);
-      bassG.gain.exponentialRampToValueAtTime(0.60, t + beat * 0.325);
+      bassG.gain.exponentialRampToValueAtTime(bassPeak, t + beat * 0.325);
       subG.gain.setValueAtTime(0.02, t);
-      subG.gain.exponentialRampToValueAtTime(0.35, t + beat * 0.325);
+      subG.gain.exponentialRampToValueAtTime(subPeak, t + beat * 0.325);
       const fOpen = beatIdx % 2 === 1 ? 1400 : 600;
       bassFilt.frequency.setValueAtTime(fOpen, t);
       bassFilt.frequency.exponentialRampToValueAtTime(400, t + beat * 0.9);
