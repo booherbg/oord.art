@@ -42,9 +42,9 @@ The harvest snare roll (layered claps with ghost note doubling on final four hit
 
 ---
 
-## EP B-Side Listening Notes
+## EP Listening Notes
 
-### Harvest (B1) — Centerpiece
+### Harvest (B2) — Closer
 
 **Acid line: LOCKED.** The gating, levels, and movement over time are validated. The squelch-to-full-pattern arc — step gating from beats-only through eighths to full, with melody interaction mode — is the track's signature. Don't rework.
 
@@ -71,7 +71,7 @@ Build takes ~4:12 (35% of track). Classic goa proportion. Chamfer fades to noise
 - Pads are basically inaudible. Need to come up significantly.
 - First bass hit enters a bit hard — needs a gentler fade-in.
 
-### Golden Hour (B2) — Perfect
+### Golden Hour (A3) — Perfect
 
 No changes. Incredibly warm. Feels like its own thing — doesn't quite belong with the other tracks stylistically, which is part of what makes it special.
 
@@ -80,6 +80,6 @@ No changes. Incredibly warm. Feels like its own thing — doesn't quite belong w
 - The closing/remembrance screen soundtrack (currently uses the SoundtrackEngine's `closing` zone, which is just chamfer + quiet pad — Golden Hour's full warmth would hit harder)
 - An unlockable "golden hour" mode on the song player after earning all transcendentals
 
-### Tikkun (B3) — Needs More Listens
+### Tikkun (A2)
 
-At ~18 minutes, this needs several dedicated sessions. The deconstruction concept (instruments exiting one by one from bar 80 through bar 470) is structurally ambitious. Will revisit.
+At ~13 minutes. The build/shatter/rebuild arc is structurally ambitious — deconstruction from bar 40 through the void, then gradual mend. Resonator singing section closes it out.

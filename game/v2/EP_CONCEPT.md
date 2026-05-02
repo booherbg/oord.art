@@ -13,23 +13,22 @@
 
 ## Tracklist
 
-### Side A — The Approach
+### Side A — The Offering
 
 | | Title | BPM | |
 |---|---|---|---|
-| A1 | Chamfer | — | 4:10 |
-| A2 | Reversed Shuffle | 122 | 5:25 |
-| A3 | 303 Church | 124 | 8:00 |
+| A1 | 303 Church | 124 | 8:00 |
+| A2 | Tikkun | 120 | 13:20 |
+| A3 | Golden Hour | 118 | 7:36 |
 
-### Side B — The Offering
+### Side B — The Resonance
 
 | | Title | BPM | |
 |---|---|---|---|
-| B1 | The Harvest (Deep Offering) | 122 | 12:00 |
-| B2 | Golden Hour | 118 | 6:40 |
-| B3 | Tikkun | 120 | 18:45 |
+| B1 | Drift | 115 | 8:46 |
+| B2 | The Harvest (Deep Offering) | 122 | 12:28 |
 
-**Total runtime: 55:00**
+**Total runtime: 50:10**
 
 ---
 
@@ -47,77 +46,39 @@ What I can tell you is what the record sounds like. And I can tell you what it f
 
 ---
 
-**A1 — Chamfer**
+**A1 — 303 Church**
 
-A single low tone. No beat. No development in the conventional sense — no build, no drop. Just a frequency that sits in the body more than the ear. Fifty-five hertz. You feel it in the sternum before you register it as sound. There's a second harmonic an octave up, so quiet you'd miss it on laptop speakers. A slow modulation — breathing, really — that makes the tone pulse at a rate that feels biological. About twelve breaths a minute.
-
-Four minutes and ten seconds of a building deciding whether you're allowed inside.
-
-I played it for a sound engineer. She put her hand flat on the monitor and said: "That's a room tone. Someone recorded the resonant frequency of a physical space." I think she's right. I think this is what the building sounds like when no one is in it.
+Eight minutes of acid house as devotional practice. A single sawtooth oscillator through a resonant filter, sweeping a sixteen-step pattern that mutates across the track's duration — contained at first, screaming by minute four, speaking in tongues by six. The pattern barely changes. Three notes shift across eight minutes. But the accumulation against that unwavering kick creates a state closer to prayer than listening. You don't notice the trance until you're in it.
 
 ---
 
-**A2 — Reversed Shuffle**
+**A2 — Tikkun**
 
-The first sign that something is wrong with the record. Every envelope is backwards — the sounds swell into existence and cut off at their loudest, like tape played in reverse, except the rhythm is forwards. Your body wants to dance but the movement feels like falling. A four-bar phrase that repeats with subtle variation: formant sweeps that almost resolve into vowels, chords that seem to be reaching for a voicing they never quite complete.
+Thirteen minutes. One idea, followed until it breaks, then followed until it mends. Sidechain bass, Goa acid breathing through a 32-step pattern, FM pluck where each strike decays into a conversation with its own reflections. By the second minute the room is full. Then the glass breaks. A burst of noise, three bell tones ringing into silence, and the room is empty for a full minute.
 
-The uncanny valley has a time signature. It's this one.
+The acid comes back first. Alone — no kick, no bass. Just the filter line and hats, like someone testing whether the floor will hold weight. The rebuild takes twice as long as the collapse did. When the pluck returns it plays the same notes. It does not sound the same.
 
-I once played this at a house party and two people left the room. Not upset — unsettled. One of them said later: "It sounded like dancing backwards through time." I don't think she knew how close she was.
-
----
-
-**A3 — 303 Church**
-
-Eight minutes of acid house as devotional practice. Four-on-the-floor kick. Offbeat hi-hats. And the 303 — a single sawtooth oscillator through a resonant filter, sweeping through a sixteen-step pattern that mutates across the track's duration. The filter opens and closes like something alive. In the first minute it's contained, almost polite. By minute four the resonance is screaming. By minute six it's speaking in tongues.
-
-This is the track that convinced me the producer understands something about repetition that most electronic musicians only gesture at. The pattern barely changes. Three notes shift across eight minutes. But the accumulation of those micro-variations against the unwavering kick creates a state that's closer to prayer than listening. You don't notice the trance until you're in it.
-
-No samples. I've run the audio through spectral analysis. Every sound on this record is generated from raw waveforms. The kick is a sine wave swept from 150 to 35 hertz in sixty milliseconds. The hi-hat is filtered white noise. The 303 line is one oscillator and one filter. That's it. The complexity is emergent. The machine is simple. What it produces is not.
+Then the room begins to sing — five harmonics of the chamfer frequency emerging one at a time, breathing against each other. Not a chord. The sound the building would make if it remembered being full. The word means repair.
 
 ---
 
-**B1 — The Harvest (Deep Offering)**
+**A3 — Golden Hour**
 
-The centerpiece. Twelve minutes. Full production. This is what the other five tracks exist to frame.
-
-It opens with the chamfer tone — the building breathing — and builds methodically: kick first, then hats, then a rolling bassline that pumps against the kick with a sidechain compression so deep it sounds like the room is gasping. The 303 enters slowly, fader-style, filter closed and opening over four bars. A pad underneath — detuned sine waves in triads, warm and wide. And then the melody.
-
-The melody is the thing. A simple figure, pentatonic, played on what sounds like a triangle wave through a low-pass filter. Dotted-quarter delay gives it a call-and-response quality, the echo answering the phrase. It repeats. And repeats. And on the third pass you realize you're not listening to the melody — you're inside it. The delay tails and the original have become one texture and you can't tell which is the call and which is the response and it doesn't matter.
-
-At 7:30 the drums drop out. The melody delay tails spiral. The pad swells to fill the space. The absence of the kick is louder than the kick was. This lasts forty seconds — long enough to forget what the beat felt like. And then:
-
-A snare roll. Sixteenth notes, escalating. Ghost notes doubling on the final four hits. And when the kick returns everything is louder and the acid filter is wide open and you understand that the first seven minutes were the warm-up.
-
-The last four minutes are the harvest. I don't know a better word for it. The bass octave-jumps on the third and seventh eighth notes. The melody gain is higher than the first pass. The room — if you're hearing this in the room where I heard it — is doing something to the low end that no speaker system should be able to do. The bass is in the walls.
+The come-down. 118 BPM — four clicks slower than the rest of the record, and you feel the deceleration physically. It starts thin: sine waves barely detuned, a narrow chord above a gentle kick. Around minute four, voices begin cascading an octave above the pad, staggering through the reverb until the tails pile into something choral. Golden Hour doesn't build to a peak. It builds to a glow. This is the bartender's track. I'm certain of that, though I couldn't tell you why.
 
 ---
 
-**B2 — Golden Hour**
+**B1 — Drift**
 
-The come-down. Or the intermission — I've gone back and forth. Dark indie disco. Pad-first, atmosphere-heavy, delay-drenched. The beat is there but it's gentler. 118 BPM — four clicks slower than the rest of the record, and you feel the deceleration physically, the way your pulse adjusts when you stop running.
+A chord struck once into fog. Two delay lines — one for the chord, one for the rim clicks — with enough filtered feedback that by the second repetition you've forgotten the original. The echoes are the track. Nothing repeats exactly. The filter wanders on its own schedule, sometimes muffled and far, sometimes bright and crowding close. The trick is it removes your sense of duration — you're not building toward anything, you're just in it, and you were in it before you knew.
 
-If The Harvest is the floor at peak, Golden Hour is the moment you step away from the crowd and find the bar. The drink in your hand is cold. You can see the dancers from here but the music sounds different at this distance — the low end carries but the highs scatter against the concrete. The melody is gone. Just the pad, the bass, and a pulse.
-
-This is the bartender's track. I'm certain of that, though I couldn't tell you why.
+*The bartender left an hour ago but nobody told the machine.*
 
 ---
 
-**B3 — Tikkun**
+**B2 — The Harvest (Deep Offering)**
 
-Eighteen minutes and forty-five seconds. The closing ceremony.
-
-It begins at full build — everything from The Harvest, every layer at peak — and deconstructs. The clap exits first. Then the melody. Then the acid filter begins to close, a three-thousand-to-two-hundred-hertz descent that takes eight bars. The bass sidechain pump gentles. The kick's click transient disappears and it becomes a body-only pulse, felt more than heard.
-
-The hi-hat is the last rhythmic element to leave. When it goes, you notice you've been relying on it without knowing. The space it occupied is a specific kind of empty.
-
-Now it's just the pad and the chamfer. The pad detune narrows — the shimmer reduces, the harmonics simplify, and you can hear the sine waves underneath separating from each other like voices after a conversation. Then the pad is gone and it's the chamfer alone.
-
-Fifty-five hertz. Where we started.
-
-The last three minutes are the building saying goodbye. The tone pulses once more with that biological breathing modulation, and then it doesn't. It holds. It thins. And at some point — you won't agree with anyone else about exactly when — it's gone and what's left is the silence after.
-
-The word *tikkun* is Hebrew. It means repair. The Kabbalists used it to describe the work of returning scattered light to its source — every holy act a small repair in the fabric of things. I don't know if the producer knows this. I don't know if the producer knows anything. But I know what this track sounds like at the end: it sounds like something being put back where it belongs.
+The closer. Twelve minutes. A breakbeat locks first — syncopated kick and snare cycling a two-bar pattern while a rolling bassline walks the chord tones underneath. The acid enters sparse, walking through progressively denser patterns until it's running full Goa lines by the peak. When the melody finally arrives on a triangle wave through a dotted-quarter delay, everything before it was the warm-up. The last four minutes are the harvest.
 
 ---
 
@@ -148,7 +109,7 @@ The builders who cut the chamfers. The pale antler on the shelf by the monitor d
 
 During the lacquer cut for the B-side run-out groove, the cutting engineer reported a subsonic presence in the master that fell below the published frequency response of the playback chain. It was confirmed at 55 Hz. Rather than filter it, the decision was made to let the lacquer capture what was there.
 
-If you play the record past the final groove of Tikkun, there are fifty-five seconds before the needle lifts. They are not silent.
+If you play the record past the final groove of The Harvest, there are fifty-five seconds before the needle lifts. They are not silent.
 
 ---
 

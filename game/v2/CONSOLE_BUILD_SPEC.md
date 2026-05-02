@@ -412,6 +412,8 @@ Two sub-voices: the FM pluck (primary, percussive, kalimba-like) and a triangle 
 | Pan spread | 0.35 | 0.0-0.8 |
 | Delay time | beat * 1.5 | 0.5-2.0 (beat mult) |
 | Delay filter | 1800 Hz LP | 800-4000 Hz |
+| Reverb send | 0.15 | 0.0-0.6 |
+| High-note attenuation | on | on / off (MIDI > 72: -6% per semitone, floor 0.5x) |
 | Triangle voice on/off | off | bool |
 | Triangle volume | 0.45 | 0.15-0.7 |
 | Triangle LP cutoff | 2500 Hz | 1000-5000 Hz |
@@ -419,7 +421,7 @@ Two sub-voices: the FM pluck (primary, percussive, kalimba-like) and a triangle 
 | Triangle delay feedback | 0.45 | 0.2-0.6 |
 | **[Re-roll melody]** | — | button |
 
-**Default volume (fader):** 0.54 (pluckSub at PEAK)
+**Default volume (fader):** 0.58 (pluckSub at PEAK)
 
 **Pattern:** Eighth notes, head notes (beats 1 and 3) louder than fills. Follows generated melody hook over the 4-chord progression.
 
@@ -850,10 +852,10 @@ Quick reference for what each phase preset sets as defaults. These are the value
 | Kick | 0.72 | off | 0.72 | 0.78 | 0.78->0 | off | off | off |
 | Snare/Clap | 0.16 | off | 0.18 | 0.18 | 0.16->0 | off | off | off |
 | Hats | 0.12 | 0.07 | 0.13 | 0.13 | 0.12->0 | off | off | off |
-| Bass | 0.55 | off | 0.65 | 0.65 | 0.55->0 | 0.45->0 | off | off |
+| Bass | 0.55 | 0.50 (bar 81) | 0.65 | 0.65 | 0.55->0 | 0.45->0 | off | off |
 | Pads | 0.038 | 0.030 | 0.035 | 0.040 | 0.036 | 0.035->0 | off | off |
 | Acid | off | 0.40 | 0.40 | 0.45 | 0.45->0 | sparse | off | off |
-| Melody/Pluck | 0.45 | off | 0.55 | 0.54 | 0.40->0 | tri 0.42 | off | off |
+| Melody/Pluck | 0.45 | off | 0.25->0.60 | 0.58 | 0.40->0 | tri 0.42 | off | off |
 | Chamfer | 0.05 | 0.05 | 0.05 | 0.05 | 0.07 | 0.10 | 0.11 | 0.12->0 |
 | Resonator | off | off | off | off | off | off | 0.22 | off |
 

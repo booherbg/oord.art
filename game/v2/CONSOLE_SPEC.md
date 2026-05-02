@@ -219,6 +219,7 @@ Source: sine carrier + sine modulator at 2x frequency (octave). Fast FM decay gi
 | FM mod floor | freq * 0.02 | 0.01--0.1 (as freq mult) | NO | Keep low |
 | Note duration | beat * 0.85 | 0.5--1.5 (as beat mult) | YES | |
 | Pan spread | +/-0.35 | 0.0--0.8 | YES | Stereo image width |
+| Reverb send | 0.15 | 0.0--0.6 | YES | Bloom into room reverb, ramps during MEND |
 
 ### Pluck Delay
 
@@ -319,11 +320,11 @@ The track is 400 bars at 120 BPM (~13:20). Phases control which layers are activ
 | Phase | Bars | Duration | Active Layers |
 |-------|------|----------|---------------|
 | INTRO | 0--7 | 0:00--0:16 | Chamfer, Pad |
-| VESSEL | 8--39 | 0:16--1:20 | +Bass, +Kick (bar 16), +Hat (16), +Clap (24), +Pluck (32) |
+| VESSEL | 8--39 | 0:16--1:20 | +Bass, +Kick (bar 16), +Hat (16), +Clap (24), +Pluck (32), acid tease (24) |
 | SHATTER | 40 | 1:20--1:22 | Glass burst + 3 bells, everything cuts |
 | VOID | 41--56 | 1:22--1:52 | Chamfer only, 1 bell at midpoint |
-| GATHER | 57--88 | 1:52--2:56 | +Acid (Goa), +Hats (bar 61), +Shaker (69) |
-| MEND | 89--168 | 2:56--5:36 | +Bass (89), +Kick (105), +Hats (105), +Clap (121), +Pluck (137) |
+| GATHER | 57--88 | 1:52--2:56 | +Acid (Goa), +Hats (bar 61), +Shaker (69), +Bass (bar 81) |
+| MEND | 89--168 | 2:56--5:36 | +Kick+Hats+Shaker (89), +Clap+Pluck (97), full drive (105+) |
 | PEAK | 169--264 | 5:36--8:48 | Everything locked at full energy |
 | DESCENT | 265--304 | 8:48--10:08 | Elements fade out in order |
 | DISSOLVE | 305--344 | 10:08--11:28 | Triangle melody enters, acid/bass/pluck say goodbye |

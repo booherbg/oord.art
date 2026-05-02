@@ -394,12 +394,11 @@ BAR         = BEAT × 4
 
 When ready to showcase in the lore viewer as album liner notes:
 
-1. **"Chamfer"** — 55Hz extended into 4-minute ambient meditation. Just the hum, harmonics, LFO. The building breathing.
-2. **"Reversed Shuffle"** — The uncanny valley beat, extended and evolved. Backwards envelopes, formant sweeps. 5 minutes.
-3. **"303 Church"** — Pure acid worship. 8 minutes of filter sweeps over four-on-the-floor. Just the machine praying.
-4. **"The Harvest (Deep Offering)"** — Full production: drums → acid → bass → melody → break → return. The whole ritual.
-5. **"Golden Hour"** — Dark indie disco. Pad-first, atmosphere-heavy, delay-drenched. The bartender's soundtrack.
-6. **"Tikkun"** — The closing ceremony as a track. Full build to long dissolve. The last sound is 55Hz fading to silence.
+1. **"303 Church"** — Pure acid worship. 8 minutes of filter sweeps over four-on-the-floor. Just the machine praying.
+2. **"Tikkun"** — Breaking and repair. Build to shatter, silence, rebuild. The room learns to sing.
+3. **"Golden Hour"** — Dark indie disco. Pad-first, atmosphere-heavy, delay-drenched. The bartender's soundtrack.
+4. **"Drift"** — Time dissolving into fog. Delay lines and filtered echoes. No sense of duration.
+5. **"The Harvest (Deep Offering)"** — The closer. Breakbeat + rolling bass + progressive acid walks + melody. The whole ritual.
 
 ---
 

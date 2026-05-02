@@ -6276,7 +6276,7 @@ class SoundtrackEngine {
       pat.push({note,accent:i%4===0?Math.random()<0.2:Math.random()<0.05,slide:Math.random()<0.75});
     }
     let acc=pat.filter(p=>p.accent).length;
-    while(acc<1){const idx=[0,8][Math.floor(Math.random()*2)];if(pat[idx].note&&!pat[idx].accent){pat[idx].accent=true;acc++;}}
+    if(acc<1){const cands=pat.map((p,i)=>p.note?i:-1).filter(i=>i>=0);if(cands.length){const idx=pick(cands);pat[idx].accent=true;}else{pat[0].note=pick(notes.slice(2,8));pat[0].accent=true;}}
     let active=pat.filter(p=>p.note).length;
     while(active<7){const idx=Math.floor(Math.random()*16);if(!pat[idx].note){pat[idx].note=pick(notes.slice(2,8));active++;}}
     return pat;

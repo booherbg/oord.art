@@ -64,12 +64,11 @@ Pick one per session. Push the synthesis somewhere new.
 ### EP Concept
 
 When the tracks are polished enough, show them in the lore viewer as album liner notes:
-1. "Chamfer" — ambient meditation on 55Hz
-2. "Reversed Shuffle" — the uncanny valley beat
-3. "303 Church" — pure acid worship
-4. "The Harvest (Deep Offering)" — full production ritual
-5. "Golden Hour" — dark indie disco
-6. "Tikkun" — the closing ceremony as a track
+1. "303 Church" — pure acid worship
+2. "Tikkun" — breaking and repair
+3. "Golden Hour" — dark indie disco
+4. "Drift" — time dissolving into fog
+5. "The Harvest (Deep Offering)" — the closer, full production ritual
 
 Each one mimics what players hear during the live performance in the game. Album notes in the lore viewer explain each track like liner notes — what the player was hearing during that part of the night.
 
