@@ -18,7 +18,7 @@
 | | Title | BPM | |
 |---|---|---|---|
 | A1 | 303 Church | 124 | 8:00 |
-| A2 | Tikkun | 120 | 13:20 |
+| A2 | Tikkun | 120 | 12:00 |
 | A3 | Golden Hour | 118 | 7:36 |
 
 ### Side B — The Resonance
@@ -28,7 +28,7 @@
 | B1 | Drift | 115 | 8:46 |
 | B2 | The Harvest (Deep Offering) | 122 | 12:28 |
 
-**Total runtime: 50:10**
+**Total runtime: 48:50**
 
 ---
 
@@ -54,7 +54,7 @@ Eight minutes of acid house as devotional practice. A single sawtooth oscillator
 
 **A2 — Tikkun**
 
-Thirteen minutes. One idea, followed until it breaks, then followed until it mends. Sidechain bass, Goa acid breathing through a 32-step pattern, FM pluck where each strike decays into a conversation with its own reflections. By the second minute the room is full. Then the glass breaks. A burst of noise, three bell tones ringing into silence, and the room is empty for a full minute.
+Twelve minutes. One idea, followed until it breaks, then followed until it mends. Sidechain bass, Goa acid breathing through a 32-step pattern, FM pluck where each strike decays into a conversation with its own reflections. By the second minute the room is full. Then the glass breaks. A burst of noise, three bell tones ringing into silence, and the room is empty for a full minute.
 
 The acid comes back first. Alone — no kick, no bass. Just the filter line and hats, like someone testing whether the floor will hold weight. The rebuild takes twice as long as the collapse did. When the pluck returns it plays the same notes. It does not sound the same.
 

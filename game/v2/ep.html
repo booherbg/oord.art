@@ -13,10 +13,10 @@
     --bg2:      #100d16;
     --orange:   #E86010;
     --yellow:   #D4A820;
-    --violet:   #6020C0;
+    --violet:   #7838D8;
     --pink:     #D04870;
     --text:     #C8BCA8;
-    --text-dim: #6A6058;
+    --text-dim: #9A8E80;
     --text-bright: #E8DCC8;
     --border:   #201818;
     --border-warm: #3A2818;
@@ -235,7 +235,7 @@
   .plant-note-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
   .plant-note p { font-size: 11px; color: var(--text-dim); line-height: 1.8; }
   .plant-note p + p { margin-top: 8px; }
-  .plant-note .hz { color: var(--orange); opacity: 0.7; }
+  .plant-note .hz { color: var(--orange); opacity: 0.85; }
   .footer { text-align: center; padding: 48px 0 20px; font-size: 9px; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; }
 
   /* ─── TRANSPORT BAR ─────────────────────────────────── */
@@ -355,7 +355,7 @@
       <span class="track-pos"><span class="play-icon">&#9654;</span> A2</span>
       <span class="track-title">Tikkun</span>
       <span class="track-bpm">120</span>
-      <span class="track-dur">13:20</span>
+      <span class="track-dur">12:00</span>
     </div>
     <div class="track-row" data-track="golden" onclick="toggleTrack('golden')">
       <span class="track-pos"><span class="play-icon">&#9654;</span> A3</span>
@@ -379,7 +379,7 @@
       <span class="track-bpm">122</span>
       <span class="track-dur">12:28</span>
     </div>
-    <div class="track-total">50:10</div>
+    <div class="track-total">48:50</div>
   </div>
 
   <div class="divider"></div>
@@ -397,14 +397,14 @@
 
   <div class="track-note">
     <div class="track-note-label"><span class="track-note-pos">A2</span> Tikkun</div>
-    <p>Thirteen minutes. One idea, followed until it breaks, then followed until it mends. Sidechain bass, Goa acid breathing through a 32-step pattern, FM pluck where each strike decays into a conversation with its own reflections. By the second minute the room is full. Then the glass breaks. A burst of noise, three bell tones ringing into silence, and the room is empty for a full minute.</p>
+    <p>Twelve minutes. One idea, followed until it breaks, then followed until it mends. Sidechain bass, Goa acid breathing through a 32-step pattern, FM pluck where each strike decays into a conversation with its own reflections. By the second minute the room is full. Then the glass breaks. A burst of noise, three bell tones ringing into silence, and the room is empty for a full minute.</p>
     <p>The acid comes back first. Alone &mdash; no kick, no bass. Just the filter line and hats, like someone testing whether the floor will hold weight. The rebuild takes twice as long as the collapse did. When the pluck returns it plays the same notes. It does not sound the same.</p>
     <p>Then the room begins to sing &mdash; five harmonics of the chamfer frequency emerging one at a time, breathing against each other. Not a chord. The sound the building would make if it remembered being full. The word means repair.</p>
   </div>
 
   <div class="track-note">
     <div class="track-note-label"><span class="track-note-pos">A3</span> Golden Hour</div>
-    <p>The come-down. 118 BPM &mdash; four clicks slower than the rest of the record, and you feel the deceleration physically. It starts thin: sine waves barely detuned, a narrow chord above a gentle kick. Around minute four, voices begin cascading an octave above the pad, staggering through the reverb until the tails pile into something choral. Golden Hour doesn't build to a peak. It builds to a glow. This is the bartender's track. I'm certain of that, though I couldn't tell you why.</p>
+    <p>The come-down. 118 BPM &mdash; six clicks slower than 303 Church, and you feel the deceleration physically. It starts thin: sine waves barely detuned, a narrow chord above a gentle kick. Around minute four, voices begin cascading an octave above the pad, staggering through the reverb until the tails pile into something choral. Golden Hour doesn't build to a peak. It builds to a glow. This is the bartender's track. I'm certain of that, though I couldn't tell you why.</p>
   </div>
 
   <div class="divider-thin"></div>
@@ -1553,7 +1553,7 @@ function compose_golden() {
 function compose_tikkun() {
   const p = genParams(120);
   const { beat, bar, sixteenth } = p;
-  const totalBars = 400;
+  const totalBars = 360;
   const nb = createNoise(0.5);
 
   // ── Reverb buses ─────────────────────────────────
@@ -1648,8 +1648,7 @@ function compose_tikkun() {
     PEAK:     169,
     DESCENT:  265,
     DISSOLVE: 305,
-    SING:     345,
-    HUM:      377
+    SING:     345
   };
 
   // ── 32-step Goa pattern ──────────────────────────
@@ -1806,8 +1805,7 @@ function compose_tikkun() {
       barNum < PH.PEAK      ? 'MEND'     :
       barNum < PH.DESCENT   ? 'PEAK'     :
       barNum < PH.DISSOLVE  ? 'DESCENT'  :
-      barNum < PH.SING      ? 'DISSOLVE' :
-      barNum < PH.HUM       ? 'SING'     : 'HUM';
+      barNum < PH.SING      ? 'DISSOLVE' : 'SING';
 
     const ci = Math.floor((barNum % 8) / 2) % 4;
     const rootMidi = p.chordRoots[ci];
@@ -2351,24 +2349,8 @@ function compose_tikkun() {
         const stagger = i * 2 * bar;
         const harmVol = 0.22 / (i + 1);
         resGains[i].gain.setValueAtTime(0, t + stagger);
-        resGains[i].gain.linearRampToValueAtTime(harmVol, t + stagger + 6 * bar);
-      }
-    }
-    if (phase === 'SING' && sib === 0 && barNum % 4 === 0 && barNum > PH.SING + 8) {
-      for (let i = 0; i < resGains.length; i++) {
-        const phs = (barNum - PH.SING) * 0.10 + i * 1.3;
-        const baseVol = 0.22 / (i + 1);
-        const modVol = baseVol * (0.65 + 0.35 * Math.sin(phs));
-        resGains[i].gain.cancelScheduledValues(t);
-        resGains[i].gain.setValueAtTime(resGains[i].gain.value, t);
-        resGains[i].gain.linearRampToValueAtTime(modVol, t + 4 * bar);
-      }
-    }
-    if (sib === 0 && barNum === PH.HUM - 4) {
-      for (let i = 0; i < resGains.length; i++) {
-        resGains[i].gain.cancelScheduledValues(t);
-        resGains[i].gain.setValueAtTime(resGains[i].gain.value, t);
-        resGains[i].gain.linearRampToValueAtTime(0.001, t + 8 * bar);
+        resGains[i].gain.linearRampToValueAtTime(harmVol, t + stagger + 4 * bar);
+        resGains[i].gain.linearRampToValueAtTime(0.001, t + stagger + 12 * bar);
       }
     }
 
@@ -2717,7 +2699,7 @@ function compose_drift() {
 const TRACK_ORDER = ['church', 'tikkun', 'golden', 'drift', 'harvest'];
 const TRACKS = {
   church:  { name: '303 Church', dur: 480, compose: compose_church },
-  tikkun:  { name: 'Tikkun', dur: 800, compose: compose_tikkun },
+  tikkun:  { name: 'Tikkun', dur: 720, compose: compose_tikkun },
   golden:  { name: 'Golden Hour', dur: 456, compose: compose_golden },
   drift:   { name: 'Drift', dur: 526, compose: compose_drift },
   harvest: { name: 'The Harvest', dur: 748, compose: compose_harvest },
