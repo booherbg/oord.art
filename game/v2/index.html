@@ -1994,11 +1994,13 @@
     .t-pip.beauty   { border-color: var(--beauty);   color: #e070a0; }
     .t-pip.truth    { border-color: var(--truth);    color: var(--yellow); }
     .t-pip.goodness { border-color: var(--goodness); color: #70c888; }
+    .t-pip.dissolution { border-color: var(--violet); color: #a070e0; }
 
     .t-pip.earned.unity    { background: rgba(64,128,208,0.14); }
     .t-pip.earned.beauty   { background: rgba(208,72,112,0.14); }
     .t-pip.earned.truth    { background: rgba(212,168,32,0.14); }
     .t-pip.earned.goodness { background: rgba(64,160,96,0.14);  }
+    .t-pip.earned.dissolution { background: rgba(120,56,216,0.14); }
 
     .t-pip .t-pip-desc {
       display: none;
@@ -2028,6 +2030,7 @@
     .t-pip.beauty .t-pip-title   { color: #e070a0; }
     .t-pip.truth .t-pip-title    { color: var(--yellow); }
     .t-pip.goodness .t-pip-title { color: #70c888; }
+    .t-pip.dissolution .t-pip-title { color: #a070e0; }
     .t-pip .t-pip-origin {
       font-size: 9px;
       color: var(--text-dim);
@@ -2606,11 +2609,11 @@
     <div class="intro-inner">
       <div class="intro-title">Before You Go In</div>
       <div class="intro-body">
-        <p>Something is happening tonight at a warehouse across town. You weren't planning to go. Each chapter takes about 15 minutes. You don't need to finish it all at once.</p>
-        <p>You'll make choices along the way. There are no wrong answers.</p>
+        <p>You're playing a character that finds themselves on an unexpected journey through an evening they won't forget.</p>
+        <p>You'll make choices along the way. Have fun and explore.</p>
       </div>
       <div class="intro-body">
-        <p>When you finish a chapter, come back and choose the same character again. New choices will appear — look for the <span style="color:var(--unity);font-weight:500">glowing options</span> that unlock as you go deeper. Each run through the same evening reveals something different.</p>
+        <p>This game is played across five chapters. Each chapter takes about 15 minutes. When you finish a chapter, new choices will appear. Look for the <span style="color:var(--unity);font-weight:500">glowing options</span> that unlock as you go deeper.</p>
       </div>
       <div class="intro-body">
         <p style="opacity:0.6">Need to step away? Use <span style="color:var(--orange)">save &amp; exit ◈</span> to bookmark your place — you'll pick up right where you left off. Music plays during this experience. To explore the lore and source material behind the story, visit the <a href="lore-viewer.html" target="_blank" style="color:var(--text);border-bottom:1px solid rgba(255,255,255,0.15)">lore document</a>.</p>
@@ -2625,22 +2628,16 @@
       <div class="site-title">The Call of<span>Sooboont</span></div>
       <div class="site-sub">A discovery game set in the universe of DJ OOR about ritual, perception, and ancient things wearing familiar shapes. Each chapter reveals a new perspective.</div>
     </header>
-    <div class="source-lore-link"><a href="lore-viewer.html" target="_blank">Lore Document &amp; References →</a></div>
+    <div class="source-lore-link" id="lore-link" hidden><a href="lore-viewer.html" target="_blank">Lore Document &amp; References →</a></div>
     <div class="divider"></div>
     <div id="bookmark-section"></div>
 <div id="progress-section"></div>
     <div id="char-cards" class="char-cards"></div>
     <div id="artifacts-section"></div>
-    <div class="legend">
-      <span class="legend-item"><span class="legend-icon">→</span> continue</span>
-      <span class="legend-item"><span class="legend-icon">↩</span> optional detail</span>
-      <span class="legend-item"><span class="legend-icon">⑂</span> story branch</span>
-      <span class="legend-item"><span class="legend-icon" style="color:var(--yellow)">◈</span> unlocked path</span>
-    </div>
-    <div style="margin-top: 24px; text-align: right;">
+    <div id="reset-section" style="margin-top: 24px; text-align: right;" hidden>
       <button type="button" class="select-reset" id="reset-btn" onclick="confirmReset()">reset all progress</button>
     </div>
-    <div class="version-tag">v1.2 · 2026-04-29 · emergent soundtrack engine, ux polish, lore doc update, easter eggs<br>v1.1 · 2026-04-29 · 5 chapters, familiar rework, mobile polish, ux audit, lore viewer overhaul<br>v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
+    <div class="version-tag" id="version-tag" hidden>v1.2 · 2026-04-29 · emergent soundtrack engine, ux polish, lore doc update, easter eggs<br>v1.1 · 2026-04-29 · 5 chapters, familiar rework, mobile polish, ux audit, lore viewer overhaul<br>v1.0 · 2026-04-25 · Initial release: rough draft ahead of the Plains Art Museum Spring Gala · <a href="lore-viewer.html" target="_blank" style="color:var(--text-dim);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1)">source material</a></div>
   </div>
 
   <!-- ─── GAME SCREEN ─────────────────────────────────── -->
@@ -2664,6 +2661,7 @@
         <span class="t-pip unity" id="t-unity">Unity<span class="t-pip-desc"><div class="t-pip-title">Unum · Unity</div>Many bodies, one motion. The boundary between self and crowd became optional.<div class="t-pip-origin">Chapter 1 · The dance floor</div></span></span>
         <span class="t-pip truth" id="t-truth">Truth<span class="t-pip-desc"><div class="t-pip-title">Verum · Truth</div>Presence without performance. What you showed was what you were.<div class="t-pip-origin">Chapter 2 · The bouncer</div></span></span>
         <span class="t-pip goodness" id="t-goodness">Goodness<span class="t-pip-desc"><div class="t-pip-title">Bonum · Goodness</div>Care without audience. Something given with no one watching.<div class="t-pip-origin">Chapter 3 · The loading dock</div></span></span>
+        <span class="t-pip dissolution" id="t-dissolution">Dissolution<span class="t-pip-desc"><div class="t-pip-title">Dissolutio · Dissolution</div>The form served its purpose. The form released. The work continues in the next arrangement.<div class="t-pip-origin">Chapter 4 · The Familiar</div></span></span>
         <span class="t-pip beauty" id="t-beauty">Beauty<span class="t-pip-desc"><div class="t-pip-title">Pulchrum · Beauty</div>Form exceeding function. The system did something impossible and beautiful.<div class="t-pip-origin">Chapter 5 · Behind the speakers</div></span></span>
       </div>
     </div>
@@ -2690,7 +2688,7 @@
     <div id="st-listen-wrap">
       <button class="restart-btn" id="st-listen-btn" onclick="stToggleListen()" style="width:100%;text-align:center;">play a track</button>
     </div>
-    <div class="st-modal-note">Generative composition by DJ OOR. Each run is a unique arrangement — key, tempo, acid pattern, and melody assembled in real time from raw waveforms.</div>
+    <div class="st-modal-note">Generative composition by DJ OOR. Each run is a unique arrangement: key, tempo, acid pattern, and melody assembled in real time from raw waveforms.</div>
   </div>
 
   <div class="st-modal" id="tags-modal">
@@ -2756,10 +2754,10 @@ const NODE_FILES = {
 };
 
 const TRANSCENDENTAL_LABELS = {
-  unity:    'Unity harvested — many bodies, one motion',
-  beauty:   'Beauty harvested — form exceeding function',
-  truth:    'Truth harvested — presence without performance',
-  goodness: 'Goodness harvested — care without audience'
+  unity:    'Unity harvested. Many bodies, one motion.',
+  beauty:   'Beauty harvested. Form exceeding function.',
+  truth:    'Truth harvested. Presence without performance.',
+  goodness: 'Goodness harvested. Care without audience.'
 };
 
 const OUTCOME_LABELS = {
@@ -2965,7 +2963,7 @@ async function resumeBookmark() {
   } catch(err) {
     document.getElementById('game').innerHTML =
       `<div class="load-error">` +
-      `<div>Could not resume — starting fresh.</div>` +
+      `<div>Could not resume. Starting fresh.</div>` +
       `<code>${esc(err.message)}</code><br><br>` +
       `<button onclick="clearBookmark();goToSelect()">← Back</button>` +
       `</div>`;
@@ -3065,8 +3063,12 @@ function showSelectScreen() {
   killCamera();
   document.getElementById('select-screen').hidden = false;
   document.getElementById('game-screen').hidden   = true;
+  window.scrollTo(0, 0);
   const hasProgress = persistent.runs > 0 || persistent.artifacts.length > 0;
   document.getElementById('state-bar').hidden     = !hasProgress;
+  document.getElementById('lore-link').hidden     = !hasProgress;
+  document.getElementById('reset-section').hidden = !hasProgress;
+  document.getElementById('version-tag').hidden   = !hasProgress;
   document.body.className = 'temp-cold';
   renderBookmark();
   renderCharCards();
@@ -3077,14 +3079,20 @@ function showSelectScreen() {
     const pip = document.getElementById('t-' + t);
     if (pip) pip.classList.toggle('earned', (persistent.transcendentals || []).includes(t));
   });
+  const dPip = document.getElementById('t-dissolution');
+  if (dPip) {
+    const familiarDone = (persistent.completed_chapters || []).includes('familiar');
+    dPip.style.display = familiarDone ? '' : 'none';
+    dPip.classList.toggle('earned', familiarDone);
+  }
 }
 
 function renderCharCards() {
   const el = document.getElementById('char-cards');
   el.innerHTML = '';
   CHAR_DEFS.forEach(def => {
-    // hide Builder entirely until Wanderer is completed
-    if (def.id === 'builder' && !persistent.completed_characters.includes('wanderer')) return;
+    if (def.id === 'familiar' && !persistent.completed_chapters.includes('unity')) return;
+    if (def.id === 'builder' && !persistent.completed_chapters.includes('familiar')) return;
 
     const unlocked  = isUnlocked(def.id);
     const completed = persistent.completed_characters.includes(def.id);
@@ -3099,7 +3107,7 @@ function renderCharCards() {
         { ch: 1, id: 'unity',    name: 'Unity',    hint: 'stay on the dance floor' },
         { ch: 2, id: 'truth',    name: 'Truth',    hint: 'the bouncer remembers you' },
         { ch: 3, id: 'goodness', name: 'Goodness', hint: 'someone is by the loading dock' },
-        { ch: 5, id: 'beauty',   name: 'Beauty',   hint: 'visit OOR — look behind the speakers' }
+        { ch: 5, id: 'beauty',   name: 'Beauty',   hint: 'visit OOR. Look behind the speakers.' }
       ];
       const next = wandererSteps.find(s => !persistent.completed_chapters.includes(s.id));
       const familiarDone = persistent.completed_chapters.includes('familiar');
@@ -3118,18 +3126,28 @@ function renderCharCards() {
       }
     } else if (completed) {
       statusNote = '<div class="char-completed-note">completed</div>';
+    } else if (def.id === 'wanderer' && persistent.runs === 0) {
+      statusNote = '<div class="char-completed-note">start here</div>';
     } else if (unlocked && def.id === 'familiar' && !completed) {
       statusNote = '<div class="char-completed-note">chapter 4</div>';
     }
 
     if (wandererNextClass) card.classList.add(wandererNextClass);
 
-    if (unlocked && def.id === 'builder') {
-      card.className = 'char-card available coming-soon';
-      card.innerHTML =
-        `<div class="char-name">${esc(def.display_name)}</div>` +
-        `<div class="char-tagline">"${esc(def.tagline)}"</div>` +
-        '<div class="char-completed-note">chapter 6 · coming soon</div>';
+    if (def.id === 'builder') {
+      const beautyDone = persistent.completed_chapters.includes('beauty');
+      if (beautyDone) {
+        card.className = 'char-card available coming-soon';
+        card.innerHTML =
+          `<div class="char-name">${esc(def.display_name)}</div>` +
+          `<div class="char-tagline">"${esc(def.tagline)}"</div>` +
+          '<div class="char-completed-note">chapter 6 · coming soon</div>';
+      } else {
+        card.className = 'char-card locked';
+        card.innerHTML =
+          `<div class="char-name">???</div>` +
+          `<div class="char-tagline">"${esc(def.locked_msg)}"</div>`;
+      }
     } else if (unlocked) {
       card.innerHTML =
         `<div class="char-name">${esc(def.display_name)}</div>` +
@@ -3182,7 +3200,7 @@ function renderArtifacts() {
 function renderProgress() {
   const el = document.getElementById('progress-section');
   if (persistent.runs === 0) {
-    el.innerHTML = '<div class="progress-note">Pick a character to start.</div>';
+    el.innerHTML = '';
     return;
   }
 
@@ -3247,7 +3265,7 @@ function renderProgress() {
   } else if (!hasFamiliar) {
     hint = 'Chapter 4 · A new perspective has opened. Try the Familiar.';
   } else if (!hasBeauty) {
-    hint = 'Chapter 5 · Return to the DJ booth as the Wanderer. Visit OOR — look behind the speakers.';
+    hint = 'Chapter 5 · Return to the DJ booth as the Wanderer. Visit OOR. Look behind the speakers.';
   }
 
   let html = '<div class="milestone-tracker" id="milestone-tracker">';
@@ -4277,6 +4295,14 @@ function updateStateBar(node) {
       : preRun.includes(t);
     pip.classList.toggle('earned', earned);
   });
+
+  // dissolution pip — secret, appears only after familiar chapter is complete
+  const dPip = document.getElementById('t-dissolution');
+  if (dPip) {
+    const familiarDone = (persistent.completed_chapters || []).includes('familiar');
+    dPip.style.display = familiarDone ? '' : 'none';
+    dPip.classList.toggle('earned', familiarDone);
+  }
 
   // artifacts — carried modal + toggle button
   const carriedBtn = document.getElementById('carried-toggle');
