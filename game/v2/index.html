@@ -2807,7 +2807,7 @@ const ARTIFACT_DESCRIPTIONS = {
   polaroid: 'A polaroid, still developing. Faces from tonight — the ones who stayed.',
   shard_of_light: 'A shard of the original light. Carried as sound. Held the way you hold a breath — gently, knowing it\'s already leaving.',
   pale_antler:    'What remains of something that dissolved. Still faintly resonant.',
-  chamfer_055:    'Six tracks pressed from the frequencies the Builder cut into the warehouse. The set OOR played that night, as close to faithful as waveforms rendered after the fact can be.'
+  chamfer_055:    'Five tracks pressed from the frequencies the Builder cut into the warehouse. The set OOR played that night, as close to faithful as waveforms rendered after the fact can be.'
 };
 
 const ARTIFACT_LINKS = {
@@ -4089,8 +4089,7 @@ function renderNode() {
       ${unlockHtml}
       ${progressHtml}
       <div class="outcome-buttons">
-        <button class="outcome-btn" onclick="restartCharacter()">Begin again</button>
-        <button class="outcome-btn" onclick="goToSelect()">Choose another perspective</button>
+        <button class="outcome-btn" onclick="goToSelect()">← Return to Perspectives</button>
         ${outcome === 'transcendence' ? `<a class="outcome-btn outcome-btn-lore" href="lore-viewer.html#s-whatwasthat" target="_blank">What Was That →</a>
         <a class="outcome-btn outcome-btn-lore" href="lore-viewer.html#s-bibliography" target="_blank">Primary Sources →</a>` : ''}
       </div>
@@ -4266,7 +4265,7 @@ function renderStub(nodeId) {
     `<div class="stub-id">${esc(nodeId)}</div>` +
     `<div class="stub-label">Path Not Yet Opened</div>` +
     `<div class="stub-msg">This branch of the story has not yet been written. Return when more is known.</div>` +
-    `<button class="stub-back" onclick="restartCharacter()">← Begin again</button>` +
+    `<button class="stub-back" onclick="goToSelect()">← Return to Perspectives</button>` +
     `</div>`;
 }
 
